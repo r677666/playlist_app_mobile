@@ -22,6 +22,7 @@ export default function Home(){
     const [choosePlaylistActive, setChoosePlaylistActive] = useState(false);
     var trackArray = [];
     var trackIDArray = [];
+    var jsonTrackIDs = [];
     const [selectedTracks, setSelectedTracks] = useState(trackArray);
     const [selectedTracksIDs, setSelectedTracksIDs] = useState(trackIDArray);
     const [playlistCreated, setPlaylistCreated] = useState([]);
@@ -120,20 +121,25 @@ export default function Home(){
         },
         body: JSON.stringify({
           'uris': [
-            "spotify:track:" + selectedTracksIDs[0]
+            jsonTrackIDs
           ],
           'position':0
         })
       }
-      // var addTracks = await fetch('https://api.spotify.com/v1/playlists/' + selectedPlaylistID + '/tracks',trackToPlaylistParameters)
-      // .then(response => response.json())
-      // .then(data => console.log(data))
-      jsonTracks(selectedPlaylistID)
+      var addTracks = await fetch('https://api.spotify.com/v1/playlists/' + selectedPlaylistID + '/tracks',trackToPlaylistParameters)
+      .then(response => response.json())
+      .then(data => console.log(data))
     }
-    async function jsonTracks(arr){
+
+    function jsonTracks(arr){
       var newArr = []
-      newArr = arr.split(", ");
-      console.log(newArr)
+      console.log("Original Array = " + arr)
+      for(var i = 0; i<arr.length; i++ ){
+        newArr[i] = "spotify:track:" + arr[i];
+      }
+      
+      jsonTrackIDs=newArr;
+      console.log("JSON Tracks = " + jsonTrackIDs)
     }
 
     //Search
