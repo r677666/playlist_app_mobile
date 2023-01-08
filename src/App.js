@@ -5,14 +5,20 @@ import { useState, useEffect } from 'react';
 import { click } from '@testing-library/user-event/dist/click';
 import { Route, Routes, BrowserRouter, Switch} from "react-router-dom";
 import Login from './login';
+import Create from './Create';
+import Profile from './Profile';
 import Home from './Home';
+import Logout from './Logout'
 
 function App() {
   return(
     <BrowserRouter>
       <Routes>
           <Route path='/Login' element={<Login/>}/>
+          <Route path='/Create' element={<Create/>}/>
+          <Route path='/Profile' element={<Profile/>}/>
           <Route path='/Home' element={<Home/>}/>
+          <Route path='/Logout' element={<Logout/>}/>
       </Routes>
     </BrowserRouter>
   )
