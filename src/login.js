@@ -11,6 +11,8 @@ const REDIRECT_URI = "http://localhost:3000/Login"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
+console.log(sessionStorage.getItem("token"))
+
 const state = generateRandomString(20)
 const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
 
@@ -20,6 +22,8 @@ export default function Login(){
     const [currentURL, setCurrentURL] = useState("");
     const [accessToken, setAccessToken] = useState("");
     const [userAuthToken, setUserAuthToken] = useState("");
+    const [error, setError] = useState("");
+    console.log("Error:"+error)
     const SPACE_DELIMITER = "%20";
     const SCOPES = ["playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify"]
     const SCOPES_URI_PARAM = SCOPES.join(SPACE_DELIMITER)
@@ -46,28 +50,31 @@ export default function Login(){
               'Authorization': 'Bearer ' + userAuthToken
           }
         }
-        var userData = fetch('https://api.spotify.com/v1/users/me',userParameters)
+        var userData = fetch('https://api.spotify.com/v1//me',userParameters)
         .then(response => response.json())
-        .then(data => console.log(data))
+        // .then(data => setError(data))
         // .then(data =>{ setUserId(data)})
       }
+
     const handleLogin = () => {
-        function testURL(){
-            return window.location.href = (SPOTIFY_ENDPOINT+'?response_type=token' + '&client_id=' + encodeURIComponent(CLIENT_ID)
+        window.location.assign(SPOTIFY_ENDPOINT+'?response_type=token' + '&client_id=' + encodeURIComponent(CLIENT_ID)
         + '&scope=' + encodeURIComponent(SCOPES_URI_PARAM) + '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) + '&state=' + encodeURIComponent(state))
-    }
-        const URL = testURL();
-        // console.log("String = " + URL)
-        // URL.substring(URL.indexOf("access_token="),"&token_type")
-        if(URL.includes("access_token")){
+        const getURL = window.location.href
+        // // console.log("String = " + URL)
+        getURL.substring(getURL.indexOf("access_token="),"&token_type")
+        if(getURL.includes("access_token")){
         console.log("TOKEN FOUND")
-        var positionToken = URL.substring(URL.indexOf("access_token="),URL.indexOf("&token_type=Bearer"))
-        setUserAuthToken(positionToken)
-        // sessionStorage.setItem("loginUserId",userId)
-        console.log("User Bearer Token from URL = " + userAuthToken)
+        var positionToken = getURL.substring(getURL.indexOf("access_token="),getURL.indexOf("&token_type=Bearer"))
+        var secondToken = positionToken.substring(positionToken.indexOf("B"))
+        setUserAuthToken(secondToken)
+        sessionStorage.setItem("token",secondToken)
+        // // console.log("User Bearer Token from URL = " + userAuthToken)
         userInfo()
-        window.location.assign("http://localhost:3000/Home")
+        // window.location.assign("http://localhost:3000/Home")
         }
+        // else if(!URL.includes("access_token")){
+        //     console.log("TOKEN NOT FOUND ************")
+        // }
     };
     
     return(
