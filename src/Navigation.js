@@ -7,9 +7,9 @@ const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
 
 function Navigation() {
-  const userAuthToken = sessionStorage.getItem("userToken").substring(13);
-  const userId = sessionStorage.getItem("loginUserId");
-  const [userImg, setUserImg] = useState("");
+  const userAuthToken = sessionStorage.getItem("token")
+  const userId = sessionStorage.getItem("userId");
+  const userImg = sessionStorage.getItem("imgURL");
   const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
@@ -27,21 +27,21 @@ function Navigation() {
   }, [])
 
   //for user image and etc... 
-  function userInfo(){
-    var userParameters = {
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + userAuthToken
-      }
-    }
-    var userData = fetch('https://api.spotify.com/v1/users/' + userId,userParameters)
-    .then(response => response.json())
-    // .then(data => { console.log(data.images[0].url)
-    .then(data => { setUserImg(data.images[0].url)
-    })
-  }
-  userInfo()
+  // function userInfo(){
+  //   var userParameters = {
+  //     method: 'GET',
+  //     headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': 'Bearer ' + userAuthToken
+  //     }
+  //   }
+  //   var userData = fetch('https://api.spotify.com/v1/users/' + userId,userParameters)
+  //   .then(response => response.json())
+  //   // .then(data => { console.log(data.images[0].url)
+  //   .then(data => { setUserImg(data.images[0].url)
+  //   })
+  // }
+  // userInfo()
   return (
     
     <div>

@@ -9,11 +9,11 @@ import TasteMaker2 from './TasteMaker2.png'
 import TasteMaker3 from './TasteMaker3.png'
 
 export default function Home(){
-    const userAuthToken = sessionStorage.getItem("userToken").substring(13);
-    const userId = sessionStorage.getItem("loginUserId");
-    sessionStorage.setItem("userAuthToken",userAuthToken)
-    sessionStorage.setItem("loginUserId",userId)
-    console.log("User ID = " + sessionStorage.getItem("loginUserId"))
+    const userAuthToken = sessionStorage.getItem("token")
+    const userId = sessionStorage.getItem("userId");
+    // sessionStorage.setItem("userAuthToken",userAuthToken)
+    // sessionStorage.setItem("loginUserId",userId)
+    // console.log("User ID = " + sessionStorage.getItem("loginUserId"))
     return(
         <div className='Home'>
         <Navigation/>

@@ -5,15 +5,19 @@ import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
 
 export default function Profile(){
-    const userAuthToken = sessionStorage.getItem("userToken").substring(13);
-    const userId = sessionStorage.getItem("loginUserId");
+    const userAuthToken = sessionStorage.getItem("token");
+    var userId = sessionStorage.getItem("userId");
+    console.log(sessionStorage.getItem("userEmail"))
+    userId = userId.replace("\""," ")
+    userId = userId.replace("\""," ")
+    console.log(userId)
     return(
         
         <div>
             <Navigation/>
             <div>
-                <h1>Username</h1>
-                <h2>Email</h2>
+                <h1>{userId}</h1>
+                <h2>"userEmail"</h2>
             </div>
         </div>
     );
