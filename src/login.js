@@ -25,7 +25,7 @@ export default function Login(){
     console.log("Image:"+ (sessionStorage.getItem("imgURL")))
     console.log("User: "+ (sessionStorage.getItem("userId")))
     const SPACE_DELIMITER = "%20";
-    const SCOPES = ["playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify"]
+    const SCOPES = ["playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email"]
     const SCOPES_URI_PARAM = SCOPES.join(SPACE_DELIMITER)
 
     useEffect(() => {
@@ -78,6 +78,7 @@ export default function Login(){
         .then(data => {
           sessionStorage.setItem("userId", JSON.stringify(data.id))
           sessionStorage.setItem("imgURL",data.images[0].url)
+          sessionStorage.setItem("userEmail",data.email)
         })
         //Just getting UserId for now but definitely can get additional info from this json
       }

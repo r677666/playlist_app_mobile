@@ -7,6 +7,7 @@ import Navigation from './Navigation';
 export default function Profile(){
     const userAuthToken = sessionStorage.getItem("token");
     var userId = sessionStorage.getItem("userId");
+    var userEmail = sessionStorage.getItem("userEmail");
     console.log(sessionStorage.getItem("userEmail"))
     userId = userId.replace("\""," ")
     userId = userId.replace("\""," ")
@@ -17,7 +18,7 @@ export default function Profile(){
             <Navigation/>
             <div>
                 <h1>{userId}</h1>
-                <h2>"userEmail"</h2>
+                <h2>{userEmail}</h2>
             </div>
         </div>
     );
