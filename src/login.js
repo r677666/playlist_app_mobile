@@ -16,14 +16,13 @@ const state = generateRandomString(20)
 const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
 
 export default function Login(){
-    
+    checkURL()
     const [userId,setUserId] = useState("");
     const [currentURL, setCurrentURL] = useState("");
     const [accessToken, setAccessToken] = useState("");
     const [userAuthToken, setUserAuthToken] = useState("");
     const [error, setError] = useState([]);
     console.log("Image:"+ (sessionStorage.getItem("imgURL")))
-    console.log("JSON: "+ (sessionStorage.getItem("json")))
     console.log("User: "+ (sessionStorage.getItem("userId")))
     const SPACE_DELIMITER = "%20";
     const SCOPES = ["playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify"]
@@ -43,6 +42,27 @@ export default function Login(){
           .then(data => setAccessToken(data.access_token))
       }, [])
 
+      function checkURL(){
+      if(window.location.href.includes("access_token")){
+        console.log("TOKEN FOUND")
+        const getURL = window.location.href;
+        var positionToken = getURL.substring(getURL.indexOf("access_token="),getURL.indexOf("&token_type=Bearer"))
+
+        var secondToken = positionToken.substring(positionToken.indexOf("B"))
+        sessionStorage.setItem("token",secondToken)
+        try{
+        userInfo()
+        }catch{
+          return(
+            <div><h1>Login Failed</h1></div>
+          )
+        }
+        if(sessionStorage.getItem("userId") != null){
+          window.location.assign("http://localhost:3000/Home")
+        }
+        }
+      }
+
     function userInfo(){
         var userParameters = {
           method: 'GET',
@@ -58,30 +78,29 @@ export default function Login(){
         .then(data => {
           sessionStorage.setItem("userId", JSON.stringify(data.id))
           sessionStorage.setItem("imgURL",data.images[0].url)
-        }
-          )
-        .then(window.location.assign("http://localhost:3000/Home"))
+        })
         //Just getting UserId for now but definitely can get additional info from this json
       }
 
     const handleLogin = () => {
-        window.location.href = (SPOTIFY_ENDPOINT+'?response_type=token' + '&client_id=' + encodeURIComponent(CLIENT_ID)
+        window.location.assign(SPOTIFY_ENDPOINT+'?response_type=token' + '&client_id=' + encodeURIComponent(CLIENT_ID)
         + '&scope=' + encodeURIComponent(SCOPES_URI_PARAM) + '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) + '&state=' + encodeURIComponent(state))
         const getURL = window.location.href
         getURL.substring(getURL.indexOf("access_token="),"&token_type")
-        if(getURL.includes("access_token")){
-        console.log("TOKEN FOUND")
-        var positionToken = getURL.substring(getURL.indexOf("access_token="),getURL.indexOf("&token_type=Bearer"))
-        var secondToken = positionToken.substring(positionToken.indexOf("B"))
-        sessionStorage.setItem("token",secondToken)
-        try{
-        userInfo()
-        }catch{
-          return(
-            <div><h1>Login Failed</h1></div>
-          )
-        }
-        }
+        // if(window.location.href.includes("access_token")){
+        // console.log("TOKEN FOUND")
+        // var positionToken = getURL.substring(getURL.indexOf("access_token="),getURL.indexOf("&token_type=Bearer"))
+
+        // var secondToken = positionToken.substring(positionToken.indexOf("B"))
+        // sessionStorage.setItem("token",secondToken)
+        // try{
+        // userInfo()
+        // }catch{
+        //   return(
+        //     <div><h1>Login Failed</h1></div>
+        //   )
+        // }
+        // }
     };
     
     return(

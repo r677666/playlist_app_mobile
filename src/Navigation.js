@@ -10,6 +10,7 @@ function Navigation() {
   const userAuthToken = sessionStorage.getItem("token")
   const userId = sessionStorage.getItem("userId");
   const userImg = sessionStorage.getItem("imgURL");
+  console.log(userImg)
   const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
