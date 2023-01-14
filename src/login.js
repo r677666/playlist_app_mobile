@@ -22,6 +22,7 @@ export default function Login(){
     const [accessToken, setAccessToken] = useState("");
     const [userAuthToken, setUserAuthToken] = useState("");
     const [error, setError] = useState([]);
+    const [isActive, setIsActive] = useState(false);
     console.log("Image:"+ (sessionStorage.getItem("imgURL")))
     console.log("User: "+ (sessionStorage.getItem("userId")))
     const SPACE_DELIMITER = "%20";
@@ -42,6 +43,36 @@ export default function Login(){
           .then(data => setAccessToken(data.access_token))
       }, [])
 
+      function checkForActive(){
+          setIsActive(current => !current)
+      }
+
+      //For Playlist App Server
+      async function fetchUsers(){
+            if(sessionStorage.getItem("userId") != null){
+                  const response = await fetch('/api/users/createUser',{
+                    method: 'POST',
+                    body: JSON.stringify({
+                      "userId": sessionStorage.getItem("userId"),
+                      "spotifyToken": sessionStorage.getItem("spotifyToken")
+                    }),
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                  })
+                  console.log(response)
+                  const json = await response.json()
+                  console.log(json)
+                  if(!response.ok){
+                    console.log("User Already Exists")
+                  }else{
+                    console.log("User Created")
+                  }
+          }else{
+            console.log("UserId Null")
+          }
+        }
+
       function checkURL(){
       if(window.location.href.includes("access_token")){
         console.log("TOKEN FOUND")
@@ -58,6 +89,7 @@ export default function Login(){
           )
         }
         if(sessionStorage.getItem("userId") != null){
+          fetchUsers()
           window.location.assign("http://localhost:3000/Home")
         }
         }
@@ -79,6 +111,7 @@ export default function Login(){
           sessionStorage.setItem("userId", JSON.stringify(data.id))
           sessionStorage.setItem("imgURL",data.images[0].url)
           sessionStorage.setItem("userEmail",data.email)
+          sessionStorage.setItem("spotifyToken",data.uri)
         })
         //Just getting UserId for now but definitely can get additional info from this json
       }
@@ -88,20 +121,6 @@ export default function Login(){
         + '&scope=' + encodeURIComponent(SCOPES_URI_PARAM) + '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) + '&state=' + encodeURIComponent(state))
         const getURL = window.location.href
         getURL.substring(getURL.indexOf("access_token="),"&token_type")
-        // if(window.location.href.includes("access_token")){
-        // console.log("TOKEN FOUND")
-        // var positionToken = getURL.substring(getURL.indexOf("access_token="),getURL.indexOf("&token_type=Bearer"))
-
-        // var secondToken = positionToken.substring(positionToken.indexOf("B"))
-        // sessionStorage.setItem("token",secondToken)
-        // try{
-        // userInfo()
-        // }catch{
-        //   return(
-        //     <div><h1>Login Failed</h1></div>
-        //   )
-        // }
-        // }
     };
     
     return(
