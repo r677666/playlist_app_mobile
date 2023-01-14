@@ -13,9 +13,8 @@ const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
 
 export default function Create(){
     
-    const userAuthToken = sessionStorage.getItem("userToken").substring(13);
-    const userId = sessionStorage.getItem("loginUserId");
-    console.log("User ID" + sessionStorage.getItem("loginUserId"))
+    const userAuthToken = sessionStorage.getItem("token")
+    const userId = sessionStorage.getItem("userId");
     const [searchInput, setSearchInput] = useState("");
     const [accessToken, setAccessToken] = useState("");
     const [albums, setAlbums] = useState([]);
@@ -71,19 +70,19 @@ export default function Create(){
     }, [])
 
     //for user image and etc... 
-    function userInfo(){
-      var userParameters = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + userAuthToken
-        }
-      }
-      var userData = fetch('https://api.spotify.com/v1/users/' + userId,userParameters)
-      .then(response => response.json())
-      .then(data => { setUserImg(data.images[0].url)
-      })
-    }
+    // function userInfo(){
+    //   var userParameters = {
+    //     method: 'GET',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+    //     }
+    //   }
+    //   var userData = fetch('https://api.spotify.com/v1/users/' + sessionStorage.getItem("userId"),userParameters)
+    //   .then(response => response.json())
+    //   .then(data => { setUserImg(data.images[0].url)
+    //   })
+    // }
 
     //Playlist Creation SUCCESSFUL
     async function playlistCreation() {

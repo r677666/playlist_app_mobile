@@ -9,17 +9,25 @@ import TasteMaker2 from './TasteMaker2.png'
 import TasteMaker3 from './TasteMaker3.png'
 
 export default function Home(){
-    const userAuthToken = sessionStorage.getItem("userToken").substring(13);
-    const userId = sessionStorage.getItem("loginUserId");
-    sessionStorage.setItem("userAuthToken",userAuthToken)
-    sessionStorage.setItem("loginUserId",userId)
-    console.log("User ID = " + sessionStorage.getItem("loginUserId"))
+    const userAuthToken = sessionStorage.getItem("token")
+    const [users,setUsers] = useState([])
+    useEffect(() => {
+        const fetchUsers = async () => {
+            const response = await fetch('/api/users')
+            .then(result => result.json())
+            .then(data => setUsers(data))
+            .then(console.log("users from Playlist App Server have been found"))
+        }
+
+        fetchUsers()
+    },[])
+
     return(
         <div className='Home'>
         <Navigation/>
         <div style={{margin:'auto',backgroundColor:'black'}}>
         <Carousel fade style={{width:'960px',maxHeight:'540px',margin:'auto'}}>
-            <Carousel.Item interval={1000}>
+            <Carousel.Item interval={2000}>
                 <img
                 className="d-block w-100"
                 src={TasteMaker1}
@@ -30,7 +38,7 @@ export default function Home(){
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item interval={1000}>
+            <Carousel.Item interval={2000}>
                 <img
                 className="d-block w-100"
                 src={TasteMaker2}
@@ -42,7 +50,7 @@ export default function Home(){
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item interval={1000}>
+            <Carousel.Item interval={2000}>
                 <img
                 className="d-block w-100"
                 src={TasteMaker3}
@@ -57,7 +65,15 @@ export default function Home(){
         </Carousel>
         </div>
         <div>
-            <h1>Hello</h1>
+            <h1>Current Users</h1>
+            {console.log(users)}
+            <Container>
+                <Row className="mx-2 row row-cols-4">
+                    {users && users.map((user,i) => (
+                        <Card style={{width:'10rem',height:'5rem'}} key={users._id}>{users[i].userId}</Card>
+                    ))}
+                </Row>
+            </Container>
         </div>
         </div>
     );
