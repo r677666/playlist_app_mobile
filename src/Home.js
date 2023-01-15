@@ -10,6 +10,7 @@ import TasteMaker3 from './TasteMaker3.png'
 
 export default function Home(){
     const userAuthToken = sessionStorage.getItem("token")
+    const userImg = sessionStorage.getItem("imgURL");
     const [users,setUsers] = useState([])
     useEffect(() => {
         const fetchUsers = async () => {
@@ -17,6 +18,7 @@ export default function Home(){
             .then(result => result.json())
             .then(data => setUsers(data))
             .then(console.log("users from Playlist App Server have been found"))
+            .then(console.log(users))
         }
 
         fetchUsers()
@@ -67,13 +69,19 @@ export default function Home(){
         <div>
             <h1>Current Users</h1>
             {console.log(users)}
-            <Container>
+            <Container style={{alignItems:"normal"}}>
                 <Row className="mx-2 row row-cols-4">
                     {users && users.map((user,i) => (
-                        <Card style={{width:'10rem',height:'5rem'}} key={users._id}>{users[i].userId}</Card>
+                        <Card style={{width:'20rem',height:'20rem'}} key={users._id}>
+                        {users[i].userId}
+                        </Card>
                     ))}
                 </Row>
             </Container>
+        </div>
+        <br/>
+        <div>
+            <h1>Holder Text</h1>
         </div>
         </div>
     );

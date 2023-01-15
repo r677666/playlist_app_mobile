@@ -125,7 +125,7 @@ export default function Login(){
     
     return(
         <div>
-            <h1>Login</h1>
+            <h1>TasteMakers</h1>
             <Container>
                 <InputGroup>
                     <Button onClick={handleLogin}>login to spotify</Button>
