@@ -15,6 +15,8 @@ console.log("User Token: " + sessionStorage.getItem("token"))
 const state = generateRandomString(20)
 const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
 
+
+
 export default function Login(){
     checkURL()
     const [userId,setUserId] = useState("");
@@ -28,7 +30,6 @@ export default function Login(){
     const SPACE_DELIMITER = "%20";
     const SCOPES = ["playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email"]
     const SCOPES_URI_PARAM = SCOPES.join(SPACE_DELIMITER)
-
     useEffect(() => {
         // API Access Token
         var authParameters = {
@@ -78,7 +79,7 @@ export default function Login(){
         console.log("TOKEN FOUND")
         const getURL = window.location.href;
         var positionToken = getURL.substring(getURL.indexOf("access_token="),getURL.indexOf("&token_type=Bearer"))
-
+        console.log("Position Token:"+positionToken)
         var secondToken = positionToken.substring(positionToken.indexOf("B"))
         sessionStorage.setItem("token",secondToken)
         try{
@@ -111,7 +112,7 @@ export default function Login(){
           sessionStorage.setItem("userId", JSON.stringify(data.id))
           sessionStorage.setItem("imgURL",data.images[0].url)
           sessionStorage.setItem("userEmail",data.email)
-          sessionStorage.setItem("spotifyToken",data.uri)
+          sessionStorage.setItem("spotifyToken",data.href)
         })
         //Just getting UserId for now but definitely can get additional info from this json
       }

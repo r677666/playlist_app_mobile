@@ -8,10 +8,7 @@ export default function Profile(){
     const userAuthToken = sessionStorage.getItem("token");
     var userId = sessionStorage.getItem("userId");
     var userEmail = sessionStorage.getItem("userEmail");
-    console.log(sessionStorage.getItem("userEmail"))
-    userId = userId.replace("\""," ")
-    userId = userId.replace("\""," ")
-    console.log(userId)
+    userId = userId.replaceAll("\"","")
     return(
         
         <div>

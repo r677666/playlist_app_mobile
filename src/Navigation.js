@@ -10,7 +10,6 @@ function Navigation() {
   const userAuthToken = sessionStorage.getItem("token")
   const userId = sessionStorage.getItem("userId");
   const userImg = sessionStorage.getItem("imgURL");
-  console.log(userImg)
   const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
@@ -27,22 +26,6 @@ function Navigation() {
       .then(data => setAccessToken(data.access_token))
   }, [])
 
-  //for user image and etc... 
-  // function userInfo(){
-  //   var userParameters = {
-  //     method: 'GET',
-  //     headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': 'Bearer ' + userAuthToken
-  //     }
-  //   }
-  //   var userData = fetch('https://api.spotify.com/v1/users/' + userId,userParameters)
-  //   .then(response => response.json())
-  //   // .then(data => { console.log(data.images[0].url)
-  //   .then(data => { setUserImg(data.images[0].url)
-  //   })
-  // }
-  // userInfo()
   return (
     
     <div>
@@ -56,6 +39,7 @@ function Navigation() {
             <Nav.Link href="/Create">Create</Nav.Link>
             <Nav.Link href="/Profile">Profile</Nav.Link>
             <Nav.Link href="/Logout">Logout</Nav.Link>
+            
           </Nav>
         </Container>
       </Navbar>
