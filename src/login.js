@@ -11,7 +11,7 @@ const REDIRECT_URI = "http://localhost:3000/Login"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
-console.log("User Token: " + sessionStorage.getItem("token"))
+// console.log("User Token: " + sessionStorage.getItem("token"))
 const state = generateRandomString(20)
 const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
 
