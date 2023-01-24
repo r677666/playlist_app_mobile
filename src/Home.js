@@ -38,10 +38,52 @@ export default function Home(){
         window.location.assign("http://localhost:3000/User/" + name)
     }
 
+    async function followUserButton(user,follower){
+        var alreadyFollowed = false;
+        console.log(user)
+        console.log(follower)
+        var followThisPerson = '';
+        var followerId = '';
+
+        
+
+        for(var i = 0; i<users.length;i++){
+            if(users[i].userId == user){
+                followThisPerson = users[i]._id
+                console.log(followThisPerson)
+                console.log("FOLLOWER MATCH")
+            }
+        }
+
+        for(var i = 0; i<users.length;i++){
+            if(users[i].userId == follower){
+                followerId = users[i]._id;
+                console.log(followerId)
+                console.log("USER MATCH")
+            }
+        }
+
+        const followMethod = await fetch("api/users/friends/addFriend",{
+            method: 'PATCH',
+            body: JSON.stringify({
+              "userId": followerId,
+              "friendId": followThisPerson
+            }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then(response => console.log(response.json()))
+        .then(alert("Friend Added"))
+    }
+
     function checkFollowButton(item1,item2){
         if(item1 != item2){
             return(
-                <Button>Follow</Button>
+
+                <Button 
+                style={{backgroundColor: "#5AEDEA", color: "black", border:"#5AEDEA"}}
+                onClick={event => {followUserButton(item2,item1)}}>Follow</Button>
             )
         }
     }
@@ -55,14 +97,14 @@ export default function Home(){
             }
             }
                 console.log("Token");
-                console.log(sessionStorage.getItem("token"))
+                // console.log(sessionStorage.getItem("token"))
                 for(var i = 0; i<users.length;i++){
                 var demoUser = users[i].userId
                 var userFixed = demoUser.replaceAll('\"', '')
-                console.log("User")
-                console.log(userFixed)
+                // console.log("User")
+                // console.log(userFixed)
                 var userData = fetch('https://api.spotify.com/v1/users/' + userFixed,userParameters)
-                .then(response => console.log(response.json()))
+                // .then(response => console.log(response.json()))
                 // .then(data => spotifyUsers.push(data.images[0].url))
                 // .then(setSpotifyUsers(loadedUsers))
                 .then(console.log("Successfully Retrieved Spotify Users"))
@@ -126,7 +168,7 @@ export default function Home(){
                         <Card style={{width:'20rem',height:'40rem', paddingTop:'1rem' }}>Best Drake Album</Card>
                         
                     </CardGroup>
-                    <Button>Submit playlist</Button>
+                    <Button style={{backgroundColor: "#2E8BC0", color: "black", border:"#2E8BC0"}}>Submit playlist</Button>
                 </Row>
             </Container>
         </div>
@@ -137,12 +179,15 @@ export default function Home(){
             <Container style={{alignItems:"normal"}}>
                 <Row className="mx-2 row row-cols-4">
                     {users && users.map((user,i) => (
-                        <Card style={{width:'20rem',height:'22rem', paddingTop:'1rem' }} key={users._id} onClick={event => clickUser(users[i].userId)}  >
-                        <Card.Img src={test[i]}/>
-                            <Container> 
-                                {users[i].userId.replaceAll("\"","")}
-                                {checkFollowButton(sessionStorage.getItem("userId"),users[i].userId)}
+                        <Card style={{width:'20rem',height:'22rem', paddingTop:'1rem' }} key={users._id} >
+                            <Container onClick={event => clickUser(users[i].userId)}>
+                                    <Card.Img src={test[i]}/>
+                                        <Container> 
+                                            {users[i].userId.replaceAll("\"","")}
+                                            
+                                        </Container>
                             </Container>
+                            {checkFollowButton(sessionStorage.getItem("userId"),users[i].userId)}
                         </Card>
                     ))}
                 </Row>

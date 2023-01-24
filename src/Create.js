@@ -45,7 +45,6 @@ export default function Create(){
     const [showCartModal, set_Cart_ShowModal] = useState(false);
     const handleClose_showCartModal = () => set_Cart_ShowModal(false);
     const handleShow_showCartModal = () => set_Cart_ShowModal(true);
-    console.log(selectedTracks)
 
     function createButtonFunction(){
       playlistCreation();
@@ -68,21 +67,6 @@ export default function Create(){
         .then(result => result.json())
         .then(data => setAccessToken(data.access_token))
     }, [])
-
-    //for user image and etc... 
-    // function userInfo(){
-    //   var userParameters = {
-    //     method: 'GET',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + sessionStorage.getItem("token")
-    //     }
-    //   }
-    //   var userData = fetch('https://api.spotify.com/v1/users/' + sessionStorage.getItem("userId"),userParameters)
-    //   .then(response => response.json())
-    //   .then(data => { setUserImg(data.images[0].url)
-    //   })
-    // }
 
     //Playlist Creation SUCCESSFUL
     async function playlistCreation() {

@@ -27,9 +27,8 @@ function Navigation() {
   }, [])
 
   return (
-    
     <div>
-      <Navbar bg="dark" variant="dark">
+      <Navbar style={{backgroundSize: "0", backgroundColor: "#2E8BC0"}} variant="light">
       
         <Container>
         <img src={userImg} className="img-thumbnail" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
 
-const UserProfile = () =>{
+export default function UserProfile(){
     const { id } = useParams()
     const [users,setUsers] = useState([])
     const [friendsIds,setFriendsIds] = useState([])
@@ -93,5 +93,3 @@ const UserProfile = () =>{
         </div>
     )
 }
-
-export default UserProfile;
