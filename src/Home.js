@@ -82,7 +82,7 @@ export default function Home(){
             return(
 
                 <Button 
-                style={{backgroundColor: "#5AEDEA", color: "black", border:"#5AEDEA"}}
+                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA"}}
                 onClick={event => {followUserButton(item2,item1)}}>Follow</Button>
             )
         }
@@ -168,7 +168,7 @@ export default function Home(){
                         <Card style={{width:'20rem',height:'40rem', paddingTop:'1rem' }}>Best Drake Album</Card>
                         
                     </CardGroup>
-                    <Button style={{backgroundColor: "#2E8BC0", color: "black", border:"#2E8BC0"}}>Submit playlist</Button>
+                    <Button style={{backgroundColor: "#ff914d", color: "black", border:"#2E8BC0"}}>Submit playlist</Button>
                 </Row>
             </Container>
         </div>
@@ -181,7 +181,8 @@ export default function Home(){
                     {users && users.map((user,i) => (
                         <Card style={{width:'20rem',height:'22rem', paddingTop:'1rem' }} key={users._id} >
                             <Container onClick={event => clickUser(users[i].userId)}>
-                                    <Card.Img src={test[i]}/>
+                                {console.log(users[i])}
+                                    {/* <Card.Img src={users[i].images.url}/> */}
                                         <Container> 
                                             {users[i].userId.replaceAll("\"","")}
                                             

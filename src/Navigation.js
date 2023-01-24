@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useState, useEffect } from 'react';
+import companyImg from '../src/Tastemakers Basic Logo.png'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
@@ -28,10 +29,10 @@ function Navigation() {
 
   return (
     <div>
-      <Navbar style={{backgroundSize: "0", backgroundColor: "#2E8BC0"}} variant="light">
+      <Navbar fixed="top" style={{backgroundSize: "0", backgroundColor: "#000000"}} variant="dark">
       
         <Container>
-        <img src={userImg} className="img-thumbnail" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
+        <img src={companyImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
           <Navbar.Brand href="/Home">Tastemakers</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/Home">Home</Nav.Link>
@@ -41,6 +42,7 @@ function Navigation() {
             
           </Nav>
         </Container>
+        <img src={userImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
       </Navbar>
     </div>
   );
