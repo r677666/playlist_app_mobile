@@ -15,8 +15,7 @@ export default function Profile(){
             <div>
                 <Navigation/>
             </div>
-            
-            <div>
+            <div style={{marginTop:"6rem"}}>
                 <h1>{userId}</h1>
                 <h2>{userEmail}</h2>
             </div>

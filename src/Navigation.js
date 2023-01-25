@@ -29,21 +29,24 @@ function Navigation() {
 
   return (
     <div>
-      <Navbar fixed="sticky" style={{backgroundSize: "0", backgroundColor: "#000000"}} variant="dark">
-      
-        <Container>
-        <img src={companyImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
-          <Navbar.Brand href="/Home">Tastemakers</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="/Home">Home</Nav.Link>
-            <Nav.Link href="/Create">Create</Nav.Link>
-            <Nav.Link href="/Profile">Profile</Nav.Link>
-            <Nav.Link href="/Logout">Logout</Nav.Link>
-            
-          </Nav>
-        </Container>
-        <img src={userImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
-      </Navbar>
+      {/* <Container> */}
+        <Navbar style={{backgroundSize: "0", backgroundColor: "#000000", top:"0",
+         position:"fixed",zIndex:"999", width:"100%"}} variant="dark">
+          <Container>
+          <img src={companyImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
+            <Navbar.Brand href="/Home">Tastemakers</Navbar.Brand>
+            <Nav className="me-auto">
+              <Nav.Link href="/Home">Home</Nav.Link>
+              <Nav.Link href="/Create">Create</Nav.Link>
+              <Nav.Link href="/Profile">Profile</Nav.Link>
+              <Nav.Link href="/Logout">Logout</Nav.Link>
+              
+            </Nav>
+            <img src={userImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
+          </Container>
+          
+        </Navbar>
+      {/* </Container> */}
     </div>
     
   );

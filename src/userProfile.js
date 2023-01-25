@@ -11,6 +11,9 @@ export default function UserProfile(){
     const [friendsIds,setFriendsIds] = useState([])
     var [friends,setFriends] = useState([])
     // console.log(friends)
+
+    
+
     useEffect(() => {
         const fetchUsers = async () => {
             const response = await fetch('/api/users')
@@ -55,7 +58,7 @@ export default function UserProfile(){
         queryFriends()
         
         
-    });
+    },[users,friendsIds,id]);
 
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
@@ -66,29 +69,59 @@ export default function UserProfile(){
     friends = unique;
     }
     friendsFilter()
+    let validate;
+
+    if(friends == null){
+        validate = <div>Loading...</div>
+    }else{
+        validate = <Row>
+        {friends.map((friends,i) => {return(
+            <Card style={{width:'8rem',height:'8rem', paddingTop:'1rem' }} key={i} >
+                <Container> 
+                    {friends}
+                </Container>
+            </Card>
+        )})}
+        </Row>
+    }
+
     return( 
         
         <div>
         
             <Navigation/>
             <div>
-                <h1>{id}</h1>
-                <h2>Friends</h2>
-                <Container>
-                    <Row>
-                    {/* <Card style={{width:'8rem',height:'8rem'}}>
-                        {friends[0]}
-                    </Card> */}
-                    {friends.map((friends,i) => {return(
-                        <Card style={{width:'8rem',height:'8rem', paddingTop:'1rem' }} key={i} >
-                            <Container> 
-                                {friends}
-                            </Container>
-                        </Card>
-                    )})}
-                    </Row>
+                <Container style={{marginTop:"8rem"}}>
+                    <h1>{id}</h1>
+                    <h3>Friends</h3>
+                    <Container>
+                        {/* <Row> */}
+                        {validate}
+                        {/* <div>Loading</div> */}
+                        {/* {friends.map((friends,i) => {return(
+                            <Card style={{width:'8rem',height:'8rem', paddingTop:'1rem' }} key={i} >
+                                <Container> 
+                                    {friends}
+                                </Container>
+                            </Card>
+                        )})} */}
+                        {/* </Row> */}
+                    </Container>
+                    <h3>Current Submissions</h3>
+                    <Container>
+                        <Row>
+                            <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
+                                Playlist 1 
+                            </Card>
+                            <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
+                                Playlist 2 
+                            </Card>
+                            <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
+                                Playlist 3 
+                            </Card>
+                        </Row>
+                    </Container>
                 </Container>
-                <h2>TasteMaker Created Playlists</h2>
             </div>
         </div>
     )

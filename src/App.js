@@ -10,6 +10,7 @@ import Profile from './Profile';
 import Home from './Home';
 import Logout from './Logout';
 import User from './userProfile';
+import Competition from './Competition';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='/Profile' element={<Profile/>}/>
           <Route path='/Home' element={<Home/>}/>
           <Route path='/Logout' element={<Logout/>}/>
+          <Route path='/competition' element={<Competition/>}/>
           <Route path={'/User/:id'} element={<User/>}/>
       </Routes>
     </BrowserRouter>

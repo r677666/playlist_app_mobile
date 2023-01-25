@@ -120,11 +120,14 @@ export default function Home(){
         }
       
       userInfo()
+      function competitionButton(){
+        window.location.assign("http://localhost:3000/competition/")
+    }
     return(
         <div className='Home'>
         <Navigation/>
         <div style={{margin:'auto',backgroundColor:'black'}}>
-        <Carousel fade style={{width:'960px',maxHeight:'540px',margin:'auto'}}>
+        <Carousel fade style={{width:'960px',maxHeight:'540px',margin:'auto', marginTop:"6rem"}}>
             <Carousel.Item interval={2000}>
                 <img
                 className="d-block w-100"
@@ -134,7 +137,7 @@ export default function Home(){
                 <Carousel.Caption>
                 <h3>Best Drake Album</h3>
                 <p>Submit your playlist for this week's competition</p>
-                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#2E8BC0"}}>Submit playlist</Button>
+                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000"}} onClick={event => competitionButton()} >Submit playlist</Button>
                 </Carousel.Caption>
                 
             </Carousel.Item>
