@@ -10,12 +10,13 @@ export default function Logout(){
     sessionStorage.setItem("userId",'');
     sessionStorage.setItem("userEmail",'')
     console.log(sessionStorage.getItem('token'))
+    useEffect(() => {
+        window.location.assign("http://localhost:3000/Login/")
+      }, [])
     return(
-        
         <div>
             <div>
                 <h1>LoggedOut</h1>
-                {/* <Button onClick={logInButtonPressed}>Login to Spotify</Button> */}
             </div>
         </div>
     );

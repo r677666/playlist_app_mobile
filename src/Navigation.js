@@ -29,7 +29,6 @@ function Navigation() {
 
   return (
     <div>
-      {/* <Container> */}
         <Navbar style={{backgroundSize: "0", backgroundColor: "#000000", top:"0",
          position:"fixed",zIndex:"999", width:"100%"}} variant="dark">
           <Container>
@@ -46,7 +45,6 @@ function Navigation() {
           </Container>
           
         </Navbar>
-      {/* </Container> */}
     </div>
     
   );
