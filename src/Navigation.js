@@ -29,7 +29,7 @@ function Navigation() {
 
   return (
     <div>
-      <Navbar fixed="top" style={{backgroundSize: "0", backgroundColor: "#000000"}} variant="dark">
+      <Navbar fixed="sticky" style={{backgroundSize: "0", backgroundColor: "#000000"}} variant="dark">
       
         <Container>
         <img src={companyImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
@@ -45,6 +45,7 @@ function Navigation() {
         <img src={userImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
       </Navbar>
     </div>
+    
   );
 }
 

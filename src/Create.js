@@ -96,11 +96,14 @@ export default function Create(){
           'Authorization': 'Bearer ' + userAuthToken
         }
       }
-      var getUsersPlaylist = await fetch('https://api.spotify.com/v1/me/playlists?offset=30&limit=30' , playlistParameters)
+      var getUsersPlaylist = await fetch('https://api.spotify.com/v1/me/playlists?sort=created_at&order=desc&offset=50&limit=50' , playlistParameters)
       .then(response => response.json())
       .then(data => {
-        setUserPlaylists(data.items);
+        const personalPlaylists = data.items.filter(playlist => {
+          return playlist.owner.id === userId.replaceAll("\"","");
+      });setUserPlaylists(personalPlaylists);
       })
+      .catch(response => console.log(response.json()))
     }
     // Add Tracks to Playlist
     async function addTrackToPlaylist(){

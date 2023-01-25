@@ -12,7 +12,10 @@ export default function Profile(){
     return(
         
         <div>
-            <Navigation/>
+            <div>
+                <Navigation/>
+            </div>
+            
             <div>
                 <h1>{userId}</h1>
                 <h2>{userEmail}</h2>

@@ -9,6 +9,8 @@ import TasteMaker2 from './TasteMaker2.png'
 import TasteMaker3 from './TasteMaker3.png'
 import { renderMatches } from 'react-router-dom';
 import Footer from './Footer';
+import artistPicture from './2809.jpg'
+import pollPicture from './Kendrick Poll Pic.png'
 
 export default function Home(){
     const userAuthToken = sessionStorage.getItem("token")
@@ -126,24 +128,32 @@ export default function Home(){
             <Carousel.Item interval={2000}>
                 <img
                 className="d-block w-100"
-                src={TasteMaker1}
+                src={artistPicture}
                 alt="First slide"
                 />
                 <Carousel.Caption>
-                <h3>First slide label</h3>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <h3>Best Drake Album</h3>
+                <p>Submit your playlist for this week's competition</p>
+                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#2E8BC0"}}>Submit playlist</Button>
                 </Carousel.Caption>
+                
             </Carousel.Item>
             <Carousel.Item interval={2000}>
                 <img
                 className="d-block w-100"
-                src={TasteMaker2}
+                src={pollPicture}
                 alt="Second slide"
                 />
-
+                
                 <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h3>To Pimp a Butterfly or Good Kid m.A.A.d City</h3>
+                <p>Vote for which you think is better</p>
+                <Button>
+                    Card 1
+                </Button>
+                <Button>
+                    Card 2
+                </Button>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={2000}>
@@ -162,18 +172,6 @@ export default function Home(){
         </div>
         <br/>
         <div>
-            <Container>
-                <Row>
-                    <CardGroup>
-                        <Card style={{width:'20rem',height:'40rem', paddingTop:'1rem' }}>Best Drake Album</Card>
-                        
-                    </CardGroup>
-                    <Button style={{backgroundColor: "#ff914d", color: "black", border:"#2E8BC0"}}>Submit playlist</Button>
-                </Row>
-            </Container>
-        </div>
-        <br/>
-        <div>
             <h1>Current Users</h1>
             {console.log(users)}
             <Container style={{alignItems:"normal"}}>
@@ -185,7 +183,6 @@ export default function Home(){
                                     {/* <Card.Img src={users[i].images.url}/> */}
                                         <Container> 
                                             {users[i].userId.replaceAll("\"","")}
-                                            
                                         </Container>
                             </Container>
                             {checkFollowButton(sessionStorage.getItem("userId"),users[i].userId)}

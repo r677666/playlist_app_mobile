@@ -129,7 +129,7 @@ export default function Login(){
             <h1>TasteMakers</h1>
             <Container>
                 <InputGroup>
-                    <Button onClick={handleLogin}>login to spotify</Button>
+                    <Button style={{backgroundColor:"green"}}onClick={handleLogin}>login with spotify</Button>
                 </InputGroup>
             </Container>
         </div>
