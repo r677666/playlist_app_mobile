@@ -42,6 +42,7 @@ export default function Login(){
         fetch('https://accounts.spotify.com/api/token', authParameters)
           .then(result => result.json())
           .then(data => setAccessToken(data.access_token))
+          .catch(result => console.log(result.json()))
       }, [])
 
       function checkForActive(){
@@ -79,8 +80,8 @@ export default function Login(){
         console.log("TOKEN FOUND")
         const getURL = window.location.href;
         var positionToken = getURL.substring(getURL.indexOf("access_token="),getURL.indexOf("&token_type=Bearer"))
-        console.log("Position Token:"+positionToken)
         var secondToken = positionToken.substring(positionToken.indexOf("B"))
+        console.log("2:"+secondToken)
         sessionStorage.setItem("token",secondToken)
         try{
         userInfo()
@@ -105,6 +106,7 @@ export default function Login(){
           }
         }
         sessionStorage.setItem("params",JSON.stringify(userParameters))
+        console.log(sessionStorage.getItem("params"))
         var userData = fetch('https://api.spotify.com/v1/me',userParameters)
         .then(response => response.json())
         // .then(data => sessionStorage.setItem("error",JSON.stringify(data)))
@@ -114,6 +116,7 @@ export default function Login(){
           sessionStorage.setItem("userEmail",data.email)
           sessionStorage.setItem("spotifyToken",data.href)
         })
+        .catch(response => console.log("CATCH"+response.json()))
         //Just getting UserId for now but definitely can get additional info from this json
       }
 
