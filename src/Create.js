@@ -97,13 +97,16 @@ export default function Create(){
           'Authorization': 'Bearer ' + userAuthToken
         }
       }
-      var getUsersPlaylist = await fetch('https://api.spotify.com/v1/me/playlists?limit=5&mine=true' , playlistParameters)
+      var getUsersPlaylist = await fetch('https://api.spotify.com/v1/me/playlists?limit=50&mine=true' , playlistParameters)
       .then(response => response.json())
-      // .then(data => {
-      //   const personalPlaylists = data.items.filter(playlist => {
-      //     return playlist.owner.id === userId.replaceAll("\"","");
-      // });setUserPlaylists(personalPlaylists);
-      // })
+      .then(data => 
+        {
+        const personalPlaylists = data.items.filter(playlist => {
+          return playlist.owner.id === userId.replaceAll("\"","");
+      });setUserPlaylists(personalPlaylists);
+      }
+      )
+      // .then(console.log(userPlaylists))
       .catch(response => console.log(response.json()))
     }
     // Add Tracks to Playlist
@@ -225,7 +228,11 @@ export default function Create(){
         console.log(selectedTracksIDs)
       }
     }
-    
+    function playlistImg(url){
+      if(url == null){
+        return ""
+      }
+    }
     // function profileImg(){
     //   userInfo();
 
@@ -314,8 +321,9 @@ export default function Create(){
                                       <div>
                                         <div>
                                         <Container>
-                                          <Card>
-                                          <Card.Img src={userPlaylists.images[0].url}/>
+                                          <Card key={userPlaylists._id}>
+                                          {/* <Card.Img src={userPlaylists.images[0].url}/> */}
+                                          {/* <Card.Img src={playlistImg(userPlaylists.images[0].url)}/> */}
                                             <Card.Title>{userPlaylists.name}</Card.Title>
                                           </Card>
 
