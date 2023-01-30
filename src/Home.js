@@ -4,7 +4,7 @@ import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navba
 import Carousel from 'react-bootstrap/Carousel';
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
-import TasteMaker3 from './Tastemaker Pro Ad .99.png'
+import TasteMaker3 from './Tastemaker Pro Ad .99 UPDATED.png'
 import { renderMatches } from 'react-router-dom';
 import Footer from './Footer';
 import artistPicture from './2809.jpg'

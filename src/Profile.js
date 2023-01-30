@@ -18,6 +18,7 @@ export default function Profile(){
             <div style={{marginTop:"6rem"}}>
                 <h1>{userId}</h1>
                 <h2>{userEmail}</h2>
+                <Button onClick={event => window.location.assign("http://localhost:3000/User/"+userId)}>View public Profile</Button>
             </div>
         </div>
     );

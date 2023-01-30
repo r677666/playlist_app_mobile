@@ -37,7 +37,8 @@ function Navigation() {
             <Nav className="me-auto">
               <Nav.Link href="/Home">Home</Nav.Link>
               <Nav.Link href="/Create">Create</Nav.Link>
-              <Nav.Link href="/Profile">Profile</Nav.Link>
+              <Nav.Link href="/competition">Competition</Nav.Link>
+              <Nav.Link href="/Account">Account</Nav.Link>
               <Nav.Link href="/Logout">Logout</Nav.Link>
               
             </Nav>
