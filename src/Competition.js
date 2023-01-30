@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Card, Button, Col, InputGroup, FormControl, CardGroup, Modal} from 'react-bootstrap';
+import { Container, Row, Card, Button, Col, InputGroup, FormControl, CardGroup, Modal, ButtonGroup} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
@@ -46,8 +46,8 @@ export default function UserProfile(){
             method: 'POST',
             body: JSON.stringify({
               "userId": userId,
-              "playlistName": selectedPlaylistName,
-              "playlistsId": selectedPlaylistID,
+              "playlistName": sessionStorage.getItem("playlistName"),
+              "playlistsId": sessionStorage.getItem("playlistId"),
               "likes": 0
             }),
             headers: {
@@ -118,9 +118,11 @@ export default function UserProfile(){
                                 <Card style={{padding:".5rem",paddingBottom:"1rem"}} key={compSubmissions._id} >
                                         <Container> 
                                             {compSubmissions[i].playlistName}
+                                            {/* <ButtonGroup> */}
                                             <Button style={{width:"5rem",marginLeft:"48rem"}}>Likes {compSubmissions[i].likes}</Button>
+                                            <Button style={{width:"5rem",marginLeft:"2rem", backgroundColor:"red"}}>Delete</Button>
+                                            {/* </ButtonGroup> */}
                                         </Container>
-                                        
                                 </Card>
                             ))}
                         </Col>
