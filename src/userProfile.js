@@ -76,7 +76,7 @@ export default function UserProfile(){
     }else{
         validate = <Row>
         {friends.map((friends,i) => {return(
-            <Card style={{width:'8rem',height:'8rem', paddingTop:'1rem' }} key={i} >
+            <Card style={{width:'8rem',height:'8rem', paddingTop:'1rem' }} key={friends._id} >
                 <Container> 
                     {friends}
                 </Container>

@@ -233,7 +233,7 @@ export default function Create(){
       <div className="App">
         <Navigation/>
         <br/>
-        <Container>
+        <Container style={{marginTop:"6rem"}}>
           <InputGroup className="mb-3" size="lg">
             <FormControl
               placeholder="Search For Artist"

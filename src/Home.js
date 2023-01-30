@@ -4,9 +4,7 @@ import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navba
 import Carousel from 'react-bootstrap/Carousel';
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
-import TasteMaker1 from './TasteMaker1.png'
-import TasteMaker2 from './TasteMaker2.png'
-import TasteMaker3 from './TasteMaker3.png'
+import TasteMaker3 from './Tastemaker Pro Ad .99.png'
 import { renderMatches } from 'react-router-dom';
 import Footer from './Footer';
 import artistPicture from './2809.jpg'
@@ -127,8 +125,8 @@ export default function Home(){
         <div className='Home'>
         <Navigation/>
         <div style={{margin:'auto',backgroundColor:'black'}}>
-        <Carousel fade style={{width:'960px',maxHeight:'540px',margin:'auto', marginTop:"6rem"}}>
-            <Carousel.Item interval={2000}>
+        <Carousel fade style={{width:'900px',maxHeight:'540px',margin:'auto', marginTop:"6rem"}}>
+            <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
                 src={artistPicture}
@@ -141,7 +139,7 @@ export default function Home(){
                 </Carousel.Caption>
                 
             </Carousel.Item>
-            <Carousel.Item interval={2000}>
+            <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
                 src={pollPicture}
@@ -159,17 +157,17 @@ export default function Home(){
                 </Button>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item interval={2000}>
+            <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
                 src={TasteMaker3}
                 alt="Second slide"
                 />
 
-                <Carousel.Caption>
+                {/* <Carousel.Caption>
                 <h3>Third slide label</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
+                </Carousel.Caption> */}
             </Carousel.Item>
         </Carousel>
         </div>
