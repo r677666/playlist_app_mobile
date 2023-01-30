@@ -83,9 +83,10 @@ export default function Create(){
             })
         }
         //Create Playlist from Given User Id
-        var createPlaylist = fetch('https://api.spotify.com/v1/users/' + userId + '/playlists',playlistParameters)
+        var createPlaylist = fetch('https://api.spotify.com/v1/users/' + userId.replaceAll("\"","") + '/playlists',playlistParameters)
         .then(response => response.json())
         .then(data => console.log(data))
+        .then(console.log(userId))
     }
     //Get Playlist
     async function getUserPlaylist(){
@@ -96,13 +97,13 @@ export default function Create(){
           'Authorization': 'Bearer ' + userAuthToken
         }
       }
-      var getUsersPlaylist = await fetch('https://api.spotify.com/v1/me/playlists?sort=created_at&order=desc&offset=50&limit=50' , playlistParameters)
+      var getUsersPlaylist = await fetch('https://api.spotify.com/v1/me/playlists?limit=5&mine=true' , playlistParameters)
       .then(response => response.json())
-      .then(data => {
-        const personalPlaylists = data.items.filter(playlist => {
-          return playlist.owner.id === userId.replaceAll("\"","");
-      });setUserPlaylists(personalPlaylists);
-      })
+      // .then(data => {
+      //   const personalPlaylists = data.items.filter(playlist => {
+      //     return playlist.owner.id === userId.replaceAll("\"","");
+      // });setUserPlaylists(personalPlaylists);
+      // })
       .catch(response => console.log(response.json()))
     }
     // Add Tracks to Playlist
