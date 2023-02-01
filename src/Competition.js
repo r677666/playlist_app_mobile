@@ -20,7 +20,8 @@ export default function UserProfile(){
     const [testUserId,setTestUserId] = useState([])
     const [currentDocs, setCurrentDocs] = useState([]);
     const [compDocsLikes, setCompDocsLikes] = useState([])
-
+    const [currentUserForDelete, setCurrentUserForDelete] = useState([]);
+    
     useEffect(() => {
         const fetchUsers = async () => {
             const response = await fetch('/api/competition')
@@ -29,6 +30,7 @@ export default function UserProfile(){
             // .then(console.log(compSubmissions[0].playlistsId))
         }
         fetchUsers()
+        setCurrentUserForDelete(userId)
     })
 
     //Post Playlist to Competition
@@ -95,32 +97,21 @@ export default function UserProfile(){
           }
         }
       }
-      function deleteButtonFunction(userId,id){
-        const followMethod = fetch("/api/competition/"+id)
-        .then( response => response.json())
-        .then(data => setTestUserId(data))
+      function deleteButtonFunction(id){
+        console.log(id)
+        const getMethod = fetch("/api/competition/" +id)
+        .then(result => console.log(result.json()))
 
-        console.log(JSON.stringify(testUserId))
-        const useTestId = testUserId.userId;
-        console.log(useTestId)
-        if(userId == useTestId){
-        //     console.log("test")
-        // }
-        // if(userId == )
-        // if(test == userId){
-        //     console.log("TEST:"+userId)
-        //     console.log("TEST:"+useTestId)
-            const deleteMethod = fetch("/api/competition/",{
-            method: 'DELETE',
-            body: JSON.stringify({
-                "docId": id
-            }),
-            headers: {
-            'Content-Type': 'application/json'
-            }
-            }).then(response => console.log(response.json()))
-
+        const deleteMethod = fetch("/api/competition/",{
+        method: 'DELETE',
+        body: JSON.stringify({
+            "id": id
+        }),
+        headers: {
+        'Content-Type': 'application/json'
         }
+        }).then(response => console.log(response.json()))
+        
       }
       //Like Comp Playlist
     const handleLike = async (userId,id) => {
@@ -187,6 +178,16 @@ export default function UserProfile(){
             return data.length
         }
     }
+    function deleteButton(user,userX){
+        if(user == currentUserForDelete){
+            return(
+            <Button onClick={event => deleteButtonFunction(userX)}>
+                Delete
+            </Button>
+            )
+        }else{
+        }
+    }
     return(
         <div>
             <Navigation/>
@@ -212,10 +213,7 @@ export default function UserProfile(){
                                                 >
                                                 Like {handleNull(compSubmissions[i].likes)}
                                                 </Button>
-                                                <Button onClick={event => deleteButtonFunction(userId,compSubmissions[i]._id)}>
-                                                    Delete
-                                                </Button>
-                                                {/* {} */}
+                                                {deleteButton(compSubmissions[i].userId,compSubmissions[i]._id)}
                                             </ButtonGroup>
                                         </Container>
                                 </Card>
