@@ -398,10 +398,10 @@ export default function Create(){
           <Row className="mx-2 row row-cols-4">
               {albums.map((album, i) => {
                 return (
-                  <div style={{width: isActive ? '54rem' : '18rem'}}>
-                  <CardGroup key={i}>
-                    <div onClick={event => onClickFunction(album.name)}>
-                      <Card>
+                  <div >
+                  <CardGroup>
+                    <div key={album.name} onClick={event => onClickFunction(album.name)}>
+                      <Card >
                         <Card.Img src={album.images[0].url} style={{maxWidth:'18rem', alignSelf:'flex-start'}}/>
                           <Card.Title>{album.name}</Card.Title>
                       </Card>

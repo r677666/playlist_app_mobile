@@ -18,7 +18,8 @@ export default function UserProfile(){
     const [selectedPlaylistID, setSelectedPlaylistID] = useState('');
     const [isActive, setIsActive] = useState(false);
     const [testUserId,setTestUserId] = useState([])
-    const [currentUser, setCurrentUser] = useState(false);
+    const [currentDocs, setCurrentDocs] = useState([]);
+    const [compDocsLikes, setCompDocsLikes] = useState([])
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -39,48 +40,13 @@ export default function UserProfile(){
               "userId": userId,
               "playlistName": sessionStorage.getItem("playlistName"),
               "playlistsId": sessionStorage.getItem("playlistId"),
-              "likes": 0
+              "likes": []
             }),
             headers: {
               'Content-Type': 'application/json'
             }
           })
         .then(result => console.log(result.json()))
-    }
-
-    //Like Comp Playlist
-    async function likePlaylist(id){
-        const followMethod = await fetch("/api/competition/addLike",{
-            method: 'PATCH',
-            body: JSON.stringify({
-                "playlistId": id
-            }),
-            headers: {
-            'Content-Type': 'application/json'
-            }
-        })
-        setIsActive(true)
-    }
-    //Delete Like from Comp Playlist
-    async function removeLikePlaylist(id){
-        const followMethod = await fetch("/api/competition/removeLike",{
-            method: 'PATCH',
-            body: JSON.stringify({
-                "playlistId": id
-            }),
-            headers: {
-            'Content-Type': 'application/json'
-            }
-        })
-        setIsActive(false)
-    }
-
-    async function likeButtonFunction(id){
-        if(isActive == false){
-            likePlaylist(id)
-        }else{
-            removeLikePlaylist(id)
-        }
     }
 
     //Get Playlist
@@ -129,7 +95,7 @@ export default function UserProfile(){
           }
         }
       }
-      function deleteButtonFunction(id){
+      function deleteButtonFunction(userId,id){
         const followMethod = fetch("/api/competition/"+id)
         .then( response => response.json())
         .then(data => setTestUserId(data))
@@ -156,7 +122,71 @@ export default function UserProfile(){
 
         }
       }
+      //Like Comp Playlist
+    const handleLike = async (userId,id) => {
+        //if currentDoc
+        //then run try catch
+        //else 
+        //
+        
+                var arr = [];
+                
+                const checkIfLikedAlready = await fetch("/api/competition/" + id)
+                .then(result => result.json())
+                .then(data => 
+                    {
+                    if(data.likes == null){
+                        console.log("TEST")
+                    }else{
+                        // console.log(data.likes.indexOf('testLike') )
+                        if(data.likes.indexOf(userId) !== -1){
+                            console.log("REMOVED LIKE")
+                                    const followMethod = fetch("/api/competition/removeLike",{
+                                        method: 'PATCH',
+                                        body: JSON.stringify({
+                                            "userId": userId,
+                                            "playlistId": id
+                                        }),
+                                        headers: {
+                                        'Content-Type': 'application/json'
+                                        }
+                                    })
+                                    setIsActive(false)
+                            //     }
+                            // }catch(err){
+                            //     console.log(err)
+                            // }
+                        }else{
+                            console.log("ADDED LIKE")
+                            const followMethod = fetch("/api/competition/addLike",{
+                                method: 'PATCH',
+                                body: JSON.stringify({
+                                    "userId": userId,
+                                    "playlistId": id
+                                }),
+                                headers: {
+                                'Content-Type': 'application/json'
+                                }
+                            }
+                            )
+                            setIsActive(true)
+                        }
+                    }
+                }
+                )
+                // .then(data => arr.push(data.likes))
 
+
+
+        
+    }
+    function handleNull(data){
+        if(data == undefined){
+            return "0"
+        }else{
+            return data.length
+        }
+    }
     return(
         <div>
             <Navigation/>
@@ -168,20 +198,21 @@ export default function UserProfile(){
                         <h3 style={{marginBottom:"1.25rem"}}>Current Submissions</h3>
                         <Col>
                             {compSubmissions && compSubmissions.map((user,i) => (
-                                <Card style={{padding:".5rem",paddingBottom:"1rem"}} key={compSubmissions._id} >
+                                <Card style={{padding:".5rem",paddingBottom:"1rem"}} >
                                         <Container> 
                                             {compSubmissions[i].playlistName}
                                             <ButtonGroup>
-                                            
                                                 <Button
-                                                onClick={event => likeButtonFunction(compSubmissions[i]._id)}
+                                                key={compSubmissions._id} 
+                                                onClick={event => handleLike(userId,compSubmissions[i]._id)}
                                                 style={{width:"5rem",
                                                 marginLeft:"48rem", 
-                                                backgroundColor: isActive ? "red" : "white", 
+                                                backgroundColor: "white", 
                                                 color:"black"}}
-                                                >Likes {compSubmissions[i].likes}</Button>
-
-                                                <Button onClick={event => deleteButtonFunction(compSubmissions[i]._id)}>
+                                                >
+                                                Like {handleNull(compSubmissions[i].likes)}
+                                                </Button>
+                                                <Button onClick={event => deleteButtonFunction(userId,compSubmissions[i]._id)}>
                                                     Delete
                                                 </Button>
                                                 {/* {} */}

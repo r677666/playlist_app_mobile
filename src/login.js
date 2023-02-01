@@ -56,7 +56,10 @@ export default function Login(){
                     method: 'POST',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),
-                      "spotifyToken": sessionStorage.getItem("spotifyToken")
+                      "friends":[],
+                      "playlists":[],
+                      "spotifyToken": sessionStorage.getItem("spotifyToken"),
+                      "paidMember":false
                     }),
                     headers: {
                       'Content-Type': 'application/json'
