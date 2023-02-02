@@ -45,6 +45,9 @@ export default function Create(){
     const [showCartModal, set_Cart_ShowModal] = useState(false);
     const handleClose_showCartModal = () => set_Cart_ShowModal(false);
     const handleShow_showCartModal = () => set_Cart_ShowModal(true);
+    const [showTrackModal, set_Track_ShowModal] = useState(false);
+    const handleClose_showTrackModal = () => set_Cart_ShowModal(false);
+    const handleShow_showTrackModal = () => set_Cart_ShowModal(true);
 
     function createButtonFunction(){
       playlistCreation();
@@ -189,7 +192,9 @@ export default function Create(){
       setIsActive(current => !current)
       var executed = false;
       search();
+      handleShow_showTrackModal()
     }
+
     function setClickedPlaylistButton(name,id){
       var executed = false;
       var currentID = "";
@@ -406,42 +411,53 @@ export default function Create(){
                           <Card.Title>{album.name}</Card.Title>
                       </Card>
                     </div>
-                    {isActive && (
-                      <div>
-                        <Card style={{width:'17rem'}}>
-                              <Card.Body style={{}}>
-                                {isActive && (
-                                  tracks.map((track, i) => {
-                                    return (
-                                      <div>
+                      <Modal show={showTrackModal} onHide={handleClose_showTrackModal}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>{album.name}</Modal.Title>
+                    </Modal.Header>
+                    <div>
+                      <Card style={{width:'18rem'}}>
+                      <Card.Body style={{}}>
+                        {isActive && (
+                                    tracks.map((track, i) => {
+                                      return (
                                         <div>
-                                          <Card
-                                          onMouseEnter={() => setHoveredTrack(true)}
-                                          onMouseLeave={() => setHoveredTrack(false)}
-                                          >
-                                            
-                                            <Card.Title >
-                                            {track.name}
-                                            {hoveredTrack && (
-                                              <Button
-                                              style={{marginLeft:'.5rem'}}
-                                              onClick={addTrackToCartFunction(track.name,track.id)}
-                                              >
-                                                Add
-                                              </Button>
-                                            )}</Card.Title>
-                                          </Card>
+                                          <div>
+                                            <Card
+                                            onMouseEnter={() => setHoveredTrack(true)}
+                                            onMouseLeave={() => setHoveredTrack(false)}
+                                            >
+                                              
+                                              <Card.Title >
+                                              {track.name}
+                                              {hoveredTrack && (
+                                                <Button
+                                                style={{marginLeft:'.5rem'}}
+                                                onClick={addTrackToCartFunction(track.name,track.id)}
+                                                >
+                                                  Add
+                                                </Button>
+                                              )}</Card.Title>
+                                            </Card>
+                                          </div>
+                                          
                                         </div>
-                                        
-                                      </div>
-                                    )
-                                  })
-                                  )}
-                              </Card.Body>
-                              
-                        </Card>
+                                      )
+                                    })
+                                    )}
+                                </Card.Body>
+
+                                </Card>
                       </div>
-                    )}
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose_showTrackModal}>
+                        {selectedPlaylistName}
+                    </Button>
+                    <Button variant="secondary" onClick={addCartItemsToPlaylist}>
+                        Tracks
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
                   </CardGroup>
                   
                   

@@ -115,11 +115,6 @@ export default function UserProfile(){
       }
       //Like Comp Playlist
     const handleLike = async (userId,id) => {
-        //if currentDoc
-        //then run try catch
-        //else 
-        //
-        
                 var arr = [];
                 
                 const checkIfLikedAlready = await fetch("/api/competition/" + id)
