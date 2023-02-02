@@ -21,6 +21,8 @@ export default function UserProfile(){
     const [currentDocs, setCurrentDocs] = useState([]);
     const [compDocsLikes, setCompDocsLikes] = useState([])
     const [currentUserForDelete, setCurrentUserForDelete] = useState([]);
+    const [compDoc, setCompDoc] = useState('');
+    const [compDocActive, setCompDocActive] = useState(false);
     
     useEffect(() => {
         const fetchUsers = async () => {
@@ -73,6 +75,28 @@ export default function UserProfile(){
         .catch(response => console.log(response.json()))
       }
 
+    //Get Comp Submitted Playlist
+    async function compPlaylist(){
+      var playlistParameters={
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+        }
+      }
+      console.log(sessionStorage.getItem('token'))
+      var getUsersPlaylist = await fetch('https://api.spotify.com/v1/playlists/' + sessionStorage.getItem('compDoc'), playlistParameters)
+        .then(response => console.log(response.json()))
+        // .then(data => console.log(data))
+        //   {
+        //   const personalPlaylists = data.items.filter(playlist => {
+        //     return playlist.owner.id === userId.replaceAll("\"","");
+        // });setUserPlaylists(personalPlaylists);
+        // }
+        // )
+        // // .then(console.log(userPlaylists))
+        // .catch(response => console.log(response.json()))
+    }
     function setClickedPlaylistButton(userId,playlistsName,playlistsId){
         var executed = false;
         var currentID = "";
@@ -183,6 +207,12 @@ export default function UserProfile(){
         }else{
         }
     }
+    function handleCompDocPress(playlist){
+      console.log("MADE IT")
+      console.log(playlist)
+      sessionStorage.setItem('compDoc', playlist)
+      compPlaylist()
+    }
     return(
         <div>
             <Navigation/>
@@ -197,6 +227,7 @@ export default function UserProfile(){
                                 <Card style={{padding:".5rem",paddingBottom:"1rem"}} >
                                         <Container> 
                                             {compSubmissions[i].playlistName}
+                                            <Button onClick={event => handleCompDocPress(compSubmissions[i].playlistsId)} style={{marginLeft:"1rem"}}>show</Button>
                                             <ButtonGroup>
                                                 <Button
                                                 key={compSubmissions._id} 
