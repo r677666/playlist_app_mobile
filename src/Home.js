@@ -16,8 +16,7 @@ export default function Home(){
     const [users,setUsers] = useState([])
     const [isActive, setIsActive] = useState(false);
     const [accessToken, setAccessToken] = useState("");
-    const [getUserImg,setGetUserImg] = useState("")
-    var [spotifyUsers,setSpotifyUsers] = useState([{}])
+    const [getUserImg, setGetUserImg] = useState([]);
     var test;
     useEffect(() => {
         const fetchUsers = async () => {
@@ -88,39 +87,32 @@ export default function Home(){
         }
     }
 
-    function userInfo(){
-            var userParameters = {
+    function competitionButton(){
+        window.location.assign("http://localhost:3000/competition/")
+    }
+    function handleUserImgs(userId){
+        var userParameters = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + sessionStorage.getItem("token")
             }
-            }
-                console.log("Token");
-                // console.log(sessionStorage.getItem("token"))
-                for(var i = 0; i<users.length;i++){
-                var demoUser = users[i].userId
-                var userFixed = demoUser.replaceAll('\"', '')
-                // console.log("User")
-                // console.log(userFixed)
-                var userData = fetch('https://api.spotify.com/v1/users/' + userFixed,userParameters)
-                // .then(response => console.log(response.json()))
-                // .then(data => spotifyUsers.push(data.images[0].url))
-                // .then(setSpotifyUsers(loadedUsers))
-                .then(console.log("Successfully Retrieved Spotify Users"))
-                }
-                console.log("Spotify")
-                console.log(spotifyUsers)
-                spotifyUsers.shift()
-                var unique = spotifyUsers.filter(onlyUnique);
-                test = unique
-                console.log(test)
         }
-      
-      userInfo()
-      function competitionButton(){
-        window.location.assign("http://localhost:3000/competition/")
+        var userData = fetch('https://api.spotify.com/v1/users/' + userId.replaceAll("\"",""))
+        .then(response => response.json())
+        .then(data => setGetUserImg(data))
     }
+    // function showUserImg(){
+    //     console.log(getUserImg.length)
+    //     for(var i = 0; i<getUserImg.length; i++){
+    //         console.log("MADE IT")
+    //         if(getUserImg.images.length == 0){
+    //             return <div> No Image </div>
+    //         }else{
+    //             return <Card.Img src={getUserImg.images[0].url}></Card.Img>
+    //         }
+    //     }
+    // }
     return(
         <div className='Home'>
         <Navigation/>
@@ -174,14 +166,14 @@ export default function Home(){
         <br/>
         <div>
             <h1>Current Users</h1>
-            {console.log(users)}
             <Container style={{alignItems:"normal"}}>
                 <Row className="mx-2 row row-cols-4">
                     {users && users.map((user,i) => (
                         <Card style={{width:'20rem',height:'22rem', paddingTop:'1rem' }} key={users._id} >
                             <Container onClick={event => clickUser(users[i].userId)}>
                                 {console.log(users[i])}
-                                    {/* <Card.Img src={users[i].images.url}/> */}
+                                    
+                                    {handleUserImgs(users[i].userId)}
                                         <Container> 
                                             {users[i].userId.replaceAll("\"","")}
                                         </Container>
