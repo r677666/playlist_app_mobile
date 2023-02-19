@@ -81,7 +81,7 @@ export default function Home(){
             return(
 
                 <Button 
-                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA", padding:".10rem", marginTop:".25rem"}}
+                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA", paddingLeft:".18rem", paddingRight:".18rem", paddingBottom:".1rem" ,marginTop:".25rem", marginLeft:".25rem"}}
                 onClick={event => {followUserButton(item2,item1)}}>Follow</Button>
             )
         }
@@ -184,20 +184,22 @@ export default function Home(){
             </div>
         <div>
             <h1 style={{textAlign:"center"}}>Current Users</h1>
-            <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem", marginBottom:"5rem", marginTop:"3rem"}}/>
+            <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem", marginBottom:"4rem", marginTop:"4rem"}}/>
             <Container style={{alignItems:"normal"}}>
                 <Row className="mx-2 row row-cols-4">
                     {users && users.map((user,i) => (
-                        <Card style={{width:'25rem',height:'25rem', paddingTop:'1rem' }} key={users._id} >
+                        <Card style={{width:'25rem',height:'25rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
                             <Container onClick={event => clickUser(users[i].userId)}>
                                 {console.log(users[i])}
                                     
                                     <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
                                         <Container style={{paddingTop:'.25rem'}}> 
                                             {users[i].userId.replaceAll("\"","")}
+                                            {checkFollowButton(sessionStorage.getItem("userId"),users[i].userId)}
                                         </Container>
+                                        
                             </Container>
-                            {checkFollowButton(sessionStorage.getItem("userId"),users[i].userId)}
+                            
                         </Card>
                     ))}
                 </Row>
