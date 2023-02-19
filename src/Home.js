@@ -81,7 +81,7 @@ export default function Home(){
             return(
 
                 <Button 
-                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA"}}
+                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA", padding:".10rem", marginTop:".25rem"}}
                 onClick={event => {followUserButton(item2,item1)}}>Follow</Button>
             )
         }
@@ -173,8 +173,8 @@ export default function Home(){
                             <Container onClick={event => clickUser(users[i].userId)}>
                                 {console.log(users[i])}
                                     
-                                    {handleUserImgs(users[i].userId)}
-                                        <Container> 
+                                    <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
+                                        <Container style={{paddingTop:'.25rem'}}> 
                                             {users[i].userId.replaceAll("\"","")}
                                         </Container>
                             </Container>

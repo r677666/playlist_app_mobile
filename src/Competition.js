@@ -13,17 +13,16 @@ export default function UserProfile(){
     const [showSetPlayListModal, set_SetPlayList_ShowModal] = useState(false);
     const handleClose_showSetPlayListModal = () => set_SetPlayList_ShowModal(false);
     const handleShow_showSetPlayListModal = () => set_SetPlayList_ShowModal(true);
+
+    const [showCompPlayListModal, set_CompPlayList_ShowModal] = useState(false);
+    const handleClose_showCompPlayListModal = () => set_CompPlayList_ShowModal(false);
+    const handleShow_showCompPlayListModal = () => set_CompPlayList_ShowModal(true);
+
     const [choosePlaylistActive, setChoosePlaylistActive] = useState(false);
-    const [selectedPlaylistName, setSelectedPlaylistName] = useState('');
-    const [selectedPlaylistID, setSelectedPlaylistID] = useState('');
     const [isActive, setIsActive] = useState(false);
-    const [testUserId,setTestUserId] = useState([])
-    const [currentDocs, setCurrentDocs] = useState([]);
-    const [compDocsLikes, setCompDocsLikes] = useState([])
+    const [isCompActive, setCompIsActive] = useState(false);
     const [currentUserForDelete, setCurrentUserForDelete] = useState([]);
     const [compDoc, setCompDoc] = useState('');
-    const [compDocActive, setCompDocActive] = useState(false);
-    
     useEffect(() => {
         const fetchUsers = async () => {
             const response = await fetch('/api/competition')
@@ -77,6 +76,7 @@ export default function UserProfile(){
 
     //Get Comp Submitted Playlist
     async function compPlaylist(){
+      setCompIsActive(true)
       var playlistParameters={
         method: 'GET',
         headers: {
@@ -86,16 +86,17 @@ export default function UserProfile(){
       }
       console.log(sessionStorage.getItem('token'))
       var getUsersPlaylist = await fetch('https://api.spotify.com/v1/playlists/' + sessionStorage.getItem('compDoc'), playlistParameters)
-        .then(response => console.log(response.json()))
-        // .then(data => console.log(data))
+        .then(response => response.json())
+        .then(data => setCompDoc(data))
+        console.log(compDoc)
         //   {
         //   const personalPlaylists = data.items.filter(playlist => {
         //     return playlist.owner.id === userId.replaceAll("\"","");
         // });setUserPlaylists(personalPlaylists);
         // }
-        // )
         // // .then(console.log(userPlaylists))
         // .catch(response => console.log(response.json()))
+        console.log("PLAYLIST TRACKS FOUND")
     }
     function setClickedPlaylistButton(userId,playlistsName,playlistsId){
         var executed = false;
@@ -211,6 +212,7 @@ export default function UserProfile(){
       console.log("MADE IT")
       console.log(playlist)
       sessionStorage.setItem('compDoc', playlist)
+      handleShow_showCompPlayListModal()
       compPlaylist()
     }
     return(
@@ -245,7 +247,7 @@ export default function UserProfile(){
                                 </Card>
                             ))}
                         </Col>
-                        <Button style={{marginTop:"1.25rem",backgroundColor:'orange',color:"black",outlineColor:"orange"}} onClick={handleShow_showSetPlayListModal}>
+                        <Button style={{marginTop:"1.25rem",backgroundColor:'orange',color:"black", borderColor:"black"}} onClick={handleShow_showSetPlayListModal}>
                             Submit a Playlist
                         </Button>
                     </Container>
@@ -260,7 +262,7 @@ export default function UserProfile(){
                               View Your Playlists
                             </Button>
                             <Card style={{width:'17rem'}}>
-                              <Card.Body style={{}}>
+                              <Card.Body>
                                 {(
                                   userPlaylists.map((userPlaylists, i) => {
                                     return (
@@ -300,7 +302,37 @@ export default function UserProfile(){
                     </Button>
                     </Modal.Footer>
                 </Modal>
-
+                {/* Show submitted playlist tracks */}
+                   <Modal show={showCompPlayListModal} onHide={handleClose_showCompPlayListModal} style={{padding:"5rem"}}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>{compDoc.name}</Modal.Title>
+                    </Modal.Header>
+                    <Container style={{paddingTop:"1rem",paddingBottom:"1rem"}}>
+                    <Card>
+                    {/* <Card.Img src={isCompActive && compDoc.href ? compDoc.tracks.items[0].track.album.images[0].url : null} style={{maxWidth:"5rem",maxHeight:"5rem"}}/> */}
+                      <CardGroup>
+                      
+                      <Card.Img src={isCompActive && compDoc.href ? compDoc.tracks.items[0].track.album.images[0].url : null} style={{maxWidth:"5rem",maxHeight:"5rem"}}/>
+                      
+                      <Card.Title>
+                      {isCompActive && compDoc.href ?
+                        (
+                        compDoc.tracks.items[0].track.name
+                        )
+                        : "null"}  
+                         </Card.Title>
+                          <Card.Text style={{paddingLeft:"1rem"}}>
+                              {isCompActive && compDoc.href ? compDoc.tracks.items[0].track.artists[0].name : null}
+                          </Card.Text> 
+                       </CardGroup>       
+                    </Card>
+                    </Container>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose_showCompPlayListModal}>
+                        Close
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
                 </div>
                 
         </div>

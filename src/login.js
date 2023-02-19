@@ -59,6 +59,7 @@ export default function Login(){
                       "friends":[],
                       "playlists":[],
                       "spotifyToken": sessionStorage.getItem("spotifyToken"),
+                      "spotifyUserImgUrl": sessionStorage.getItem("spotifyUserImgUrl"),
                       "paidMember":false
                     }),
                     headers: {
@@ -118,6 +119,7 @@ export default function Login(){
           sessionStorage.setItem("imgURL",data.images[0].url)
           sessionStorage.setItem("userEmail",data.email)
           sessionStorage.setItem("spotifyToken",data.href)
+          sessionStorage.setItem("spotifyUserImgUrl",data.images[0].url)
         })
         .catch(response => console.log("CATCH"+response.json()))
         //Just getting UserId for now but definitely can get additional info from this json
