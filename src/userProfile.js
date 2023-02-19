@@ -10,6 +10,7 @@ export default function UserProfile(){
     const [users,setUsers] = useState([])
     const [friendsIds,setFriendsIds] = useState([])
     var [friends,setFriends] = useState([])
+    const [shouldRunEffect, setShouldRunEffect] = useState(true);
     // console.log(friends)
 
     
@@ -23,7 +24,12 @@ export default function UserProfile(){
             // .then(console.log("users from Playlist App Server have been found"))
         }
         fetchUsers()
-        
+        // let intervalid;
+        // if(shouldRunEffect){
+        //     intervalid = setInterval(() => {
+        //         console.log('Interval tick')
+        //     }, 10);
+        // }
         const getFriends = async () => {
             
             var token = "";
@@ -58,7 +64,11 @@ export default function UserProfile(){
         queryFriends()
         
         
-    },[users,friendsIds,id]);
+    });
+    //trying to stop constant run
+    // const handleStopEffect = () => {
+    //     setShouldRunEffect(false);
+    // }
 
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
@@ -84,15 +94,48 @@ export default function UserProfile(){
         )})}
         </Row>
     }
-
+    
     return( 
         
         <div>
         
             <Navigation/>
             <div>
-                <Container style={{marginTop:"8rem"}}>
-                    <h1>{id}</h1>
+                <Container style={{marginTop:"8rem", paddingBottom:"20rem"}}>
+                    <Card.Img style={{marginLeft:"35.5rem", width:"10rem",height:"10rem"}} src="..."></Card.Img>
+                    <h1 style={{textAlign:"center"}}>{id}</h1>
+                    <h2>Top 4 Artist</h2>
+                    <Container>
+                        {/* <h1>Show top four artist in seperate canvas</h1> */}
+                        <Row>
+                            <Card style={{width:'20rem',height:'25rem', paddingTop:'1rem' }}>
+                                Artist 1 
+                            </Card>
+                            <Card style={{width:'20rem',height:'25rem', paddingTop:'1rem' }}>
+                                Artist 2 
+                            </Card>
+                            <Card style={{width:'20rem',height:'25rem', paddingTop:'1rem' }}>
+                                Artist 3 
+                            </Card>
+                            <Card style={{width:'20rem',height:'25rem', paddingTop:'1rem' }}>
+                                Artist 4 
+                            </Card>
+                        </Row>
+                    </Container>
+                    <h3>Best of {id}</h3>
+                    <Container>
+                        <Row>
+                            <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
+                                Playlist 1 
+                            </Card>
+                            <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
+                                Playlist 2 
+                            </Card>
+                            <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
+                                Playlist 3 
+                            </Card>
+                        </Row>
+                    </Container>
                     <h3>Friends</h3>
                     <Container>
                         {/* <Row> */}

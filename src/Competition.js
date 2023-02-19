@@ -222,7 +222,7 @@ export default function UserProfile(){
             <Navigation/>
             <div style={{marginTop:"8rem"}}>
                     <h1 style={{textAlign:"center",fontSize:"80px"}}>The Best Album of the Year</h1>
-                    <h5 style={{textAlign:"center",color:"gray", fontSize:"15px"}}>The Best User Created Album o the Year</h5>
+                    <h5 style={{textAlign:"center",color:"gray", fontSize:"15px"}}>The Best User Created Album of the Year</h5>
                 </div>
                 <div>
                     <Container style={{maxWidth:"50rem"}}>

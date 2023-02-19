@@ -163,13 +163,32 @@ export default function Home(){
             </Carousel.Item>
         </Carousel>
         </div>
-        <br/>
+        <br style={{display:"block",content:"",color:"red"}}/>
+        <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem"}}/>
         <div>
-            <h1 style={{paddingLeft:"1rem",textAlign:"center"}}>Current Users</h1>
+            <h1 style={{textAlign:"center", marginTop:"3rem", marginBottom:"3rem"}}>
+                For The Tastemakers
+            </h1>
+            
+        
+        <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem"}}/>
+        <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}>words words words as gjs asg oasjsogjown gwa;osg sa;lj ghwho ajga os;g diwa;g </h5>
+        <h5 style={{textAlign:"center"}}>awi;gjwaj ajsgj;ag;waj;aj wj a; gawgas;gs asog; as goa asg ;asjg ; asgjeo; a jwg</h5>
+        <h5 style={{textAlign:"center"}}>words words words as gjs asg oasjsogjown gwa;osg sa;lj ghwho ajga os;g diwa;g </h5>
+        <h5 style={{textAlign:"center"}}>awi;gjwaj ajsgj;ag;waj;aj wj a; gawgas;gs asog; as goa asg ;asjg ; asgjeo; a jwg</h5>
+        <h5 style={{textAlign:"center"}}>words words words as gjs asg oasjsogjown gwa;osg sa;lj ghwho ajga os;g diwa;g </h5>
+        <h5 style={{textAlign:"center"}}>awi;gjwaj ajsgj;ag;waj;aj wj a; gawgas;gs asog; as goa asg ;asjg ; asgjeo; a jwg</h5>
+        <h5 style={{textAlign:"center"}}>words words words as gjs asg oasjsogjown gwa;osg sa;lj ghwho ajga os;g diwa;g </h5>
+        <h5 style={{textAlign:"center", paddingBottom:"5rem"}}>awi;gjwaj ajsgj;ag;waj;aj wj a; gawgas;gs asog; as goa asg ;asjg ; asgjeo; a jwg</h5>
+        <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem", marginBottom:"3rem"}}/>
+            </div>
+        <div>
+            <h1 style={{textAlign:"center"}}>Current Users</h1>
+            <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem", marginBottom:"5rem", marginTop:"3rem"}}/>
             <Container style={{alignItems:"normal"}}>
                 <Row className="mx-2 row row-cols-4">
                     {users && users.map((user,i) => (
-                        <Card style={{width:'20rem',height:'22rem', paddingTop:'1rem' }} key={users._id} >
+                        <Card style={{width:'25rem',height:'25rem', paddingTop:'1rem' }} key={users._id} >
                             <Container onClick={event => clickUser(users[i].userId)}>
                                 {console.log(users[i])}
                                     
