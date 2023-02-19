@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal} from 'react-bootstrap';
+import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal, ButtonGroup} from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
@@ -127,7 +127,7 @@ export default function Home(){
                 <Carousel.Caption>
                 <h3>Best Drake Album</h3>
                 <p>Submit your playlist for this week's competition</p>
-                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000"}} onClick={event => competitionButton()} >Submit playlist</Button>
+                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button>
                 </Carousel.Caption>
                 
             </Carousel.Item>
@@ -141,25 +141,31 @@ export default function Home(){
                 <Carousel.Caption>
                 <h3>To Pimp a Butterfly or Good Kid m.A.A.d City</h3>
                 <p>Vote for which you think is better</p>
-                <Button>
-                    Card 1
+                <ButtonGroup>
+                <Button style={{backgroundColor:"orange", color:"black", borderColor:"black"}}>
+                    To Pimp a Butterfly
                 </Button>
-                <Button>
-                    Card 2
+                <Button style={{backgroundColor:"black", color:"orange", borderColor:"black"}}>
+                    Good Kid m.A.A.d City
                 </Button>
+                </ButtonGroup>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
                 src={TasteMaker3}
-                alt="Second slide"
+                alt="Third slide"
                 />
-
-                {/* <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption> */}
+                
+                <Carousel.Caption>
+                    <Button 
+                    style={{marginBottom:"1rem", color:"white",backgroundColor:"black", borderColor:"orange", paddingLeft:"2rem",paddingRight:"2rem"}}
+                    
+                    >
+                        Go Pro
+                    </Button>
+                </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
         </div>
@@ -172,15 +178,11 @@ export default function Home(){
             
         
         <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem"}}/>
-        <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}>words words words as gjs asg oasjsogjown gwa;osg sa;lj ghwho ajga os;g diwa;g </h5>
-        <h5 style={{textAlign:"center"}}>awi;gjwaj ajsgj;ag;waj;aj wj a; gawgas;gs asog; as goa asg ;asjg ; asgjeo; a jwg</h5>
-        <h5 style={{textAlign:"center"}}>words words words as gjs asg oasjsogjown gwa;osg sa;lj ghwho ajga os;g diwa;g </h5>
-        <h5 style={{textAlign:"center"}}>awi;gjwaj ajsgj;ag;waj;aj wj a; gawgas;gs asog; as goa asg ;asjg ; asgjeo; a jwg</h5>
-        <h5 style={{textAlign:"center"}}>words words words as gjs asg oasjsogjown gwa;osg sa;lj ghwho ajga os;g diwa;g </h5>
-        <h5 style={{textAlign:"center"}}>awi;gjwaj ajsgj;ag;waj;aj wj a; gawgas;gs asog; as goa asg ;asjg ; asgjeo; a jwg</h5>
-        <h5 style={{textAlign:"center"}}>words words words as gjs asg oasjsogjown gwa;osg sa;lj ghwho ajga os;g diwa;g </h5>
-        <h5 style={{textAlign:"center", paddingBottom:"5rem"}}>awi;gjwaj ajsgj;ag;waj;aj wj a; gawgas;gs asog; as goa asg ;asjg ; asgjeo; a jwg</h5>
-        <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem", marginBottom:"3rem"}}/>
+        <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </h5>
+        <h5 style={{textAlign:"center"}}>et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </h5>
+        <h5 style={{textAlign:"center"}}>consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</h5>
+        <h5 style={{textAlign:"center"}}> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h5>
+        <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem", marginBottom:"3rem", marginTop:"4rem"}}/>
             </div>
         <div>
             <h1 style={{textAlign:"center"}}>Current Users</h1>
