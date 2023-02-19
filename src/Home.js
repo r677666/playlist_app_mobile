@@ -117,7 +117,7 @@ export default function Home(){
         <div className='Home'>
         <Navigation/>
         <div style={{margin:'auto',backgroundColor:'black'}}>
-        <Carousel fade style={{width:'900px',maxHeight:'540px',margin:'auto', marginTop:"6rem"}}>
+        <Carousel fade style={{width:'1080px',maxHeight:'900px',margin:'auto', marginTop:"6rem"}}>
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
@@ -165,7 +165,7 @@ export default function Home(){
         </div>
         <br/>
         <div>
-            <h1>Current Users</h1>
+            <h1 style={{paddingLeft:"1rem",textAlign:"center"}}>Current Users</h1>
             <Container style={{alignItems:"normal"}}>
                 <Row className="mx-2 row row-cols-4">
                     {users && users.map((user,i) => (

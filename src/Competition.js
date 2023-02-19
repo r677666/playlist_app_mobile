@@ -221,23 +221,23 @@ export default function UserProfile(){
         <div>
             <Navigation/>
             <div style={{marginTop:"8rem"}}>
-                    <h1>Competition</h1>
+                    <h1 style={{textAlign:"center",fontSize:"80px"}}>The Best Album of the Year</h1>
+                    <h5 style={{textAlign:"center",color:"gray", fontSize:"15px"}}>The Best User Created Album o the Year</h5>
                 </div>
                 <div>
-                    <Container>
-                        <h3 style={{marginBottom:"1.25rem"}}>Current Submissions</h3>
+                    <Container style={{maxWidth:"50rem"}}>
+                        <h3 style={{marginBottom:"1.25rem", textAlign:"center"}}>Current Submissions</h3>
                         <Col>
                             {compSubmissions && compSubmissions.map((user,i) => (
                                 <Card style={{padding:".5rem",paddingBottom:"1rem"}} >
                                         <Container> 
                                             {compSubmissions[i].playlistName}
                                             <Button onClick={event => handleCompDocPress(compSubmissions[i].playlistsId)} style={{marginLeft:"1rem"}}>show</Button>
-                                            <ButtonGroup>
+                                            <ButtonGroup style={{float:"right"}}>
                                                 <Button
                                                 key={compSubmissions._id} 
                                                 onClick={event => handleLike(userId,compSubmissions[i]._id)}
                                                 style={{width:"5rem",
-                                                marginLeft:"48rem", 
                                                 backgroundColor: "white", 
                                                 color:"black"}}
                                                 >
