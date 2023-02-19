@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Card, Button, Col, InputGroup, FormControl, CardGroup, Modal, ButtonGroup} from 'react-bootstrap';
+import { Container, Row, Card, Button, Col, InputGroup, FormControl, CardGroup, Modal, ButtonGroup, CardDeck} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
@@ -23,6 +23,7 @@ export default function UserProfile(){
     const [isCompActive, setCompIsActive] = useState(false);
     const [currentUserForDelete, setCurrentUserForDelete] = useState([]);
     const [compDoc, setCompDoc] = useState('');
+    var docTracks = [];
     useEffect(() => {
         const fetchUsers = async () => {
             const response = await fetch('/api/competition')
@@ -215,6 +216,7 @@ export default function UserProfile(){
       handleShow_showCompPlayListModal()
       compPlaylist()
     }
+    
     return(
         <div>
             <Navigation/>
@@ -308,24 +310,27 @@ export default function UserProfile(){
                     <Modal.Title>{compDoc.name}</Modal.Title>
                     </Modal.Header>
                     <Container style={{paddingTop:"1rem",paddingBottom:"1rem"}}>
-                    <Card>
-                    {/* <Card.Img src={isCompActive && compDoc.href ? compDoc.tracks.items[0].track.album.images[0].url : null} style={{maxWidth:"5rem",maxHeight:"5rem"}}/> */}
+                    {isCompActive && compDoc.href ? (compDoc.tracks.items.map((items,i) => {
+                      return(
+                        <Card>
                       <CardGroup>
                       
-                      <Card.Img src={isCompActive && compDoc.href ? compDoc.tracks.items[0].track.album.images[0].url : null} style={{maxWidth:"5rem",maxHeight:"5rem"}}/>
-                      
-                      <Card.Title>
-                      {isCompActive && compDoc.href ?
-                        (
-                        compDoc.tracks.items[0].track.name
-                        )
-                        : "null"}  
-                         </Card.Title>
-                          <Card.Text style={{paddingLeft:"1rem"}}>
-                              {isCompActive && compDoc.href ? compDoc.tracks.items[0].track.artists[0].name : null}
-                          </Card.Text> 
+                      <Card.Img src={items.track.album.images[0].url} style={{maxWidth:"5rem",maxHeight:"5rem"}}/>
+                      {/* {console.log(items.track.album.images[0].url)} */}
+                      <CardGroup as='div' className='flex-column' style={{maxWidth:"20rem", paddingLeft:"1rem", paddingTop:".08rem"}}>
+                        <Card.Title>
+                        {items.track.name}
+                        </Card.Title>
+                        <Card.Text>
+                        {items.track.artists[0].name}
+                        </Card.Text>  
+                         </CardGroup>
                        </CardGroup>       
                     </Card>
+                      )
+                    })) : null}
+                    
+
                     </Container>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose_showCompPlayListModal}>
