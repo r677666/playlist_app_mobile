@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Card, Button, Col, InputGroup, FormControl, CardGroup, Modal, ButtonGroup} from 'react-bootstrap';
+import { Container, Row, Card, Button, Col, InputGroup, FormControl, CardGroup, Modal, ButtonGroup, CardDeck} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
@@ -13,15 +13,17 @@ export default function UserProfile(){
     const [showSetPlayListModal, set_SetPlayList_ShowModal] = useState(false);
     const handleClose_showSetPlayListModal = () => set_SetPlayList_ShowModal(false);
     const handleShow_showSetPlayListModal = () => set_SetPlayList_ShowModal(true);
+
+    const [showCompPlayListModal, set_CompPlayList_ShowModal] = useState(false);
+    const handleClose_showCompPlayListModal = () => set_CompPlayList_ShowModal(false);
+    const handleShow_showCompPlayListModal = () => set_CompPlayList_ShowModal(true);
+
     const [choosePlaylistActive, setChoosePlaylistActive] = useState(false);
-    const [selectedPlaylistName, setSelectedPlaylistName] = useState('');
-    const [selectedPlaylistID, setSelectedPlaylistID] = useState('');
     const [isActive, setIsActive] = useState(false);
-    const [testUserId,setTestUserId] = useState([])
-    const [currentDocs, setCurrentDocs] = useState([]);
-    const [compDocsLikes, setCompDocsLikes] = useState([])
+    const [isCompActive, setCompIsActive] = useState(false);
     const [currentUserForDelete, setCurrentUserForDelete] = useState([]);
-    
+    const [compDoc, setCompDoc] = useState('');
+    var docTracks = [];
     useEffect(() => {
         const fetchUsers = async () => {
             const response = await fetch('/api/competition')
@@ -73,6 +75,30 @@ export default function UserProfile(){
         .catch(response => console.log(response.json()))
       }
 
+    //Get Comp Submitted Playlist
+    async function compPlaylist(){
+      setCompIsActive(true)
+      var playlistParameters={
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+        }
+      }
+      console.log(sessionStorage.getItem('token'))
+      var getUsersPlaylist = await fetch('https://api.spotify.com/v1/playlists/' + sessionStorage.getItem('compDoc'), playlistParameters)
+        .then(response => response.json())
+        .then(data => setCompDoc(data))
+        console.log(compDoc)
+        //   {
+        //   const personalPlaylists = data.items.filter(playlist => {
+        //     return playlist.owner.id === userId.replaceAll("\"","");
+        // });setUserPlaylists(personalPlaylists);
+        // }
+        // // .then(console.log(userPlaylists))
+        // .catch(response => console.log(response.json()))
+        console.log("PLAYLIST TRACKS FOUND")
+    }
     function setClickedPlaylistButton(userId,playlistsName,playlistsId){
         var executed = false;
         var currentID = "";
@@ -183,26 +209,35 @@ export default function UserProfile(){
         }else{
         }
     }
+    function handleCompDocPress(playlist){
+      console.log("MADE IT")
+      console.log(playlist)
+      sessionStorage.setItem('compDoc', playlist)
+      handleShow_showCompPlayListModal()
+      compPlaylist()
+    }
+    
     return(
         <div>
             <Navigation/>
             <div style={{marginTop:"8rem"}}>
-                    <h1>Competition</h1>
+                    <h1 style={{textAlign:"center",fontSize:"80px"}}>The Best Album of the Year</h1>
+                    <h5 style={{textAlign:"center",color:"gray", fontSize:"15px"}}>The Best User Created Album of the Year</h5>
                 </div>
                 <div>
-                    <Container>
-                        <h3 style={{marginBottom:"1.25rem"}}>Current Submissions</h3>
+                    <Container style={{maxWidth:"50rem"}}>
+                        <h3 style={{marginBottom:"1.25rem", textAlign:"center"}}>Current Submissions</h3>
                         <Col>
                             {compSubmissions && compSubmissions.map((user,i) => (
                                 <Card style={{padding:".5rem",paddingBottom:"1rem"}} >
                                         <Container> 
                                             {compSubmissions[i].playlistName}
-                                            <ButtonGroup>
+                                            <Button onClick={event => handleCompDocPress(compSubmissions[i].playlistsId)} style={{marginLeft:"1rem"}}>show</Button>
+                                            <ButtonGroup style={{float:"right"}}>
                                                 <Button
                                                 key={compSubmissions._id} 
                                                 onClick={event => handleLike(userId,compSubmissions[i]._id)}
                                                 style={{width:"5rem",
-                                                marginLeft:"48rem", 
                                                 backgroundColor: "white", 
                                                 color:"black"}}
                                                 >
@@ -214,7 +249,7 @@ export default function UserProfile(){
                                 </Card>
                             ))}
                         </Col>
-                        <Button style={{marginTop:"1.25rem",backgroundColor:'orange',color:"black",outlineColor:"orange"}} onClick={handleShow_showSetPlayListModal}>
+                        <Button style={{marginTop:"1.25rem",backgroundColor:'orange',color:"black", borderColor:"black"}} onClick={handleShow_showSetPlayListModal}>
                             Submit a Playlist
                         </Button>
                     </Container>
@@ -229,7 +264,7 @@ export default function UserProfile(){
                               View Your Playlists
                             </Button>
                             <Card style={{width:'17rem'}}>
-                              <Card.Body style={{}}>
+                              <Card.Body>
                                 {(
                                   userPlaylists.map((userPlaylists, i) => {
                                     return (
@@ -269,7 +304,40 @@ export default function UserProfile(){
                     </Button>
                     </Modal.Footer>
                 </Modal>
+                {/* Show submitted playlist tracks */}
+                   <Modal show={showCompPlayListModal} onHide={handleClose_showCompPlayListModal} style={{padding:"5rem"}}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>{compDoc.name}</Modal.Title>
+                    </Modal.Header>
+                    <Container style={{paddingTop:"1rem",paddingBottom:"1rem"}}>
+                    {isCompActive && compDoc.href ? (compDoc.tracks.items.map((items,i) => {
+                      return(
+                        <Card>
+                      <CardGroup>
+                      
+                      <Card.Img src={items.track.album.images[0].url} style={{maxWidth:"5rem",maxHeight:"5rem"}}/>
+                      {/* {console.log(items.track.album.images[0].url)} */}
+                      <CardGroup as='div' className='flex-column' style={{maxWidth:"20rem", paddingLeft:"1rem", paddingTop:".08rem"}}>
+                        <Card.Title>
+                        {items.track.name}
+                        </Card.Title>
+                        <Card.Text>
+                        {items.track.artists[0].name}
+                        </Card.Text>  
+                         </CardGroup>
+                       </CardGroup>       
+                    </Card>
+                      )
+                    })) : null}
+                    
 
+                    </Container>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose_showCompPlayListModal}>
+                        Close
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
                 </div>
                 
         </div>

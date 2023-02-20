@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal} from 'react-bootstrap';
+import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal, ButtonGroup} from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
@@ -16,8 +16,7 @@ export default function Home(){
     const [users,setUsers] = useState([])
     const [isActive, setIsActive] = useState(false);
     const [accessToken, setAccessToken] = useState("");
-    const [getUserImg,setGetUserImg] = useState("")
-    var [spotifyUsers,setSpotifyUsers] = useState([{}])
+    const [getUserImg, setGetUserImg] = useState([]);
     var test;
     useEffect(() => {
         const fetchUsers = async () => {
@@ -82,50 +81,43 @@ export default function Home(){
             return(
 
                 <Button 
-                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA"}}
+                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA", paddingLeft:".18rem", paddingRight:".18rem", paddingBottom:".1rem" ,marginTop:".25rem", marginLeft:".25rem"}}
                 onClick={event => {followUserButton(item2,item1)}}>Follow</Button>
             )
         }
     }
 
-    function userInfo(){
-            var userParameters = {
+    function competitionButton(){
+        window.location.assign("http://localhost:3000/competition/")
+    }
+    function handleUserImgs(userId){
+        var userParameters = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + sessionStorage.getItem("token")
             }
-            }
-                console.log("Token");
-                // console.log(sessionStorage.getItem("token"))
-                for(var i = 0; i<users.length;i++){
-                var demoUser = users[i].userId
-                var userFixed = demoUser.replaceAll('\"', '')
-                // console.log("User")
-                // console.log(userFixed)
-                var userData = fetch('https://api.spotify.com/v1/users/' + userFixed,userParameters)
-                // .then(response => console.log(response.json()))
-                // .then(data => spotifyUsers.push(data.images[0].url))
-                // .then(setSpotifyUsers(loadedUsers))
-                .then(console.log("Successfully Retrieved Spotify Users"))
-                }
-                console.log("Spotify")
-                console.log(spotifyUsers)
-                spotifyUsers.shift()
-                var unique = spotifyUsers.filter(onlyUnique);
-                test = unique
-                console.log(test)
         }
-      
-      userInfo()
-      function competitionButton(){
-        window.location.assign("http://localhost:3000/competition/")
+        var userData = fetch('https://api.spotify.com/v1/users/' + userId.replaceAll("\"",""))
+        .then(response => response.json())
+        .then(data => setGetUserImg(data))
     }
+    // function showUserImg(){
+    //     console.log(getUserImg.length)
+    //     for(var i = 0; i<getUserImg.length; i++){
+    //         console.log("MADE IT")
+    //         if(getUserImg.images.length == 0){
+    //             return <div> No Image </div>
+    //         }else{
+    //             return <Card.Img src={getUserImg.images[0].url}></Card.Img>
+    //         }
+    //     }
+    // }
     return(
         <div className='Home'>
         <Navigation/>
         <div style={{margin:'auto',backgroundColor:'black'}}>
-        <Carousel fade style={{width:'900px',maxHeight:'540px',margin:'auto', marginTop:"6rem"}}>
+        <Carousel fade style={{width:'1080px',maxHeight:'900px',margin:'auto', marginTop:"6rem"}}>
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
@@ -135,7 +127,7 @@ export default function Home(){
                 <Carousel.Caption>
                 <h3>Best Drake Album</h3>
                 <p>Submit your playlist for this week's competition</p>
-                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000"}} onClick={event => competitionButton()} >Submit playlist</Button>
+                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button>
                 </Carousel.Caption>
                 
             </Carousel.Item>
@@ -149,44 +141,67 @@ export default function Home(){
                 <Carousel.Caption>
                 <h3>To Pimp a Butterfly or Good Kid m.A.A.d City</h3>
                 <p>Vote for which you think is better</p>
-                <Button>
-                    Card 1
+                <ButtonGroup>
+                <Button style={{backgroundColor:"#ff914d", color:"black", borderColor:"black"}}>
+                    To Pimp a Butterfly
                 </Button>
-                <Button>
-                    Card 2
+                <Button style={{backgroundColor:"black", color:"#ff914d", borderColor:"black"}}>
+                    Good Kid m.A.A.d City
                 </Button>
+                </ButtonGroup>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
                 src={TasteMaker3}
-                alt="Second slide"
+                alt="Third slide"
                 />
-
-                {/* <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption> */}
+                
+                <Carousel.Caption>
+                    <Button 
+                    style={{marginBottom:"1rem", color:"white",backgroundColor:"black", borderColor:"orange", paddingLeft:"2rem",paddingRight:"2rem"}}
+                    
+                    >
+                        Go Pro
+                    </Button>
+                </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
         </div>
-        <br/>
+        <br style={{display:"block",content:"",color:"red"}}/>
+        <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem"}}/>
         <div>
-            <h1>Current Users</h1>
-            {console.log(users)}
+            <h1 style={{textAlign:"center", marginTop:"3rem", marginBottom:"3rem"}}>
+                For The Tastemakers
+            </h1>
+            
+        
+        <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem"}}/>
+        <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </h5>
+        <h5 style={{textAlign:"center"}}>et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </h5>
+        <h5 style={{textAlign:"center"}}>consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</h5>
+        <h5 style={{textAlign:"center"}}> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h5>
+        <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem", marginBottom:"3rem", marginTop:"4rem"}}/>
+            </div>
+        <div>
+            <h1 style={{textAlign:"center"}}>Current Users</h1>
+            <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem", marginBottom:"4rem", marginTop:"4rem"}}/>
             <Container style={{alignItems:"normal"}}>
                 <Row className="mx-2 row row-cols-4">
                     {users && users.map((user,i) => (
-                        <Card style={{width:'20rem',height:'22rem', paddingTop:'1rem' }} key={users._id} >
+                        <Card style={{width:'25rem',height:'25rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
                             <Container onClick={event => clickUser(users[i].userId)}>
                                 {console.log(users[i])}
-                                    {/* <Card.Img src={users[i].images.url}/> */}
-                                        <Container> 
+                                    
+                                    <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
+                                        <Container style={{paddingTop:'.25rem'}}> 
                                             {users[i].userId.replaceAll("\"","")}
+                                            {checkFollowButton(sessionStorage.getItem("userId"),users[i].userId)}
                                         </Container>
+                                        
                             </Container>
-                            {checkFollowButton(sessionStorage.getItem("userId"),users[i].userId)}
+                            
                         </Card>
                     ))}
                 </Row>

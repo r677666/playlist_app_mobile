@@ -46,8 +46,8 @@ export default function Create(){
     const handleClose_showCartModal = () => set_Cart_ShowModal(false);
     const handleShow_showCartModal = () => set_Cart_ShowModal(true);
     const [showTrackModal, set_Track_ShowModal] = useState(false);
-    const handleClose_showTrackModal = () => set_Cart_ShowModal(false);
-    const handleShow_showTrackModal = () => set_Cart_ShowModal(true);
+    const handleClose_showTrackModal = () => set_Track_ShowModal(false);
+    const handleShow_showTrackModal = () => set_Track_ShowModal(true);
 
     function createButtonFunction(){
       playlistCreation();
@@ -69,7 +69,7 @@ export default function Create(){
       fetch('https://accounts.spotify.com/api/token', authParameters)
         .then(result => result.json())
         .then(data => setAccessToken(data.access_token))
-    }, [])
+    })
 
     //Playlist Creation SUCCESSFUL
     async function playlistCreation() {
@@ -413,7 +413,7 @@ export default function Create(){
                     </div>
                       <Modal show={showTrackModal} onHide={handleClose_showTrackModal}>
                     <Modal.Header closeButton>
-                    <Modal.Title>{album.name}</Modal.Title>
+                    <Modal.Title> {clickedAlbum} </Modal.Title>
                     </Modal.Header>
                     <div>
                       <Card style={{width:'18rem'}}>
