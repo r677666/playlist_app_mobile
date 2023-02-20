@@ -142,10 +142,10 @@ export default function Home(){
                 <h3>To Pimp a Butterfly or Good Kid m.A.A.d City</h3>
                 <p>Vote for which you think is better</p>
                 <ButtonGroup>
-                <Button style={{backgroundColor:"orange", color:"black", borderColor:"black"}}>
+                <Button style={{backgroundColor:"#ff914d", color:"black", borderColor:"black"}}>
                     To Pimp a Butterfly
                 </Button>
-                <Button style={{backgroundColor:"black", color:"orange", borderColor:"black"}}>
+                <Button style={{backgroundColor:"black", color:"#ff914d", borderColor:"black"}}>
                     Good Kid m.A.A.d City
                 </Button>
                 </ButtonGroup>
