@@ -156,7 +156,7 @@ export default function UserProfile(){
                     <Container>
                         <Row>
                             <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
-                                {compDocsPlaylistName[0]}
+                                {/* {compDocsPlaylistName[0]} */}
                             </Card>
                         </Row>
                     </Container>

@@ -81,7 +81,7 @@ export default function Home(){
             return(
 
                 <Button 
-                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA", paddingLeft:".18rem", paddingRight:".18rem", paddingBottom:".1rem" ,marginTop:".25rem", marginLeft:".25rem"}}
+                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA", paddingLeft:".18rem", paddingRight:".18rem"}}
                 onClick={event => {followUserButton(item2,item1)}}>Follow</Button>
             )
         }
@@ -102,27 +102,21 @@ export default function Home(){
         .then(response => response.json())
         .then(data => setGetUserImg(data))
     }
-    // function showUserImg(){
-    //     console.log(getUserImg.length)
-    //     for(var i = 0; i<getUserImg.length; i++){
-    //         console.log("MADE IT")
-    //         if(getUserImg.images.length == 0){
-    //             return <div> No Image </div>
-    //         }else{
-    //             return <Card.Img src={getUserImg.images[0].url}></Card.Img>
-    //         }
-    //     }
-    // }
+    function handleUpgradeButton(){
+        window.location.assign("http://localhost:3000/Upgrade")
+    }
     return(
         <div className='Home'>
         <Navigation/>
-        <div style={{margin:'auto',backgroundColor:'black'}}>
-        <Carousel fade style={{width:'1080px',maxHeight:'900px',margin:'auto', marginTop:"6rem"}}>
+        <div style={{backgroundColor:"black"}}>
+        <div style={{margin:'auto',backgroundColor:'black', width:"80%"}}>
+        <Carousel fade style={{maxHeight:'900px',margin:'auto', marginTop:"6rem", backgroundColor:"black", color:"black"}}>
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
                 src={artistPicture}
                 alt="First slide"
+                style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover' }}
                 />
                 <Carousel.Caption>
                 <h3>Best Drake Album</h3>
@@ -160,14 +154,15 @@ export default function Home(){
                 
                 <Carousel.Caption>
                     <Button 
+                    onClick={event => handleUpgradeButton()}
                     style={{marginBottom:"1rem", color:"white",backgroundColor:"black", borderColor:"orange", paddingLeft:"2rem",paddingRight:"2rem"}}
-                    
                     >
                         Go Pro
                     </Button>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
+        </div>
         </div>
         <br style={{display:"block",content:"",color:"red"}}/>
         <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem"}}/>

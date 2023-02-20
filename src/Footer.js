@@ -1,5 +1,6 @@
 import React from 'react';
 import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
+import mainLogo from '../src/Tastemakers Main Logo (1).png'
 
 export default function Footer() {
   return (
@@ -35,6 +36,7 @@ export default function Footer() {
         <MDBContainer className='text-center text-md-start mt-5'>
           <MDBRow className='mt-3'>
             <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
+              <img src={mainLogo} style={{maxWidth:"10rem", marginBottom:"2rem"}} />
               <h6 className='text-uppercase fw-bold mb-4'>
                 <MDBIcon icon="gem" className="me-3" />
                 Tastemakers
@@ -42,6 +44,7 @@ export default function Footer() {
               <p>
                 Get paid to Play(list)
               </p>
+              
             </MDBCol>
 
             <MDBCol md="2" lg="2" xl="2" className='mx-auto mb-4'>

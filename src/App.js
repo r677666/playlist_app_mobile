@@ -11,6 +11,7 @@ import Home from './Home';
 import Logout from './Logout';
 import User from './userProfile';
 import Competition from './Competition';
+import Upgrade from './Upgrade';
 
 function App() {
 
@@ -23,9 +24,10 @@ function App() {
           <Route path='/Create' element={<Create/>}/>
           <Route path='/Account' element={<Profile/>}/>
           <Route path='/Home' element={<Home/>}/>
-          <Route path='/Logout' element={<Logout/>}/>
           <Route path='/competition' element={<Competition/>}/>
           <Route path={'/User/:id'} element={<User/>}/>
+          <Route path={'/Upgrade'} element={<Upgrade/>}/>
+          <Route path='/Logout' element={<Logout/>}/>
       </Routes>
     </BrowserRouter>
   )

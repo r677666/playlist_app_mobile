@@ -9,6 +9,8 @@ export default function Logout(){
     sessionStorage.setItem("imgURL",'');
     sessionStorage.setItem("userId",'');
     sessionStorage.setItem("userEmail",'')
+    sessionStorage.setItem("spotifyToken",'')
+    sessionStorage.clear()
     console.log(sessionStorage.getItem('token'))
     useEffect(() => {
         window.location.assign("http://localhost:3000/Login/")
