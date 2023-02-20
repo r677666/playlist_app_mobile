@@ -4,22 +4,24 @@ import { Container, Row, Card } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
+import FREE from './FREE.png';
+import PRO from './vibes.png';
 
 export default function UserProfile(){
     const { id } = useParams()
     const [users,setUsers] = useState([])
     const [friendsIds,setFriendsIds] = useState([])
     var [friends,setFriends] = useState([])
-    // console.log(friends)
-
-    
+    var [compDocs,setCompDocs] = useState([])
+    var [compDocsPlaylistName,setCompDocsPlaylistName] = useState([])
+    var userId = sessionStorage.getItem("userId")
 
     useEffect(() => {
         const fetchUsers = async () => {
             const response = await fetch('/api/users')
             .then(result => result.json())
             .then(data => setUsers(data))
-            .then(console.log(users))
+            // .then(console.log(users))
             // .then(console.log("users from Playlist App Server have been found"))
         }
         fetchUsers()
@@ -38,9 +40,9 @@ export default function UserProfile(){
                     .then(data => demoArr.push(data.friends))
                 }
             }
-            console.log("Demo Arr: "+demoArr);
+            // console.log("Demo Arr: "+demoArr);
             setFriendsIds(demoArr[0])
-            console.log("Friends Ids: "+friendsIds)
+            // console.log("Friends Ids: "+friendsIds)
 
         }
         getFriends()
@@ -52,7 +54,7 @@ export default function UserProfile(){
                 .then(result => result.json())
                 .then(data => test.push(data.userId))
             }
-            console.log(test)
+            // console.log(test)
             setFriends(test)
         }
         queryFriends()
@@ -85,6 +87,19 @@ export default function UserProfile(){
         </Row>
     }
 
+    async function getSubmissions(){
+        var arr = []
+        const fetchSubmissions = await fetch("/api/competition")
+        .then(response => response.json())
+        .then(data => setCompDocs(data))
+        for(var i = 0; i<compDocs.length; i++){
+            if(compDocs[i].userId == userId){
+                arr.push(compDocs[i].playlistName)
+            }
+        }
+        setCompDocsPlaylistName(arr)
+    }
+    getSubmissions()
     return( 
         
         <div>
@@ -92,7 +107,7 @@ export default function UserProfile(){
             <Navigation/>
             <div>
                 <Container style={{marginTop:"8rem"}}>
-                    <h1>{id}</h1>
+                    <h1>{id} <img style={{width:"7rem"}}src={FREE}/></h1>
                     <h3>Friends</h3>
                     <Container>
                         {/* <Row> */}
@@ -111,13 +126,7 @@ export default function UserProfile(){
                     <Container>
                         <Row>
                             <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
-                                Playlist 1 
-                            </Card>
-                            <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
-                                Playlist 2 
-                            </Card>
-                            <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
-                                Playlist 3 
+                                {compDocsPlaylistName[0]}
                             </Card>
                         </Row>
                     </Container>
