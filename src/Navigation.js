@@ -51,7 +51,7 @@ function Navigation() {
               </Nav>
             </Navbar.Collapse>
             <NavbarCollapse>
-            <img src={userImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
+            <img src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem', marginLeft:'30.5rem'}}/>
             </NavbarCollapse>
           </Container>
           

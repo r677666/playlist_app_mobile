@@ -4,6 +4,7 @@ import { Container, Row, Card, Button, Col, InputGroup, FormControl, CardGroup, 
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
+import Footer from './Footer';
 
 export default function UserProfile(){
 
@@ -339,7 +340,6 @@ export default function UserProfile(){
                     </Modal.Footer>
                 </Modal>
                 </div>
-                
         </div>
     )
 }

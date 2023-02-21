@@ -81,7 +81,7 @@ export default function Home(){
             return(
 
                 <Button 
-                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA", paddingLeft:".18rem", paddingRight:".18rem"}}
+                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA", paddingLeft:"1rem", paddingRight:"1rem", marginLeft:".5rem"}}
                 onClick={event => {followUserButton(item2,item1)}}>Follow</Button>
             )
         }
@@ -185,7 +185,7 @@ export default function Home(){
             <Container style={{alignItems:"normal"}}>
                 <Row className="mx-2 row row-cols-4">
                     {users && users.map((user,i) => (
-                        <Card style={{width:'25rem',height:'25rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
+                        <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
                             <Container onClick={event => clickUser(users[i].userId)}>
                                 {console.log(users[i])}
                                     
