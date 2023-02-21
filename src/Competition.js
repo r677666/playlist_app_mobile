@@ -250,7 +250,7 @@ export default function UserProfile(){
                                 </Card>
                             ))}
                         </Col>
-                        <Button style={{marginTop:"1.25rem",backgroundColor:'orange',color:"black", borderColor:"black"}} onClick={handleShow_showSetPlayListModal}>
+                        <Button style={{marginTop:"1.25rem",backgroundColor:"#ff914d",color:"black", borderColor:"black"}} onClick={handleShow_showSetPlayListModal}>
                             Submit a Playlist
                         </Button>
                     </Container>

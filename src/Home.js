@@ -155,7 +155,7 @@ export default function Home(){
                 <Carousel.Caption>
                     <Button 
                     onClick={event => handleUpgradeButton()}
-                    style={{marginBottom:"1rem", color:"white",backgroundColor:"black", borderColor:"orange", paddingLeft:"2rem",paddingRight:"2rem"}}
+                    style={{marginBottom:"1rem", color:"white",backgroundColor:"black", borderColor:"#ff914d", paddingLeft:"2rem",paddingRight:"2rem"}}
                     >
                         Go Pro
                     </Button>
