@@ -173,10 +173,12 @@ export default function Home(){
             
         
         <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem"}}/>
-        <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </h5>
-        <h5 style={{textAlign:"center"}}>et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </h5>
-        <h5 style={{textAlign:"center"}}>consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</h5>
-        <h5 style={{textAlign:"center"}}> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h5>
+        <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}>Ever sit around and wonder, "What would be their best album?". Three songs from this album, five from that, </h5>
+        <h5 style={{textAlign:"center"}}>  two from another? Man, that's a good damn album right?...Shouldn't you get a paid for making THAT good of an album. Well, Tastemakers is the place for you.</h5>
+        <h5 style={{textAlign:"center"}}> We're here for the music heads, the old heads, the TASTEMAKERS. Sure AI can generate some random playlists of something you MIGHT like.</h5>
+        <h5 style={{textAlign:"center"}}> But we all know the truth. Music is made by humans. Humans have the taste. Humans should be the MAKERS.</h5>
+        <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}> Welcome to the movement.</h5>
+        <h5 style={{textAlign:"center", paddingTop:"1.5rem", fontSize:"1.75rem"}}> Welcome to Tastemakers.</h5>
         <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem", marginBottom:"3rem", marginTop:"4rem"}}/>
             </div>
         <div>
