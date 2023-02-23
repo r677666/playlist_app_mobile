@@ -7,7 +7,7 @@ const ProductDisplay = () => (
       <Logo />
       <div className="description">
         <h3>PRO Membership</h3>
-        <h5>$5.00 / month</h5>
+        <h5>$4.99 / month</h5>
       </div>
     </div>
     <form action="/create-checkout-session" method="POST">

@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal, ButtonGroup} from 'react-bootstrap';
+import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal, ButtonGroup, Collapse} from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
@@ -8,7 +8,7 @@ import TasteMaker3 from './Tastemaker Pro Ad .99 UPDATED.png'
 import { renderMatches } from 'react-router-dom';
 import Footer from './Footer';
 import artistPicture from './2809.jpg'
-import pollPicture from './Kendrick Poll Pic.png'
+import pollPicture from './Kendrick Poll Clear.png'
 
 export default function Home(){
     const userAuthToken = sessionStorage.getItem("token")
@@ -17,6 +17,10 @@ export default function Home(){
     const [isActive, setIsActive] = useState(false);
     const [accessToken, setAccessToken] = useState("");
     const [getUserImg, setGetUserImg] = useState([]);
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+      });
     var test;
     useEffect(() => {
         const fetchUsers = async () => {
@@ -26,6 +30,17 @@ export default function Home(){
             .then(console.log("users from Playlist App Server have been found"))
         }
         fetchUsers()
+        function handleResize() {
+            setWindowSize({
+              width: window.innerWidth,
+              height: window.innerHeight,
+            });
+          }
+      
+          window.addEventListener("resize", handleResize);
+          handleResize(); // Set initial size on mount
+      
+          return () => window.removeEventListener("resize", handleResize);
     },[])
 
     function onlyUnique(value, index, self) {
@@ -86,6 +101,23 @@ export default function Home(){
             )
         }
     }
+    function handleGoProButton(){
+        if(windowSize.width < 765){
+            return(
+                <div></div>
+            )
+        }else{
+           return(
+              <Button 
+                    onClick={event => handleUpgradeButton()}
+                    style={{marginBottom:"1rem", color:"white",backgroundColor:"black", borderColor:"#ff914d", paddingLeft:"2rem",paddingRight:"2rem"}}
+                    >
+                        Go Pro
+                    </Button>  
+            )
+        }
+        
+    }
 
     function competitionButton(){
         window.location.assign("http://localhost:3000/competition/")
@@ -105,6 +137,24 @@ export default function Home(){
     function handleUpgradeButton(){
         window.location.assign("http://localhost:3000/Upgrade")
     }
+    function handleTextMobile(){
+        if(windowSize.width < 765){
+            return(
+                <div>
+                    
+                </div>
+            )
+        }else{
+            return(
+                <div>
+                    <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}>Ever sit around and wonder, "What would be their best album?". Three songs from this album, five from that, </h5>
+            <h5 style={{textAlign:"center"}}>  two from another? Man, that's a good damn album right?...Shouldn't you get a paid for making THAT good of an album. Well, Tastemakers is the place for you.</h5>
+            <h5 style={{textAlign:"center"}}> We're here for the music heads, the old heads, the TASTEMAKERS. Sure AI can generate some random playlists of something you MIGHT like.</h5>
+            <h5 style={{textAlign:"center"}}> But we all know the truth. Music is made by humans. Humans have the taste. Humans should be the MAKERS.</h5>
+                </div>
+            )
+        }
+    }
     return(
         <div className='Home'>
         <Navigation/>
@@ -119,8 +169,8 @@ export default function Home(){
                 style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover' }}
                 />
                 <Carousel.Caption>
-                <h3>Best Drake Album</h3>
-                <p>Submit your playlist for this week's competition</p>
+                <h3 style={{color:"black", textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF'}}>Best Drake Album</h3>
+                <p style={{color:"white", textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Submit playlist for this week's competition</p>
                 <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button>
                 </Carousel.Caption>
                 
@@ -133,8 +183,8 @@ export default function Home(){
                 />
                 
                 <Carousel.Caption>
-                <h3>To Pimp a Butterfly or Good Kid m.A.A.d City</h3>
-                <p>Vote for which you think is better</p>
+                <h3 style={{color:"black", textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF'}}>To Pimp a Butterfly or Good Kid m.A.A.d City</h3>
+                <p style={{color:"white",textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Vote Now</p>
                 <ButtonGroup>
                 <Button style={{backgroundColor:"#ff914d", color:"black", borderColor:"black"}}>
                     To Pimp a Butterfly
@@ -153,37 +203,31 @@ export default function Home(){
                 />
                 
                 <Carousel.Caption>
-                    <Button 
-                    onClick={event => handleUpgradeButton()}
-                    style={{marginBottom:"1rem", color:"white",backgroundColor:"black", borderColor:"#ff914d", paddingLeft:"2rem",paddingRight:"2rem"}}
-                    >
-                        Go Pro
-                    </Button>
+                <div>{handleGoProButton()}</div>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
         </div>
         </div>
-        <br style={{display:"block",content:"",color:"red"}}/>
-        <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem"}}/>
+        <hr style={{borderColor:"red", height:".2rem"}}/>
         <div>
             <h1 style={{textAlign:"center", marginTop:"3rem", marginBottom:"3rem"}}>
-                For The Tastemakers
+                Music Lovers Welcome
             </h1>
             
         
-        <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem"}}/>
-        <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}>Ever sit around and wonder, "What would be their best album?". Three songs from this album, five from that, </h5>
-        <h5 style={{textAlign:"center"}}>  two from another? Man, that's a good damn album right?...Shouldn't you get a paid for making THAT good of an album. Well, Tastemakers is the place for you.</h5>
-        <h5 style={{textAlign:"center"}}> We're here for the music heads, the old heads, the TASTEMAKERS. Sure AI can generate some random playlists of something you MIGHT like.</h5>
-        <h5 style={{textAlign:"center"}}> But we all know the truth. Music is made by humans. Humans have the taste. Humans should be the MAKERS.</h5>
+        <hr style={{borderColor:"red", height:".2rem"}}/>
+        <div>
+            {handleTextMobile()}
+        </div>
+        <h5 style={{textAlign:"center"}}> Music is made by humans. Humans have TASTE. Humans are the MAKERS.</h5>
         <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}> Welcome to the movement.</h5>
-        <h5 style={{textAlign:"center", paddingTop:"1.5rem", fontSize:"1.75rem"}}> Welcome to Tastemakers.</h5>
-        <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem", marginBottom:"3rem", marginTop:"4rem"}}/>
+        <h5 style={{textAlign:"center", paddingTop:"1.5rem", fontSize:"1.75rem"}}> Welcome to TASTEMAKERS.</h5>
+        <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"4rem"}}/>
             </div>
         <div>
             <h1 style={{textAlign:"center"}}>Current Users</h1>
-            <hr style={{color:"red", marginLeft:"25rem", marginRight:"25rem", marginBottom:"4rem", marginTop:"4rem"}}/>
+            <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"4rem", textAlign:'center'}}/>
             <Container style={{alignItems:"normal"}}>
                 <Row className="mx-2 row row-cols-4">
                     {users && users.map((user,i) => (

@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal } from 'react-bootstrap';
+import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal, Stack } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { click } from '@testing-library/user-event/dist/click';
 import Login from './login';
@@ -70,6 +70,24 @@ export default function Create(){
         .then(result => result.json())
         .then(data => setAccessToken(data.access_token))
     })
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+      height: undefined,
+    });
+  
+    useEffect(() => {
+      function handleResize() {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      }
+  
+      window.addEventListener("resize", handleResize);
+      handleResize(); // Set initial size on mount
+  
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     //Playlist Creation SUCCESSFUL
     async function playlistCreation() {
@@ -238,16 +256,28 @@ export default function Create(){
         return ""
       }
     }
-    // function profileImg(){
-    //   userInfo();
-
-    // }
+    function handleWindowSize(){
+      if(windowSize.width < 765){
+          return 'vertical'
+      }else{
+          return 'horizontal'
+      }
+  }
+  function handleCardSize(){
+      if(windowSize.width < 765){
+          return '30rem'
+      }else{
+          return '30rem'
+      }
+  }
     return (
       <div className="App">
         <Navigation/>
         <br/>
         <Container style={{marginTop:"6rem"}}>
+        
           <InputGroup className="mb-3" size="lg">
+          <Stack direction='vertical'>
             <FormControl
               placeholder="Search For Artist"
               type="input"
@@ -396,10 +426,10 @@ export default function Create(){
                         Add Items to Playlist
                     </Button>
                     </Modal.Footer>
-                </Modal>
+                </Modal></Stack>
           </InputGroup>
-        </Container>
-        <Container>
+          
+          
           <Row className="mx-2 row row-cols-4">
               {albums.map((album, i) => {
                 return (

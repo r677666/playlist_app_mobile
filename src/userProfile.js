@@ -110,16 +110,16 @@ export default function UserProfile(){
                     <Container>
                         {/* <h1>Show top four artist in seperate canvas</h1> */}
                         <Row>
-                            <Card style={{width:'20rem',height:'25rem', paddingTop:'1rem' }}>
+                            <Card style={{width:'30rem',height:'25rem', paddingTop:'1rem' }}>
                                 Artist 1 
                             </Card>
-                            <Card style={{width:'20rem',height:'25rem', paddingTop:'1rem' }}>
+                            <Card style={{width:'30rem',height:'25rem', paddingTop:'1rem' }}>
                                 Artist 2 
                             </Card>
-                            <Card style={{width:'20rem',height:'25rem', paddingTop:'1rem' }}>
+                            <Card style={{width:'30rem',height:'25rem', paddingTop:'1rem' }}>
                                 Artist 3 
                             </Card>
-                            <Card style={{width:'20rem',height:'25rem', paddingTop:'1rem' }}>
+                            <Card style={{width:'30rem',height:'25rem', paddingTop:'1rem' }}>
                                 Artist 4 
                             </Card>
                         </Row>

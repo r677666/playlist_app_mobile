@@ -36,7 +36,7 @@ function Navigation() {
          variant="dark">
           <Container>
           <img src={companyImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
-            <Navbar.Brand href="/Home">Tastemakers</Navbar.Brand>
+            <Navbar.Brand href="/Home">TASTEMAKERS</Navbar.Brand>
             <Navbar.Toggle/>
             <Navbar.Collapse id='basic-navbar-nav'>
               <Nav className="me-auto">
