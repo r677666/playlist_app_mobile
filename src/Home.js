@@ -155,12 +155,36 @@ export default function Home(){
             )
         }
     }
+    function handleCardTextMobile(){
+        if(windowSize.width < 765){
+            return (
+                <div>
+                </div>
+            )
+        }else{
+            return(
+                <h3 style={{color:"black", marginTop:"20rem",textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF'}}>Best Drake Album</h3>
+            )
+        }
+    }
+    function handleCard2TextMobile(){
+        if(windowSize.width < 765){
+            return (
+                <div>
+                </div>
+            )
+        }else{
+            return(
+                <h3 style={{color:"black", textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF'}}>To Pimp a Butterfly or Good Kid m.A.A.d City</h3>
+            )
+        }
+    }
     return(
         <div className='Home'>
         <Navigation/>
         <div style={{backgroundColor:"black"}}>
         <div style={{margin:'auto',backgroundColor:'black', width:"80%"}}>
-        <Carousel fade style={{maxHeight:'900px',margin:'auto', marginTop:"6rem", backgroundColor:"black", color:"black"}}>
+        <Carousel fade style={{maxHeight:'900px', margin:'auto', marginTop:"6rem", backgroundColor:"black", color:"black"}}>
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
@@ -169,7 +193,7 @@ export default function Home(){
                 style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover' }}
                 />
                 <Carousel.Caption>
-                <h3 style={{color:"black", textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF'}}>Best Drake Album</h3>
+                {handleCardTextMobile()}
                 <p style={{color:"white", textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Submit playlist for this week's competition</p>
                 <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button>
                 </Carousel.Caption>
@@ -183,7 +207,7 @@ export default function Home(){
                 />
                 
                 <Carousel.Caption>
-                <h3 style={{color:"black", textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF'}}>To Pimp a Butterfly or Good Kid m.A.A.d City</h3>
+                    {handleCard2TextMobile()}
                 <p style={{color:"white",textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Vote Now</p>
                 <ButtonGroup>
                 <Button style={{backgroundColor:"#ff914d", color:"black", borderColor:"black"}}>

@@ -109,7 +109,7 @@ export default function UserProfile(){
                     <h2>Top 4 Artist</h2>
                     <Container>
                         {/* <h1>Show top four artist in seperate canvas</h1> */}
-                        <Row>
+                        <Row className="flex-nowrap overflow-auto">
                             <Card style={{width:'30rem',height:'25rem', paddingTop:'1rem' }}>
                                 Artist 1 
                             </Card>
@@ -126,7 +126,7 @@ export default function UserProfile(){
                     </Container>
                     <h3>Best of {id}</h3>
                     <Container>
-                        <Row>
+                        <Row className="flex-nowrap overflow-auto">
                             <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
                                 Playlist 1 
                             </Card>
@@ -135,6 +135,9 @@ export default function UserProfile(){
                             </Card>
                             <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
                                 Playlist 3 
+                            </Card>
+                            <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
+                                Playlist 4
                             </Card>
                         </Row>
                     </Container>
@@ -154,7 +157,7 @@ export default function UserProfile(){
                     </Container>
                     <h3>Current Submissions</h3>
                     <Container>
-                        <Row>
+                        <Row className="flex-nowrap overflow-auto">
                             <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
                                 {/* {compDocsPlaylistName[0]} */}
                             </Card>
