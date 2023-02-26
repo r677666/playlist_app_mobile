@@ -24,6 +24,10 @@ export default function UserProfile(){
     const [isCompActive, setCompIsActive] = useState(false);
     const [currentUserForDelete, setCurrentUserForDelete] = useState([]);
     const [compDoc, setCompDoc] = useState('');
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+      height: undefined,
+    });
     var docTracks = [];
     useEffect(() => {
         const fetchUsers = async () => {
@@ -34,7 +38,21 @@ export default function UserProfile(){
         }
         fetchUsers()
         setCurrentUserForDelete(userId)
+
     })
+    useEffect(() => {
+              function handleResize() {
+          setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+          });
+        }
+    
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Set initial size on mount
+    
+        return () => window.removeEventListener("resize", handleResize);
+    },[])
 
     //Post Playlist to Competition
     async function postCompDoc(){
@@ -218,16 +236,58 @@ export default function UserProfile(){
       compPlaylist()
     }
     
+function handleBigText(){
+  if(windowSize.width < 750 ){
+    return (
+      <>
+      <h1 style={{textAlign:"center",fontSize:"1.8rem"}}>The Best Album of the Year</h1>
+      <h5 style={{textAlign:"center",color:"gray", fontSize:".75rem",marginBottom:"1.5rem"}}>The Best User Created Album of the Year</h5></>
+    )
+  }else{
+    return(
+      <>
+      <h1 style={{textAlign:"center",fontSize:"4rem"}}>The Best Album of the Year</h1>
+      <h5 style={{textAlign:"center",color:"gray", fontSize:"1rem"}}>The Best User Created Album of the Year</h5>
+    </>
+    )
+  }
+}
+
+function handleSubmissionText(){
+  if(windowSize.width < 750 ){
+    return null
+  }else{
+    return(
+      <div>
+      <h5 style={{marginBottom:"1.25rem", textAlign:"left", marginTop:'1rem'}}>Current Submissions</h5>
+    </div>
+    )
+  }
+}
+function handleSubmitButton(){
+  if(windowSize.width < 750 ){
+    return (
+      <Button style={{marginTop:"1.5rem",backgroundColor:"#ff914d",color:"black", borderColor:"black", marginLeft:"7rem", justifyContent:"center", alignIems:"center", display:"flex"}} onClick={handleShow_showSetPlayListModal}>
+                            Submit a Playlist
+                        </Button>
+    )
+  }else{
+    return(
+      <Button style={{marginTop:"1.25rem",backgroundColor:"#ff914d",color:"black", borderColor:"black"}} onClick={handleShow_showSetPlayListModal}>
+                            Submit a Playlist
+                        </Button>
+    )
+  }
+}
     return(
         <div>
             <Navigation/>
-            <div style={{marginTop:"8rem"}}>
-                    <h1 style={{textAlign:"center",fontSize:"1.75rem"}}>The Best Album of the Year</h1>
-                    <h5 style={{textAlign:"center",color:"gray", fontSize:"1rem"}}>The Best User Created Album of the Year</h5>
+            <div style={{marginTop:"8rem", width:"100%"}}>
+                    {handleBigText()}
                 </div>
                 <div>
                     <Container style={{maxWidth:"50rem", marginBottom:'5rem'}}>
-                        <h4 style={{marginBottom:"1.25rem", textAlign:"center"}}>Current Submissions</h4>
+                        {handleSubmissionText()}
                         <Col>
                             {compSubmissions && compSubmissions.map((user,i) => (
                                 <Card style={{padding:".5rem",paddingBottom:"1rem"}} >
@@ -250,9 +310,7 @@ export default function UserProfile(){
                                 </Card>
                             ))}
                         </Col>
-                        <Button style={{marginTop:"1.25rem",backgroundColor:"#ff914d",color:"black", borderColor:"black"}} onClick={handleShow_showSetPlayListModal}>
-                            Submit a Playlist
-                        </Button>
+                        {handleSubmitButton()}
                     </Container>
 
                     {/* Modal for Set Playlist Button */}
