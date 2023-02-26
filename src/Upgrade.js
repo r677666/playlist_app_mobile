@@ -9,6 +9,14 @@ import goldOk from './gold_ok.png';
 import grayOk from './gray_ok.png'
 
 export default function Upgrade(){
+    let [message, setMessage] = useState('');
+    let [success, setSuccess] = useState(false);
+    let [sessionId, setSessionId] = useState('');
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     const [windowSize, setWindowSize] = useState({
         width: undefined,
         height: undefined,
@@ -27,10 +35,58 @@ export default function Upgrade(){
     
         return () => window.removeEventListener("resize", handleResize);
       }, []);
+
+      useEffect(() => {
+        // Check to see if this is a redirect back from Checkout
+        const query = new URLSearchParams(window.location.search);
     
-    function handleUpgradeButton(){
-        window.location.assign('http://localhost:3000/Payment')
-    }
+        if (query.get('success')) {
+          setSuccess(true);
+          setSessionId(query.get('session_id'));
+          updateUserProStatus()
+        }
+    
+        if (query.get('canceled')) {
+          setSuccess(false);
+          setMessage(
+            "Order canceled -- continue to shop around and checkout when you're ready."
+          );
+        }
+        function updateUserProStatus(){
+            // console.log("TESTING SUCCESSFUL")
+            // const changeUserProStatus = async () => {
+                const response = fetch('/api/users/updateProStatus',{
+                    method: 'PATCH',
+                    body: JSON.stringify({
+                      "userId": sessionStorage.getItem("userId"),
+                      "paidMember":true
+                    }),
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                  })
+                  .then(response => console.log(response.json()))
+                  .then(console.log("Success Scription in DB"))
+                // .then(console.log(compSubmissions[0].playlistsId))
+            // }
+        }
+        function successOrMessage(){
+            if (!success && message === '') {
+              return console.log("Failed to Subscribe")
+            } else if (success && sessionId !== '') {
+              return handleShow()
+            } else {
+              return <Message message={message} />;
+            }
+          }
+          successOrMessage();
+      }, [sessionId]);
+    
+      const Message = ({ message }) => (
+        <section>
+          <p>{message}</p>
+        </section>
+      );
     function handleWindowSize(){
         if(windowSize.width < 765){
             return 'vertical'
@@ -122,6 +178,18 @@ export default function Upgrade(){
             <div style={{marginTop:'4rem'}}>
                 <Footer/>
             </div>
+            <Modal show={show} onHide={handleClose} animation={false}>
+                <Modal.Header closeButton>
+                <Modal.Title>Success</Modal.Title>
+                </Modal.Header>
+                <Modal.Body> Successful, Welcome to Tastemakers</Modal.Body>
+                <Modal.Footer>
+                <Button variant="primary" onClick={handleClose}>
+                    Close
+                </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
+        
     )
 }

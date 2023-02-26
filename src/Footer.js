@@ -47,18 +47,18 @@ export default function Footer() {
             <MDBCol md="1" lg="2" xl="1" className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>Useful links</h6>
               <p>
-                <a href='#!' className='text-reset'>
-                  Pricing
+                <a href='/' className='text-reset'>
+                  Home
                 </a>
               </p>
               <p>
-                <a href='#!' className='text-reset'>
+                <a href='/Competition' className='text-reset'>
+                  Competition
+                </a>
+              </p>
+              <p>
+                <a href='/Account' className='text-reset'>
                   Settings
-                </a>
-              </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Orders
                 </a>
               </p>
               <p>
@@ -71,18 +71,20 @@ export default function Footer() {
             <MDBCol md="2" lg="3" xl="2" className='mx-auto mb-md-0 mb-4'>
               <h6 className='text-uppercase fw-bold mb-3'>Contact</h6>
               <p>
-                <MDBIcon icon="home" className="me-3" />
+                {/* <MDBIcon icon="home" className="me-3" /> */}
                 Columbus, OH, 43240
               </p>
               <p>
-                <MDBIcon icon="envelope" className="me-3" />
+                {/* <MDBIcon icon="envelope" className="me-3" /> */}
                 tastemakers.official.llc@gmail.com
               </p>
               <p>
-                <MDBIcon icon="phone" className="me-3" /> + 01 234 567 88
+                {/* <MDBIcon icon="phone" className="me-3" />  */}
+                + 614 271 1109
               </p>
               <p>
-                <MDBIcon icon="print" className="me-3" /> + 01 234 567 89
+                {/* <MDBIcon icon="print" className="me-3" />  */}
+                + 01 234 567 89
               </p>
             </MDBCol>
           </MDBRow>

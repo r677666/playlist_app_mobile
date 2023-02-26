@@ -267,7 +267,7 @@ function handleSubmissionText(){
 function handleSubmitButton(){
   if(windowSize.width < 750 ){
     return (
-      <Button style={{marginTop:"1.5rem",backgroundColor:"#ff914d",color:"black", borderColor:"black", marginLeft:"7rem", justifyContent:"center", alignIems:"center", display:"flex"}} onClick={handleShow_showSetPlayListModal}>
+      <Button style={{marginTop:"1.5rem",backgroundColor:"#ff914d",color:"black", borderColor:"black", justifyContent:"center", alignIems:"center", display:"flex", textAlign:"center"}} onClick={handleShow_showSetPlayListModal}>
                             Submit a Playlist
                         </Button>
     )

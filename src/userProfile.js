@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
 import FREE from './FREE.png';
 import PRO from './vibes.png';
+import Footer from './Footer';
 
 export default function UserProfile(){
     const { id } = useParams()
@@ -103,7 +104,7 @@ export default function UserProfile(){
         
             <Navigation/>
             <div>
-                <Container style={{marginTop:"8rem", paddingBottom:"20rem"}}>
+                <Container style={{marginTop:"8rem", paddingBottom:"2rem"}}>
                     <Card.Img style={{marginLeft:"35.5rem", width:"10rem",height:"10rem"}} src="..."></Card.Img>
                     <h1 style={{textAlign:"center"}}>{id}</h1>
                     <h2>Top 4 Artist</h2>
@@ -164,7 +165,10 @@ export default function UserProfile(){
                         </Row>
                     </Container>
                 </Container>
+                    
+                <Footer/>
             </div>
+            
         </div>
     )
 }
