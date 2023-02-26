@@ -222,12 +222,12 @@ export default function UserProfile(){
         <div>
             <Navigation/>
             <div style={{marginTop:"8rem"}}>
-                    <h1 style={{textAlign:"center",fontSize:"80px"}}>The Best Album of the Year</h1>
-                    <h5 style={{textAlign:"center",color:"gray", fontSize:"15px"}}>The Best User Created Album of the Year</h5>
+                    <h1 style={{textAlign:"center",fontSize:"1.75rem"}}>The Best Album of the Year</h1>
+                    <h5 style={{textAlign:"center",color:"gray", fontSize:"1rem"}}>The Best User Created Album of the Year</h5>
                 </div>
                 <div>
-                    <Container style={{maxWidth:"50rem"}}>
-                        <h3 style={{marginBottom:"1.25rem", textAlign:"center"}}>Current Submissions</h3>
+                    <Container style={{maxWidth:"50rem", marginBottom:'5rem'}}>
+                        <h4 style={{marginBottom:"1.25rem", textAlign:"center"}}>Current Submissions</h4>
                         <Col>
                             {compSubmissions && compSubmissions.map((user,i) => (
                                 <Card style={{padding:".5rem",paddingBottom:"1rem"}} >
@@ -340,6 +340,7 @@ export default function UserProfile(){
                     </Modal.Footer>
                 </Modal>
                 </div>
+                <Footer/>
         </div>
     )
 }
