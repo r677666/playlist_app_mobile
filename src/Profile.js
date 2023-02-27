@@ -22,7 +22,7 @@ export default function Profile(){
     userId = userId.replaceAll("\"","")
     useEffect(() => {
     
-        const response = fetch('/api/users/'+userId)
+        const response = fetch('/api/users/'+ sessionStorage.getItem("userId"))
         .then(result => result.json())
         .then(data => setUserPro(data.paidMember))
         .then(console.log(userPro))
@@ -32,12 +32,13 @@ export default function Profile(){
         if(userPro == true){
           return(
             <>
-            <img className="d-inline-block align-top" alt='' style={{width:'2.3rem',height:'2.3rem', marginRight:'.5rem', marginLeft:'20rem'}}src={crown}/>
-            <img src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem"}}/>
+            <h1 style={{textAlign:'center'}}> <img alt='' style={{width:'2.3rem',height:'2.3rem', marginRight:'.5rem'}}src={crown}/>{userId}</h1>
             </>
           )
         }else{
-            return(<h1></h1>)
+            return(
+                <h1>{userId} <span style={{color:"white", fontSize:"2rem", textShadow: '0 0 5px #808080, 0 0 10px #808080, 0 0 15px #808080'}}>FREE</span></h1>
+                )
         }
       }
     return(
@@ -50,10 +51,8 @@ export default function Profile(){
                 <div className="justify-content-center" style={{marginTop:"6rem", textAlign:"center" }}>
                 <img src={userImg} alt='...' style={{width:'20rem',borderRadius: "10rem",height:'20rem', marginTop:'2rem', marginBottom:'2rem'}}/>
                     
-                        <h1>{userId} <span style={{color:"white", fontSize:"2rem", textShadow: '0 0 5px #808080, 0 0 10px #808080, 0 0 15px #808080'}}>FREE</span>
-                        {/* <img src={FREE} style={{width:"5rem", height:"3rem"}} alt="..."/> */}
-                        </h1>
-                    <h2>{userEmail}</h2>
+                     {handleProUser()}
+                     <h2>{userEmail}</h2>
                     <Button
                     style={{marginTop:"1rem"}}
                     onClick={event => window.location.assign("http://localhost:3000/User/"+userId)}>View public Profile</Button>
