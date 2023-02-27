@@ -12,6 +12,7 @@ export default function Upgrade(){
     let [message, setMessage] = useState('');
     let [success, setSuccess] = useState(false);
     let [sessionId, setSessionId] = useState('');
+    const [userPro, setUserPro] = useState(false);
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -81,6 +82,15 @@ export default function Upgrade(){
           }
           successOrMessage();
       }, [sessionId]);
+
+      useEffect(() => {
+    
+        const response = fetch('/api/users/'+ sessionStorage.getItem("userId"))
+        .then(result => result.json())
+        .then(data => setUserPro(data.paidMember))
+        .then(console.log(userPro))
+    
+    }, [])
     
       const Message = ({ message }) => (
         <section>
@@ -101,7 +111,49 @@ export default function Upgrade(){
             return '30rem'
         }
     }
-    
+    function handleProUser(){
+      if(userPro == true){
+        return(
+          <form action="/create-portal-session" method="POST">
+                                {/* Add a hidden field with the lookup_key of your Price */}
+                                {/* <input
+                                  type="hidden"
+                                  id="session-id"
+                                  name="session_id"
+                                  value={sessionId}
+                                />
+                                <Button
+                                id="checkout-and-portal-button" type="submit"
+                                style={{marginBottom:".25rem", color:"#ff914d",backgroundColor:"black", borderColor:"black", paddingLeft:"2rem",paddingRight:"2rem",marginTop:'.75rem'}}
+                                >
+                                    Manage
+                                </Button> */}
+        <input
+          type="hidden"
+          id="session-id"
+          name="session_id"
+          value={sessionId}
+        />
+        <button id="checkout-and-portal-button" type="submit">
+          Manage your billing information
+        </button>
+                                </form>
+        )
+      }else{
+          return(
+            <form action="/create-checkout-session" method="POST">
+                                {/* Add a hidden field with the lookup_key of your Price */}
+                                <input type="hidden" name="lookup_key" value="proMembership" />
+                                <Button
+                                id="checkout-and-portal-button" type="submit"
+                                style={{marginBottom:".25rem", color:"#ff914d",backgroundColor:"black", borderColor:"black", paddingLeft:"2rem",paddingRight:"2rem",marginTop:'.75rem'}}
+                                >
+                                    Upgrade
+                                </Button>
+                                </form>
+          )
+      }
+    }
     return(
         <div>
             <Navigation/>
@@ -160,16 +212,7 @@ export default function Upgrade(){
                                     Chance to Win the Golden Vinyl
                                 </Card.Text>
                                 
-                                <form action="/create-checkout-session" method="POST">
-                                {/* Add a hidden field with the lookup_key of your Price */}
-                                <input type="hidden" name="lookup_key" value="proMembership" />
-                                <Button
-                                id="checkout-and-portal-button" type="submit"
-                                style={{marginBottom:".25rem", color:"#ff914d",backgroundColor:"black", borderColor:"black", paddingLeft:"2rem",paddingRight:"2rem",marginTop:'.75rem'}}
-                                >
-                                    Upgrade
-                                </Button>
-                                </form>
+                                {handleProUser()}
                             </Card.Body>
                      </Card>
                 </Stack>
