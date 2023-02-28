@@ -111,33 +111,18 @@ export default function Upgrade(){
             return '30rem'
         }
     }
+    function handleManageButton(){
+      window.location.assign("billing.stripe.com/p/login/test_eVaaFXcPrayi6hWcMM")
+    }
     function handleProUser(){
       if(userPro == true){
         return(
-          <form action="/create-portal-session" method="POST">
-                                {/* Add a hidden field with the lookup_key of your Price */}
-                                {/* <input
-                                  type="hidden"
-                                  id="session-id"
-                                  name="session_id"
-                                  value={sessionId}
-                                />
                                 <Button
-                                id="checkout-and-portal-button" type="submit"
+                                onClick={ event => handleManageButton()}
                                 style={{marginBottom:".25rem", color:"#ff914d",backgroundColor:"black", borderColor:"black", paddingLeft:"2rem",paddingRight:"2rem",marginTop:'.75rem'}}
                                 >
                                     Manage
-                                </Button> */}
-        <input
-          type="hidden"
-          id="session-id"
-          name="session_id"
-          value={sessionId}
-        />
-        <button id="checkout-and-portal-button" type="submit">
-          Manage your billing information
-        </button>
-                                </form>
+                                </Button>
         )
       }else{
           return(
