@@ -7,6 +7,7 @@ import Footer from './Footer';
 import crown from './crown.png';
 import goldOk from './gold_ok.png';
 import grayOk from './gray_ok.png'
+import { Link } from 'react-router-dom';
 
 export default function Upgrade(){
     let [message, setMessage] = useState('');
@@ -111,21 +112,23 @@ export default function Upgrade(){
             return '30rem'
         }
     }
-    // function handleManageButton(){
-    //  window.location.assign("billing.stripe.com/p/login/test_eVaaFXcPrayi6hWcMM")
-    // }
+    function handleManageButton(){
+     window.location.assign("https://billing.stripe.com/p/login/test_eVaaFXcPrayi6hWcMM")
+    }
     function handleProUser(){
       if(userPro == true){
         return(
-          <form method="POST" action="/create-customer-portal-session">
-          <button type="submit">Manage billing</button>
-        </form>
-                                // <Button
-                                // id="checkout-and-portal-button"
-                                // style={{marginBottom:".25rem", color:"#ff914d",backgroundColor:"black", borderColor:"black", paddingLeft:"2rem",paddingRight:"2rem",marginTop:'.75rem'}}
-                                // >
-                                //     Manage
-                                // </Button>
+            <div>
+              {/* <a href='billing.stripe.com/p/login/test_eVaaFXcPrayi6hWcMM'> */}
+                  <Button
+                  onClick={event => handleManageButton()}
+                  style={{marginBottom:".25rem", color:"#ff914d",backgroundColor:"black", borderColor:"black", paddingLeft:"2rem",paddingRight:"2rem",marginTop:'.75rem'}}
+                  >
+                  Manage
+                      
+                  </Button>
+                {/* </a> */}
+            </div>
         )
       }else{
           return(
