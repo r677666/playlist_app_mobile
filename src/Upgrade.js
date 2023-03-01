@@ -111,18 +111,21 @@ export default function Upgrade(){
             return '30rem'
         }
     }
-    function handleManageButton(){
-      window.location.assign("billing.stripe.com/p/login/test_eVaaFXcPrayi6hWcMM")
-    }
+    // function handleManageButton(){
+    //  window.location.assign("billing.stripe.com/p/login/test_eVaaFXcPrayi6hWcMM")
+    // }
     function handleProUser(){
       if(userPro == true){
         return(
-                                <Button
-                                onClick={ event => handleManageButton()}
-                                style={{marginBottom:".25rem", color:"#ff914d",backgroundColor:"black", borderColor:"black", paddingLeft:"2rem",paddingRight:"2rem",marginTop:'.75rem'}}
-                                >
-                                    Manage
-                                </Button>
+          <form method="POST" action="/create-customer-portal-session">
+          <button type="submit">Manage billing</button>
+        </form>
+                                // <Button
+                                // id="checkout-and-portal-button"
+                                // style={{marginBottom:".25rem", color:"#ff914d",backgroundColor:"black", borderColor:"black", paddingLeft:"2rem",paddingRight:"2rem",marginTop:'.75rem'}}
+                                // >
+                                //     Manage
+                                // </Button>
         )
       }else{
           return(
