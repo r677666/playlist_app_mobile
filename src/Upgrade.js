@@ -119,15 +119,16 @@ export default function Upgrade(){
       if(userPro == true){
         return(
             <div>
-              {/* <a href='billing.stripe.com/p/login/test_eVaaFXcPrayi6hWcMM'> */}
+              <form action="/create-customer-portal-session" method="POST">
                   <Button
-                  onClick={event => handleManageButton()}
+                  // onClick={event => handleManageButton()}
+                  id="create-customer-portal-session" type="submit" 
                   style={{marginBottom:".25rem", color:"#ff914d",backgroundColor:"black", borderColor:"black", paddingLeft:"2rem",paddingRight:"2rem",marginTop:'.75rem'}}
                   >
                   Manage
                       
                   </Button>
-                {/* </a> */}
+                  </form>
             </div>
         )
       }else{
