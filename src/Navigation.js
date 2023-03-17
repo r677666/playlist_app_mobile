@@ -36,17 +36,21 @@ function Navigation() {
 
   }, [])
 
+  function handleNavPic(){
+    window.location.assign("http://localhost:3000/Profile")
+  }
+
   function handleProUser(){
     if(userPro == true){
       return(
         <>
         <img className="d-inline-block align-top" alt='' style={{width:'2.3rem',height:'2.3rem', marginRight:'.5rem', marginLeft:'20rem'}}src={crown}/>
-        <img src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem"}}/>
+        <img onClick={event => handleNavPic()} src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem"}}/>
         </>
       )
     }else{
       return(
-        <img src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem"}}/>
+        <img src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem", marginLeft:'22.75rem'}}/>
       )
     }
   }
@@ -58,7 +62,8 @@ function Navigation() {
          position:"fixed",zIndex:"999", width:"100%"}} 
          variant="dark">
           <Container>
-          <img src={companyImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem',marginRight:'2rem'}}/>
+          <img src={companyImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem'}}/>
+          <text style={{color:"red", fontSize:"1.5rem", marginRight:"2rem"}}>BETA</text>
             <Navbar.Brand href="/Home">TASTEMAKERS</Navbar.Brand>
             <Navbar.Toggle/>
             <Navbar.Collapse id='basic-navbar-nav'>

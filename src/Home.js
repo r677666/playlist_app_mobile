@@ -9,6 +9,7 @@ import { renderMatches } from 'react-router-dom';
 import Footer from './Footer';
 import artistPicture from './2809.jpg'
 import pollPicture from './Kendrick Poll Clear.png'
+import stockPhotoLogo from './Tastemakers Main Logo (1).png'
 
 export default function Home(){
     const userAuthToken = sessionStorage.getItem("token")
@@ -146,11 +147,12 @@ export default function Home(){
             )
         }else{
             return(
-                <div>
-                    <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}>Ever sit around and wonder, "What would be their best album?". Three songs from this album, five from that, </h5>
-            <h5 style={{textAlign:"center"}}>  two from another? Man, that's a good damn album right?...Shouldn't you get a paid for making THAT good of an album. Well, Tastemakers is the place for you.</h5>
-            <h5 style={{textAlign:"center"}}> We're here for the music heads, the old heads, the TASTEMAKERS. Sure AI can generate some random playlists of something you MIGHT like.</h5>
-            <h5 style={{textAlign:"center"}}> But we all know the truth. Music is made by humans. Humans have the taste. Humans should be the MAKERS.</h5>
+                <div style={{maxWidth:"45rem"}}>
+                    <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}>Ever sit around and wonder, "What would be their best album?". Three songs from this</h5>
+            <h5 style={{textAlign:"center"}}>album, five from that, two from another? Man, that's a good dang album right?...</h5>
+            <h5 style={{textAlign:"center"}}>Shouldn't you get a paid for making THAT good of an album. Well, Tastemakers is the place for you.</h5>
+            <h5 style={{textAlign:"center"}}> We're here for the music heads, the casuals, the TASTEMAKERS. Sure AI can generate some random playlists of something you MIGHT like.</h5>
+            <h5 style={{textAlign:"center"}}> But we all know the truth.</h5>
                 </div>
             )
         }
@@ -234,26 +236,34 @@ export default function Home(){
         </div>
         </div>
         <hr style={{borderColor:"red", height:".2rem"}}/>
-        <div>
-            <h1 style={{textAlign:"center", marginTop:"3rem", marginBottom:"3rem"}}>
-                Music Lovers Welcome
-            </h1>
+        <div style={{width:"100%"}}>
+                <h1 style={{textAlign:"center", marginTop:"3rem", marginBottom:"3rem"}}>
+                    Music Lovers Welcome
+                </h1>
+                
             
-        
-        <hr style={{borderColor:"red", height:".2rem"}}/>
-        <div>
-            {handleTextMobile()}
-        </div>
-        <h5 style={{textAlign:"center"}}> Music is made by humans. Humans have TASTE. Humans are the MAKERS.</h5>
-        <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}> Welcome to the movement.</h5>
-        <h5 style={{textAlign:"center", paddingTop:"1.5rem", fontSize:"1.75rem"}}> Welcome to TASTEMAKERS.</h5>
-        <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"4rem"}}/>
+            <hr style={{borderColor:"red", height:".2rem"}}/>
+            <div style={{width:"100%", display:"inline-flex"}}>
+                <div style={{maxWidth:"45rem", marginLeft:"4rem"}}>
+                    {handleTextMobile()}
+                
+                <h5 style={{textAlign:"center"}}> Music is made by humans. Humans have TASTE. Humans are the MAKERS.</h5>
+                <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}> Welcome to the movement.</h5>
+                <h5 style={{textAlign:"center", paddingTop:"1.5rem", fontSize:"1.75rem"}}> Welcome to 
+                <span style={{color:"red"
+                // textShadow: "0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px red, 0 0 2px red, 0 0 2px red, 0 0 10px red, 0 0 0px red"
+                }}>TASTEMAKERS</span>.</h5>
+                </div>
+                <img style={{width:"28rem", height:"25rem", marginLeft:"8rem", marginTop:"2rem"}}src={stockPhotoLogo}/>
             </div>
+            <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"4rem"}}/>
+            
+        </div>
         <div>
             <h1 style={{textAlign:"center"}}>Current Users</h1>
             <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"4rem", textAlign:'center'}}/>
             <Container style={{alignItems:"normal"}}>
-                <Row className="mx-2 row row-cols-4">
+                <Row className="flex-nowrap overflow-auto">
                     {users && users.map((user,i) => (
                         <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
                             <Container onClick={event => clickUser(users[i].userId)}>
@@ -262,7 +272,8 @@ export default function Home(){
                                     <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
                                         <Container style={{paddingTop:'.25rem'}}> 
                                             {users[i].userId.replaceAll("\"","")}
-                                            {checkFollowButton(sessionStorage.getItem("userId"),users[i].userId)}
+                                            {/* Add Follower Button with userProfile is finished */}
+                                            {/* {checkFollowButton(sessionStorage.getItem("userId"),users[i].userId)} */}
                                         </Container>
                                         
                             </Container>

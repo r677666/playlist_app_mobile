@@ -300,10 +300,10 @@ export default function Create(){
               <Button variant='primary' 
               onClick={handleShow_showSetPlayListModal} 
               style={{backgroundColor:"#ff914d"}}>
-                Set Playlist
+                Set Playlist to Add Songs
               </Button>
               <Button variant='primary' onClick={handleShow_showCartModal} style={{backgroundColor:'red'}}>
-                Cart
+                Add Selected Songs to Playlist
               </Button>
                 <Modal show={showModal} onHide={handleClose}>
                     <Modal.Header closeButton>
@@ -454,20 +454,19 @@ export default function Create(){
                                         <div>
                                           <div>
                                             <Card
-                                            onMouseEnter={() => setHoveredTrack(true)}
-                                            onMouseLeave={() => setHoveredTrack(false)}
+                                            // onMouseEnter={() => setHoveredTrack(true)}
+                                            // onMouseLeave={() => setHoveredTrack(false)}
                                             >
                                               
                                               <Card.Title >
                                               {track.name}
-                                              {hoveredTrack && (
                                                 <Button
                                                 style={{marginLeft:'.5rem'}}
                                                 onClick={addTrackToCartFunction(track.name,track.id)}
                                                 >
                                                   Add
                                                 </Button>
-                                              )}</Card.Title>
+                                              </Card.Title>
                                             </Card>
                                           </div>
                                           

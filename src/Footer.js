@@ -62,7 +62,7 @@ export default function Footer() {
                 </a>
               </p>
               <p>
-                <a href='#!' className='text-reset'>
+                <a href='mailto:tastemakers.official.llc@gmail.com' className='text-reset'>
                   Help
                 </a>
               </p>

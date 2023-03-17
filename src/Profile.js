@@ -53,13 +53,14 @@ export default function Profile(){
                     
                      {handleProUser()}
                      <h2>{userEmail}</h2>
-                    <Button
+                     {/* Need to make userProfile fully functional first */}
+                    {/* <Button
                     style={{marginTop:"1rem"}}
-                    onClick={event => window.location.assign("http://localhost:3000/User/"+userId)}>View public Profile</Button>
+                    onClick={event => window.location.assign("http://localhost:3000/User/"+userId)}>View public Profile</Button> */}
                     
                 </div>
                 <div style={{textAlign:"center", marginTop:"1rem"}}>
-                    <Button onClick={event => handleUpgradeButton()}>Upgrade</Button>
+                    <Button onClick={event => handleUpgradeButton()}>Manage Account</Button>
                 </div>
                 <div style={{marginTop:"7rem"}}>
                     <Footer/>

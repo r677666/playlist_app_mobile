@@ -8,6 +8,7 @@ import crown from './crown.png';
 import goldOk from './gold_ok.png';
 import grayOk from './gray_ok.png'
 import { Link } from 'react-router-dom';
+// import Stripe from "stripe";
 
 export default function Upgrade(){
     let [message, setMessage] = useState('');
@@ -18,6 +19,9 @@ export default function Upgrade(){
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    // const stripe = new Stripe("sk_test_51Mdh79DtWk2E47D2T8ZzQnNWdiE1mXZETGEtr5kmP0TXKE1D4E0IB2xD8OXd0LIMeVLxIwydqJhBRJpuhFwbKfLS00YhbtWKpA");
+    // const [customer, setCustomer] = useState(null);
 
     const [windowSize, setWindowSize] = useState({
         width: undefined,
@@ -54,6 +58,19 @@ export default function Upgrade(){
             "Order canceled -- continue to shop around and checkout when you're ready."
           );
         }
+
+        // useEffect(() => {
+        //   stripe.customers.list({ email })
+        //     .then((customers) => {
+        //       if (customers.data.length > 0) {
+        //         setCustomer(customers.data[0]);
+        //       }
+        //     })
+        //     .catch((error) => {
+        //       console.error(error);
+        //     });
+        // }, [email]);
+
         function updateUserProStatus(){
             // console.log("TESTING SUCCESSFUL")
             // const changeUserProStatus = async () => {
@@ -113,22 +130,29 @@ export default function Upgrade(){
         }
     }
     function handleManageButton(){
-     window.location.assign("https://billing.stripe.com/p/login/test_eVaaFXcPrayi6hWcMM")
+    //  window.location.assign("https://billing.stripe.com/p/login/test_eVaaFXcPrayi6hWcMM")
+    window.location.assign("https://docs.google.com/forms/d/e/1FAIpQLSeh8SZ2oHX19Es-thaSu5ijEPDyOYQGR4QMbgt5wvnE5e-KRQ/viewform?vc=0&c=0&w=1&flr=0")
     }
     function handleProUser(){
       if(userPro == true){
         return(
             <div>
-              <form action="/create-customer-portal-session" method="POST">
+              {/* <form action="/create-portal-session" method="POST">
+                    <input
+                      type="hidden"
+                      id="session-id"
+                      name="session_id"
+                      value={sessionId}
+                    /> */}
                   <Button
-                  // onClick={event => handleManageButton()}
+                  onClick={event => handleManageButton()}
                   id="create-customer-portal-session" type="submit" 
                   style={{marginBottom:".25rem", color:"#ff914d",backgroundColor:"black", borderColor:"black", paddingLeft:"2rem",paddingRight:"2rem",marginTop:'.75rem'}}
                   >
                   Manage
                       
                   </Button>
-                  </form>
+                  {/* </form> */}
             </div>
         )
       }else{

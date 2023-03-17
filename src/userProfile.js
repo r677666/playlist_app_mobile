@@ -7,6 +7,7 @@ import Navigation from './Navigation';
 import FREE from './FREE.png';
 import PRO from './vibes.png';
 import Footer from './Footer';
+import logo from './taste makers logo (1).png'
 
 export default function UserProfile(){
     const { id } = useParams()
@@ -103,11 +104,11 @@ export default function UserProfile(){
         <div>
         
             <Navigation/>
-            <div>
-                <Container style={{marginTop:"8rem", paddingBottom:"2rem"}}>
-                    <Card.Img style={{marginLeft:"35.5rem", width:"10rem",height:"10rem"}} src="..."></Card.Img>
+            <div style={{justifyContent:"center", textAlign:"center"}}>
+                <Container style={{marginTop:"8rem", paddingBottom:"2rem", justifyContent:"center"}}>
+                    <img style={{width:"10rem",height:"10rem", borderRadius:"20rem",justifyContent:"center", display:'inline-flex', borderColor:"orange"}} src={logo}></img>
                     <h1 style={{textAlign:"center"}}>{id}</h1>
-                    <h2>Top 4 Artist</h2>
+                    <h2 style={{textAlign:"left"}}>Top 4 Artist</h2>
                     <Container>
                         {/* <h1>Show top four artist in seperate canvas</h1> */}
                         <Row className="flex-nowrap overflow-auto">
@@ -125,7 +126,7 @@ export default function UserProfile(){
                             </Card>
                         </Row>
                     </Container>
-                    <h3>Best of {id}</h3>
+                    <h3 style={{textAlign:"left"}}>Best of {id}</h3>
                     <Container>
                         <Row className="flex-nowrap overflow-auto">
                             <Card style={{width:'25rem',height:'18rem', paddingTop:'1rem' }}>
@@ -142,19 +143,19 @@ export default function UserProfile(){
                             </Card>
                         </Row>
                     </Container>
-                    <h3>Friends</h3>
+                    <h3 style={{textAlign:"left"}}>Friends</h3>
                     <Container>
-                        {/* <Row> */}
-                        {validate}
+                        <Row>
+                        {/* {validate} */}
                         {/* <div>Loading</div> */}
-                        {/* {friends.map((friends,i) => {return(
+                        {friends.map((friends,i) => {return(
                             <Card style={{width:'8rem',height:'8rem', paddingTop:'1rem' }} key={i} >
                                 <Container> 
                                     {friends}
                                 </Container>
                             </Card>
-                        )})} */}
-                        {/* </Row> */}
+                        )})}
+                        </Row>
                     </Container>
                     <h3>Current Submissions</h3>
                     <Container>

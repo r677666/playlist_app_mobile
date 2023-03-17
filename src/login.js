@@ -4,6 +4,7 @@ import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Form 
 import React,{ useState, useEffect, Component } from 'react';
 import { click } from '@testing-library/user-event/dist/click';
 import App from './App';
+import TastemakerImg  from './Tastemakers Main Logo (1).png'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -60,7 +61,8 @@ export default function Login(){
                       "playlists":[],
                       "spotifyToken": sessionStorage.getItem("spotifyToken"),
                       "spotifyUserImgUrl": sessionStorage.getItem("spotifyUserImgUrl"),
-                      "paidMember":false
+                      "paidMember":false,
+                      "email":sessionStorage.getItem("userEmail")
                     }),
                     headers: {
                       'Content-Type': 'application/json'
@@ -133,13 +135,23 @@ export default function Login(){
     };
     
     return(
-        <div>
-            <h1>TasteMakers</h1>
-            <Container>
+      <div>
+        <div style={{display: "flex", height: "100vh", width: "100%", backgroundColor: "black"}}>
+          <div style={{width:"100%", height:"100%", textAlign:"center", justifyContent:"center"}}>
+            {/* <h1>TasteMakers</h1> */}
+            <div style={{justifyContent:"left", marginRight:"20rem", display:"flex"}}>
+              <img src={TastemakerImg} style={{height:"30rem",widht:"30rem", marginLeft:"10rem", marginTop:"7rem"}}/>
+              
+              <Container style={{justifyContent:"center", marginTop:"15rem", marginLeft:"10rem"}}>
+                <h5 style={{color:"#ff514d", justifyContent:"center"}}>Join Now</h5>
                 <InputGroup>
-                    <Button style={{backgroundColor:"green"}}onClick={handleLogin}>login with spotify</Button>
+                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem"}}onClick={handleLogin}>Login with Spotify</Button>
                 </InputGroup>
             </Container>
+            </div>
+            
+          </div>  
         </div>
+      </div>
     )
 }

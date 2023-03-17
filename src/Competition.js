@@ -19,6 +19,8 @@ export default function UserProfile(){
     const handleClose_showCompPlayListModal = () => set_CompPlayList_ShowModal(false);
     const handleShow_showCompPlayListModal = () => set_CompPlayList_ShowModal(true);
 
+    const [currentPage, setCurrentPage] = useState(1);
+
     const [choosePlaylistActive, setChoosePlaylistActive] = useState(false);
     const [isActive, setIsActive] = useState(false);
     const [isCompActive, setCompIsActive] = useState(false);
@@ -258,8 +260,10 @@ function handleSubmissionText(){
     return null
   }else{
     return(
-      <div>
-      <h5 style={{marginBottom:"1.25rem", textAlign:"left", marginTop:'1rem'}}>Current Submissions</h5>
+      <div style={{ maxWidth:"50rem"}}>
+      <h5 style={{marginBottom:"1.25rem", textAlign:"left", marginTop:'1rem'}}>
+        Current Submissions<span style={{marginLeft:"24rem"}}> Payout:
+      <span style={{fontSize:"3.5rem",color:"green"}}>$250</span></span></h5>
     </div>
     )
   }
@@ -279,16 +283,28 @@ function handleSubmitButton(){
     )
   }
 }
+//show cards with pages
+  // const cardsPerPage = 6;
+  // const totalPages = Math.ceil(cards.length / cardsPerPage);
+  // const indexOfLastCard = currentPage * cardsPerPage;
+  // const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  // const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard);
+
     return(
         <div>
             <Navigation/>
             <div style={{marginTop:"8rem", width:"100%"}}>
                     {handleBigText()}
                 </div>
+                
                 <div>
-                    <Container style={{maxWidth:"50rem", marginBottom:'5rem'}}>
+                  
+                    <Container style={{maxWidth:"100%", marginBottom:'5rem', display:"inline-flex"}}>
+                      <div style={{width:"16rem", height:"40rem", backgroundColor:"green", marginRight:"5rem", marginLeft:"1rem"}}>Add 1</div>
+                      <div style={{maxWidth:"50rem"}}>
                         {handleSubmissionText()}
-                        <Col>
+                        <Col style={{maxWidth:"50rem"}}>
+                          <Row className="flex overflow-auto overflow-y-scroll" style={{height:'25rem'}}>
                             {compSubmissions && compSubmissions.map((user,i) => (
                                 <Card style={{padding:".5rem",paddingBottom:"1rem"}} >
                                         <Container> 
@@ -309,8 +325,21 @@ function handleSubmitButton(){
                                         </Container>
                                 </Card>
                             ))}
+                              {/* <div> */}
+                              {/* {currentCards.map((card) => (
+                                <Card key={card.id} title={card.title} image={card.image} />
+                              ))}
+                            </div>
+                            {Array.from({ length: totalPages }, (_, i) => (
+                              <button key={i} onClick={() => setCurrentPage(i + 1)}>
+                                {i + 1}
+                              </button>
+                            ))} */}
+                            </Row>
                         </Col>
                         {handleSubmitButton()}
+                        </div>
+                        <div style={{width:"16rem", height:"40rem", backgroundColor:"green", marginLeft:"5rem", marginRight:"1rem"}}>Add 2</div>
                     </Container>
 
                     {/* Modal for Set Playlist Button */}
