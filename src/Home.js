@@ -243,14 +243,14 @@ export default function Home(){
                 
             
             <hr style={{borderColor:"red", height:".2rem"}}/>
-            <div style={{width:"100%", display:"inline-flex"}}>
+            <div style={{width:"100%", display:"inline-flex", justifyContent:"center"}}>
                 <div style={{maxWidth:"45rem", marginLeft:"4rem"}}>
                     {handleTextMobile()}
                 
                 <h5 style={{textAlign:"center"}}> Music is made by humans. Humans have TASTE. Humans are the MAKERS.</h5>
                 <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}> Welcome to the movement.</h5>
                 <h5 style={{textAlign:"center", paddingTop:"1.5rem", fontSize:"1.75rem"}}> Welcome to 
-                <span style={{color:"red"
+                <span style={{color:"red", marginLeft:".25rem"
                 // textShadow: "0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px red, 0 0 2px red, 0 0 2px red, 0 0 10px red, 0 0 0px red"
                 }}>TASTEMAKERS</span>.</h5>
                 </div>

@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
 import Footer from './Footer';
+import Adsense from 'react-adsense';
 
 export default function UserProfile(){
 
@@ -223,7 +224,7 @@ export default function UserProfile(){
     function deleteButton(user,userX){
         if(user == currentUserForDelete){
             return(
-            <Button onClick={event => deleteButtonFunction(userX)}>
+            <Button style={{color:"orange",backgroundColor:"black",borderColor:"black"}}onClick={event => deleteButtonFunction(userX)}>
                 Delete
             </Button>
             )
@@ -297,26 +298,45 @@ function handleSubmitButton(){
                     {handleBigText()}
                 </div>
                 
-                <div>
-                  
-                    <Container style={{maxWidth:"100%", marginBottom:'5rem', display:"inline-flex"}}>
-                      <div style={{width:"16rem", height:"40rem", backgroundColor:"green", marginRight:"5rem", marginLeft:"1rem"}}>Add 1</div>
-                      <div style={{maxWidth:"50rem"}}>
+                <div style={{justifyContent:"center", width:"100%",display:"inline-flex"}}>
+                                        
+                {/* <div style={{maxWidth:"25%", width:"20%",
+                height:"40rem", backgroundColor:"green", 
+                marginLeft:"1rem", marginRight:"1rem"}}>Add 1</div> */}
+
+                <Adsense.Google
+                    client='ca-pub-7787464840070054'
+                    slot='9738875136'
+                    style={{ width: 500, height: 300, float: 'left' }}
+                    format=''
+                />
+                {/* <ins class="adsbygoogle"
+                style={{display:"block", width:"20%", height:"40rem"}}
+                data-ad-client="ca-pub-7787464840070054"
+                data-ad-slot="9738875136"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins> */}
+                    <Container style={{marginBottom:'5rem', display:"inline-flex", width:"50%"}}>
+
+                      <div style={{width:"100%"}}>
                         {handleSubmissionText()}
-                        <Col style={{maxWidth:"50rem"}}>
+                        <Col>
                           <Row className="flex overflow-auto overflow-y-scroll" style={{height:'25rem'}}>
                             {compSubmissions && compSubmissions.map((user,i) => (
-                                <Card style={{padding:".5rem",paddingBottom:"1rem"}} >
+                                <Card style={{padding:".5rem",paddingBottom:"1rem", justifyContent:"left", justifyItems:"left"}} >
                                         <Container> 
-                                            {compSubmissions[i].playlistName}
-                                            <Button onClick={event => handleCompDocPress(compSubmissions[i].playlistsId)} style={{marginLeft:"1rem"}}>show</Button>
+                                            <text style={{justifySelf:"left"}}>{compSubmissions[i].playlistName}</text>
+                                            <Button 
+                                            onClick={event => handleCompDocPress(compSubmissions[i].playlistsId)} 
+                                            style={{marginLeft:"1rem",color:"black", backgroundColor:"white", borderColor:"orange"}}>view</Button>
                                             <ButtonGroup style={{float:"right"}}>
                                                 <Button
                                                 key={compSubmissions._id} 
                                                 onClick={event => handleLike(userId,compSubmissions[i]._id)}
                                                 style={{width:"5rem",
                                                 backgroundColor: "white", 
-                                                color:"black"}}
+                                                color:"black",
+                                                borderColor:"orange"}}
                                                 >
                                                 Like {handleNull(compSubmissions[i].likes)}
                                                 </Button>
@@ -339,9 +359,15 @@ function handleSubmitButton(){
                         </Col>
                         {handleSubmitButton()}
                         </div>
-                        <div style={{width:"16rem", height:"40rem", backgroundColor:"green", marginLeft:"5rem", marginRight:"1rem"}}>Add 2</div>
+                        
                     </Container>
-
+{/* <div style={{maxWidth:"25%", width:"20%", height:"40rem", backgroundColor:"green", marginLeft:"1rem",marginRight:"1rem"}}>Add 2</div> */}
+                <ins class="adsbygoogle"
+                style={{display:"block", width:"20%", height:"40rem"}}
+                data-ad-client="ca-pub-7787464840070054"
+                data-ad-slot="9738875136"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
                     {/* Modal for Set Playlist Button */}
                 <Modal show={showSetPlayListModal} onHide={handleClose_showSetPlayListModal}>
                     <Modal.Header closeButton>
