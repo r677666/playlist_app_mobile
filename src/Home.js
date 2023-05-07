@@ -25,7 +25,7 @@ export default function Home(){
     var test;
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('/api/users')
+            const response = await fetch('http://localhost:8000/api/users')
             .then(result => result.json())
             .then(data => setUsers(data))
             .then(console.log("users from Playlist App Server have been found"))
@@ -78,7 +78,7 @@ export default function Home(){
             }
         }
 
-        const followMethod = await fetch("api/users/friends/addFriend",{
+        const followMethod = await fetch("http://localhost:8000/api/users/friends/addFriend",{
             method: 'PATCH',
             body: JSON.stringify({
               "userId": followerId,

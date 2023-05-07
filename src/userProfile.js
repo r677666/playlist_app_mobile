@@ -21,7 +21,7 @@ export default function UserProfile(){
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('/api/users')
+            const response = await fetch('http://localhost:8000/api/users')
             .then(result => result.json())
             .then(data => setUsers(data))
             // .then(console.log(users))
@@ -43,7 +43,7 @@ export default function UserProfile(){
                 test = test.substring(33)
                 if(id === test){
                     token = users[i]._id
-                    const getFriends = await fetch('/api/users/' + token)
+                    const getFriends = await fetch('http://localhost:8000/api/users/' + token)
                     .then(result => result.json())
                     .then(data => demoArr.push(data.friends))
                 }
@@ -58,7 +58,7 @@ export default function UserProfile(){
             var test = [];
             for(var i = 0; i<friendsIds.length; i++){
                 var user = friendsIds[i];
-                const query = await fetch('/api/users/' + user)
+                const query = await fetch('http://localhost:8000/api/users/' + user)
                 .then(result => result.json())
                 .then(data => test.push(data.userId))
             }

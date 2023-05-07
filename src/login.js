@@ -54,7 +54,7 @@ export default function Login(){
       //For Playlist App Server
       async function fetchUsers(){
             if(sessionStorage.getItem("userId") != null){
-                  const response = await fetch('/api/users/createUser',{
+                  const response = await fetch('http://localhost:8000/api/users/createUser',{
                     method: 'POST',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),

@@ -34,7 +34,7 @@ export default function UserProfile(){
     var docTracks = [];
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('/api/competition')
+            const response = await fetch('http://localhost:8000/api/competition')
             .then(result => result.json())
             .then(data => setCompSubmissions(data))
             // .then(console.log(compSubmissions[0].playlistsId))
@@ -60,7 +60,7 @@ export default function UserProfile(){
     //Post Playlist to Competition
     async function postCompDoc(){
 
-        var postPlaylistToComp = await fetch('/api/competition/create', {
+        var postPlaylistToComp = await fetch('http://localhost:8000/api/competition/create', {
             method: 'POST',
             body: JSON.stringify({
               "userId": userId,
@@ -147,10 +147,10 @@ export default function UserProfile(){
       }
       function deleteButtonFunction(id){
         console.log(id)
-        const getMethod = fetch("/api/competition/" +id)
+        const getMethod = fetch("http://localhost:8000/api/competition/" +id)
         .then(result => console.log(result.json()))
 
-        const deleteMethod = fetch("/api/competition/",{
+        const deleteMethod = fetch("http://localhost:8000/api/competition/",{
         method: 'DELETE',
         body: JSON.stringify({
             "id": id
@@ -165,7 +165,7 @@ export default function UserProfile(){
     const handleLike = async (userId,id) => {
                 var arr = [];
                 
-                const checkIfLikedAlready = await fetch("/api/competition/" + id)
+                const checkIfLikedAlready = await fetch("http://localhost:8000/api/competition/" + id)
                 .then(result => result.json())
                 .then(data => 
                     {
@@ -175,7 +175,7 @@ export default function UserProfile(){
                         // console.log(data.likes.indexOf('testLike') )
                         if(data.likes.indexOf(userId) !== -1){
                             console.log("REMOVED LIKE")
-                                    const followMethod = fetch("/api/competition/removeLike",{
+                                    const followMethod = fetch("http://localhost:8000/api/competition/removeLike",{
                                         method: 'PATCH',
                                         body: JSON.stringify({
                                             "userId": userId,
@@ -192,7 +192,7 @@ export default function UserProfile(){
                             // }
                         }else{
                             console.log("ADDED LIKE")
-                            const followMethod = fetch("/api/competition/addLike",{
+                            const followMethod = fetch("http://localhost:8000/api/competition/addLike",{
                                 method: 'PATCH',
                                 body: JSON.stringify({
                                     "userId": userId,
@@ -325,7 +325,7 @@ function handleSubmitButton(){
                             {compSubmissions && compSubmissions.map((user,i) => (
                                 <Card style={{padding:".5rem",paddingBottom:"1rem", justifyContent:"left", justifyItems:"left"}} >
                                         <Container> 
-                                            <text style={{justifySelf:"left"}}>{compSubmissions[i].playlistName}</text>
+                                            <h2 style={{justifySelf:"left"}}>{compSubmissions[i].playlistName}</h2>
                                             <Button 
                                             onClick={event => handleCompDocPress(compSubmissions[i].playlistsId)} 
                                             style={{marginLeft:"1rem",color:"black", backgroundColor:"white", borderColor:"orange"}}>view</Button>

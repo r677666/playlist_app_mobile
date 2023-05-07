@@ -22,7 +22,7 @@ export default function Profile(){
     userId = userId.replaceAll("\"","")
     useEffect(() => {
     
-        const response = fetch('/api/users/'+ sessionStorage.getItem("userId"))
+        const response = fetch('http://localhost:8000/api/users/'+ sessionStorage.getItem("userId"))
         .then(result => result.json())
         .then(data => setUserPro(data.paidMember))
         .then(console.log(userPro))
