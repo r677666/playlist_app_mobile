@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal } from 'react-bootstrap';
+import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal, Stack } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { click } from '@testing-library/user-event/dist/click';
 import Login from './login';
@@ -45,7 +45,9 @@ export default function Create(){
     const [showCartModal, set_Cart_ShowModal] = useState(false);
     const handleClose_showCartModal = () => set_Cart_ShowModal(false);
     const handleShow_showCartModal = () => set_Cart_ShowModal(true);
-    console.log(selectedTracks)
+    const [showTrackModal, set_Track_ShowModal] = useState(false);
+    const handleClose_showTrackModal = () => set_Track_ShowModal(false);
+    const handleShow_showTrackModal = () => set_Track_ShowModal(true);
 
     function createButtonFunction(){
       playlistCreation();
@@ -67,22 +69,25 @@ export default function Create(){
       fetch('https://accounts.spotify.com/api/token', authParameters)
         .then(result => result.json())
         .then(data => setAccessToken(data.access_token))
-    }, [])
-
-    //for user image and etc... 
-    // function userInfo(){
-    //   var userParameters = {
-    //     method: 'GET',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Bearer ' + sessionStorage.getItem("token")
-    //     }
-    //   }
-    //   var userData = fetch('https://api.spotify.com/v1/users/' + sessionStorage.getItem("userId"),userParameters)
-    //   .then(response => response.json())
-    //   .then(data => { setUserImg(data.images[0].url)
-    //   })
-    // }
+    })
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+      height: undefined,
+    });
+  
+    useEffect(() => {
+      function handleResize() {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      }
+  
+      window.addEventListener("resize", handleResize);
+      handleResize(); // Set initial size on mount
+  
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     //Playlist Creation SUCCESSFUL
     async function playlistCreation() {
@@ -99,9 +104,10 @@ export default function Create(){
             })
         }
         //Create Playlist from Given User Id
-        var createPlaylist = fetch('https://api.spotify.com/v1/users/' + userId + '/playlists',playlistParameters)
+        var createPlaylist = fetch('https://api.spotify.com/v1/users/' + userId.replaceAll("\"","") + '/playlists',playlistParameters)
         .then(response => response.json())
         .then(data => console.log(data))
+        .then(console.log(userId))
     }
     //Get Playlist
     async function getUserPlaylist(){
@@ -112,11 +118,17 @@ export default function Create(){
           'Authorization': 'Bearer ' + userAuthToken
         }
       }
-      var getUsersPlaylist = await fetch('https://api.spotify.com/v1/me/playlists?offset=30&limit=30' , playlistParameters)
+      var getUsersPlaylist = await fetch('https://api.spotify.com/v1/me/playlists?limit=50&mine=true' , playlistParameters)
       .then(response => response.json())
-      .then(data => {
-        setUserPlaylists(data.items);
-      })
+      .then(data => 
+        {
+        const personalPlaylists = data.items.filter(playlist => {
+          return playlist.owner.id === userId.replaceAll("\"","");
+      });setUserPlaylists(personalPlaylists);
+      }
+      )
+      // .then(console.log(userPlaylists))
+      .catch(response => console.log(response.json()))
     }
     // Add Tracks to Playlist
     async function addTrackToPlaylist(){
@@ -198,7 +210,9 @@ export default function Create(){
       setIsActive(current => !current)
       var executed = false;
       search();
+      handleShow_showTrackModal()
     }
+
     function setClickedPlaylistButton(name,id){
       var executed = false;
       var currentID = "";
@@ -237,17 +251,33 @@ export default function Create(){
         console.log(selectedTracksIDs)
       }
     }
-    
-    // function profileImg(){
-    //   userInfo();
-
-    // }
+    function playlistImg(url){
+      if(url == null){
+        return ""
+      }
+    }
+    function handleWindowSize(){
+      if(windowSize.width < 765){
+          return 'vertical'
+      }else{
+          return 'horizontal'
+      }
+  }
+  function handleCardSize(){
+      if(windowSize.width < 765){
+          return '30rem'
+      }else{
+          return '30rem'
+      }
+  }
     return (
       <div className="App">
         <Navigation/>
         <br/>
-        <Container>
+        <Container style={{marginTop:"6rem"}}>
+        
           <InputGroup className="mb-3" size="lg">
+          <Stack direction='vertical'>
             <FormControl
               placeholder="Search For Artist"
               type="input"
@@ -269,11 +299,11 @@ export default function Create(){
               </Button>
               <Button variant='primary' 
               onClick={handleShow_showSetPlayListModal} 
-              style={{backgroundColor:'orange'}}>
-                Set Playlist
+              style={{backgroundColor:"#ff914d"}}>
+                Set Playlist to Add Songs
               </Button>
               <Button variant='primary' onClick={handleShow_showCartModal} style={{backgroundColor:'red'}}>
-                Cart
+                Add Selected Songs to Playlist
               </Button>
                 <Modal show={showModal} onHide={handleClose}>
                     <Modal.Header closeButton>
@@ -326,8 +356,9 @@ export default function Create(){
                                       <div>
                                         <div>
                                         <Container>
-                                          <Card>
-                                          <Card.Img src={userPlaylists.images[0].url}/>
+                                          <Card key={userPlaylists._id}>
+                                          {/* <Card.Img src={userPlaylists.images[0].url}/> */}
+                                          {/* <Card.Img src={playlistImg(userPlaylists.images[0].url)}/> */}
                                             <Card.Title>{userPlaylists.name}</Card.Title>
                                           </Card>
 
@@ -395,57 +426,67 @@ export default function Create(){
                         Add Items to Playlist
                     </Button>
                     </Modal.Footer>
-                </Modal>
+                </Modal></Stack>
           </InputGroup>
-        </Container>
-        <Container>
+          
+          
           <Row className="mx-2 row row-cols-4">
               {albums.map((album, i) => {
                 return (
-                  <div style={{width: isActive ? '54rem' : '18rem'}}>
-                  <CardGroup key={i}>
-                    <div onClick={event => onClickFunction(album.name)}>
-                      <Card>
+                  <div >
+                  <CardGroup>
+                    <div key={album.name} onClick={event => onClickFunction(album.name)}>
+                      <Card >
                         <Card.Img src={album.images[0].url} style={{maxWidth:'18rem', alignSelf:'flex-start'}}/>
                           <Card.Title>{album.name}</Card.Title>
                       </Card>
                     </div>
-                    {isActive && (
-                      <div>
-                        <Card style={{width:'17rem'}}>
-                              <Card.Body style={{}}>
-                                {isActive && (
-                                  tracks.map((track, i) => {
-                                    return (
-                                      <div>
+                      <Modal show={showTrackModal} onHide={handleClose_showTrackModal}>
+                    <Modal.Header closeButton>
+                    <Modal.Title> {clickedAlbum} </Modal.Title>
+                    </Modal.Header>
+                    <div>
+                      <Card style={{width:'18rem'}}>
+                      <Card.Body style={{}}>
+                        {isActive && (
+                                    tracks.map((track, i) => {
+                                      return (
                                         <div>
-                                          <Card
-                                          onMouseEnter={() => setHoveredTrack(true)}
-                                          onMouseLeave={() => setHoveredTrack(false)}
-                                          >
-                                            
-                                            <Card.Title >
-                                            {track.name}
-                                            {hoveredTrack && (
-                                              <Button
-                                              style={{marginLeft:'.5rem'}}
-                                              onClick={addTrackToCartFunction(track.name,track.id)}
-                                              >
-                                                Add
-                                              </Button>
-                                            )}</Card.Title>
-                                          </Card>
+                                          <div>
+                                            <Card
+                                            // onMouseEnter={() => setHoveredTrack(true)}
+                                            // onMouseLeave={() => setHoveredTrack(false)}
+                                            >
+                                              
+                                              <Card.Title >
+                                              {track.name}
+                                                <Button
+                                                style={{marginLeft:'.5rem'}}
+                                                onClick={addTrackToCartFunction(track.name,track.id)}
+                                                >
+                                                  Add
+                                                </Button>
+                                              </Card.Title>
+                                            </Card>
+                                          </div>
+                                          
                                         </div>
-                                        
-                                      </div>
-                                    )
-                                  })
-                                  )}
-                              </Card.Body>
-                              
-                        </Card>
+                                      )
+                                    })
+                                    )}
+                                </Card.Body>
+
+                                </Card>
                       </div>
-                    )}
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose_showTrackModal}>
+                        {selectedPlaylistName}
+                    </Button>
+                    <Button variant="secondary" onClick={addCartItemsToPlaylist}>
+                        Tracks
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
                   </CardGroup>
                   
                   

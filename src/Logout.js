@@ -4,19 +4,21 @@ import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navba
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
 
-export default function Profile(){
-    const userAuthToken = sessionStorage.getItem("userToken").substring(13);
-    const userId = sessionStorage.getItem("loginUserId");
-    const logInButtonPressed = () => {
-        window.location.assign("http://localhost:3000/Login")
-    }
-    
+export default function Logout(){
+    sessionStorage.setItem('token','')
+    sessionStorage.setItem("imgURL",'');
+    sessionStorage.setItem("userId",'');
+    sessionStorage.setItem("userEmail",'')
+    sessionStorage.setItem("spotifyToken",'')
+    sessionStorage.clear()
+    console.log(sessionStorage.getItem('token'))
+    useEffect(() => {
+        window.location.assign("https://playlist-frontend-krmi.onrender.com/Login/")
+      }, [])
     return(
-        
         <div>
             <div>
                 <h1>LoggedOut</h1>
-                <Button onClick={logInButtonPressed}>Login to Spotify</Button>
             </div>
         </div>
     );

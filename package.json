@@ -1,23 +1,27 @@
 {
-  "proxy":"http://localhost:8000",
   "name": "playlist_app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.2.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.3.0-alpha1",
+    "mdb-react-ui-kit": "^5.1.0",
+    "mongoose-unique-array": "^0.4.2",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.7.0",
+    "react-adsense": "^0.1.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
+    "ssri": "^10.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

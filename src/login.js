@@ -4,16 +4,20 @@ import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Form 
 import React,{ useState, useEffect, Component } from 'react';
 import { click } from '@testing-library/user-event/dist/click';
 import App from './App';
+import TastemakerImg  from './Tastemakers Main Logo (1).png'
+import spotifyImg from './spotify img.png'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "http://localhost:3000/Login"
+const REDIRECT_URI = "https://playlist-frontend-krmi.onrender.com/Login"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
-console.log("User Token: " + sessionStorage.getItem("token"))
+// console.log("User Token: " + sessionStorage.getItem("token"))
 const state = generateRandomString(20)
 const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
+
+
 
 export default function Login(){
     checkURL()
@@ -28,7 +32,6 @@ export default function Login(){
     const SPACE_DELIMITER = "%20";
     const SCOPES = ["playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email"]
     const SCOPES_URI_PARAM = SCOPES.join(SPACE_DELIMITER)
-
     useEffect(() => {
         // API Access Token
         var authParameters = {
@@ -41,6 +44,7 @@ export default function Login(){
         fetch('https://accounts.spotify.com/api/token', authParameters)
           .then(result => result.json())
           .then(data => setAccessToken(data.access_token))
+          .catch(result => console.log(result.json()))
       }, [])
 
       function checkForActive(){
@@ -50,11 +54,16 @@ export default function Login(){
       //For Playlist App Server
       async function fetchUsers(){
             if(sessionStorage.getItem("userId") != null){
-                  const response = await fetch('/api/users/createUser',{
+                  const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users/createUser',{
                     method: 'POST',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),
-                      "spotifyToken": sessionStorage.getItem("spotifyToken")
+                      "friends":[],
+                      "playlists":[],
+                      "spotifyToken": sessionStorage.getItem("spotifyToken"),
+                      "spotifyUserImgUrl": sessionStorage.getItem("spotifyUserImgUrl"),
+                      "paidMember":false,
+                      "email":sessionStorage.getItem("userEmail")
                     }),
                     headers: {
                       'Content-Type': 'application/json'
@@ -78,8 +87,8 @@ export default function Login(){
         console.log("TOKEN FOUND")
         const getURL = window.location.href;
         var positionToken = getURL.substring(getURL.indexOf("access_token="),getURL.indexOf("&token_type=Bearer"))
-
         var secondToken = positionToken.substring(positionToken.indexOf("B"))
+        console.log("2:"+secondToken)
         sessionStorage.setItem("token",secondToken)
         try{
         userInfo()
@@ -90,7 +99,7 @@ export default function Login(){
         }
         if(sessionStorage.getItem("userId") != null){
           fetchUsers()
-          window.location.assign("http://localhost:3000/Home")
+          window.location.assign("https://playlist-frontend-krmi.onrender.com/Home")
         }
         }
       }
@@ -104,6 +113,7 @@ export default function Login(){
           }
         }
         sessionStorage.setItem("params",JSON.stringify(userParameters))
+        console.log(sessionStorage.getItem("params"))
         var userData = fetch('https://api.spotify.com/v1/me',userParameters)
         .then(response => response.json())
         // .then(data => sessionStorage.setItem("error",JSON.stringify(data)))
@@ -111,8 +121,10 @@ export default function Login(){
           sessionStorage.setItem("userId", JSON.stringify(data.id))
           sessionStorage.setItem("imgURL",data.images[0].url)
           sessionStorage.setItem("userEmail",data.email)
-          sessionStorage.setItem("spotifyToken",data.uri)
+          sessionStorage.setItem("spotifyToken",data.href)
+          sessionStorage.setItem("spotifyUserImgUrl",data.images[0].url)
         })
+        .catch(response => console.log("CATCH"+response.json()))
         //Just getting UserId for now but definitely can get additional info from this json
       }
 
@@ -124,13 +136,25 @@ export default function Login(){
     };
     
     return(
-        <div>
-            <h1>Login</h1>
-            <Container>
+      <div>
+        <div style={{display: "flex", height: "100vh", width: "100%",textAlign:"center", justifyContent:"center",backgroundColor:"black"}}>
+          <div style={{textAlign:"center", justifyContent:"center"}}>
+            {/* <h1>TasteMakers</h1> */}
+            <div style={{justifyContent:"left", marginRight:"20rem", display:"flex"}}>
+              <img src={TastemakerImg} style={{height:"40rem",widht:"40rem", marginLeft:"10rem", marginTop:"10rem"}}/>
+              
+              <Container style={{marginTop:"25rem", marginLeft:"10rem"}}>
+                <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
                 <InputGroup>
-                    <Button onClick={handleLogin}>login to spotify</Button>
+                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem"}}onClick={handleLogin}>
+                    <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
+                    Login with Spotify</Button>
                 </InputGroup>
             </Container>
+            </div>
+            
+          </div>  
         </div>
+      </div>
     )
 }
