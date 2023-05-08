@@ -284,6 +284,129 @@ function handleSubmitButton(){
     )
   }
 }
+
+function handleGoogleAds(){
+  if(windowSize.width < 750 ){
+    return (
+      <div>
+        
+        <Container style={{marginBottom:'5rem', display:"inline-flex", width:"50%", textAlign:"center"}}>
+
+<div style={{width:"100%"}}>
+  {handleSubmissionText()}
+  <Col>
+    <Row className="flex overflow-auto overflow-y-scroll" style={{height:'25rem'}}>
+      {compSubmissions && compSubmissions.map((user,i) => (
+          <Card style={{padding:".5rem",paddingBottom:"1rem", justifyContent:"left", justifyItems:"left"}} >
+                  <Container> 
+                      <h4 style={{justifySelf:"left"}}>{compSubmissions[i].playlistName}</h4>
+                      <Button 
+                      onClick={event => handleCompDocPress(compSubmissions[i].playlistsId)} 
+                      style={{marginLeft:"1rem",color:"black", backgroundColor:"white", borderColor:"orange"}}>view</Button>
+                      <ButtonGroup style={{float:"right"}}>
+                          <Button
+                          key={compSubmissions._id} 
+                          onClick={event => handleLike(userId,compSubmissions[i]._id)}
+                          style={{width:"5rem",
+                          backgroundColor: "white", 
+                          color:"black",
+                          borderColor:"orange"}}
+                          >
+                          Like {handleNull(compSubmissions[i].likes)}
+                          </Button>
+                          {deleteButton(compSubmissions[i].userId,compSubmissions[i]._id)}
+                      </ButtonGroup>
+                  </Container>
+          </Card>
+      ))}
+        {/* <div> */}
+        {/* {currentCards.map((card) => (
+          <Card key={card.id} title={card.title} image={card.image} />
+        ))}
+      </div>
+      {Array.from({ length: totalPages }, (_, i) => (
+        <button key={i} onClick={() => setCurrentPage(i + 1)}>
+          {i + 1}
+        </button>
+      ))} */}
+      </Row>
+  </Col>
+  {handleSubmitButton()}
+  </div>
+  
+</Container>
+      </div>
+    )
+  }else{
+    return(<div>
+      <Adsense.Google
+      client='ca-pub-7787464840070054'
+      slot='9738875136'
+      style={{ width: 500, height: 300, float: 'left' }}
+      format=''
+  />
+  {/* <ins class="adsbygoogle"
+  style={{display:"block", width:"20%", height:"40rem"}}
+  data-ad-client="ca-pub-7787464840070054"
+  data-ad-slot="9738875136"
+  data-ad-format="auto"
+  data-full-width-responsive="true"></ins> */}
+      <Container style={{marginBottom:'5rem', display:"inline-flex", width:"50%", textAlign:"center"}}>
+
+        <div style={{width:"100%"}}>
+          {handleSubmissionText()}
+          <Col>
+            <Row className="flex overflow-auto overflow-y-scroll" style={{height:'25rem'}}>
+              {compSubmissions && compSubmissions.map((user,i) => (
+                  <Card style={{padding:".5rem",paddingBottom:"1rem", justifyContent:"left", justifyItems:"left"}} >
+                          <Container> 
+                              <h4 style={{justifySelf:"left"}}>{compSubmissions[i].playlistName}</h4>
+                              <Button 
+                              onClick={event => handleCompDocPress(compSubmissions[i].playlistsId)} 
+                              style={{marginLeft:"1rem",color:"black", backgroundColor:"white", borderColor:"orange"}}>view</Button>
+                              <ButtonGroup style={{float:"right"}}>
+                                  <Button
+                                  key={compSubmissions._id} 
+                                  onClick={event => handleLike(userId,compSubmissions[i]._id)}
+                                  style={{width:"5rem",
+                                  backgroundColor: "white", 
+                                  color:"black",
+                                  borderColor:"orange"}}
+                                  >
+                                  Like {handleNull(compSubmissions[i].likes)}
+                                  </Button>
+                                  {deleteButton(compSubmissions[i].userId,compSubmissions[i]._id)}
+                              </ButtonGroup>
+                          </Container>
+                  </Card>
+              ))}
+                {/* <div> */}
+                {/* {currentCards.map((card) => (
+                  <Card key={card.id} title={card.title} image={card.image} />
+                ))}
+              </div>
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button key={i} onClick={() => setCurrentPage(i + 1)}>
+                  {i + 1}
+                </button>
+              ))} */}
+              </Row>
+          </Col>
+          {handleSubmitButton()}
+          </div>
+          
+      </Container>
+{/* <div style={{maxWidth:"25%", width:"20%", height:"40rem", backgroundColor:"green", marginLeft:"1rem",marginRight:"1rem"}}>Add 2</div> */}
+  <ins class="adsbygoogle"
+  style={{display:"block", width:"20%", height:"40rem"}}
+  data-ad-client="ca-pub-7787464840070054"
+  data-ad-slot="9738875136"
+  data-ad-format="auto"
+  data-full-width-responsive="true"></ins>
+  </div>
+    )
+  }
+}
 //show cards with pages
   // const cardsPerPage = 6;
   // const totalPages = Math.ceil(cards.length / cardsPerPage);
@@ -300,74 +423,7 @@ function handleSubmitButton(){
                 
                 <div style={{justifyContent:"center", width:"100%",display:"inline-flex"}}>
                                         
-                {/* <div style={{maxWidth:"25%", width:"20%",
-                height:"40rem", backgroundColor:"green", 
-                marginLeft:"1rem", marginRight:"1rem"}}>Add 1</div> */}
-
-                <Adsense.Google
-                    client='ca-pub-7787464840070054'
-                    slot='9738875136'
-                    style={{ width: 500, height: 300, float: 'left' }}
-                    format=''
-                />
-                {/* <ins class="adsbygoogle"
-                style={{display:"block", width:"20%", height:"40rem"}}
-                data-ad-client="ca-pub-7787464840070054"
-                data-ad-slot="9738875136"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins> */}
-                    <Container style={{marginBottom:'5rem', display:"inline-flex", width:"50%"}}>
-
-                      <div style={{width:"100%"}}>
-                        {handleSubmissionText()}
-                        <Col>
-                          <Row className="flex overflow-auto overflow-y-scroll" style={{height:'25rem'}}>
-                            {compSubmissions && compSubmissions.map((user,i) => (
-                                <Card style={{padding:".5rem",paddingBottom:"1rem", justifyContent:"left", justifyItems:"left"}} >
-                                        <Container> 
-                                            <h2 style={{justifySelf:"left"}}>{compSubmissions[i].playlistName}</h2>
-                                            <Button 
-                                            onClick={event => handleCompDocPress(compSubmissions[i].playlistsId)} 
-                                            style={{marginLeft:"1rem",color:"black", backgroundColor:"white", borderColor:"orange"}}>view</Button>
-                                            <ButtonGroup style={{float:"right"}}>
-                                                <Button
-                                                key={compSubmissions._id} 
-                                                onClick={event => handleLike(userId,compSubmissions[i]._id)}
-                                                style={{width:"5rem",
-                                                backgroundColor: "white", 
-                                                color:"black",
-                                                borderColor:"orange"}}
-                                                >
-                                                Like {handleNull(compSubmissions[i].likes)}
-                                                </Button>
-                                                {deleteButton(compSubmissions[i].userId,compSubmissions[i]._id)}
-                                            </ButtonGroup>
-                                        </Container>
-                                </Card>
-                            ))}
-                              {/* <div> */}
-                              {/* {currentCards.map((card) => (
-                                <Card key={card.id} title={card.title} image={card.image} />
-                              ))}
-                            </div>
-                            {Array.from({ length: totalPages }, (_, i) => (
-                              <button key={i} onClick={() => setCurrentPage(i + 1)}>
-                                {i + 1}
-                              </button>
-                            ))} */}
-                            </Row>
-                        </Col>
-                        {handleSubmitButton()}
-                        </div>
-                        
-                    </Container>
-{/* <div style={{maxWidth:"25%", width:"20%", height:"40rem", backgroundColor:"green", marginLeft:"1rem",marginRight:"1rem"}}>Add 2</div> */}
-                <ins class="adsbygoogle"
-                style={{display:"block", width:"20%", height:"40rem"}}
-                data-ad-client="ca-pub-7787464840070054"
-                data-ad-slot="9738875136"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
+                {handleGoogleAds()}
                     {/* Modal for Set Playlist Button */}
                 <Modal show={showSetPlayListModal} onHide={handleClose_showSetPlayListModal}>
                     <Modal.Header closeButton>
