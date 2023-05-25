@@ -55,7 +55,7 @@ export default function UserProfile(){
         handleResize(); // Set initial size on mount
     
         return () => window.removeEventListener("resize", handleResize);
-    },[])
+    })
 
     //Post Playlist to Competition
     async function postCompDoc(){
