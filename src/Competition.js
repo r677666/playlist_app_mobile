@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
 import Footer from './Footer';
 import Adsense from 'react-adsense';
-
+//testing change
 export default function UserProfile(){
 
     const [compSubmissions,setCompSubmissions] = useState([''])
