@@ -141,7 +141,7 @@ export default function Login(){
           <div style={{textAlign:"center", justifyContent:"center"}}>
             {/* <h1>TasteMakers</h1> */}
             <div style={{justifyContent:"left", marginRight:"20rem", display:"flex"}}>
-              <img src={TastemakerImg} style={{height:"40rem",widht:"40rem", marginLeft:"10rem", marginTop:"10rem"}}/>
+              <img src={TastemakerImg} style={{height:"40rem",widht:"40rem", marginLeft:"10rem", marginTop:".5rem"}}/>
               
               <Container style={{marginTop:"25rem", marginLeft:"10rem"}}>
                 <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
