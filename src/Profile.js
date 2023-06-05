@@ -9,7 +9,7 @@ import Footer from './Footer';
 import crown from './crown.png';
 
 function handleUpgradeButton(){
-    window.location.assign("https://playlist-frontend-krmi.onrender.com/Upgrade")
+    window.location.assign("http://localhost:3000/Upgrade")
 }
 
 export default function Profile(){
@@ -22,7 +22,7 @@ export default function Profile(){
     userId = userId.replaceAll("\"","")
     useEffect(() => {
     
-        const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/'+ sessionStorage.getItem("userId"))
+        const response = fetch('http://localhost:8000/api/users/'+ sessionStorage.getItem("userId"))
         .then(result => result.json())
         .then(data => setUserPro(data.paidMember))
         .then(console.log(userPro))

@@ -9,7 +9,7 @@ import spotifyImg from './spotify img.png'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "https://playlist-frontend-krmi.onrender.com/Login"
+const REDIRECT_URI = "http://localhost:3000/Login"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
@@ -54,7 +54,7 @@ export default function Login(){
       //For Playlist App Server
       async function fetchUsers(){
             if(sessionStorage.getItem("userId") != null){
-                  const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users/createUser',{
+                  const response = await fetch('http://localhost:8000/api/users/createUser',{
                     method: 'POST',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),
@@ -99,7 +99,7 @@ export default function Login(){
         }
         if(sessionStorage.getItem("userId") != null){
           fetchUsers()
-          window.location.assign("https://playlist-frontend-krmi.onrender.com/Home")
+          window.location.assign("http://localhost:3000/Home")
         }
         }
       }
