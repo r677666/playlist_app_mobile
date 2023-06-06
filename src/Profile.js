@@ -56,7 +56,7 @@ export default function Profile(){
                      {/* Need to make userProfile fully functional first */}
                     {/* <Button
                     style={{marginTop:"1rem"}}
-                    onClick={event => window.location.assign("http://localhost:3000/User/"+userId)}>View public Profile</Button> */}
+                    onClick={event => window.location.assign("https://playlist-frontend-krmi.onrender.com/User/"+userId)}>View public Profile</Button> */}
                     
                 </div>
                 <div style={{textAlign:"center", marginTop:"1rem"}}>

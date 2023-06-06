@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
 import Footer from './Footer';
 import Adsense from 'react-adsense';
-
+//testing change
 export default function UserProfile(){
 
     const [compSubmissions,setCompSubmissions] = useState([''])
@@ -55,7 +55,7 @@ export default function UserProfile(){
         handleResize(); // Set initial size on mount
     
         return () => window.removeEventListener("resize", handleResize);
-    },[])
+    })
 
     //Post Playlist to Competition
     async function postCompDoc(){
@@ -289,7 +289,7 @@ function handleGoogleAds(){
   if(windowSize.width < 750 ){
     return (
       <div>
-        
+
         <Container style={{marginBottom:'5rem', display:"inline-flex", width:"50%", textAlign:"center"}}>
 
 <div style={{width:"100%"}}>
@@ -338,20 +338,21 @@ function handleGoogleAds(){
       </div>
     )
   }else{
-    return(<div>
-      <Adsense.Google
+    return(
+    <div>
+      {/* <Adsense.Google
       client='ca-pub-7787464840070054'
       slot='9738875136'
       style={{ width: 500, height: 300, float: 'left' }}
       format=''
-  />
+  /> */}
   {/* <ins class="adsbygoogle"
   style={{display:"block", width:"20%", height:"40rem"}}
   data-ad-client="ca-pub-7787464840070054"
   data-ad-slot="9738875136"
   data-ad-format="auto"
   data-full-width-responsive="true"></ins> */}
-      <Container style={{marginBottom:'5rem', display:"inline-flex", width:"50%", textAlign:"center"}}>
+      <Container style={{marginBottom:'5rem', display:"inline-flex", width:"100%", textAlign:"center"}}>
 
         <div style={{width:"100%"}}>
           {handleSubmissionText()}

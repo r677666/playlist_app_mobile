@@ -13,7 +13,7 @@ export default function Logout(){
     sessionStorage.clear()
     console.log(sessionStorage.getItem('token'))
     useEffect(() => {
-        window.location.assign("https://playlist-frontend-krmi.onrender.com/Login/")
+        window.location.assign("https://playlist-frontend-krmi.onrender.com/")
       }, [])
     return(
         <div>
