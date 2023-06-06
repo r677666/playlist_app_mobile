@@ -9,7 +9,7 @@ import spotifyImg from './spotify img.png'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "http://localhost:3000/Login"
+const REDIRECT_URI = "http://localhost:3000/"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
@@ -136,14 +136,14 @@ export default function Login(){
     };
     
     return(
-      <div>
+      <div style={{height: "100vh", width: "100%", backgroundColor:"black"}}>
         <div style={{display: "flex", height: "100vh", width: "100%",textAlign:"center", justifyContent:"center",backgroundColor:"black"}}>
           <div style={{textAlign:"center", justifyContent:"center"}}>
             {/* <h1>TasteMakers</h1> */}
             <div style={{justifyContent:"left", marginRight:"20rem", display:"flex"}}>
               <img src={TastemakerImg} style={{height:"40rem",widht:"40rem", marginLeft:"10rem", marginTop:".5rem"}}/>
               
-              <Container style={{marginTop:"25rem", marginLeft:"10rem"}}>
+              <Container style={{marginTop:"20rem", marginLeft:"5rem"}}>
                 <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
                 <InputGroup>
                     <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem"}}onClick={handleLogin}>

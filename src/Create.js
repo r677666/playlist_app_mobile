@@ -87,7 +87,7 @@ export default function Create(){
       handleResize(); // Set initial size on mount
   
       return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    });
 
     //Playlist Creation SUCCESSFUL
     async function playlistCreation() {
