@@ -6,7 +6,8 @@ import { click } from '@testing-library/user-event/dist/click';
 import App from './App';
 import TastemakerImg  from './Tastemakers Main Logo (1).png'
 import spotifyImg from './spotify img.png'
-import Footer from './Footer Login'
+import Footer from './Footer Desktop Login'
+import FooterMobile from './Footer Login'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -156,17 +157,17 @@ export default function Login(){
     function handleSmallerScreen(){
       if(windowSize.width < 765){
         return (
-          <div style={{height: "100vh", width: "100%", backgroundColor:"black", textAlign:"center", alignContent:"center", alignItems:"center",color:"black", justifyContent:"center", justifyItems:"center"}}>
+          <div style={{height: "100vh", width: "100%", backgroundColor:"black", textAlign:"center", alignContent:"center", alignItems:"center",color:"black", justifyContent:"center", justifyItems:"center", display:"center"}}>
           {/* <div style={{display: "left", height: "100vh", width: "50vh",textAlign:"center", justifyContent:"left",backgroundColor:"black"}}> */}
             {/* <div style={{textAlign:"center", justifyContent:"center", backgroundColor:"black"}}> */}
               {/* <h1>TasteMakers</h1> */}
               {/* <div style={{justifyContent:"left", marginRight:"20rem", display:"center"}}> */}
-                <img src={TastemakerImg} style={{height:"25rem",width:"25rem", marginTop:".5rem"}}/>
+                <img src={TastemakerImg} style={{height:"20rem",width:"20rem", marginTop:".5rem"}}/>
                 
-                <Container style={{marginTop:"2rem",marginBottom:"5rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
+                <Container style={{marginTop:"2rem",marginBottom:"5rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
                   <h5 style={{color:"#ff514d",fontSize:"1.5rem"}}>Join Now</h5>
-                  <InputGroup>
-                      <Button style={{backgroundColor:"green", width:"50vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center", marginLeft:"10vh"}}onClick={handleLogin}>
+                  <InputGroup style={{display:"center", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
+                      <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center"}}onClick={handleLogin}>
                       <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
                       Login with Spotify</Button>
                   </InputGroup>
@@ -175,6 +176,8 @@ export default function Login(){
               
             {/* </div>   */}
           {/* </div> */}
+          <br/>
+        <FooterMobile/>
         </div>
         )
       }else{
@@ -198,6 +201,8 @@ export default function Login(){
             
           </div>  
         </div>
+        <br/>
+        <Footer/>
       </div>
            )
       }
@@ -206,8 +211,6 @@ export default function Login(){
     return(
       <div>
       {handleSmallerScreen()}
-      <br/>
-        <Footer/>
         </div>
     )
 }
