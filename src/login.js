@@ -6,10 +6,12 @@ import { click } from '@testing-library/user-event/dist/click';
 import App from './App';
 import TastemakerImg  from './Tastemakers Main Logo (1).png'
 import spotifyImg from './spotify img.png'
+import Footer from './Footer Desktop Login'
+import FooterMobile from './Footer Login'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "http://localhost:3000/"
+const REDIRECT_URI = "https://playlist-frontend-krmi.onrender.com/"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
@@ -27,6 +29,10 @@ export default function Login(){
     const [userAuthToken, setUserAuthToken] = useState("");
     const [error, setError] = useState([]);
     const [isActive, setIsActive] = useState(false);
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+      height: undefined,
+    });
     console.log("Image:"+ (sessionStorage.getItem("imgURL")))
     console.log("User: "+ (sessionStorage.getItem("userId")))
     const SPACE_DELIMITER = "%20";
@@ -41,10 +47,23 @@ export default function Login(){
           },
           body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
         }
+
         fetch('https://accounts.spotify.com/api/token', authParameters)
           .then(result => result.json())
           .then(data => setAccessToken(data.access_token))
           .catch(result => console.log(result.json()))
+
+          function handleResize() {
+            setWindowSize({
+              width: window.innerWidth,
+              height: window.innerHeight,
+            });
+          }
+      
+          window.addEventListener("resize", handleResize);
+          handleResize(); // Set initial size on mount
+      
+          return () => window.removeEventListener("resize", handleResize);
       }, [])
 
       function checkForActive(){
@@ -54,7 +73,7 @@ export default function Login(){
       //For Playlist App Server
       async function fetchUsers(){
             if(sessionStorage.getItem("userId") != null){
-                  const response = await fetch('http://localhost:8000/api/users/createUser',{
+                  const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users/createUser',{
                     method: 'POST',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),
@@ -99,7 +118,7 @@ export default function Login(){
         }
         if(sessionStorage.getItem("userId") != null){
           fetchUsers()
-          window.location.assign("http://localhost:3000/Home")
+          window.location.assign("https://playlist-frontend-krmi.onrender.com/Home")
         }
         }
       }
@@ -135,8 +154,35 @@ export default function Login(){
         getURL.substring(getURL.indexOf("access_token="),"&token_type")
     };
     
-    return(
-      <div style={{height: "100vh", width: "100%", backgroundColor:"black"}}>
+    function handleSmallerScreen(){
+      if(windowSize.width < 765){
+        return (
+          <div style={{height: "100vh", width: "100%", backgroundColor:"black", textAlign:"center", alignContent:"center", alignItems:"center",color:"black", justifyContent:"center", justifyItems:"center", display:"center"}}>
+          {/* <div style={{display: "left", height: "100vh", width: "50vh",textAlign:"center", justifyContent:"left",backgroundColor:"black"}}> */}
+            {/* <div style={{textAlign:"center", justifyContent:"center", backgroundColor:"black"}}> */}
+              {/* <h1>TasteMakers</h1> */}
+              {/* <div style={{justifyContent:"left", marginRight:"20rem", display:"center"}}> */}
+                <img src={TastemakerImg} style={{height:"20rem",width:"20rem", marginTop:".5rem"}}/>
+                
+                <Container style={{marginTop:"3rem",marginBottom:"8rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
+                  <h5 style={{color:"#ff514d",fontSize:"1.5rem"}}>Join Now</h5>
+                  <InputGroup style={{display:"center", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
+                      <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center"}}onClick={handleLogin}>
+                      <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
+                      Login with Spotify</Button>
+                  </InputGroup>
+              </Container>
+              {/* </div> */}
+              
+            {/* </div>   */}
+          {/* </div> */}
+          <br/>
+        <FooterMobile style={{marginTop:"2rem"}}/>
+        </div>
+        )
+      }else{
+          return(
+            <div style={{height: "100vh", width: "100%", backgroundColor:"black"}}>
         <div style={{display: "flex", height: "100vh", width: "100%",textAlign:"center", justifyContent:"center",backgroundColor:"black"}}>
           <div style={{textAlign:"center", justifyContent:"center"}}>
             {/* <h1>TasteMakers</h1> */}
@@ -155,6 +201,16 @@ export default function Login(){
             
           </div>  
         </div>
+        <br/>
+        <Footer/>
       </div>
+           )
+      }
+    }
+
+    return(
+      <div>
+      {handleSmallerScreen()}
+        </div>
     )
 }
