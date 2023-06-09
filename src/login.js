@@ -164,7 +164,7 @@ export default function Login(){
               {/* <div style={{justifyContent:"left", marginRight:"20rem", display:"center"}}> */}
                 <img src={TastemakerImg} style={{height:"20rem",width:"20rem", marginTop:".5rem"}}/>
                 
-                <Container style={{marginTop:"2rem",marginBottom:"5rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
+                <Container style={{marginTop:"3rem",marginBottom:"8rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
                   <h5 style={{color:"#ff514d",fontSize:"1.5rem"}}>Join Now</h5>
                   <InputGroup style={{display:"center", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
                       <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center"}}onClick={handleLogin}>
@@ -177,7 +177,7 @@ export default function Login(){
             {/* </div>   */}
           {/* </div> */}
           <br/>
-        <FooterMobile/>
+        <FooterMobile style={{marginTop:"2rem"}}/>
         </div>
         )
       }else{
