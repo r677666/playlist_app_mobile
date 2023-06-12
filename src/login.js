@@ -11,7 +11,7 @@ import FooterMobile from './Footer Login'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "https://playlist-frontend-krmi.onrender.com/"
+const REDIRECT_URI = "https://playlist-frontend-krmi.onrender.com"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
@@ -73,7 +73,7 @@ export default function Login(){
       //For Playlist App Server
       async function fetchUsers(){
             if(sessionStorage.getItem("userId") != null){
-                  const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users/createUser',{
+                  const response = await fetch('https://playlist-backend-6muv.onrender.comapi/users/createUser',{
                     method: 'POST',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),
@@ -118,7 +118,7 @@ export default function Login(){
         }
         if(sessionStorage.getItem("userId") != null){
           fetchUsers()
-          window.location.assign("https://playlist-frontend-krmi.onrender.com/Home")
+          window.location.assign("https://playlist-frontend-krmi.onrender.comHome")
         }
         }
       }
@@ -162,9 +162,9 @@ export default function Login(){
             {/* <div style={{textAlign:"center", justifyContent:"center", backgroundColor:"black"}}> */}
               {/* <h1>TasteMakers</h1> */}
               {/* <div style={{justifyContent:"left", marginRight:"20rem", display:"center"}}> */}
-                <img src={TastemakerImg} style={{height:"20rem",width:"20rem", marginTop:".5rem"}}/>
+                <img src={TastemakerImg} style={{height:"25rem",width:"25rem", marginTop:".5rem"}}/>
                 
-                <Container style={{marginTop:"2rem",marginBottom:"5rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
+                <Container style={{marginTop:"1.5rem",marginBottom:"12rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
                   <h5 style={{color:"#ff514d",fontSize:"1.5rem"}}>Join Now</h5>
                   <InputGroup style={{display:"center", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
                       <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center"}}onClick={handleLogin}>

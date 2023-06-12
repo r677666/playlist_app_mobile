@@ -258,9 +258,149 @@ export default function Create(){
     }
     function handleWindowSize(){
       if(windowSize.width < 765){
-          return 'vertical'
+          return (
+            <Row>
+              {albums.map((album, i) => {
+                return (
+                  <div >
+                  <CardGroup style={{justifyContent:"center", alignContent:"center", alignItems:"center", justifyItems:"center", marginLeft:"1.5rem"}}>
+                    <div key={album.name} 
+                    onClick={event => onClickFunction(album.name)}
+                    >
+                      <Card style={{width:'20rem'}}>
+                        <Card.Img src={album.images[0].url} style={{width:'20rem'}}/>
+                          <Card.Title>{album.name}</Card.Title>
+                      </Card>
+                    </div>
+                      <Modal 
+                      show={showTrackModal} 
+                      onHide={handleClose_showTrackModal}>
+                    <Modal.Header closeButton>
+                    <Modal.Title> {clickedAlbum} </Modal.Title>
+                    </Modal.Header>
+                    <div>
+                      <Card style={{width:'18rem'}}>
+                      <Card.Body style={{}}>
+                        {isActive && (
+                                    tracks.map((track, i) => {
+                                      return (
+                                        <div>
+                                          <div>
+                                            <Card
+                                            // onMouseEnter={() => setHoveredTrack(true)}
+                                            // onMouseLeave={() => setHoveredTrack(false)}
+                                            >
+                                              
+                                              <Card.Title >
+                                              {track.name}
+                                                <Button
+                                                style={{marginLeft:'.5rem'}}
+                                                onClick={addTrackToCartFunction(track.name,track.id)}
+                                                >
+                                                  Add
+                                                </Button>
+                                              </Card.Title>
+                                            </Card>
+                                          </div>
+                                          
+                                        </div>
+                                      )
+                                    })
+                                    )}
+                                </Card.Body>
+
+                                </Card>
+                      </div>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose_showTrackModal}>
+                        {selectedPlaylistName}
+                    </Button>
+                    <Button variant="secondary" onClick={addCartItemsToPlaylist}>
+                        Tracks
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
+                  </CardGroup>
+                  
+                  
+                  </div>
+                )
+              })}
+            
+          </Row>
+          )
       }else{
-          return 'horizontal'
+          return (
+            <div>
+              <Row className="mx-2 row row-cols-4">
+              {albums.map((album, i) => {
+                return (
+                  <div >
+                  <CardGroup>
+                    <div key={album.name} onClick={event => onClickFunction(album.name)}>
+                      <Card >
+                        <Card.Img src={album.images[0].url} style={{maxWidth:'18rem', alignSelf:'flex-start'}}/>
+                          <Card.Title>{album.name}</Card.Title>
+                      </Card>
+                    </div>
+                      <Modal 
+                      show={showTrackModal} 
+                      onHide={handleClose_showTrackModal}>
+                    <Modal.Header closeButton>
+                    <Modal.Title> {clickedAlbum} </Modal.Title>
+                    </Modal.Header>
+                    <div>
+                      <Card style={{width:'18rem'}}>
+                      <Card.Body style={{}}>
+                        {isActive && (
+                                    tracks.map((track, i) => {
+                                      return (
+                                        <div>
+                                          <div>
+                                            <Card
+                                            // onMouseEnter={() => setHoveredTrack(true)}
+                                            // onMouseLeave={() => setHoveredTrack(false)}
+                                            >
+                                              
+                                              <Card.Title >
+                                              {track.name}
+                                                <Button
+                                                style={{marginLeft:'.5rem'}}
+                                                onClick={addTrackToCartFunction(track.name,track.id)}
+                                                >
+                                                  Add
+                                                </Button>
+                                              </Card.Title>
+                                            </Card>
+                                          </div>
+                                          
+                                        </div>
+                                      )
+                                    })
+                                    )}
+                                </Card.Body>
+
+                                </Card>
+                      </div>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose_showTrackModal}>
+                        {selectedPlaylistName}
+                    </Button>
+                    <Button variant="secondary" onClick={addCartItemsToPlaylist}>
+                        Tracks
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
+                  </CardGroup>
+                  
+                  
+                  </div>
+                )
+              })}
+            
+          </Row>
+            </div>
+          )
       }
   }
   function handleCardSize(){
@@ -428,73 +568,7 @@ export default function Create(){
                     </Modal.Footer>
                 </Modal></Stack>
           </InputGroup>
-          
-          
-          <Row className="mx-2 row row-cols-4">
-              {albums.map((album, i) => {
-                return (
-                  <div >
-                  <CardGroup>
-                    <div key={album.name} onClick={event => onClickFunction(album.name)}>
-                      <Card >
-                        <Card.Img src={album.images[0].url} style={{maxWidth:'18rem', alignSelf:'flex-start'}}/>
-                          <Card.Title>{album.name}</Card.Title>
-                      </Card>
-                    </div>
-                      <Modal show={showTrackModal} onHide={handleClose_showTrackModal}>
-                    <Modal.Header closeButton>
-                    <Modal.Title> {clickedAlbum} </Modal.Title>
-                    </Modal.Header>
-                    <div>
-                      <Card style={{width:'18rem'}}>
-                      <Card.Body style={{}}>
-                        {isActive && (
-                                    tracks.map((track, i) => {
-                                      return (
-                                        <div>
-                                          <div>
-                                            <Card
-                                            // onMouseEnter={() => setHoveredTrack(true)}
-                                            // onMouseLeave={() => setHoveredTrack(false)}
-                                            >
-                                              
-                                              <Card.Title >
-                                              {track.name}
-                                                <Button
-                                                style={{marginLeft:'.5rem'}}
-                                                onClick={addTrackToCartFunction(track.name,track.id)}
-                                                >
-                                                  Add
-                                                </Button>
-                                              </Card.Title>
-                                            </Card>
-                                          </div>
-                                          
-                                        </div>
-                                      )
-                                    })
-                                    )}
-                                </Card.Body>
-
-                                </Card>
-                      </div>
-                    <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose_showTrackModal}>
-                        {selectedPlaylistName}
-                    </Button>
-                    <Button variant="secondary" onClick={addCartItemsToPlaylist}>
-                        Tracks
-                    </Button>
-                    </Modal.Footer>
-                </Modal>
-                  </CardGroup>
-                  
-                  
-                  </div>
-                )
-              })}
-            
-          </Row>
+        {handleWindowSize()}
         </Container>
       </div>
     );

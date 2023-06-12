@@ -25,7 +25,7 @@ export default function Home(){
     var test;
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users')
+            const response = await fetch('https://playlist-backend-6muv.onrender.comapi/users')
             .then(result => result.json())
             .then(data => setUsers(data))
             .then(console.log("users from Playlist App Server have been found"))
@@ -78,7 +78,7 @@ export default function Home(){
             }
         }
 
-        const followMethod = await fetch("https://playlist-backend-6muv.onrender.com/api/users/friends/addFriend",{
+        const followMethod = await fetch("https://playlist-backend-6muv.onrender.comapi/users/friends/addFriend",{
             method: 'PATCH',
             body: JSON.stringify({
               "userId": followerId,
@@ -181,8 +181,123 @@ export default function Home(){
             )
         }
     }
-    return(
-        <div className='Home'>
+
+    function handleMobileHomeScreen(){
+        if(windowSize.width < 765){
+            return(
+                <div>
+                    <div className='Home'>
+        <Navigation style={{marginBottom:"3000rem"}}/>
+        <div style={{backgroundColor:"black"}}>
+        <div style={{margin:'auto',backgroundColor:'black', width:"80%"}}>
+        <Carousel fade style={{maxHeight:'900px', margin:'auto', marginTop:"6.25rem", backgroundColor:"black", color:"black"}}>
+            <Carousel.Item interval={4000}>
+                <img
+                className="d-block w-100"
+                src={artistPicture}
+                alt="First slide"
+                style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover' }}
+                />
+                <Carousel.Caption>
+                {handleCardTextMobile()}
+                <p style={{color:"white", textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Submit playlist for this week's competition</p>
+                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button>
+                </Carousel.Caption>
+                
+            </Carousel.Item>
+            <Carousel.Item interval={4000}>
+                <img
+                className="d-block w-100"
+                src={pollPicture}
+                alt="Second slide"
+                />
+                
+                <Carousel.Caption>
+                    {handleCard2TextMobile()}
+                <p style={{marginBottom:"1rem",color:"lime",textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Vote Now</p>
+                <ButtonGroup>
+                <Button style={{backgroundColor:"#ff914d", color:"black", borderColor:"black", fontSize:".75rem", padding:".05rem"}}>
+                    To Pimp a Butterfly
+                </Button>
+                <Button style={{backgroundColor:"black", color:"#ff914d", borderColor:"black", fontSize:".75rem",padding:".05rem"}}>
+                    Good Kid m.A.A.d City
+                </Button>
+                </ButtonGroup>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item interval={4000}>
+                <img
+                className="d-block w-100"
+                src={TasteMaker3}
+                alt="Third slide"
+                />
+                
+                <Carousel.Caption>
+                <div>{handleGoProButton()}</div>
+                </Carousel.Caption>
+            </Carousel.Item>
+        </Carousel>
+        </div>
+        </div>
+        <hr style={{borderColor:"red", height:".2rem"}}/>
+        <div style={{width:"100%"}}>
+                <h1 style={{textAlign:"center", marginTop:"3rem", marginBottom:"3rem"}}>
+                    Music Lovers Welcome
+                </h1>
+                
+            
+            <hr style={{borderColor:"red", height:".2rem", justifyContent:"center", alignContent:"center",justifyItems:"center", alignItems:"center", textAlign:"center"}}/>
+            <div style={{width:"100%", display:"inline-flex", justifyContent:"center", alignContent:"center",justifyItems:"center", alignItems:"center", textAlign:"center"}}>
+                <div style={{maxWidth:"45rem", marginLeft:"4rem", justifyContent:"center", alignContent:"center",justifyItems:"center", alignItems:"center", textAlign:"center"}}>
+                    {handleTextMobile()}
+                <img style={{width:"22rem", height:"20rem", marginTop:"2rem", marginRight:"4rem"}}src={stockPhotoLogo}/>
+                <h5 style={{paddingTop:"2.5rem", paddingRight:"3rem"}}> Music is made by HUMANS.</h5>
+                <h5 style={{textAlign:"center", paddingTop:"1rem", paddingRight:"3rem"}}> Humans are the MAKERS.</h5>
+                <h5 style={{textAlign:"center", paddingTop:"1rem", paddingRight:"3rem"}}>Makers have TASTE. </h5>
+                <h5 style={{textAlign:"center", paddingTop:"1.5rem", paddingRight:"3rem"}}> Welcome to the movement.</h5>
+                <h5 style={{textAlign:"center", paddingTop:"1.5rem", fontSize:"1.75rem", paddingRight:"3rem"}}> Welcome to 
+                <span style={{color:"red", marginLeft:".25rem"
+                // textShadow: "0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px red, 0 0 2px red, 0 0 2px red, 0 0 10px red, 0 0 0px red"
+                }}>TASTEMAKERS</span>.</h5>
+                </div>
+                
+            </div>
+            <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"3rem"}}/>
+            
+        </div>
+        <div>
+            <h1 style={{textAlign:"center"}}>Current Users</h1>
+            <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"4rem", textAlign:'center'}}/>
+            <Container style={{alignItems:"normal"}}>
+                <Row className="flex-nowrap overflow-auto">
+                    {users && users.map((user,i) => (
+                        <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
+                            <Container onClick={event => clickUser(users[i].userId)}>
+                                {console.log(users[i])}
+                                    
+                                    <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
+                                        <Container style={{paddingTop:'.25rem'}}> 
+                                            {users[i].userId.replaceAll("\"","")}
+                                            {/* Add Follower Button with userProfile is finished */}
+                                            {/* {checkFollowButton(sessionStorage.getItem("userId"),users[i].userId)} */}
+                                        </Container>
+                                        
+                            </Container>
+                            
+                        </Card>
+                    ))}
+                </Row>
+            </Container>
+        </div>
+        <br/>
+        <Footer/>
+        </div>
+                </div>
+            )
+        }else{
+            return(
+                <div>
+                            <div className='Home'>
         <Navigation/>
         <div style={{backgroundColor:"black"}}>
         <div style={{margin:'auto',backgroundColor:'black', width:"80%"}}>
@@ -286,5 +401,14 @@ export default function Home(){
         <br/>
         <Footer/>
         </div>
+                </div>
+            )
+        }
+    }
+    return(
+        <div>
+            {handleMobileHomeScreen()}
+        </div>
+        
     );
 }
