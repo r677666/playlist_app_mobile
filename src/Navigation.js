@@ -29,7 +29,7 @@ function Navigation() {
       .then(result => result.json())
       .then(data => setAccessToken(data.access_token))
 
-    const response = fetch('https://playlist-backend-6muv.onrender.comapi/users/'+userId)
+    const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/'+userId)
       .then(result => result.json())
       .then(data => setUserPro(data.paidMember))
       .then(console.log(userPro))

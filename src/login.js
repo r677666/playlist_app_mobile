@@ -73,7 +73,7 @@ export default function Login(){
       //For Playlist App Server
       async function fetchUsers(){
             if(sessionStorage.getItem("userId") != null){
-                  const response = await fetch('https://playlist-backend-6muv.onrender.comapi/users/createUser',{
+                  const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users/createUser',{
                     method: 'POST',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),
