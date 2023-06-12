@@ -74,7 +74,7 @@ export default function Upgrade(){
         function updateUserProStatus(){
             // console.log("TESTING SUCCESSFUL")
             // const changeUserProStatus = async () => {
-                const response = fetch('https://playlist-backend-6muv.onrender.comapi/users/updateProStatus',{
+                const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/updateProStatus',{
                     method: 'PATCH',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),
@@ -103,7 +103,7 @@ export default function Upgrade(){
 
       useEffect(() => {
     
-        const response = fetch('https://playlist-backend-6muv.onrender.comapi/users/'+ sessionStorage.getItem("userId"))
+        const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/'+ sessionStorage.getItem("userId"))
         .then(result => result.json())
         .then(data => setUserPro(data.paidMember))
         .then(console.log(userPro))
