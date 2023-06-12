@@ -118,7 +118,7 @@ export default function Login(){
         }
         if(sessionStorage.getItem("userId") != null){
           fetchUsers()
-          window.location.assign("https://playlist-frontend-krmi.onrender.comHome")
+          window.location.assign("https://playlist-frontend-krmi.onrender.com/Home")
         }
         }
       }

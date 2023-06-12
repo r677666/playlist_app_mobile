@@ -37,7 +37,7 @@ function Navigation() {
   }, [])
 
   function handleNavPic(){
-    window.location.assign("https://playlist-frontend-krmi.onrender.comAccount")
+    window.location.assign("https://playlist-frontend-krmi.onrender.com/Account")
   }
 
   function handleProUser(){

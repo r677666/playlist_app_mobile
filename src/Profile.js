@@ -9,7 +9,7 @@ import Footer from './Footer';
 import crown from './crown.png';
 
 function handleUpgradeButton(){
-    window.location.assign("https://playlist-frontend-krmi.onrender.comUpgrade")
+    window.location.assign("https://playlist-frontend-krmi.onrender.com/Upgrade")
 }
 
 export default function Profile(){
