@@ -21,7 +21,7 @@ export default function UserProfile(){
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users')
+            const response = await fetch('https://playlist-backend-6muv.onrender.comapi/users')
             .then(result => result.json())
             .then(data => setUsers(data))
             // .then(console.log(users))
@@ -43,7 +43,7 @@ export default function UserProfile(){
                 test = test.substring(33)
                 if(id === test){
                     token = users[i]._id
-                    const getFriends = await fetch('https://playlist-backend-6muv.onrender.com/api/users/' + token)
+                    const getFriends = await fetch('https://playlist-backend-6muv.onrender.comapi/users/' + token)
                     .then(result => result.json())
                     .then(data => demoArr.push(data.friends))
                 }
@@ -58,7 +58,7 @@ export default function UserProfile(){
             var test = [];
             for(var i = 0; i<friendsIds.length; i++){
                 var user = friendsIds[i];
-                const query = await fetch('https://playlist-backend-6muv.onrender.com/api/users/' + user)
+                const query = await fetch('https://playlist-backend-6muv.onrender.comapi/users/' + user)
                 .then(result => result.json())
                 .then(data => test.push(data.userId))
             }

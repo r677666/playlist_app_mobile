@@ -29,7 +29,7 @@ function Navigation() {
       .then(result => result.json())
       .then(data => setAccessToken(data.access_token))
 
-    const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/'+userId)
+    const response = fetch('https://playlist-backend-6muv.onrender.comapi/users/'+userId)
       .then(result => result.json())
       .then(data => setUserPro(data.paidMember))
       .then(console.log(userPro))
@@ -37,7 +37,7 @@ function Navigation() {
   }, [])
 
   function handleNavPic(){
-    window.location.assign("https://playlist-frontend-krmi.onrender.com/Profile")
+    window.location.assign("https://playlist-frontend-krmi.onrender.comAccount")
   }
 
   function handleProUser(){
@@ -63,7 +63,7 @@ function Navigation() {
          variant="dark">
           <Container>
           <img src={companyImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem'}}/>
-          <h1 style={{color:"red", fontSize:"1.5rem", marginRight:"2rem"}}>BETA</h1>
+          <h1 style={{color:"orange", fontSize:"1.25rem", marginRight:"1rem", marginTop:"1vh"}}>BETA</h1>
             <Navbar.Brand href="/Home">TASTEMAKERS</Navbar.Brand>
             <Navbar.Toggle/>
             <Navbar.Collapse id='basic-navbar-nav'>
