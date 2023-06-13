@@ -10,6 +10,8 @@ import Footer from './Footer';
 import artistPicture from './2809.jpg'
 import pollPicture from './Kendrick Poll Clear.png'
 import stockPhotoLogo from './Tastemakers Main Logo (1).png'
+import SpotifyPlayback from './SpotifyPlayback';
+
 
 export default function Home(){
     const userAuthToken = sessionStorage.getItem("token")
@@ -25,7 +27,7 @@ export default function Home(){
     var test;
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users')
+            const response = await fetch('http://localhost:8000/api/users')
             .then(result => result.json())
             .then(data => setUsers(data))
             .then(console.log("users from Playlist App Server have been found"))
@@ -50,7 +52,7 @@ export default function Home(){
 
     function clickUser(name){
         name = name.replaceAll("\"", "")
-        window.location.assign("https://playlist-frontend-krmi.onrender.com/User/" + name)
+        window.location.assign("http://localhost:3000/User/" + name)
     }
 
     async function followUserButton(user,follower){
@@ -78,7 +80,7 @@ export default function Home(){
             }
         }
 
-        const followMethod = await fetch("https://playlist-backend-6muv.onrender.com/api/users/friends/addFriend",{
+        const followMethod = await fetch("http://localhost:8000/api/users/friends/addFriend",{
             method: 'PATCH',
             body: JSON.stringify({
               "userId": followerId,
@@ -121,7 +123,7 @@ export default function Home(){
     }
 
     function competitionButton(){
-        window.location.assign("https://playlist-frontend-krmi.onrender.com/competition/")
+        window.location.assign("http://localhost:3000/competition/")
     }
     function handleUserImgs(userId){
         var userParameters = {
@@ -136,7 +138,7 @@ export default function Home(){
         .then(data => setGetUserImg(data))
     }
     function handleUpgradeButton(){
-        window.location.assign("https://playlist-frontend-krmi.onrender.com/Upgrade")
+        window.location.assign("http://localhost:3000/Upgrade")
     }
     function handleTextMobile(){
         if(windowSize.width < 765){
@@ -181,6 +183,27 @@ export default function Home(){
             )
         }
     }
+
+    function checkForSpotifyPlayer(){
+        if(localStorage.getItem("showSpotifyPlayer")=="true"){
+          // handleOpen_showSpotifyPlayer();
+              return(
+                <div>
+                  <SpotifyPlayback/>
+                </div>
+              )
+            }else if(localStorage.getItem("showSpotifyPlayer")=="false"){
+              return(
+                <div></div>
+              )
+            }
+      }
+    
+      function handleSpotifyPlayback(){
+        localStorage.setItem("showSpotifyPlayer","true")
+        console.log(localStorage.getItem("showSpotifyPlayer"))
+        checkForSpotifyPlayer()
+      }
 
     function handleMobileHomeScreen(){
         if(windowSize.width < 765){
@@ -399,6 +422,7 @@ export default function Home(){
             </Container>
         </div>
         <br/>
+        {checkForSpotifyPlayer()}
         <Footer/>
         </div>
                 </div>

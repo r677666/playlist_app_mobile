@@ -5,7 +5,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
 import Footer from './Footer';
+import play from './play.png';
 import Adsense from 'react-adsense';
+import SpotifyPlayback from './SpotifyPlayback';
 //testing change
 export default function UserProfile(){
 
@@ -27,6 +29,11 @@ export default function UserProfile(){
     const [currentPage, setCurrentPage] = useState(1);
 
     const [choosePlaylistActive, setChoosePlaylistActive] = useState(false);
+
+    const [showSpotifyPlayer, setShowSpotifyPlayer] = useState(false);
+    const handleClose_showSpotifyPlayer = () => setShowSpotifyPlayer(false);
+    const handleOpen_showSpotifyPlayer = () => setShowSpotifyPlayer(true);
+
     const [isActive, setIsActive] = useState(false);
     const [isCompActive, setCompIsActive] = useState(false);
     const [currentUserForDelete, setCurrentUserForDelete] = useState([]);
@@ -38,7 +45,7 @@ export default function UserProfile(){
     var docTracks = [];
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('https://playlist-backend-6muv.onrender.com/api/competition')
+            const response = await fetch('http://localhost:8000/api/competition')
             .then(result => result.json())
             .then(data => setCompSubmissions(data))
             // .then(console.log(compSubmissions[0].playlistsId))
@@ -64,7 +71,7 @@ export default function UserProfile(){
     //Post Playlist to Competition
     async function postCompDoc(){
 
-        var postPlaylistToComp = await fetch('https://playlist-backend-6muv.onrender.com/api/competition/create', {
+        var postPlaylistToComp = await fetch('http://localhost:8000/api/competition/create', {
             method: 'POST',
             body: JSON.stringify({
               "userId": userId,
@@ -151,10 +158,10 @@ export default function UserProfile(){
       }
       function deleteButtonFunction(id){
         console.log(id)
-        const getMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/" +id)
+        const getMethod = fetch("http://localhost:8000/api/competition/" +id)
         .then(result => console.log(result.json()))
 
-        const deleteMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/",{
+        const deleteMethod = fetch("http://localhost:8000/api/competition/",{
         method: 'DELETE',
         body: JSON.stringify({
             "id": id
@@ -169,7 +176,7 @@ export default function UserProfile(){
     const handleLike = async (userId,id) => {
                 var arr = [];
                 
-                const checkIfLikedAlready = await fetch("https://playlist-backend-6muv.onrender.com/api/competition/" + id)
+                const checkIfLikedAlready = await fetch("http://localhost:8000/api/competition/" + id)
                 .then(result => result.json())
                 .then(data => 
                     {
@@ -179,7 +186,7 @@ export default function UserProfile(){
                         // console.log(data.likes.indexOf('testLike') )
                         if(data.likes.indexOf(userId) !== -1){
                             console.log("REMOVED LIKE")
-                                    const followMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/removeLike",{
+                                    const followMethod = fetch("http://localhost:8000/api/competition/removeLike",{
                                         method: 'PATCH',
                                         body: JSON.stringify({
                                             "userId": userId,
@@ -196,7 +203,7 @@ export default function UserProfile(){
                             // }
                         }else{
                             console.log("ADDED LIKE")
-                            const followMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/addLike",{
+                            const followMethod = fetch("http://localhost:8000/api/competition/addLike",{
                                 method: 'PATCH',
                                 body: JSON.stringify({
                                     "userId": userId,
@@ -409,22 +416,43 @@ function handleGoogleAds(){
           
       </Container>
 {/* <div style={{maxWidth:"25%", width:"20%", height:"40rem", backgroundColor:"green", marginLeft:"1rem",marginRight:"1rem"}}>Add 2</div> */}
-  <ins class="adsbygoogle"
+  {/* <ins class="adsbygoogle"
   style={{display:"block", width:"20%", height:"40rem"}}
   data-ad-client="ca-pub-7787464840070054"
   data-ad-slot="9738875136"
   data-ad-format="auto"
-  data-full-width-responsive="true"></ins>
+  data-full-width-responsive="true"></ins> */}
   </div>
     )
   }
 }
-//show cards with pages
-  // const cardsPerPage = 6;
-  // const totalPages = Math.ceil(cards.length / cardsPerPage);
-  // const indexOfLastCard = currentPage * cardsPerPage;
-  // const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  // const currentCards = cards.slice(indexOfFirstCard, indexOfLastCard);
+
+  function checkForSpotifyPlayer(){
+    if(localStorage.getItem("showSpotifyPlayer")=="true"){
+      // handleOpen_showSpotifyPlayer();
+          return(
+            <div>
+              <SpotifyPlayback/>
+            </div>
+          )
+        }else if(localStorage.getItem("showSpotifyPlayer")=="false"){
+          return(
+            <div></div>
+          )
+        }
+  }
+
+  function handleSpotifyPlayback(){
+    localStorage.setItem("showSpotifyPlayer","true")
+    console.log(localStorage.getItem("showSpotifyPlayer"))
+    checkForSpotifyPlayer()
+  }
+
+  function handleSpotifyPlaybackOff(){
+    localStorage.setItem("showSpotifyPlayer","false")
+    // handleClose_showSpotifyPlayer();
+    checkForSpotifyPlayer()
+  }
 
     return(
         <div>
@@ -487,9 +515,10 @@ function handleGoogleAds(){
                     </Modal.Footer>
                 </Modal>
                 {/* Show submitted playlist tracks */}
-                   <Modal show={showCompPlayListModal} onHide={handleClose_showCompPlayListModal} style={{padding:"5rem"}}>
+                   <Modal show={showCompPlayListModal} onHide={handleClose_showCompPlayListModal} style={{padding:"5rem",zIndex:"1050"}}>
                     <Modal.Header closeButton>
-                    <Modal.Title>{compDoc.name}</Modal.Title>
+                    <Modal.Title>{compDoc.name}<Button style={{marginLeft:"6rem"}} onClick={event => handleSpotifyPlayback()}>
+                      Play</Button></Modal.Title>
                     </Modal.Header>
                     <Container style={{paddingTop:"1rem",paddingBottom:"1rem"}}>
                     {isCompActive && compDoc.href ? (compDoc.tracks.items.map((items,i) => {
@@ -524,7 +553,10 @@ function handleGoogleAds(){
 {/* FOR MOBILE - MODAL */}
 <Modal show={showCompPlayListModalMobile} onHide={handleClose_showCompPlayListModalMobile} style={{width:"24rem", marginLeft:".25rem"}}>
                     <Modal.Header closeButton>
-                    <Modal.Title>{compDoc.name}</Modal.Title>
+                    <Modal.Title>{compDoc.name}
+                    <Button style={{marginLeft:"6rem"}} onClick={event => handleSpotifyPlayback()}>
+                      Play</Button>
+                      </Modal.Title>
                     </Modal.Header>
                     <Container style={{paddingTop:"1rem",paddingBottom:"1rem"}}>
                     {isCompActive && compDoc.href ? (compDoc.tracks.items.map((items,i) => {
@@ -558,6 +590,7 @@ function handleGoogleAds(){
                 </Modal>
                     
                 </div>
+                {checkForSpotifyPlayer()}
                 <Footer/>
         </div>
     )

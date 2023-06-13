@@ -11,7 +11,7 @@ import FooterMobile from './Footer Login'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "https://playlist-frontend-krmi.onrender.com"
+const REDIRECT_URI = "http://localhost:3000/"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
@@ -36,7 +36,7 @@ export default function Login(){
     console.log("Image:"+ (sessionStorage.getItem("imgURL")))
     console.log("User: "+ (sessionStorage.getItem("userId")))
     const SPACE_DELIMITER = "%20";
-    const SCOPES = ["playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email"]
+    const SCOPES = ["streaming","playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email", "user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state"]
     const SCOPES_URI_PARAM = SCOPES.join(SPACE_DELIMITER)
     useEffect(() => {
         // API Access Token
@@ -73,7 +73,7 @@ export default function Login(){
       //For Playlist App Server
       async function fetchUsers(){
             if(sessionStorage.getItem("userId") != null){
-                  const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users/createUser',{
+                  const response = await fetch('http://localhost:8000/api/users/createUser',{
                     method: 'POST',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),
@@ -118,7 +118,7 @@ export default function Login(){
         }
         if(sessionStorage.getItem("userId") != null){
           fetchUsers()
-          window.location.assign("https://playlist-frontend-krmi.onrender.com/Home")
+          window.location.assign("http://localhost:3000/Home")
         }
         }
       }
@@ -148,8 +148,8 @@ export default function Login(){
       }
 
     const handleLogin = () => {
-        window.location.assign(SPOTIFY_ENDPOINT+'?response_type=token' + '&client_id=' + encodeURIComponent(CLIENT_ID)
-        + '&scope=' + encodeURIComponent(SCOPES_URI_PARAM) + '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) + '&state=' + encodeURIComponent(state))
+        window.location.assign(SPOTIFY_ENDPOINT+'?response_type=token' + '&client_id=' + (CLIENT_ID)
+        + '&scope=' + (SCOPES_URI_PARAM) + '&redirect_uri=' + (REDIRECT_URI) + '&state=' + (state))
         const getURL = window.location.href
         getURL.substring(getURL.indexOf("access_token="),"&token_type")
     };

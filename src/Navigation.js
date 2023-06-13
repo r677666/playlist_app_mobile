@@ -29,7 +29,7 @@ function Navigation() {
       .then(result => result.json())
       .then(data => setAccessToken(data.access_token))
 
-    const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/'+userId)
+    const response = fetch('http://localhost:8000/api/users/'+userId)
       .then(result => result.json())
       .then(data => setUserPro(data.paidMember))
       .then(console.log(userPro))
@@ -37,7 +37,7 @@ function Navigation() {
   }, [])
 
   function handleNavPic(){
-    window.location.assign("https://playlist-frontend-krmi.onrender.com/Account")
+    window.location.assign("http://localhost:3000/Account")
   }
 
   function handleProUser(){
