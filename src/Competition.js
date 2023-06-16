@@ -435,10 +435,6 @@ function handleGoogleAds(){
               <SpotifyPlayback/>
             </div>
           )
-        }else if(localStorage.getItem("showSpotifyPlayer")=="false"){
-          return(
-            <div></div>
-          )
         }
   }
 
@@ -554,7 +550,7 @@ function handleGoogleAds(){
 <Modal show={showCompPlayListModalMobile} onHide={handleClose_showCompPlayListModalMobile} style={{width:"24rem", marginLeft:".25rem"}}>
                     <Modal.Header closeButton>
                     <Modal.Title>{compDoc.name}
-                    <Button style={{marginLeft:"6rem"}} onClick={event => handleSpotifyPlayback()}>
+                    <Button style={{marginLeft:"6rem"}} onClick={() => handleSpotifyPlayback()}>
                       Play</Button>
                       </Modal.Title>
                     </Modal.Header>

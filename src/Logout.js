@@ -10,6 +10,7 @@ export default function Logout(){
     sessionStorage.setItem("userId",'');
     sessionStorage.setItem("userEmail",'')
     sessionStorage.setItem("spotifyToken",'')
+    localStorage.setItem("showSpotifyPlayer", "false")
     sessionStorage.clear()
     console.log(sessionStorage.getItem('token'))
     useEffect(() => {

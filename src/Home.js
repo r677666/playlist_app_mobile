@@ -123,7 +123,7 @@ export default function Home(){
     }
 
     function competitionButton(){
-        window.location.assign("http://localhost:3000/competition/")
+        window.location.assign("http://localhost:3000/Competition/")
     }
     function handleUserImgs(userId){
         var userParameters = {
@@ -422,7 +422,7 @@ export default function Home(){
             </Container>
         </div>
         <br/>
-        {checkForSpotifyPlayer()}
+        {/* {checkForSpotifyPlayer()} */}
         <Footer/>
         </div>
                 </div>
