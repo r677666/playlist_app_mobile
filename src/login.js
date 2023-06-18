@@ -60,6 +60,8 @@ export default function Login(){
               height: window.innerHeight,
             });
           }
+
+          document.body.style.overflowX = 'hidden';
       
           window.addEventListener("resize", handleResize);
           handleResize(); // Set initial size on mount
@@ -167,14 +169,19 @@ export default function Login(){
             {/* <div style={{textAlign:"center", justifyContent:"center", backgroundColor:"black"}}> */}
               {/* <h1>TasteMakers</h1> */}
               {/* <div style={{justifyContent:"left", marginRight:"20rem", display:"center"}}> */}
-                <img src={TastemakerImg} style={{height:"25rem",width:"25rem", marginTop:".5rem"}}/>
+                <img src={TastemakerImg} style={{height:"25rem",width:"23rem", marginTop:".5rem"}}/>
                 
-                <Container style={{marginTop:"1.5rem",marginBottom:"12rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
+                <Container style={{marginTop:".1rem",marginBottom:"12rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
                   <h5 style={{color:"#ff514d",fontSize:"1.5rem"}}>Join Now</h5>
                   <InputGroup style={{display:"center", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
-                      <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center"}}onClick={handleLogin}>
+                      <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center"}}
+                      // onClick={handleLogin}
+                      >
                       <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
                       Login with Spotify</Button>
+                      <Button style={{backgroundColor:"black", marginTop:"1rem", width:"40vh", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleSignup}>
+                    <img style={{width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
+                    Sign Up for Beta</Button>
                   </InputGroup>
               </Container>
               {/* </div> */}
