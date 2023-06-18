@@ -5,13 +5,14 @@ import React,{ useState, useEffect, Component } from 'react';
 import { click } from '@testing-library/user-event/dist/click';
 import App from './App';
 import TastemakerImg  from './Tastemakers Main Logo (1).png'
+import TastemakerLogo from './taste makers logo (1).png'
 import spotifyImg from './spotify img.png'
 import Footer from './Footer Desktop Login'
 import FooterMobile from './Footer Login'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "https://playlist-frontend-krmi.onrender.com"
+const REDIRECT_URI = "https://www.tastemakers.pro/"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
@@ -36,7 +37,7 @@ export default function Login(){
     console.log("Image:"+ (sessionStorage.getItem("imgURL")))
     console.log("User: "+ (sessionStorage.getItem("userId")))
     const SPACE_DELIMITER = "%20";
-    const SCOPES = ["playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email"]
+    const SCOPES = ["streaming","playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email", "user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state"]
     const SCOPES_URI_PARAM = SCOPES.join(SPACE_DELIMITER)
     useEffect(() => {
         // API Access Token
@@ -118,7 +119,7 @@ export default function Login(){
         }
         if(sessionStorage.getItem("userId") != null){
           fetchUsers()
-          window.location.assign("https://playlist-frontend-krmi.onrender.com/Home")
+          window.location.assign("https://www.tastemakers.pro/Home")
         }
         }
       }
@@ -148,11 +149,15 @@ export default function Login(){
       }
 
     const handleLogin = () => {
-        window.location.assign(SPOTIFY_ENDPOINT+'?response_type=token' + '&client_id=' + encodeURIComponent(CLIENT_ID)
-        + '&scope=' + encodeURIComponent(SCOPES_URI_PARAM) + '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) + '&state=' + encodeURIComponent(state))
+        window.location.assign(SPOTIFY_ENDPOINT+'?response_type=token' + '&client_id=' + (CLIENT_ID)
+        + '&scope=' + (SCOPES_URI_PARAM) + '&redirect_uri=' + (REDIRECT_URI) + '&state=' + (state))
         const getURL = window.location.href
         getURL.substring(getURL.indexOf("access_token="),"&token_type")
     };
+
+    const handleSignup = () => {
+      window.location.assign("https://forms.gle/9z9cmbSbvpmSCSwb8")
+  };
     
     function handleSmallerScreen(){
       if(windowSize.width < 765){
@@ -192,9 +197,12 @@ export default function Login(){
               <Container style={{marginTop:"20rem", marginLeft:"5rem"}}>
                 <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
                 <InputGroup>
-                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem"}}onClick={handleLogin}>
+                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleLogin}>
                     <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
                     Login with Spotify</Button>
+                    <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
+                    <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
+                    Sign Up for Beta</Button>
                 </InputGroup>
             </Container>
             </div>
