@@ -27,7 +27,7 @@ export default function Home(){
     var test;
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('http://localhost:8000/api/users')
+            const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users')
             .then(result => result.json())
             .then(data => setUsers(data))
             .then(console.log("users from Playlist App Server have been found"))
@@ -52,7 +52,7 @@ export default function Home(){
 
     function clickUser(name){
         name = name.replaceAll("\"", "")
-        window.location.assign("http://localhost:3000/User/" + name)
+        window.location.assign("https://www.tastemakers.pro/User/" + name)
     }
 
     async function followUserButton(user,follower){
@@ -80,7 +80,7 @@ export default function Home(){
             }
         }
 
-        const followMethod = await fetch("http://localhost:8000/api/users/friends/addFriend",{
+        const followMethod = await fetch("https://playlist-backend-6muv.onrender.com/api/users/friends/addFriend",{
             method: 'PATCH',
             body: JSON.stringify({
               "userId": followerId,
@@ -123,7 +123,7 @@ export default function Home(){
     }
 
     function competitionButton(){
-        window.location.assign("http://localhost:3000/Competition/")
+        window.location.assign("https://www.tastemakers.pro/Competition/")
     }
     function handleUserImgs(userId){
         var userParameters = {
@@ -138,7 +138,7 @@ export default function Home(){
         .then(data => setGetUserImg(data))
     }
     function handleUpgradeButton(){
-        window.location.assign("http://localhost:3000/Upgrade")
+        window.location.assign("https://www.tastemakers.pro/Upgrade")
     }
     function handleTextMobile(){
         if(windowSize.width < 765){

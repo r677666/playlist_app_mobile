@@ -45,7 +45,7 @@ export default function UserProfile(){
     var docTracks = [];
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('http://localhost:8000/api/competition')
+            const response = await fetch('https://playlist-backend-6muv.onrender.com/api/competition')
             .then(result => result.json())
             .then(data => setCompSubmissions(data))
             // .then(console.log(compSubmissions[0].playlistsId))
@@ -71,7 +71,7 @@ export default function UserProfile(){
     //Post Playlist to Competition
     async function postCompDoc(){
 
-        var postPlaylistToComp = await fetch('http://localhost:8000/api/competition/create', {
+        var postPlaylistToComp = await fetch('https://playlist-backend-6muv.onrender.com/api/competition/create', {
             method: 'POST',
             body: JSON.stringify({
               "userId": userId,
@@ -158,10 +158,10 @@ export default function UserProfile(){
       }
       function deleteButtonFunction(id){
         console.log(id)
-        const getMethod = fetch("http://localhost:8000/api/competition/" +id)
+        const getMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/" +id)
         .then(result => console.log(result.json()))
 
-        const deleteMethod = fetch("http://localhost:8000/api/competition/",{
+        const deleteMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/",{
         method: 'DELETE',
         body: JSON.stringify({
             "id": id
@@ -176,7 +176,7 @@ export default function UserProfile(){
     const handleLike = async (userId,id) => {
                 var arr = [];
                 
-                const checkIfLikedAlready = await fetch("http://localhost:8000/api/competition/" + id)
+                const checkIfLikedAlready = await fetch("https://playlist-backend-6muv.onrender.com/api/competition/" + id)
                 .then(result => result.json())
                 .then(data => 
                     {
@@ -186,7 +186,7 @@ export default function UserProfile(){
                         // console.log(data.likes.indexOf('testLike') )
                         if(data.likes.indexOf(userId) !== -1){
                             console.log("REMOVED LIKE")
-                                    const followMethod = fetch("http://localhost:8000/api/competition/removeLike",{
+                                    const followMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/removeLike",{
                                         method: 'PATCH',
                                         body: JSON.stringify({
                                             "userId": userId,
@@ -203,7 +203,7 @@ export default function UserProfile(){
                             // }
                         }else{
                             console.log("ADDED LIKE")
-                            const followMethod = fetch("http://localhost:8000/api/competition/addLike",{
+                            const followMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/addLike",{
                                 method: 'PATCH',
                                 body: JSON.stringify({
                                     "userId": userId,
@@ -441,12 +441,6 @@ function handleGoogleAds(){
   function handleSpotifyPlayback(){
     localStorage.setItem("showSpotifyPlayer","true")
     console.log(localStorage.getItem("showSpotifyPlayer"))
-    checkForSpotifyPlayer()
-  }
-
-  function handleSpotifyPlaybackOff(){
-    localStorage.setItem("showSpotifyPlayer","false")
-    // handleClose_showSpotifyPlayer();
     checkForSpotifyPlayer()
   }
 

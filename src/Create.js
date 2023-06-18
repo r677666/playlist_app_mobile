@@ -69,7 +69,7 @@ export default function Create(){
       fetch('https://accounts.spotify.com/api/token', authParameters)
         .then(result => result.json())
         .then(data => setAccessToken(data.access_token))
-    })
+    },[])
     const [windowSize, setWindowSize] = useState({
       width: undefined,
       height: undefined,
@@ -87,7 +87,7 @@ export default function Create(){
       handleResize(); // Set initial size on mount
   
       return () => window.removeEventListener("resize", handleResize);
-    });
+    },[]);
 
     //Playlist Creation SUCCESSFUL
     async function playlistCreation() {

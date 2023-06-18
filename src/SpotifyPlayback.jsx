@@ -13,9 +13,11 @@ function SpotifyPlayback(props){
     const [player, setPlayer] = useState(undefined);
     const [is_paused, setPaused] = useState(false);
     const [is_active, setActive] = useState(false);
+    const [error, setError] = useState(false);
     // const [current_track, setTrack] = useState(track);
-
+    // player.disconnect()
     useEffect(() => {
+      
         const script = document.createElement('script');
         script.src = 'https://sdk.scdn.co/spotify-player.js';
         script.async = true;
@@ -98,18 +100,36 @@ function SpotifyPlayback(props){
             }
           });
         }
+        // else{
+        //   window.onSpotifyWebPlaybackSDKReady();
+        // }
       }, []);
       
     
     function handleSpotifyPlaybackOff(){
+      player.pause()
       player.disconnect()
         setPlayer(null)
         localStorage.setItem("showSpotifyPlayer", "false")
         console.log(localStorage.getItem("showSpotifyPlaylist"))
     }
 
+    function handleReload() {
+      player.pause()
+      player.disconnect()
+      setPlayer(null);
+      localStorage.setItem("showSpotifyPlayer", "false")
+      window.onSpotifyWebPlaybackSDKReady();
+    }
+
     return(
+
+      <div>
+      {error ? (
         <div>
+          {handleReload}
+        </div>
+      ) : (
             
             <Navbar
             style={{height:"6rem",backgroundSize: "0", backgroundColor: "black", bottom:"0",
@@ -118,7 +138,7 @@ function SpotifyPlayback(props){
             >
                 
                 <Button onClick={() => handleSpotifyPlaybackOff()} 
-                style={{background:`url(${exit})`, backgroundSize: "cover", border: "none", height:"2rem", width:"2.25rem", marginLeft:"1rem",justifyContent:"flex-end", display:"flex"}}/>
+                style={{background:`url(${exit})`, backgroundSize: "cover", border: "none", height:"2rem", marginBottom:"1rem",width:"1.5rem", marginLeft:"1rem",justifyContent:"flex-end", display:"flex"}}/>
                 <img src={sessionStorage.getItem("currentTrackAlbumImg")} style={{height:"5rem", width:"5rem", marginLeft:"1rem"}}/>
                 <text style={{marginLeft:"1rem"}}>{sessionStorage.getItem("currentTrack")}</text>
                 <button className="btn-spotify" onClick={() => { player && player.previousTrack() }} >
@@ -137,6 +157,7 @@ function SpotifyPlayback(props){
                 {/* <img src={play} style={{height:"2.5rem", width:"2.5rem", marginLeft:"32rem"}}/> */}
 
             </Navbar>
+      )}
         </div>
     );
 }

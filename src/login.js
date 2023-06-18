@@ -5,13 +5,14 @@ import React,{ useState, useEffect, Component } from 'react';
 import { click } from '@testing-library/user-event/dist/click';
 import App from './App';
 import TastemakerImg  from './Tastemakers Main Logo (1).png'
+import TastemakerLogo from './taste makers logo (1).png'
 import spotifyImg from './spotify img.png'
 import Footer from './Footer Desktop Login'
 import FooterMobile from './Footer Login'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "http://localhost:3000/"
+const REDIRECT_URI = "https://www.tastemakers.pro/"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
@@ -73,7 +74,7 @@ export default function Login(){
       //For Playlist App Server
       async function fetchUsers(){
             if(sessionStorage.getItem("userId") != null){
-                  const response = await fetch('http://localhost:8000/api/users/createUser',{
+                  const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users/createUser',{
                     method: 'POST',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),
@@ -118,7 +119,7 @@ export default function Login(){
         }
         if(sessionStorage.getItem("userId") != null){
           fetchUsers()
-          window.location.assign("http://localhost:3000/Home")
+          window.location.assign("https://www.tastemakers.pro/Home")
         }
         }
       }
@@ -153,6 +154,10 @@ export default function Login(){
         const getURL = window.location.href
         getURL.substring(getURL.indexOf("access_token="),"&token_type")
     };
+
+    const handleSignup = () => {
+      window.location.assign("https://forms.gle/9z9cmbSbvpmSCSwb8")
+  };
     
     function handleSmallerScreen(){
       if(windowSize.width < 765){
@@ -192,9 +197,12 @@ export default function Login(){
               <Container style={{marginTop:"20rem", marginLeft:"5rem"}}>
                 <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
                 <InputGroup>
-                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem"}}onClick={handleLogin}>
+                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleLogin}>
                     <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
                     Login with Spotify</Button>
+                    <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
+                    <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
+                    Sign Up for Beta</Button>
                 </InputGroup>
             </Container>
             </div>
