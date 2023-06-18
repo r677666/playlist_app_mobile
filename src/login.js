@@ -197,7 +197,9 @@ export default function Login(){
               <Container style={{marginTop:"20rem", marginLeft:"5rem"}}>
                 <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
                 <InputGroup>
-                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleLogin}>
+                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem"}}
+                    // onClick={handleLogin}
+                    >
                     <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
                     Login with Spotify</Button>
                     <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
