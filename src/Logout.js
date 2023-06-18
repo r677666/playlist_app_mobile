@@ -10,10 +10,11 @@ export default function Logout(){
     sessionStorage.setItem("userId",'');
     sessionStorage.setItem("userEmail",'')
     sessionStorage.setItem("spotifyToken",'')
+    localStorage.setItem("showSpotifyPlayer", "false")
     sessionStorage.clear()
     console.log(sessionStorage.getItem('token'))
     useEffect(() => {
-        window.location.assign("https://playlist-frontend-krmi.onrender.com")
+        window.location.assign("https://www.tastemakers.pro")
       }, [])
     return(
         <div>

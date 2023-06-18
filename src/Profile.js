@@ -9,7 +9,7 @@ import Footer from './Footer';
 import crown from './crown.png';
 
 function handleUpgradeButton(){
-    window.location.assign("https://playlist-frontend-krmi.onrender.com/Upgrade")
+    window.location.assign("https://www.tastemakers.pro/Upgrade")
 }
 
 export default function Profile(){
@@ -56,7 +56,7 @@ export default function Profile(){
                      {/* Need to make userProfile fully functional first */}
                     {/* <Button
                     style={{marginTop:"1rem"}}
-                    onClick={event => window.location.assign("https://playlist-frontend-krmi.onrender.comUser/"+userId)}>View public Profile</Button> */}
+                    onClick={event => window.location.assign("https://www.tastemakers.proUser/"+userId)}>View public Profile</Button> */}
                     
                 </div>
                 <div style={{textAlign:"center", marginTop:"1rem"}}>
