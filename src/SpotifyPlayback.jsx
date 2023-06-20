@@ -127,7 +127,7 @@ function SpotifyPlayback(props){
       <div>
       {error ? (
         <div>
-          {handleReload}
+          {handleReload()}
         </div>
       ) : (
             

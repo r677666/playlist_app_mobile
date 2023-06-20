@@ -7,6 +7,7 @@ import Login from './login';
 import App from './App';
 import { json } from 'react-router-dom';
 import Navigation from './Navigation';
+import addImage from './add (1).png'
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
@@ -106,8 +107,8 @@ export default function Create(){
         //Create Playlist from Given User Id
         var createPlaylist = fetch('https://api.spotify.com/v1/users/' + userId.replaceAll("\"","") + '/playlists',playlistParameters)
         .then(response => response.json())
-        .then(data => console.log(data))
-        .then(console.log(userId))
+        // .then(data => //console.log(data))
+        // .then(//console.log(userId))
     }
     //Get Playlist
     async function getUserPlaylist(){
@@ -127,15 +128,15 @@ export default function Create(){
       });setUserPlaylists(personalPlaylists);
       }
       )
-      // .then(console.log(userPlaylists))
-      .catch(response => console.log(response.json()))
+      // .then(//console.log(userPlaylists))
+      // .catch(response => //console.log(response.json()))
     }
     // Add Tracks to Playlist
     async function addTrackToPlaylist(){
-      console.log("Made It to Adding Tracks to Playlist")
-      console.log("Playlist Id to add Tracks: " + selectedPlaylistID)
-      console.log("Playlist Tracks = " + selectedTracks)
-      console.log("Playlist Tracks IDs = " +selectedTracksIDs)
+      //console.log("Made It to Adding Tracks to Playlist")
+      //console.log("Playlist Id to add Tracks: " + selectedPlaylistID)
+      //console.log("Playlist Tracks = " + selectedTracks)
+      //console.log("Playlist Tracks IDs = " +selectedTracksIDs)
       var trackToPlaylistParameters = {
         method: 'POST',
         headers: {
@@ -150,26 +151,26 @@ export default function Create(){
       }
       var addTracks = await fetch('https://api.spotify.com/v1/playlists/' + selectedPlaylistID + '/tracks',trackToPlaylistParameters)
       .then(response => response.json())
-      .then(data => console.log(data))
+      // .then(data => //console.log(data))
     }
 
     function jsonTracksFunction(arr){
-      console.log("jsonTracksFunction called")
+      //console.log("jsonTracksFunction called")
       var newArr = []
-      console.log("Original Array = " + arr)
-      console.log(arr.length)
+      //console.log("Original Array = " + arr)
+      //console.log(arr.length)
       for(var i = 0; i<arr.length; i++ ){
         newArr[i] = "spotify:track:" + arr[i];
-        console.log(newArr[i])
+        //console.log(newArr[i])
       }
       jsonTrackIDs=newArr;
-      console.log("JSON Tracks = " + jsonTrackIDs)
+      //console.log("JSON Tracks = " + jsonTrackIDs)
       addTrackToPlaylist()
     }
 
     //Search
     async function search() {
-      console.log("Search for " + searchInput);
+      //console.log("Search for " + searchInput);
   
       //Get Request for Artist Id
       var searchParameters = {
@@ -193,12 +194,12 @@ export default function Create(){
         var albumID = await fetch('https://api.spotify.com/v1/search?q=' + clickedAlbum + "&type=album", searchParameters)
         .then(response => response.json())
         .then(data => data.albums.items[0].id)
-        .then(console.log("Album Id Found"))
+        // .then(//console.log("Album Id Found"))
         
         var returnedTracks = await fetch('https://api.spotify.com/v1/albums/' + albumID + '/tracks',searchParameters)
         .then(response => response.json())
         .then(data => {setTracks(data.items)})
-        .then(console.log("Tracks for " + clickedAlbum + " Found"))
+        // .then(//console.log("Tracks for " + clickedAlbum + " Found"))
       }
         
       
@@ -210,7 +211,9 @@ export default function Create(){
       setIsActive(current => !current)
       var executed = false;
       search();
+      setClickedAlbum(name)
       handleShow_showTrackModal()
+      // set_Track_ShowModal(true)
     }
 
     function setClickedPlaylistButton(name,id){
@@ -224,8 +227,8 @@ export default function Create(){
           // }else{
           //   currentID = id
           // }
-          console.log(name)
-          console.log("Playlist ID = " + id)
+          //console.log(name)
+          //console.log("Playlist ID = " + id)
           alert("SELECTED")
           setSelectedPlaylistID(id)
           setSelectedPlaylistName(name)
@@ -234,7 +237,7 @@ export default function Create(){
     }
     function addCartItemsToPlaylist(){
           // addTrackToPlaylist()
-          console.log("Add cart items pressed")
+          //console.log("Add cart items pressed")
           jsonTracksFunction(selectedTracksIDs)
     }
 
@@ -247,13 +250,18 @@ export default function Create(){
           setSelectedTracksIDs(trackIDArray => [...trackIDArray, id])
           alert("Current Tracks For Playlist: " + selectedTracks)
         }
-        console.log(selectedTracks)
-        console.log(selectedTracksIDs)
+        //console.log(selectedTracks)
+        //console.log(selectedTracksIDs)
       }
     }
     function playlistImg(url){
       if(url == null){
         return ""
+      }
+    }
+    function checkForLogin(){
+      if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
+          window.location.assign("https://tastemakers.pro")
       }
     }
     function handleWindowSize(){
@@ -265,7 +273,7 @@ export default function Create(){
                   <div >
                   <CardGroup style={{justifyContent:"center", alignContent:"center", alignItems:"center", justifyItems:"center", marginLeft:"1.5rem"}}>
                     <div key={album.name} 
-                    onClick={event => onClickFunction(album.name)}
+                    onClick={() => onClickFunction(album.name)}
                     >
                       <Card style={{width:'20rem'}}>
                         <Card.Img src={album.images[0].url} style={{width:'20rem'}}/>
@@ -273,7 +281,7 @@ export default function Create(){
                       </Card>
                     </div>
                       <Modal 
-                      show={showTrackModal} 
+                      show={handleShow_showTrackModal} 
                       onHide={handleClose_showTrackModal}>
                     <Modal.Header closeButton>
                     <Modal.Title> {clickedAlbum} </Modal.Title>
@@ -337,60 +345,14 @@ export default function Create(){
                 return (
                   <div >
                   <CardGroup>
-                    <div key={album.name} onClick={event => onClickFunction(album.name)}>
+                    <div key={album.name} 
+                    onClick={() => onClickFunction(album.name)}
+                    >
                       <Card >
                         <Card.Img src={album.images[0].url} style={{maxWidth:'18rem', alignSelf:'flex-start'}}/>
                           <Card.Title>{album.name}</Card.Title>
                       </Card>
                     </div>
-                      <Modal 
-                      show={showTrackModal} 
-                      onHide={handleClose_showTrackModal}>
-                    <Modal.Header closeButton>
-                    <Modal.Title> {clickedAlbum} </Modal.Title>
-                    </Modal.Header>
-                    <div>
-                      <Card style={{width:'18rem'}}>
-                      <Card.Body style={{}}>
-                        {isActive && (
-                                    tracks.map((track, i) => {
-                                      return (
-                                        <div>
-                                          <div>
-                                            <Card
-                                            // onMouseEnter={() => setHoveredTrack(true)}
-                                            // onMouseLeave={() => setHoveredTrack(false)}
-                                            >
-                                              
-                                              <Card.Title >
-                                              {track.name}
-                                                <Button
-                                                style={{marginLeft:'.5rem'}}
-                                                onClick={addTrackToCartFunction(track.name,track.id)}
-                                                >
-                                                  Add
-                                                </Button>
-                                              </Card.Title>
-                                            </Card>
-                                          </div>
-                                          
-                                        </div>
-                                      )
-                                    })
-                                    )}
-                                </Card.Body>
-
-                                </Card>
-                      </div>
-                    <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose_showTrackModal}>
-                        {selectedPlaylistName}
-                    </Button>
-                    <Button variant="secondary" onClick={addCartItemsToPlaylist}>
-                        Tracks
-                    </Button>
-                    </Modal.Footer>
-                </Modal>
                   </CardGroup>
                   
                   
@@ -411,7 +373,8 @@ export default function Create(){
       }
   }
     return (
-      <div className="App">
+      <div style={{backgroundColor:"#FFFCFC"}}className="App">
+        {checkForLogin()}
         <Navigation/>
         <br/>
         <Container style={{marginTop:"6rem"}}>
@@ -569,6 +532,58 @@ export default function Create(){
                 </Modal></Stack>
           </InputGroup>
         {handleWindowSize()}
+        <Modal 
+                      show={showTrackModal} 
+                      onHide={handleClose_showTrackModal}
+                      style={{textAlign:"center", borderColor:"orange", outlineColor:"orange", color:"orange", borderRadius:'2rem'}}
+                      >
+                    <Modal.Header style={{ textAlign: 'center', backgroundColor:'black', color:'orange', borderColor:'orange', outlineColor:'orange'}} closeButton>
+                    <Modal.Title style={{backgroundColor:'black'}}> {clickedAlbum} </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body style={{backgroundColor:'black'}}>
+                    <div>
+                      <Card style={{width:'100%',backgroundColor:'black'}}>
+                      <Card.Body style={{}}>
+                        {isActive && (
+                                    tracks.map((track, i) => {
+                                      return (
+                                        <div>
+                                          <div>
+                                            <Card
+                                            style={{width:'100%',backgroundColor:'black', borderColor:'orange'}}
+                                            // onMouseEnter={() => setHoveredTrack(true)}
+                                            // onMouseLeave={() => setHoveredTrack(false)}
+                                            >
+                                              
+                                              <Card.Title style={{color:"orange", paddingTop:'.5rem'}}>
+                                              {track.name}
+                                                <Image
+                                                style={{marginLeft:'.5rem', width:"1.5rem", height:"1.5rem"}}
+                                                src={addImage}
+                                                onClick={addTrackToCartFunction(track.name,track.id)}
+                                                />
+                                              </Card.Title>
+                                            </Card>
+                                          </div>
+                                          
+                                        </div>
+                                      )
+                                    })
+                                    )}
+                                </Card.Body>
+
+                                </Card>
+                      </div>
+                      </Modal.Body>
+                    <Modal.Footer style={{backgroundColor:"black",color:'orange', borderColor:'orange', outlineColor:'orange'}}>
+                    <Button variant="secondary" onClick={handleClose_showTrackModal}>
+                        {selectedPlaylistName}
+                    </Button>
+                    <Button variant="secondary" onClick={addCartItemsToPlaylist}>
+                        Tracks
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
         </Container>
       </div>
     );
