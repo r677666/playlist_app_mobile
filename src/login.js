@@ -12,7 +12,7 @@ import FooterMobile from './Footer Login'
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "https://tastemakers.pro"
+const REDIRECT_URI = "https://www.tastemakers.pro/"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
