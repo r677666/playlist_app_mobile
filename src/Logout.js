@@ -14,7 +14,7 @@ export default function Logout(){
     sessionStorage.clear()
     console.log(sessionStorage.getItem('token'))
     useEffect(() => {
-        window.location.assign("https://www.tastemakers.pro")
+        window.location.assign("https://tastemakers.pro")
       }, [])
     return(
         <div>

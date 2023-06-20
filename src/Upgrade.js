@@ -72,7 +72,7 @@ export default function Upgrade(){
         // }, [email]);
 
         function updateUserProStatus(){
-            // console.log("TESTING SUCCESSFUL")
+            // //console.log("TESTING SUCCESSFUL")
             // const changeUserProStatus = async () => {
                 const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/updateProStatus',{
                     method: 'PATCH',
@@ -84,14 +84,14 @@ export default function Upgrade(){
                       'Content-Type': 'application/json'
                     }
                   })
-                  .then(response => console.log(response.json()))
-                  .then(console.log("Success Scription in DB"))
-                // .then(console.log(compSubmissions[0].playlistsId))
+                  // .then(response => //console.log(response.json()))
+                  // .then(//console.log("Success Scription in DB"))
+                // .then(//console.log(compSubmissions[0].playlistsId))
             // }
         }
         function successOrMessage(){
             if (!success && message === '') {
-              return console.log("Failed to Subscribe")
+              return //console.log("Failed to Subscribe")
             } else if (success && sessionId !== '') {
               return handleShow()
             } else {
@@ -106,7 +106,7 @@ export default function Upgrade(){
         const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/'+ sessionStorage.getItem("userId"))
         .then(result => result.json())
         .then(data => setUserPro(data.paidMember))
-        .then(console.log(userPro))
+        // .then(//console.log(userPro))
     
     }, [])
     

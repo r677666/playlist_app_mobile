@@ -32,12 +32,12 @@ function Navigation() {
     const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/'+userId)
       .then(result => result.json())
       .then(data => setUserPro(data.paidMember))
-      .then(console.log(userPro))
+      // .then(//console.log(userPro))
 
   }, [])
 
   function handleNavPic(){
-    window.location.assign("https://www.tastemakers.pro/Account")
+    window.location.assign("https://tastemakers.pro/Account")
   }
 
   function handleProUser(){

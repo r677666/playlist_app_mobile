@@ -10,15 +10,15 @@ import spotifyImg from './spotify img.png'
 import Footer from './Footer Desktop Login'
 import FooterMobile from './Footer Login'
 
-const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "https://www.tastemakers.pro/"
+const REDIRECT_URI = "https://tastemakers.pro/"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
-// console.log("User Token: " + sessionStorage.getItem("token"))
+// //console.log("User Token: " + sessionStorage.getItem("token"))
 const state = generateRandomString(20)
-const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
+const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET
 
 
 
@@ -34,8 +34,8 @@ export default function Login(){
       width: undefined,
       height: undefined,
     });
-    console.log("Image:"+ (sessionStorage.getItem("imgURL")))
-    console.log("User: "+ (sessionStorage.getItem("userId")))
+    //console.log("Image:"+ (sessionStorage.getItem("imgURL")))
+    //console.log("User: "+ (sessionStorage.getItem("userId")))
     const SPACE_DELIMITER = "%20";
     const SCOPES = ["streaming","playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email", "user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state"]
     const SCOPES_URI_PARAM = SCOPES.join(SPACE_DELIMITER)
@@ -91,26 +91,26 @@ export default function Login(){
                       'Content-Type': 'application/json'
                     }
                   })
-                  console.log(response)
+                  //console.log(response)
                   const json = await response.json()
-                  console.log(json)
+                  //console.log(json)
                   if(!response.ok){
-                    console.log("User Already Exists")
+                    //console.log("User Already Exists")
                   }else{
-                    console.log("User Created")
+                    //console.log("User Created")
                   }
           }else{
-            console.log("UserId Null")
+            //console.log("UserId Null")
           }
         }
 
       function checkURL(){
       if(window.location.href.includes("access_token")){
-        console.log("TOKEN FOUND")
+        //console.log("TOKEN FOUND")
         const getURL = window.location.href;
         var positionToken = getURL.substring(getURL.indexOf("access_token="),getURL.indexOf("&token_type=Bearer"))
         var secondToken = positionToken.substring(positionToken.indexOf("B"))
-        console.log("2:"+secondToken)
+        //console.log("2:"+secondToken)
         sessionStorage.setItem("token",secondToken)
         try{
         userInfo()
@@ -121,7 +121,7 @@ export default function Login(){
         }
         if(sessionStorage.getItem("userId") != null){
           fetchUsers()
-          window.location.assign("https://www.tastemakers.pro/Home")
+          window.location.assign("https://tastemakers.pro/Home")
         }
         }
       }
@@ -135,7 +135,7 @@ export default function Login(){
           }
         }
         sessionStorage.setItem("params",JSON.stringify(userParameters))
-        console.log(sessionStorage.getItem("params"))
+        //console.log(sessionStorage.getItem("params"))
         var userData = fetch('https://api.spotify.com/v1/me',userParameters)
         .then(response => response.json())
         // .then(data => sessionStorage.setItem("error",JSON.stringify(data)))
@@ -205,7 +205,7 @@ export default function Login(){
                 <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
                 <InputGroup>
                     <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem"}}
-                    // onClick={handleLogin}
+                    onClick={handleLogin}
                     >
                     <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
                     Login with Spotify</Button>
