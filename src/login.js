@@ -175,7 +175,7 @@ export default function Login(){
                   <h5 style={{color:"#ff514d",fontSize:"1.5rem"}}>Join Now</h5>
                   <InputGroup style={{display:"center", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
                       <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center"}}
-                      // onClick={handleLogin}
+                      onClick={handleLogin}
                       >
                       <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
                       Login with Spotify</Button>
