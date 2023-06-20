@@ -15,7 +15,7 @@ export default function UserProfile(){
     const [friendsIds,setFriendsIds] = useState([])
     var [friends,setFriends] = useState([])
     const [shouldRunEffect, setShouldRunEffect] = useState(true);
-    // console.log(friends)
+    // //console.log(friends)
 
     
 
@@ -24,14 +24,14 @@ export default function UserProfile(){
             const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users')
             .then(result => result.json())
             .then(data => setUsers(data))
-            // .then(console.log(users))
-            // .then(console.log("users from Playlist App Server have been found"))
+            // .then(//console.log(users))
+            // .then(//console.log("users from Playlist App Server have been found"))
         }
         fetchUsers()
         // let intervalid;
         // if(shouldRunEffect){
         //     intervalid = setInterval(() => {
-        //         console.log('Interval tick')
+        //         //console.log('Interval tick')
         //     }, 10);
         // }
         const getFriends = async () => {
@@ -48,9 +48,9 @@ export default function UserProfile(){
                     .then(data => demoArr.push(data.friends))
                 }
             }
-            // console.log("Demo Arr: "+demoArr);
+            // //console.log("Demo Arr: "+demoArr);
             setFriendsIds(demoArr[0])
-            // console.log("Friends Ids: "+friendsIds)
+            // //console.log("Friends Ids: "+friendsIds)
 
         }
         getFriends()
@@ -62,7 +62,7 @@ export default function UserProfile(){
                 .then(result => result.json())
                 .then(data => test.push(data.userId))
             }
-            // console.log(test)
+            // //console.log(test)
             setFriends(test)
         }
         queryFriends()

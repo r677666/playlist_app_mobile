@@ -7,7 +7,7 @@ import Navigation from './Navigation';
 import TasteMaker3 from './Tastemaker Pro Ad .99 UPDATED.png'
 import { renderMatches } from 'react-router-dom';
 import Footer from './Footer';
-import artistPicture from './2809.jpg'
+import FOATad from './FOAT ad.png'
 import pollPicture from './Kendrick Poll Clear.png'
 import stockPhotoLogo from './Tastemakers Main Logo (1).png'
 import SpotifyPlayback from './SpotifyPlayback';
@@ -30,7 +30,7 @@ export default function Home(){
             const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users')
             .then(result => result.json())
             .then(data => setUsers(data))
-            .then(console.log("users from Playlist App Server have been found"))
+            // .then(//console.log("users from Playlist App Server have been found"))
         }
         fetchUsers()
         function handleResize() {
@@ -52,13 +52,13 @@ export default function Home(){
 
     function clickUser(name){
         name = name.replaceAll("\"", "")
-        window.location.assign("https://www.tastemakers.pro/User/" + name)
+        window.location.assign("https://tastemakers.pro/User/" + name)
     }
 
     async function followUserButton(user,follower){
         var alreadyFollowed = false;
-        console.log(user)
-        console.log(follower)
+        //console.log(user)
+        //console.log(follower)
         var followThisPerson = '';
         var followerId = '';
 
@@ -67,16 +67,16 @@ export default function Home(){
         for(var i = 0; i<users.length;i++){
             if(users[i].userId == user){
                 followThisPerson = users[i]._id
-                console.log(followThisPerson)
-                console.log("FOLLOWER MATCH")
+                //console.log(followThisPerson)
+                //console.log("FOLLOWER MATCH")
             }
         }
 
         for(var i = 0; i<users.length;i++){
             if(users[i].userId == follower){
                 followerId = users[i]._id;
-                console.log(followerId)
-                console.log("USER MATCH")
+                //console.log(followerId)
+                //console.log("USER MATCH")
             }
         }
 
@@ -90,9 +90,15 @@ export default function Home(){
               'Content-Type': 'application/json'
             }
           })
-        .then(response => console.log(response.json()))
+        // .then(response => //console.log(response.json()))
         .then(alert("Friend Added"))
     }
+
+    function checkForLogin(){
+        if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
+            window.location.assign("https://tastemakers.pro")
+        }
+      }
 
     function checkFollowButton(item1,item2){
         if(item1 != item2){
@@ -123,7 +129,7 @@ export default function Home(){
     }
 
     function competitionButton(){
-        window.location.assign("https://www.tastemakers.pro/Competition/")
+        window.location.assign("https://tastemakers.pro/Competition/")
     }
     function handleUserImgs(userId){
         var userParameters = {
@@ -138,7 +144,7 @@ export default function Home(){
         .then(data => setGetUserImg(data))
     }
     function handleUpgradeButton(){
-        window.location.assign("https://www.tastemakers.pro/Upgrade")
+        window.location.assign("https://tastemakers.pro/Upgrade")
     }
     function handleTextMobile(){
         if(windowSize.width < 765){
@@ -167,7 +173,7 @@ export default function Home(){
             )
         }else{
             return(
-                <h3 style={{color:"black", marginTop:"20rem",textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF'}}>Best Drake Album</h3>
+                <h3 style={{color:"black", marginTop:"20rem",textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF'}}>F.O.A.T.</h3>
             )
         }
     }
@@ -201,7 +207,7 @@ export default function Home(){
     
       function handleSpotifyPlayback(){
         localStorage.setItem("showSpotifyPlayer","true")
-        console.log(localStorage.getItem("showSpotifyPlayer"))
+        //console.log(localStorage.getItem("showSpotifyPlayer"))
         checkForSpotifyPlayer()
       }
 
@@ -217,7 +223,7 @@ export default function Home(){
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
-                src={artistPicture}
+                src={FOATad}
                 alt="First slide"
                 style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover' }}
                 />
@@ -228,7 +234,7 @@ export default function Home(){
                 </Carousel.Caption>
                 
             </Carousel.Item>
-            <Carousel.Item interval={4000}>
+            {/* <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
                 src={pollPicture}
@@ -247,7 +253,7 @@ export default function Home(){
                 </Button>
                 </ButtonGroup>
                 </Carousel.Caption>
-            </Carousel.Item>
+            </Carousel.Item> */}
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
@@ -296,7 +302,7 @@ export default function Home(){
                     {users && users.map((user,i) => (
                         <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
                             <Container onClick={event => clickUser(users[i].userId)}>
-                                {console.log(users[i])}
+                                {/* {console.log(users[i])} */}
                                     
                                     <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
                                         <Container style={{paddingTop:'.25rem'}}> 
@@ -319,7 +325,7 @@ export default function Home(){
             )
         }else{
             return(
-                <div>
+                <div style={{backgroundColor:"#FFFCFC"}}>
                             <div className='Home'>
         <Navigation/>
         <div style={{backgroundColor:"black"}}>
@@ -328,18 +334,18 @@ export default function Home(){
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
-                src={artistPicture}
+                src={FOATad}
                 alt="First slide"
-                style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover' }}
+                style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover', marginLeft:'1rem' }}
                 />
                 <Carousel.Caption>
-                {handleCardTextMobile()}
+                {/* {handleCardTextMobile()} */}
                 <p style={{color:"white", textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Submit playlist for this week's competition</p>
                 <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button>
                 </Carousel.Caption>
                 
             </Carousel.Item>
-            <Carousel.Item interval={4000}>
+            {/* <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
                 src={pollPicture}
@@ -358,7 +364,7 @@ export default function Home(){
                 </Button>
                 </ButtonGroup>
                 </Carousel.Caption>
-            </Carousel.Item>
+            </Carousel.Item> */}
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
@@ -405,7 +411,7 @@ export default function Home(){
                     {users && users.map((user,i) => (
                         <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
                             <Container onClick={event => clickUser(users[i].userId)}>
-                                {console.log(users[i])}
+                                {/* {//console.log(users[i])} */}
                                     
                                     <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
                                         <Container style={{paddingTop:'.25rem'}}> 
@@ -431,6 +437,7 @@ export default function Home(){
     }
     return(
         <div>
+            {checkForLogin()}
             {handleMobileHomeScreen()}
         </div>
         

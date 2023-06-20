@@ -9,23 +9,21 @@ import Footer from './Footer';
 import crown from './crown.png';
 
 function handleUpgradeButton(){
-    window.location.assign("https://www.tastemakers.pro/Upgrade")
+    window.location.assign("https://tastemakers.pro/Upgrade")
 }
-
 export default function Profile(){
     const userAuthToken = sessionStorage.getItem("token");
     var userId = sessionStorage.getItem("userId");
     var userEmail = sessionStorage.getItem("userEmail");
     const userImg = sessionStorage.getItem("imgURL");
     const [userPro, setUserPro] = useState(false);
-    console.log(userImg)
-    userId = userId.replaceAll("\"","")
+    //console.log(userImg)
     useEffect(() => {
     
         const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/'+ sessionStorage.getItem("userId"))
         .then(result => result.json())
         .then(data => setUserPro(data.paidMember))
-        .then(console.log(userPro))
+        // .then(console.log(userPro))
     
     }, [])
     function handleProUser(){
@@ -41,9 +39,17 @@ export default function Profile(){
                 )
         }
       }
+      function checkForLogin(){
+        if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
+            window.location.assign("https://tastemakers.pro")
+        }
+        userId = userId.replaceAll("\"","")
+      }
+    
     return(
         
-        <div>
+        <div style={{backgroundColor:"#FFFCFC"}}>
+            {checkForLogin()}
             <div style={{width:"100%",height:"100%", textAlign:'center'}}>
                 <div>
                     <Navigation/>

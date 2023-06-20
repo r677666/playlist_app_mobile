@@ -69,23 +69,19 @@ export default function Footer() {
             </MDBCol> */}
 
             <MDBCol md="2" lg="3" xl="2" className='mx-auto mb-md-0 mb-4'>
-              <h6 className='text-uppercase fw-bold mb-3'>Contact</h6>
+              <h6 style={{marginTop:"2rem"}}className='text-uppercase fw-bold mb-3'>Contact</h6>
               <p>
                 {/* <MDBIcon icon="home" className="me-3" /> */}
-                Columbus, OH, 43240
+                Delaware, OH, 43015
               </p>
               <p>
                 {/* <MDBIcon icon="envelope" className="me-3" /> */}
                 tastemakers.official.llc@gmail.com
               </p>
-              <p>
+              {/* <p>
                 {/* <MDBIcon icon="phone" className="me-3" />  */}
-                + 614 271 1109
-              </p>
-              <p>
-                {/* <MDBIcon icon="print" className="me-3" />  */}
-                + 01 234 567 89
-              </p>
+                {/* + 614 271 1109 */}
+              {/* </p> */} 
             </MDBCol>
           </MDBRow>
         </MDBContainer>
@@ -93,8 +89,8 @@ export default function Footer() {
 
       <div className='text-center p-4' style={{ backgroundColor: '#ff914d' }}>
         © 2023 Copyright:    
-        <a className='text-reset fw-bold' href='https://tastemakers.com/'>
-          TasteMakers.com
+        <a className='text-reset fw-bold' href='https://tastemakers.pro/'>
+          TasteMakers.pro
         </a>
       </div>
     </MDBFooter>

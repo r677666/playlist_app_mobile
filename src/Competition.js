@@ -261,14 +261,17 @@ function handleBigText(){
   if(windowSize.width < 750 ){
     return (
       <>
-      <h1 style={{textAlign:"center",fontSize:"1.8rem"}}>The Best Album of the Year</h1>
-      <h5 style={{textAlign:"center",color:"gray", fontSize:".75rem",marginBottom:"1.5rem"}}>The Best User Created Album of the Year</h5></>
+      <h1 style={{textAlign:"center",fontSize:"1.8rem", color:"orange"}}>F.O.A.T.</h1>
+      <h5 style={{textAlign:"center",color:"gray", fontSize:".75rem"}}>The First of All Time</h5>
+      <h5 style={{textAlign:"center",color:"gray", fontSize:".75rem",marginBottom:"1.5rem"}}>You are truly one of the first! Submit the first playlist to ever be voted for! Time to get paid!</h5>
+      </>
     )
   }else{
     return(
       <>
-      <h1 style={{textAlign:"center",fontSize:"4rem"}}>The Best Album of the Year</h1>
-      <h5 style={{textAlign:"center",color:"gray", fontSize:"1rem"}}>The Best User Created Album of the Year</h5>
+            <h1 style={{textAlign:"center",fontSize:"8rem", color:"orange"}}>F.O.A.T.</h1>
+      <h5 style={{textAlign:"center",color:"gray", fontSize:"1.75rem", color:"orange"}}>The First of All Time</h5>
+      <h5 style={{textAlign:"center",color:"gray", fontSize:".75rem",marginBottom:"1.5rem", color:"orange"}}>You are truly one of the first! Submit the first playlist to ever be voted for! Time to get paid!</h5>
     </>
     )
   }
@@ -280,9 +283,9 @@ function handleSubmissionText(){
   }else{
     return(
       <div style={{ maxWidth:"50rem"}}>
-      <h5 style={{marginBottom:"1.25rem", textAlign:"left", marginTop:'1rem'}}>
-        Current Submissions<span style={{marginLeft:"24rem"}}> Payout:
-      <span style={{fontSize:"3.5rem",color:"green"}}>$250</span></span></h5>
+      <h5 style={{marginBottom:"1.25rem", textAlign:"left", marginTop:'1rem', color:"orange"}}>
+        Current Submissions<span style={{marginLeft:"24rem", color:"orange"}}> Payout:
+      <span style={{fontSize:"3.5rem",color:"orangered"}}>$25</span></span></h5>
     </div>
     )
   }
@@ -377,7 +380,7 @@ function handleGoogleAds(){
           <Col>
             <Row className="flex overflow-auto overflow-y-scroll" style={{height:'25rem'}}>
               {compSubmissions && compSubmissions.map((user,i) => (
-                  <Card style={{padding:".5rem",paddingBottom:"1rem", justifyContent:"left", justifyItems:"left"}} >
+                  <Card style={{padding:".5rem",paddingBottom:"1rem", justifyContent:"left", justifyItems:"left", backgroundColor:"#FAFAFA"}} >
                           <Container> 
                               <h4 style={{justifySelf:"left"}}>{compSubmissions[i].playlistName}</h4>
                               <Button 
@@ -443,11 +446,17 @@ function handleGoogleAds(){
     console.log(localStorage.getItem("showSpotifyPlayer"))
     checkForSpotifyPlayer()
   }
+  function checkForLogin(){
+    if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
+        window.location.assign("https://tastemakers.pro")
+    }
+  }
 
     return(
-        <div>
+        <div style={{backgroundColor:"black"}}>
+          {checkForLogin()}
             <Navigation/>
-            <div style={{marginTop:"8rem", width:"100%"}}>
+            <div style={{marginTop:"6rem", width:"100%"}}>
                     {handleBigText()}
                 </div>
                 
