@@ -20,7 +20,7 @@ export default function Profile(){
     //console.log(userImg)
     useEffect(() => {
     
-        const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/'+ sessionStorage.getItem("userId"))
+        const response = fetch(process.env.REACT_APP_BACKEND_URL+'/api/users/'+ sessionStorage.getItem("userId"))
         .then(result => result.json())
         .then(data => setUserPro(data.paidMember))
         // .then(console.log(userPro))
