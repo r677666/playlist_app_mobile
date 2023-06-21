@@ -80,7 +80,7 @@ export default function Home(){
             }
         }
 
-        const followMethod = await fetch(process.env.REACT_APP_BACKEND_URL+"/api/users/friends/addFriend",{
+        const followMethod = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/users/friends/addFriend',{
             method: 'PATCH',
             body: JSON.stringify({
               "userId": followerId,
