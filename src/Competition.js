@@ -158,10 +158,10 @@ export default function UserProfile(){
       }
       function deleteButtonFunction(id){
         console.log(id)
-        const getMethod = fetch(process.env.REACT_APP_BACKEND_URL+"/api/competition/" +id)
+        const getMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/' +id)
         .then(result => console.log(result.json()))
 
-        const deleteMethod = fetch(process.env.REACT_APP_BACKEND_URL+"/api/competition/",{
+        const deleteMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/',{
         method: 'DELETE',
         body: JSON.stringify({
             "id": id
@@ -176,7 +176,7 @@ export default function UserProfile(){
     const handleLike = async (userId,id) => {
                 var arr = [];
                 
-                const checkIfLikedAlready = await fetch(process.env.REACT_APP_BACKEND_URL+"/api/competition/" + id)
+                const checkIfLikedAlready = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/' + id)
                 .then(result => result.json())
                 .then(data => 
                     {
@@ -186,7 +186,7 @@ export default function UserProfile(){
                         // console.log(data.likes.indexOf('testLike') )
                         if(data.likes.indexOf(userId) !== -1){
                             console.log("REMOVED LIKE")
-                                    const followMethod = fetch(process.env.REACT_APP_BACKEND_URL+"/api/competition/removeLike",{
+                                    const followMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/removeLike',{
                                         method: 'PATCH',
                                         body: JSON.stringify({
                                             "userId": userId,
@@ -203,7 +203,7 @@ export default function UserProfile(){
                             // }
                         }else{
                             console.log("ADDED LIKE")
-                            const followMethod = fetch(process.env.REACT_APP_BACKEND_URL+"/api/competition/addLike",{
+                            const followMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/addLike',{
                                 method: 'PATCH',
                                 body: JSON.stringify({
                                     "userId": userId,

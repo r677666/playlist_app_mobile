@@ -12,7 +12,7 @@ import FooterMobile from './Footer Login'
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "https://www.tastemakers.pro/"
+const REDIRECT_URI = "https://tastemakers.pro/"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
@@ -69,8 +69,8 @@ export default function Login(){
           return () => window.removeEventListener("resize", handleResize);
       }, [])
 
-      function checkForActive(){
-          setIsActive(current => !current)
+      function checkForRegisteredUser(){
+        
       }
 
       //For Playlist App Server
@@ -95,12 +95,12 @@ export default function Login(){
                   const json = await response.json()
                   //console.log(json)
                   if(!response.ok){
-                    //console.log("User Already Exists")
+                    console.log("User Already Exists")
                   }else{
-                    //console.log("User Created")
+                    console.log("User Created")
                   }
           }else{
-            //console.log("UserId Null")
+            console.log("UserId Null")
           }
         }
 
@@ -114,14 +114,14 @@ export default function Login(){
         sessionStorage.setItem("token",secondToken)
         try{
         userInfo()
+        if(sessionStorage.getItem("userId") != null){
+          fetchUsers()
+          window.location.assign("https://tastemakers.pro/Home")
+        }
         }catch{
           return(
             <div><h1>Login Failed</h1></div>
           )
-        }
-        if(sessionStorage.getItem("userId") != null){
-          fetchUsers()
-          window.location.assign("https://tastemakers.pro/Home")
         }
         }
       }
@@ -134,6 +134,7 @@ export default function Login(){
               'Authorization': 'Bearer ' + sessionStorage.getItem("token")
           }
         }
+        try{
         sessionStorage.setItem("params",JSON.stringify(userParameters))
         //console.log(sessionStorage.getItem("params"))
         var userData = fetch('https://api.spotify.com/v1/me',userParameters)
@@ -147,6 +148,15 @@ export default function Login(){
           sessionStorage.setItem("spotifyUserImgUrl",data.images[0].url)
         })
         .catch(response => console.log("CATCH"+response.json()))
+        if(sessionStorage.getItem("userEmail") == null || sessionStorage.getItem("spotifyUserImgUrl") == null || sessionStorage.getItem("imgURL") == null){
+          sessionStorage.setItem("spotifyToken",null)
+          window.location.assign("https://tastemakers.pro/Logout")
+          alert("Login Failed - Sign Up First / Restart Browser Cache / or Contact Us")
+        }
+      }catch{
+        sessionStorage.setItem("userId",null)
+        sessionStorage.setItem("token",null)
+      }
         //Just getting UserId for now but definitely can get additional info from this json
       }
 
