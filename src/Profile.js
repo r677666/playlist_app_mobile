@@ -7,6 +7,7 @@ import FREE from './FREE 2.png';
 import PRO from './vibes.png';
 import Footer from './Footer';
 import crown from './crown.png';
+import BottomGoogleAd from './BottomGoogleAd';
 
 function handleUpgradeButton(){
     window.location.assign("https://www.tastemakers.pro/Upgrade")
@@ -72,6 +73,7 @@ export default function Profile(){
                     <Footer/>
                 </div>
             </div>
+            <BottomGoogleAd/>
         </div>
     );
 }

@@ -9,6 +9,7 @@ import play from './play.png';
 import Adsense from 'react-adsense';
 import SpotifyPlayback from './SpotifyPlayback';
 import officialSpotify from './spotify official logo.png'
+import BottomGoogleAd from './BottomGoogleAd';
 //testing change
 export default function UserProfile(){
 
@@ -602,6 +603,7 @@ function handleGoogleAds(){
                     
                 </div>
                 {checkForSpotifyPlayer()}
+                <BottomGoogleAd/>
                 <Footer/>
         </div>
     )

@@ -12,6 +12,7 @@ import pollPicture from './Kendrick Poll Clear.png'
 import stockPhotoLogo from './Tastemakers Main Logo (1).png'
 import MobileAe2 from './Tastemaker Pro Ad .99 UPDATED - MOBILE.png'
 import SpotifyPlayback from './SpotifyPlayback';
+import BottomGoogleAd from './BottomGoogleAd';
 
 
 export default function Home(){
@@ -440,6 +441,7 @@ export default function Home(){
         <div>
             {checkForLogin()}
             {handleMobileHomeScreen()}
+            <BottomGoogleAd/>
         </div>
         
     );
