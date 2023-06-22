@@ -38,7 +38,7 @@ export default function Login(){
     //console.log("Image:"+ (sessionStorage.getItem("imgURL")))
     //console.log("User: "+ (sessionStorage.getItem("userId")))
     const SPACE_DELIMITER = "%20";
-    const SCOPES = ["streaming","playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email", "user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state"]
+    const SCOPES = ["playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email", "user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state"]
     const SCOPES_URI_PARAM = SCOPES.join(SPACE_DELIMITER)
     useEffect(() => {
         // API Access Token
@@ -196,7 +196,9 @@ export default function Login(){
                       <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center"}}
                       onClick={handleLogin}
                       >
-                      <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
+                      {/* <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}}
+                      //  src={spotifyImg}
+                       /> */}
                       Login with Spotify</Button>
                       <Button style={{backgroundColor:"black", marginTop:"1rem", width:"40vh", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleSignup}>
                     <img style={{width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
@@ -226,7 +228,7 @@ export default function Login(){
                     <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem"}}
                     onClick={handleLogin}
                     >
-                    <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
+                    {/* <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/> */}
                     Login with Spotify</Button>
                     <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
                     <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
