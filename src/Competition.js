@@ -448,7 +448,7 @@ function handleGoogleAds(){
   }
   function checkForLogin(){
     if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
-        window.location.assign("https://tastemakers.pro")
+        window.location.assign("https://www.tastemakers.pro")
     }
   }
 
