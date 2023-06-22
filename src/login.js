@@ -9,10 +9,11 @@ import TastemakerLogo from './taste makers logo (1).png'
 import spotifyImg from './spotify img.png'
 import Footer from './Footer Desktop Login'
 import FooterMobile from './Footer Login'
+import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "https://www.tastemakers.pro/"
+const REDIRECT_URI = "https://tastemakers.pro/"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
@@ -68,10 +69,6 @@ export default function Login(){
       
           return () => window.removeEventListener("resize", handleResize);
       }, [])
-
-      function checkForRegisteredUser(){
-        
-      }
 
       //For Playlist App Server
       async function fetchUsers(){
@@ -138,7 +135,14 @@ export default function Login(){
         sessionStorage.setItem("params",JSON.stringify(userParameters))
         //console.log(sessionStorage.getItem("params"))
         var userData = fetch('https://api.spotify.com/v1/me',userParameters)
-        .then(response => response.json())
+        .then(response => 
+          {
+            if(response.status !== 200){
+              alert("Login Failed - Sign Up for Beta / Clear Cache / or Contact Us")
+            return null
+          }
+          return response.json()
+          })
         // .then(data => sessionStorage.setItem("error",JSON.stringify(data)))
         .then(data => {
           sessionStorage.setItem("userId", JSON.stringify(data.id))
@@ -148,15 +152,11 @@ export default function Login(){
           sessionStorage.setItem("spotifyUserImgUrl",data.images[0].url)
         })
         .catch(response => console.log("CATCH"+response.json()))
-        if(sessionStorage.getItem("userEmail") == null || sessionStorage.getItem("spotifyUserImgUrl") == null || sessionStorage.getItem("imgURL") == null){
-          sessionStorage.setItem("spotifyToken",null)
-          window.location.assign("https://tastemakers.pro/Logout")
-          alert("Login Failed - Sign Up First / Restart Browser Cache / or Contact Us")
-        }
       }catch{
         sessionStorage.setItem("userId",null)
         sessionStorage.setItem("token",null)
       }
+      // checkForUser()
         //Just getting UserId for now but definitely can get additional info from this json
       }
 
@@ -170,6 +170,14 @@ export default function Login(){
     const handleSignup = () => {
       window.location.assign("https://forms.gle/9z9cmbSbvpmSCSwb8")
   };
+
+  function checkForUser(){
+    if(sessionStorage.getItem("userEmail") == null){
+      window.location.assign("https://tastemakers.pro")
+      sessionStorage.setItem("userId", null)
+      alert("Login Failed - Sign Up / Clear Cache / or Contact Us")
+    }
+  }
     
     function handleSmallerScreen(){
       if(windowSize.width < 765){
