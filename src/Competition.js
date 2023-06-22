@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Card, Button, Col, InputGroup, FormControl, CardGroup, Modal, ButtonGroup, CardDeck} from 'react-bootstrap';
+import { Container, Row, Card, Button, Col, InputGroup, FormControl, CardGroup, Modal, ButtonGroup, CardDeck, Image} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
@@ -8,6 +8,7 @@ import Footer from './Footer';
 import play from './play.png';
 import Adsense from 'react-adsense';
 import SpotifyPlayback from './SpotifyPlayback';
+import officialSpotify from './spotify official logo.png'
 //testing change
 export default function UserProfile(){
 
@@ -143,9 +144,9 @@ export default function UserProfile(){
             // }else{
             //   currentID = id
             // }
-            console.log("User Name:"+userId)
-            console.log("Playlists Name:"+playlistsName)
-            console.log("Playlist ID = " + playlistsId)
+            // console.log("User Name:"+userId)
+            // console.log("Playlists Name:"+playlistsName)
+            // console.log("Playlist ID = " + playlistsId)
             alert("SELECTED")
             sessionStorage.setItem("playlistId",playlistsId)
             sessionStorage.setItem("playlistName",playlistsName)
@@ -442,9 +443,10 @@ function handleGoogleAds(){
   }
 
   function handleSpotifyPlayback(){
-    localStorage.setItem("showSpotifyPlayer","true")
-    console.log(localStorage.getItem("showSpotifyPlayer"))
-    checkForSpotifyPlayer()
+    // localStorage.setItem("showSpotifyPlayer","true")
+    // console.log(localStorage.getItem("showSpotifyPlayer"))
+    // checkForSpotifyPlayer()
+    window.open("https://open.spotify.com/playlist/" + sessionStorage.getItem('compDoc'))
   }
   function checkForLogin(){
     if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
@@ -516,8 +518,13 @@ function handleGoogleAds(){
                 {/* Show submitted playlist tracks */}
                    <Modal show={showCompPlayListModal} onHide={handleClose_showCompPlayListModal} style={{padding:"5rem",zIndex:"1050"}}>
                     <Modal.Header closeButton>
-                    <Modal.Title>{compDoc.name}<Button style={{marginLeft:"6rem"}} onClick={event => handleSpotifyPlayback()}>
-                      Play</Button></Modal.Title>
+                    <Modal.Title>{compDoc.name}<Button style={{marginLeft:"6rem", backgroundColor:"white", color:"black", borderColor:"black", fontSize:"1.25rem"}} onClick={event => handleSpotifyPlayback()}>
+                      Play
+                      <Image
+                        style={{marginLeft:'.5rem', width:"3rem", height:"3rem"}}
+                        src={officialSpotify}
+                      />
+                      </Button></Modal.Title>
                     </Modal.Header>
                     <Container style={{paddingTop:"1rem",paddingBottom:"1rem"}}>
                     {isCompActive && compDoc.href ? (compDoc.tracks.items.map((items,i) => {
@@ -525,7 +532,7 @@ function handleGoogleAds(){
                         <Card>
                       <CardGroup>
                       
-                      <Card.Img src={items.track.album.images[0].url} style={{maxWidth:"5rem",maxHeight:"5rem"}}/>
+                      <Card.Img src={items.track.album.images[0].url} style={{marginLeft:"1rem", borderRadius:"0rem",maxWidth:"5rem",maxHeight:"5rem"}}/>
                       {/* {console.log(items.track.album.images[0].url)} */}
                       <CardGroup as='div' className='flex-column' style={{maxWidth:"20rem", paddingLeft:"1rem", paddingTop:".08rem"}}>
                         <Card.Title>
@@ -554,7 +561,12 @@ function handleGoogleAds(){
                     <Modal.Header closeButton>
                     <Modal.Title>{compDoc.name}
                     <Button style={{marginLeft:"6rem"}} onClick={() => handleSpotifyPlayback()}>
-                      Play</Button>
+                      Play
+                      <Image
+                        style={{marginLeft:'.5rem', width:"1.5rem", height:"1.5rem"}}
+                        src={officialSpotify}
+                      />
+                      </Button>
                       </Modal.Title>
                     </Modal.Header>
                     <Container style={{paddingTop:"1rem",paddingBottom:"1rem"}}>
