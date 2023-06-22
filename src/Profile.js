@@ -9,7 +9,7 @@ import Footer from './Footer';
 import crown from './crown.png';
 
 function handleUpgradeButton(){
-    window.location.assign("https://tastemakers.pro/Upgrade")
+    window.location.assign("https://www.tastemakers.pro/Upgrade")
 }
 export default function Profile(){
     const userAuthToken = sessionStorage.getItem("token");
@@ -41,7 +41,7 @@ export default function Profile(){
       }
       function checkForLogin(){
         if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
-            window.location.assign("https://tastemakers.pro")
+            window.location.assign("https://www.tastemakers.pro")
         }
         userId = userId.replaceAll("\"","")
       }

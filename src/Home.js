@@ -10,6 +10,7 @@ import Footer from './Footer';
 import FOATad from './FOAT ad.png'
 import pollPicture from './Kendrick Poll Clear.png'
 import stockPhotoLogo from './Tastemakers Main Logo (1).png'
+import MobileAe2 from './Tastemaker Pro Ad .99 UPDATED - MOBILE.png'
 import SpotifyPlayback from './SpotifyPlayback';
 
 
@@ -52,7 +53,7 @@ export default function Home(){
 
     function clickUser(name){
         name = name.replaceAll("\"", "")
-        window.location.assign("https://tastemakers.pro/User/" + name)
+        window.location.assign("https://www.tastemakers.pro/User/" + name)
     }
 
     async function followUserButton(user,follower){
@@ -96,7 +97,7 @@ export default function Home(){
 
     function checkForLogin(){
         if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
-            window.location.assign("https://tastemakers.pro")
+            window.location.assign("https://www.tastemakers.pro")
         }
       }
 
@@ -129,7 +130,7 @@ export default function Home(){
     }
 
     function competitionButton(){
-        window.location.assign("https://tastemakers.pro/Competition/")
+        window.location.assign("https://www.tastemakers.pro/Competition/")
     }
     function handleUserImgs(userId){
         var userParameters = {
@@ -144,7 +145,7 @@ export default function Home(){
         .then(data => setGetUserImg(data))
     }
     function handleUpgradeButton(){
-        window.location.assign("https://tastemakers.pro/Upgrade")
+        window.location.assign("https://www.tastemakers.pro/Upgrade")
     }
     function handleTextMobile(){
         if(windowSize.width < 765){
@@ -229,8 +230,8 @@ export default function Home(){
                 />
                 <Carousel.Caption>
                 {handleCardTextMobile()}
-                <p style={{color:"white", textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Submit playlist for this week's competition</p>
-                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button>
+                {/* <p style={{color:"white", textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Submit playlist for this week's competition</p> */}
+                {/* <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button> */}
                 </Carousel.Caption>
                 
             </Carousel.Item>
@@ -257,7 +258,7 @@ export default function Home(){
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
-                src={TasteMaker3}
+                src={MobileAe2}
                 alt="Third slide"
                 />
                 

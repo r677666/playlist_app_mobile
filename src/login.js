@@ -113,7 +113,7 @@ export default function Login(){
         userInfo()
         if(sessionStorage.getItem("userId") != null){
           fetchUsers()
-          window.location.assign("https://tastemakers.pro/Home")
+          window.location.assign("https://www.tastemakers.pro/Home")
         }
         }catch{
           return(
@@ -139,7 +139,7 @@ export default function Login(){
           {
             if(response.status !== 200){
               alert("Login Failed - Sign Up for Beta / Clear Cache / or Contact Us")
-              window.location.assign('https://tastemakers.pro/Logout')
+              window.location.assign('https://www.tastemakers.pro/Logout')
             return null
           }
           return response.json()
@@ -174,7 +174,7 @@ export default function Login(){
 
   function checkForUser(){
     if(sessionStorage.getItem("userEmail") == null){
-      window.location.assign("https://tastemakers.pro")
+      window.location.assign("https://www.tastemakers.pro")
       sessionStorage.setItem("userId", null)
       alert("Login Failed - Sign Up / Clear Cache / or Contact Us")
     }
