@@ -139,6 +139,7 @@ export default function Login(){
           {
             if(response.status !== 200){
               alert("Login Failed - Sign Up for Beta / Clear Cache / or Contact Us")
+              window.location.assign('https://tastemakers.pro/Logout')
             return null
           }
           return response.json()
