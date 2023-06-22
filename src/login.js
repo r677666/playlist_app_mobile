@@ -9,7 +9,9 @@ import TastemakerLogo from './taste makers logo (1).png'
 import spotifyImg from './spotify img.png'
 import Footer from './Footer Desktop Login'
 import FooterMobile from './Footer Login'
+import GoogleAd from 'react-google-ad';
 import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
+import BottomGoogleAd from './BottomGoogleAd';
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -179,6 +181,11 @@ export default function Login(){
       alert("Login Failed - Sign Up / Clear Cache / or Contact Us")
     }
   }
+
+  const containerStyle = {
+    height:"5rem",backgroundSize: "0", backgroundColor: "black", bottom:"0",
+            position:"fixed",zIndex:"1060", width:"100%", color:"white", display:"flex"
+  };
     
     function handleSmallerScreen(){
       if(windowSize.width < 765){
@@ -240,6 +247,14 @@ export default function Login(){
           </div>  
         </div>
         <br/>
+        {/* <div style={containerStyle}>
+        <GoogleAd
+          adClient="ca-pub-7787464840070054"
+          adSlot="4414116362"
+          format="auto"
+        />
+        </div> */}
+        <BottomGoogleAd/>
         <Footer/>
       </div>
            )
