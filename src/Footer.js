@@ -48,7 +48,7 @@ export default function Footer() {
             <MDBCol md="1" lg="2" xl="1" className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>Useful links</h6>
               <p>
-                <a href='/' className='text-reset'>
+                <a href='/Home' className='text-reset'>
                   Home
                 </a>
               </p>
