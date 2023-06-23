@@ -6,10 +6,11 @@ import { click } from '@testing-library/user-event/dist/click';
 import App from './App';
 import TastemakerImg  from './Tastemakers Main Logo (1).png'
 import TastemakerLogo from './taste makers logo (1).png'
-import spotifyImg from './spotify img.png'
+import spotifyImg from './Spotify_Icon_RGB_White.png'
 import Footer from './Footer Desktop Login'
 import FooterMobile from './Footer Login'
 import GoogleAd from 'react-google-ad';
+
 import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
 import BottomGoogleAd from './BottomGoogleAd';
 
@@ -203,10 +204,10 @@ export default function Login(){
                       <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center"}}
                       onClick={handleLogin}
                       >
-                      {/* <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}}
-                      //  src={spotifyImg}
-                       /> */}
-                      Login with Spotify</Button>
+                      <img style={{width:"4.5rem",height:"4.5rem", marginRight:"1rem"}}
+                       src={spotifyImg}
+                       />
+                      Login</Button>
                       <Button style={{backgroundColor:"black", marginTop:"1rem", width:"40vh", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleSignup}>
                     <img style={{width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
                     Sign Up for Beta</Button>
@@ -232,11 +233,13 @@ export default function Login(){
               <Container style={{marginTop:"20rem", marginLeft:"5rem"}}>
                 <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
                 <InputGroup>
-                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem"}}
+                {/* <div style={{display:"flex"}}> */}
+                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem", fontSize:"1.5rem"}}
                     onClick={handleLogin}
                     >
-                    {/* <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/> */}
-                    Login with Spotify</Button>
+                    <img style={{width:"2rem",height:"2rem", marginRight:".5rem"}} src={spotifyImg}/>
+                    Login</Button>
+                {/* </div> */}
                     <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
                     <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
                     Sign Up for Beta</Button>

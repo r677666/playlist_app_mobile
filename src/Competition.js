@@ -522,7 +522,7 @@ function handleGoogleAds(){
                     <Modal.Title>{compDoc.name}<Button style={{marginLeft:"6rem", backgroundColor:"white", color:"black", borderColor:"black", fontSize:"1.25rem"}} onClick={event => handleSpotifyPlayback()}>
                       Play
                       <Image
-                        style={{marginLeft:'.5rem', width:"3rem", height:"3rem"}}
+                        style={{marginLeft:'.5rem', width:"4.375rem", height:"4.375rem"}}
                         src={officialSpotify}
                       />
                       </Button></Modal.Title>
@@ -561,10 +561,10 @@ function handleGoogleAds(){
 <Modal show={showCompPlayListModalMobile} onHide={handleClose_showCompPlayListModalMobile} style={{width:"24rem", marginLeft:".25rem"}}>
                     <Modal.Header closeButton>
                     <Modal.Title>{compDoc.name}
-                    <Button style={{marginLeft:"6rem"}} onClick={() => handleSpotifyPlayback()}>
+                    <Button style={{backgroundColor:"white", color:"black", borderColor:"black"}} onClick={() => handleSpotifyPlayback()}>
                       Play
                       <Image
-                        style={{marginLeft:'.5rem', width:"1.5rem", height:"1.5rem"}}
+                        style={{marginLeft:'.5rem', width:"4.375rem", height:"4.375rem"}}
                         src={officialSpotify}
                       />
                       </Button>
