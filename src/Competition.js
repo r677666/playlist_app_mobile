@@ -576,7 +576,7 @@ function handleGoogleAds(){
                         <Card>
                       <CardGroup style={{display:"flex"}}>
                       
-                      <Card.Img src={items.track.album.images[0].url} style={{maxWidth:"5rem",maxHeight:"5rem",borderRadius:"0rem"}}/>
+                      <Card.Img src={items.track.album.images[0].url} style={{width:"5rem",height:"5rem",borderRadius:"0rem", marginLeft:"1rem"}}/>
                       {/* {console.log(items.track.album.images[0].url)} */}
                       <CardGroup as='div' className='flex-column' style={{maxWidth:"20rem", paddingLeft:"1rem", paddingTop:".08rem"}}>
                         

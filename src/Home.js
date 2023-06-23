@@ -303,7 +303,9 @@ export default function Home(){
                 <Row className="flex-nowrap overflow-auto">
                     {users && users.map((user,i) => (
                         <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
-                            <Container onClick={event => clickUser(users[i].userId)}>
+                            <Container 
+                            // onClick={event => clickUser(users[i].userId)}
+                            >
                                 {/* {console.log(users[i])} */}
                                     
                                     <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
@@ -412,7 +414,9 @@ export default function Home(){
                 <Row className="flex-nowrap overflow-auto">
                     {users && users.map((user,i) => (
                         <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
-                            <Container onClick={event => clickUser(users[i].userId)}>
+                            <Container 
+                            // onClick={event => clickUser(users[i].userId)}
+                            >
                                 {/* {//console.log(users[i])} */}
                                     
                                     <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
