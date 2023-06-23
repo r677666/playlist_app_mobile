@@ -602,7 +602,7 @@ function handleGoogleAds(){
                 </Modal>
                     
                 </div>
-                {checkForSpotifyPlayer()}
+                {/* {checkForSpotifyPlayer()} */}
                 <BottomGoogleAd/>
                 <Footer/>
         </div>
