@@ -8,6 +8,7 @@ import crown from './crown.png';
 import goldOk from './gold_ok.png';
 import grayOk from './gray_ok.png'
 import { Link } from 'react-router-dom';
+import BottomGoogleAd from './BottomGoogleAd';
 // import Stripe from "stripe";
 
 export default function Upgrade(){
@@ -248,6 +249,7 @@ export default function Upgrade(){
                 </Button>
                 </Modal.Footer>
             </Modal>
+            <BottomGoogleAd/>
         </div>
         
     )
