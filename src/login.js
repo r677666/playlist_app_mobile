@@ -254,7 +254,7 @@ export default function Login(){
           format="auto"
         />
         </div> */}
-        <BottomGoogleAd/>
+        {/* <BottomGoogleAd/> */}
         <Footer/>
       </div>
            )
@@ -264,6 +264,7 @@ export default function Login(){
     return(
       <div>
       {handleSmallerScreen()}
+      <BottomGoogleAd/>
         </div>
     )
 }
