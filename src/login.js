@@ -206,7 +206,7 @@ export default function Login(){
                       {/* <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}}
                       //  src={spotifyImg}
                        /> */}
-                      Login with Spotify</Button>
+                      Login</Button>
                       <Button style={{backgroundColor:"black", marginTop:"1rem", width:"40vh", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleSignup}>
                     <img style={{width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
                     Sign Up for Beta</Button>
@@ -236,7 +236,7 @@ export default function Login(){
                     onClick={handleLogin}
                     >
                     {/* <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/> */}
-                    Login with Spotify</Button>
+                    Login</Button>
                     <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
                     <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
                     Sign Up for Beta</Button>
