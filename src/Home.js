@@ -4,10 +4,11 @@ import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navba
 import Carousel from 'react-bootstrap/Carousel';
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
-import TasteMaker3 from './Tastemaker Pro Ad .99 UPDATED.png'
+// import TasteMaker3 from './Tastemaker Pro Ad .99 UPDATED.png'
+import TasteMaker3 from './Tastemaker SUBMIT FREE AD.png'
 import { renderMatches } from 'react-router-dom';
 import Footer from './Footer';
-import FOATad from './FOAT ad.png'
+import FOATad from './FOAT ad (2).png'
 import pollPicture from './Kendrick Poll Clear.png'
 import stockPhotoLogo from './Tastemakers Main Logo (1).png'
 import MobileAe2 from './Tastemaker Pro Ad .99 UPDATED - MOBILE.png'
@@ -259,7 +260,7 @@ export default function Home(){
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
-                src={MobileAe2}
+                src={TasteMaker3}
                 alt="Third slide"
                 />
                 
@@ -334,13 +335,13 @@ export default function Home(){
         <Navigation/>
         <div style={{backgroundColor:"black"}}>
         <div style={{margin:'auto',backgroundColor:'black', width:"80%"}}>
-        <Carousel fade style={{maxHeight:'900px', margin:'auto', marginTop:"6rem", backgroundColor:"black", color:"black"}}>
+        <Carousel fade style={{maxHeight:'900px', margin:'auto', marginTop:"6rem", backgroundColor:"black", color:"black", justifyContent:"center", alignContent:"center"}}>
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
                 src={FOATad}
                 alt="First slide"
-                style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover', marginLeft:'1rem' }}
+                style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover'}}
                 />
                 <Carousel.Caption>
                 {/* {handleCardTextMobile()} */}
@@ -371,13 +372,14 @@ export default function Home(){
             </Carousel.Item> */}
             <Carousel.Item interval={4000}>
                 <img
-                className="d-block w-100"
+                // className="d-block w-100"
                 src={TasteMaker3}
                 alt="Third slide"
+                style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover' }}
                 />
                 
                 <Carousel.Caption>
-                <div>{handleGoProButton()}</div>
+                {/* <div>{handleGoProButton()}</div> */}
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
