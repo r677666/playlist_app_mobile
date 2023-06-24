@@ -8,7 +8,7 @@ import Footer from './Footer';
 import play from './play.png';
 import Adsense from 'react-adsense';
 import SpotifyPlayback from './SpotifyPlayback';
-import officialSpotify from './spotify official logo.png'
+import officialSpotify from './Spotify_Icon_RGB_Black.png'
 import BottomGoogleAd from './BottomGoogleAd';
 //testing change
 export default function UserProfile(){
@@ -522,7 +522,7 @@ function handleGoogleAds(){
                     <Modal.Title>{compDoc.name}<Button style={{marginLeft:"6rem", backgroundColor:"white", color:"black", borderColor:"black", fontSize:"1.25rem"}} onClick={event => handleSpotifyPlayback()}>
                       Play
                       <Image
-                        style={{marginLeft:'.5rem', width:"4.375rem", height:"4.375rem"}}
+                        style={{marginLeft:'.5rem', width:"2rem", height:"2rem"}}
                         src={officialSpotify}
                       />
                       </Button></Modal.Title>
@@ -564,7 +564,7 @@ function handleGoogleAds(){
                     <Button style={{backgroundColor:"white", color:"black", borderColor:"black"}} onClick={() => handleSpotifyPlayback()}>
                       Play
                       <Image
-                        style={{marginLeft:'.5rem', width:"4.375rem", height:"4.375rem"}}
+                        style={{marginLeft:'.5rem', width:"1.5rem", height:"1.5rem"}}
                         src={officialSpotify}
                       />
                       </Button>
