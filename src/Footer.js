@@ -91,8 +91,9 @@ export default function Footer() {
       <div className='text-center p-4' style={{ backgroundColor: '#ff914d' }}>
         © 2023 Copyright:    
         <a className='text-reset fw-bold' href='https://www.tastemakers.pro/'>
-          TasteMakers.pro
+          TasteMakers Pro LLC
         </a>
+
       </div>
     </MDBFooter>
     </div>
