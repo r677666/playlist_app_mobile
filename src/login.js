@@ -11,12 +11,12 @@ import Footer from './Footer Desktop Login'
 import FooterMobile from './Footer Login'
 import GoogleAd from 'react-google-ad';
 
+
 import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
 import BottomGoogleAd from './BottomGoogleAd';
-
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "https://www.tastemakers.pro/"
+const REDIRECT_URI = "https://tastemakers.pro/"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
@@ -95,12 +95,12 @@ export default function Login(){
                   const json = await response.json()
                   //console.log(json)
                   if(!response.ok){
-                    console.log("User Already Exists")
+                    //console.log("User Already Exists")
                   }else{
-                    console.log("User Created")
+                    //console.log("User Created")
                   }
           }else{
-            console.log("UserId Null")
+            //console.log("UserId Null")
           }
         }
 

@@ -454,6 +454,11 @@ function handleGoogleAds(){
         window.location.assign("https://www.tastemakers.pro")
     }
   }
+  function checkForLogin(){
+    if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
+        window.location.assign("https://tastemakers.pro")
+    }
+  }
 
     return(
         <div style={{backgroundColor:"black"}}>

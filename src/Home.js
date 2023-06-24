@@ -55,7 +55,7 @@ export default function Home(){
 
     function clickUser(name){
         name = name.replaceAll("\"", "")
-        window.location.assign("https://www.tastemakers.pro/User/" + name)
+        window.location.assign("https://tastemakers.pro/User/" + name)
     }
 
     async function followUserButton(user,follower){
@@ -132,7 +132,7 @@ export default function Home(){
     }
 
     function competitionButton(){
-        window.location.assign("https://www.tastemakers.pro/Competition/")
+        window.location.assign("https://tastemakers.pro/Competition/")
     }
     function handleUserImgs(userId){
         var userParameters = {
@@ -147,7 +147,7 @@ export default function Home(){
         .then(data => setGetUserImg(data))
     }
     function handleUpgradeButton(){
-        window.location.assign("https://www.tastemakers.pro/Upgrade")
+        window.location.assign("https://tastemakers.pro/Upgrade")
     }
     function handleTextMobile(){
         if(windowSize.width < 765){

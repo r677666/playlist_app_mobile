@@ -10,7 +10,7 @@ import crown from './crown.png';
 import BottomGoogleAd from './BottomGoogleAd';
 
 function handleUpgradeButton(){
-    window.location.assign("https://www.tastemakers.pro/Upgrade")
+    window.location.assign("https://tastemakers.pro/Upgrade")
 }
 export default function Profile(){
     const userAuthToken = sessionStorage.getItem("token");

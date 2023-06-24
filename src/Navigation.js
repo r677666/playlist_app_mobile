@@ -37,7 +37,7 @@ function Navigation() {
   }, [])
 
   function handleNavPic(){
-    window.location.assign("https://www.tastemakers.pro/Account")
+    window.location.assign("https://tastemakers.pro/Account")
   }
 
   function handleProUser(){
