@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Card, Button, Col, InputGroup, FormControl, CardGroup, Modal, ButtonGroup, CardDeck} from 'react-bootstrap';
+import { Container, Row, Card, Button, Col, InputGroup, FormControl, CardGroup, Modal, ButtonGroup, CardDeck, Image} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
@@ -8,6 +8,8 @@ import Footer from './Footer';
 import play from './play.png';
 import Adsense from 'react-adsense';
 import SpotifyPlayback from './SpotifyPlayback';
+import officialSpotify from './Spotify_Icon_RGB_Black.png'
+import BottomGoogleAd from './BottomGoogleAd';
 //testing change
 export default function UserProfile(){
 
@@ -45,7 +47,7 @@ export default function UserProfile(){
     var docTracks = [];
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('https://playlist-backend-6muv.onrender.com/api/competition')
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition')
             .then(result => result.json())
             .then(data => setCompSubmissions(data))
             // .then(console.log(compSubmissions[0].playlistsId))
@@ -71,7 +73,7 @@ export default function UserProfile(){
     //Post Playlist to Competition
     async function postCompDoc(){
 
-        var postPlaylistToComp = await fetch('https://playlist-backend-6muv.onrender.com/api/competition/create', {
+        var postPlaylistToComp = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/create', {
             method: 'POST',
             body: JSON.stringify({
               "userId": userId,
@@ -143,9 +145,9 @@ export default function UserProfile(){
             // }else{
             //   currentID = id
             // }
-            console.log("User Name:"+userId)
-            console.log("Playlists Name:"+playlistsName)
-            console.log("Playlist ID = " + playlistsId)
+            // console.log("User Name:"+userId)
+            // console.log("Playlists Name:"+playlistsName)
+            // console.log("Playlist ID = " + playlistsId)
             alert("SELECTED")
             sessionStorage.setItem("playlistId",playlistsId)
             sessionStorage.setItem("playlistName",playlistsName)
@@ -158,10 +160,10 @@ export default function UserProfile(){
       }
       function deleteButtonFunction(id){
         console.log(id)
-        const getMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/" +id)
+        const getMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/' +id)
         .then(result => console.log(result.json()))
 
-        const deleteMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/",{
+        const deleteMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/',{
         method: 'DELETE',
         body: JSON.stringify({
             "id": id
@@ -176,7 +178,7 @@ export default function UserProfile(){
     const handleLike = async (userId,id) => {
                 var arr = [];
                 
-                const checkIfLikedAlready = await fetch("https://playlist-backend-6muv.onrender.com/api/competition/" + id)
+                const checkIfLikedAlready = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/' + id)
                 .then(result => result.json())
                 .then(data => 
                     {
@@ -186,7 +188,7 @@ export default function UserProfile(){
                         // console.log(data.likes.indexOf('testLike') )
                         if(data.likes.indexOf(userId) !== -1){
                             console.log("REMOVED LIKE")
-                                    const followMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/removeLike",{
+                                    const followMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/removeLike',{
                                         method: 'PATCH',
                                         body: JSON.stringify({
                                             "userId": userId,
@@ -203,7 +205,7 @@ export default function UserProfile(){
                             // }
                         }else{
                             console.log("ADDED LIKE")
-                            const followMethod = fetch("https://playlist-backend-6muv.onrender.com/api/competition/addLike",{
+                            const followMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/addLike',{
                                 method: 'PATCH',
                                 body: JSON.stringify({
                                     "userId": userId,
@@ -442,9 +444,15 @@ function handleGoogleAds(){
   }
 
   function handleSpotifyPlayback(){
-    localStorage.setItem("showSpotifyPlayer","true")
-    console.log(localStorage.getItem("showSpotifyPlayer"))
-    checkForSpotifyPlayer()
+    // localStorage.setItem("showSpotifyPlayer","true")
+    // console.log(localStorage.getItem("showSpotifyPlayer"))
+    // checkForSpotifyPlayer()
+    window.open("https://open.spotify.com/playlist/" + sessionStorage.getItem('compDoc'))
+  }
+  function checkForLogin(){
+    if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
+        window.location.assign("https://www.tastemakers.pro")
+    }
   }
   function checkForLogin(){
     if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
@@ -516,8 +524,13 @@ function handleGoogleAds(){
                 {/* Show submitted playlist tracks */}
                    <Modal show={showCompPlayListModal} onHide={handleClose_showCompPlayListModal} style={{padding:"5rem",zIndex:"1050"}}>
                     <Modal.Header closeButton>
-                    <Modal.Title>{compDoc.name}<Button style={{marginLeft:"6rem"}} onClick={event => handleSpotifyPlayback()}>
-                      Play</Button></Modal.Title>
+                    <Modal.Title>{compDoc.name}<Button style={{marginLeft:"6rem", backgroundColor:"white", color:"black", borderColor:"black", fontSize:"1.25rem"}} onClick={event => handleSpotifyPlayback()}>
+                      Play
+                      <Image
+                        style={{marginLeft:'.5rem', width:"2rem", height:"2rem"}}
+                        src={officialSpotify}
+                      />
+                      </Button></Modal.Title>
                     </Modal.Header>
                     <Container style={{paddingTop:"1rem",paddingBottom:"1rem"}}>
                     {isCompActive && compDoc.href ? (compDoc.tracks.items.map((items,i) => {
@@ -525,7 +538,7 @@ function handleGoogleAds(){
                         <Card>
                       <CardGroup>
                       
-                      <Card.Img src={items.track.album.images[0].url} style={{maxWidth:"5rem",maxHeight:"5rem"}}/>
+                      <Card.Img src={items.track.album.images[0].url} style={{marginLeft:"1rem", borderRadius:"0rem",maxWidth:"5rem",maxHeight:"5rem"}}/>
                       {/* {console.log(items.track.album.images[0].url)} */}
                       <CardGroup as='div' className='flex-column' style={{maxWidth:"20rem", paddingLeft:"1rem", paddingTop:".08rem"}}>
                         <Card.Title>
@@ -553,8 +566,13 @@ function handleGoogleAds(){
 <Modal show={showCompPlayListModalMobile} onHide={handleClose_showCompPlayListModalMobile} style={{width:"24rem", marginLeft:".25rem"}}>
                     <Modal.Header closeButton>
                     <Modal.Title>{compDoc.name}
-                    <Button style={{marginLeft:"6rem"}} onClick={() => handleSpotifyPlayback()}>
-                      Play</Button>
+                    <Button style={{backgroundColor:"white", color:"black", borderColor:"black"}} onClick={() => handleSpotifyPlayback()}>
+                      Play
+                      <Image
+                        style={{marginLeft:'.5rem', width:"1.5rem", height:"1.5rem"}}
+                        src={officialSpotify}
+                      />
+                      </Button>
                       </Modal.Title>
                     </Modal.Header>
                     <Container style={{paddingTop:"1rem",paddingBottom:"1rem"}}>
@@ -563,7 +581,7 @@ function handleGoogleAds(){
                         <Card>
                       <CardGroup style={{display:"flex"}}>
                       
-                      <Card.Img src={items.track.album.images[0].url} style={{maxWidth:"5rem",maxHeight:"5rem"}}/>
+                      <Card.Img src={items.track.album.images[0].url} style={{width:"5rem",height:"5rem",borderRadius:"0rem", marginLeft:"1rem"}}/>
                       {/* {console.log(items.track.album.images[0].url)} */}
                       <CardGroup as='div' className='flex-column' style={{maxWidth:"20rem", paddingLeft:"1rem", paddingTop:".08rem"}}>
                         
@@ -589,7 +607,8 @@ function handleGoogleAds(){
                 </Modal>
                     
                 </div>
-                {checkForSpotifyPlayer()}
+                {/* {checkForSpotifyPlayer()} */}
+                <BottomGoogleAd/>
                 <Footer/>
         </div>
     )

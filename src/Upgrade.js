@@ -8,6 +8,7 @@ import crown from './crown.png';
 import goldOk from './gold_ok.png';
 import grayOk from './gray_ok.png'
 import { Link } from 'react-router-dom';
+import BottomGoogleAd from './BottomGoogleAd';
 // import Stripe from "stripe";
 
 export default function Upgrade(){
@@ -74,7 +75,7 @@ export default function Upgrade(){
         function updateUserProStatus(){
             // //console.log("TESTING SUCCESSFUL")
             // const changeUserProStatus = async () => {
-                const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/updateProStatus',{
+                const response = fetch(process.env.REACT_APP_BACKEND_URL+'/api/users/updateProStatus',{
                     method: 'PATCH',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),
@@ -103,7 +104,7 @@ export default function Upgrade(){
 
       useEffect(() => {
     
-        const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/'+ sessionStorage.getItem("userId"))
+        const response = fetch(process.env.REACT_APP_BACKEND_URL+'/api/users/'+ sessionStorage.getItem("userId"))
         .then(result => result.json())
         .then(data => setUserPro(data.paidMember))
         // .then(//console.log(userPro))
@@ -248,6 +249,7 @@ export default function Upgrade(){
                 </Button>
                 </Modal.Footer>
             </Modal>
+            <BottomGoogleAd/>
         </div>
         
     )

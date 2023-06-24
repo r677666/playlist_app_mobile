@@ -4,13 +4,16 @@ import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navba
 import Carousel from 'react-bootstrap/Carousel';
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
-import TasteMaker3 from './Tastemaker Pro Ad .99 UPDATED.png'
+// import TasteMaker3 from './Tastemaker Pro Ad .99 UPDATED.png'
+import TasteMaker3 from './Tastemaker SUBMIT FREE AD.png'
 import { renderMatches } from 'react-router-dom';
 import Footer from './Footer';
-import FOATad from './FOAT ad.png'
+import FOATad from './FOAT ad (2).png'
 import pollPicture from './Kendrick Poll Clear.png'
 import stockPhotoLogo from './Tastemakers Main Logo (1).png'
+import MobileAe2 from './Tastemaker Pro Ad .99 UPDATED - MOBILE.png'
 import SpotifyPlayback from './SpotifyPlayback';
+import BottomGoogleAd from './BottomGoogleAd';
 
 
 export default function Home(){
@@ -27,7 +30,7 @@ export default function Home(){
     var test;
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users')
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/users')
             .then(result => result.json())
             .then(data => setUsers(data))
             // .then(//console.log("users from Playlist App Server have been found"))
@@ -80,7 +83,7 @@ export default function Home(){
             }
         }
 
-        const followMethod = await fetch("https://playlist-backend-6muv.onrender.com/api/users/friends/addFriend",{
+        const followMethod = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/users/friends/addFriend',{
             method: 'PATCH',
             body: JSON.stringify({
               "userId": followerId,
@@ -96,7 +99,7 @@ export default function Home(){
 
     function checkForLogin(){
         if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
-            window.location.assign("https://tastemakers.pro")
+            window.location.assign("https://www.tastemakers.pro")
         }
       }
 
@@ -229,8 +232,8 @@ export default function Home(){
                 />
                 <Carousel.Caption>
                 {handleCardTextMobile()}
-                <p style={{color:"white", textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Submit playlist for this week's competition</p>
-                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button>
+                {/* <p style={{color:"white", textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Submit playlist for this week's competition</p> */}
+                {/* <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button> */}
                 </Carousel.Caption>
                 
             </Carousel.Item>
@@ -301,7 +304,9 @@ export default function Home(){
                 <Row className="flex-nowrap overflow-auto">
                     {users && users.map((user,i) => (
                         <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
-                            <Container onClick={event => clickUser(users[i].userId)}>
+                            <Container 
+                            // onClick={event => clickUser(users[i].userId)}
+                            >
                                 {/* {console.log(users[i])} */}
                                     
                                     <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
@@ -330,13 +335,13 @@ export default function Home(){
         <Navigation/>
         <div style={{backgroundColor:"black"}}>
         <div style={{margin:'auto',backgroundColor:'black', width:"80%"}}>
-        <Carousel fade style={{maxHeight:'900px', margin:'auto', marginTop:"6rem", backgroundColor:"black", color:"black"}}>
+        <Carousel fade style={{maxHeight:'900px', margin:'auto', marginTop:"6rem", backgroundColor:"black", color:"black", justifyContent:"center", alignContent:"center"}}>
             <Carousel.Item interval={4000}>
                 <img
                 className="d-block w-100"
                 src={FOATad}
                 alt="First slide"
-                style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover', marginLeft:'1rem' }}
+                style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover'}}
                 />
                 <Carousel.Caption>
                 {/* {handleCardTextMobile()} */}
@@ -367,13 +372,14 @@ export default function Home(){
             </Carousel.Item> */}
             <Carousel.Item interval={4000}>
                 <img
-                className="d-block w-100"
+                // className="d-block w-100"
                 src={TasteMaker3}
                 alt="Third slide"
+                style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'cover' }}
                 />
                 
                 <Carousel.Caption>
-                <div>{handleGoProButton()}</div>
+                {/* <div>{handleGoProButton()}</div> */}
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
@@ -410,7 +416,9 @@ export default function Home(){
                 <Row className="flex-nowrap overflow-auto">
                     {users && users.map((user,i) => (
                         <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
-                            <Container onClick={event => clickUser(users[i].userId)}>
+                            <Container 
+                            // onClick={event => clickUser(users[i].userId)}
+                            >
                                 {/* {//console.log(users[i])} */}
                                     
                                     <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
@@ -439,6 +447,7 @@ export default function Home(){
         <div>
             {checkForLogin()}
             {handleMobileHomeScreen()}
+            <BottomGoogleAd/>
         </div>
         
     );

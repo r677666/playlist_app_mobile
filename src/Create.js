@@ -8,6 +8,7 @@ import App from './App';
 import { json } from 'react-router-dom';
 import Navigation from './Navigation';
 import addImage from './add (1).png'
+import BottomGoogleAd from './BottomGoogleAd';
 
 const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
@@ -261,7 +262,7 @@ export default function Create(){
     }
     function checkForLogin(){
       if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
-          window.location.assign("https://tastemakers.pro")
+          window.location.assign("https://www.tastemakers.pro")
       }
     }
     function handleWindowSize(){
@@ -585,6 +586,7 @@ export default function Create(){
                     </Modal.Footer>
                 </Modal>
         </Container>
+        <BottomGoogleAd/>
       </div>
     );
     

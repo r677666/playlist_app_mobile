@@ -7,6 +7,7 @@ import FREE from './FREE 2.png';
 import PRO from './vibes.png';
 import Footer from './Footer';
 import crown from './crown.png';
+import BottomGoogleAd from './BottomGoogleAd';
 
 function handleUpgradeButton(){
     window.location.assign("https://tastemakers.pro/Upgrade")
@@ -20,7 +21,7 @@ export default function Profile(){
     //console.log(userImg)
     useEffect(() => {
     
-        const response = fetch('https://playlist-backend-6muv.onrender.com/api/users/'+ sessionStorage.getItem("userId"))
+        const response = fetch(process.env.REACT_APP_BACKEND_URL+'/api/users/'+ sessionStorage.getItem("userId"))
         .then(result => result.json())
         .then(data => setUserPro(data.paidMember))
         // .then(console.log(userPro))
@@ -41,7 +42,7 @@ export default function Profile(){
       }
       function checkForLogin(){
         if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
-            window.location.assign("https://tastemakers.pro")
+            window.location.assign("https://www.tastemakers.pro")
         }
         userId = userId.replaceAll("\"","")
       }
@@ -72,6 +73,7 @@ export default function Profile(){
                     <Footer/>
                 </div>
             </div>
+            <BottomGoogleAd/>
         </div>
     );
 }

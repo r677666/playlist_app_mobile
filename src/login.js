@@ -6,10 +6,14 @@ import { click } from '@testing-library/user-event/dist/click';
 import App from './App';
 import TastemakerImg  from './Tastemakers Main Logo (1).png'
 import TastemakerLogo from './taste makers logo (1).png'
-import spotifyImg from './spotify img.png'
+import spotifyImg from './Spotify_Icon_RGB_White.png'
 import Footer from './Footer Desktop Login'
 import FooterMobile from './Footer Login'
+import GoogleAd from 'react-google-ad';
 
+
+import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
+import BottomGoogleAd from './BottomGoogleAd';
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
 const REDIRECT_URI = "https://tastemakers.pro/"
@@ -37,7 +41,7 @@ export default function Login(){
     //console.log("Image:"+ (sessionStorage.getItem("imgURL")))
     //console.log("User: "+ (sessionStorage.getItem("userId")))
     const SPACE_DELIMITER = "%20";
-    const SCOPES = ["streaming","playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email", "user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state"]
+    const SCOPES = ["playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email", "user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state"]
     const SCOPES_URI_PARAM = SCOPES.join(SPACE_DELIMITER)
     useEffect(() => {
         // API Access Token
@@ -69,14 +73,10 @@ export default function Login(){
           return () => window.removeEventListener("resize", handleResize);
       }, [])
 
-      function checkForActive(){
-          setIsActive(current => !current)
-      }
-
       //For Playlist App Server
       async function fetchUsers(){
             if(sessionStorage.getItem("userId") != null){
-                  const response = await fetch('https://playlist-backend-6muv.onrender.com/api/users/createUser',{
+                  const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/users/createUser',{
                     method: 'POST',
                     body: JSON.stringify({
                       "userId": sessionStorage.getItem("userId"),
@@ -114,14 +114,14 @@ export default function Login(){
         sessionStorage.setItem("token",secondToken)
         try{
         userInfo()
+        if(sessionStorage.getItem("userId") != null){
+          fetchUsers()
+          window.location.assign("https://www.tastemakers.pro/Home")
+        }
         }catch{
           return(
             <div><h1>Login Failed</h1></div>
           )
-        }
-        if(sessionStorage.getItem("userId") != null){
-          fetchUsers()
-          window.location.assign("https://tastemakers.pro/Home")
         }
         }
       }
@@ -134,10 +134,19 @@ export default function Login(){
               'Authorization': 'Bearer ' + sessionStorage.getItem("token")
           }
         }
+        try{
         sessionStorage.setItem("params",JSON.stringify(userParameters))
         //console.log(sessionStorage.getItem("params"))
         var userData = fetch('https://api.spotify.com/v1/me',userParameters)
-        .then(response => response.json())
+        .then(response => 
+          {
+            if(response.status !== 200){
+              alert("Login Failed - Sign Up for Beta / Clear Cache / or Contact Us")
+              window.location.assign('https://www.tastemakers.pro/Logout')
+            return null
+          }
+          return response.json()
+          })
         // .then(data => sessionStorage.setItem("error",JSON.stringify(data)))
         .then(data => {
           sessionStorage.setItem("userId", JSON.stringify(data.id))
@@ -147,6 +156,11 @@ export default function Login(){
           sessionStorage.setItem("spotifyUserImgUrl",data.images[0].url)
         })
         .catch(response => console.log("CATCH"+response.json()))
+      }catch{
+        sessionStorage.setItem("userId",null)
+        sessionStorage.setItem("token",null)
+      }
+      // checkForUser()
         //Just getting UserId for now but definitely can get additional info from this json
       }
 
@@ -159,6 +173,19 @@ export default function Login(){
 
     const handleSignup = () => {
       window.location.assign("https://forms.gle/9z9cmbSbvpmSCSwb8")
+  };
+
+  function checkForUser(){
+    if(sessionStorage.getItem("userEmail") == null){
+      window.location.assign("https://www.tastemakers.pro")
+      sessionStorage.setItem("userId", null)
+      alert("Login Failed - Sign Up / Clear Cache / or Contact Us")
+    }
+  }
+
+  const containerStyle = {
+    height:"5rem",backgroundSize: "0", backgroundColor: "black", bottom:"0",
+            position:"fixed",zIndex:"1060", width:"100%", color:"white", display:"flex"
   };
     
     function handleSmallerScreen(){
@@ -174,11 +201,13 @@ export default function Login(){
                 <Container style={{marginTop:".1rem",marginBottom:"12rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
                   <h5 style={{color:"#ff514d",fontSize:"1.5rem"}}>Join Now</h5>
                   <InputGroup style={{display:"center", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
-                      <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center"}}
-                      // onClick={handleLogin}
+                      <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center", fontSize:"1.5rem"}}
+                      onClick={handleLogin}
                       >
-                      <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
-                      Login with Spotify</Button>
+                      <img style={{width:"1.5rem",height:"1.5rem", marginRight:"1rem"}}
+                       src={spotifyImg}
+                       />
+                      Login</Button>
                       <Button style={{backgroundColor:"black", marginTop:"1rem", width:"40vh", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleSignup}>
                     <img style={{width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
                     Sign Up for Beta</Button>
@@ -204,11 +233,13 @@ export default function Login(){
               <Container style={{marginTop:"20rem", marginLeft:"5rem"}}>
                 <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
                 <InputGroup>
-                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem"}}
+                {/* <div style={{display:"flex"}}> */}
+                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem", fontSize:"1.5rem"}}
                     onClick={handleLogin}
                     >
-                    <img style={{width:"2rem",height:"2rem", marginRight:"1rem"}} src={spotifyImg}/>
-                    Login with Spotify</Button>
+                    <img style={{width:"2rem",height:"2rem", marginRight:".5rem"}} src={spotifyImg}/>
+                    Login</Button>
+                {/* </div> */}
                     <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
                     <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
                     Sign Up for Beta</Button>
@@ -219,6 +250,14 @@ export default function Login(){
           </div>  
         </div>
         <br/>
+        {/* <div style={containerStyle}>
+        <GoogleAd
+          adClient="ca-pub-7787464840070054"
+          adSlot="4414116362"
+          format="auto"
+        />
+        </div> */}
+        {/* <BottomGoogleAd/> */}
         <Footer/>
       </div>
            )
@@ -228,6 +267,7 @@ export default function Login(){
     return(
       <div>
       {handleSmallerScreen()}
+      <BottomGoogleAd/>
         </div>
     )
 }
