@@ -13,6 +13,7 @@ import User from './userProfile';
 import Competition from './Competition';
 import Upgrade from './Upgrade';
 import Payment from './stripePayment'
+import Ads from './Ads'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
           <Route path={'/Upgrade'} element={<Upgrade/>}/>
           <Route path='/Logout' element={<Logout/>}/>
           <Route path='/payment' element={<Payment/>}/>
+          <Route path='/ads.txt' element={<Ads/>}/>
       </Routes>
     </BrowserRouter>
   )
