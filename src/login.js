@@ -267,7 +267,7 @@ export default function Login(){
     return(
       <div>
       {handleSmallerScreen()}
-      <BottomGoogleAd/>
+      {/* <BottomGoogleAd/> */}
         </div>
     )
 }
