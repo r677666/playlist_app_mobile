@@ -256,11 +256,13 @@ export default function UserProfile(){
       }
     }
     function handleCompDocPressMobile(playlist){
+      if(checkForLogin()){
       console.log("MADE IT")
       console.log(playlist)
       sessionStorage.setItem('compDoc', playlist)
       handleShow_showCompPlayListModalMobile()
       compPlaylist()
+      }
     }
     
 function handleBigText(){
