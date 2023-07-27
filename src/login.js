@@ -16,7 +16,7 @@ import BottomGoogleAd from './BottomGoogleAd';
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URI = "https://www.tastemakers.pro/"
+const REDIRECT_URI = "https://www.tastemakers.pro/Login"
 const generateRandomString = function (length=6){
     return Math.random().toString(20).substring(2,length)
 }
@@ -116,7 +116,7 @@ export default function Login(){
         userInfo()
         if(sessionStorage.getItem("userId") != null){
           fetchUsers()
-          window.location.assign("https://www.tastemakers.pro/Home")
+          window.location.assign("https://www.tastemakers.pro/")
         }
         }catch{
           return(
@@ -176,7 +176,7 @@ export default function Login(){
   };
 
   const handleGuest = () => {
-    window.location.assign("https://www.tastemakers.pro/Home")
+    window.location.assign("https://www.tastemakers.pro/")
 };
 
   function checkForUser(){
