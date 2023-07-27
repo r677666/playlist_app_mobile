@@ -42,7 +42,7 @@ export default function Profile(){
       }
       function checkForLogin(){
         if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
-            window.location.assign("https://www.tastemakers.pro")
+            window.location.assign("https://www.tastemakers.pro/Login")
         }
         userId = userId.replaceAll("\"","")
       }

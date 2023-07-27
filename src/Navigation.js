@@ -64,11 +64,11 @@ function Navigation() {
           <Container>
           <img src={companyImg} className="img-circle" alt='...' style={{width:'5rem',height:'5rem'}}/>
           <h1 style={{color:"orange", fontSize:"1.25rem", marginRight:"1rem", marginTop:"1vh"}}>BETA</h1>
-            <Navbar.Brand href="/Home">TASTEMAKERS</Navbar.Brand>
+            <Navbar.Brand href="/">TASTEMAKERS</Navbar.Brand>
             <Navbar.Toggle/>
             <Navbar.Collapse id='basic-navbar-nav'>
               <Nav className="me-auto">
-                <Nav.Link href="/Home">Home</Nav.Link>
+                <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/Create">Create</Nav.Link>
                 <Nav.Link href="/Competition">Competition</Nav.Link>
                 <Nav.Link href="/Account">Account</Nav.Link>

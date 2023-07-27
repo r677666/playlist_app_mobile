@@ -22,10 +22,10 @@ function App() {
   return(
     <BrowserRouter>
       <Routes>
-          <Route path='/' element={<Login/>}/>
+          <Route path='/' element={<Home/>}/>
           <Route path='/Create' element={<Create/>}/>
           <Route path='/Account' element={<Profile/>}/>
-          <Route path='/Home' element={<Home/>}/>
+          <Route path='/Login' element={<Login/>}/>
           <Route path='/competition' element={<Competition/>}/>
           <Route path={'/User/:id'} element={<User/>}/>
           <Route path={'/Upgrade'} element={<Upgrade/>}/>
