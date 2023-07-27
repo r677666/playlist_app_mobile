@@ -73,7 +73,7 @@ export default function Profile(){
                     <Footer/>
                 </div>
             </div>
-            <BottomGoogleAd/>
+            {/* <BottomGoogleAd/> */}
         </div>
     );
 }

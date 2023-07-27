@@ -52,8 +52,10 @@ export default function Create(){
     const handleShow_showTrackModal = () => set_Track_ShowModal(true);
 
     function createButtonFunction(){
+      if(checkForLogin()){
       playlistCreation();
       handleClose();
+      }
     }
 
     //clickedAlbum consts
@@ -113,6 +115,7 @@ export default function Create(){
     }
     //Get Playlist
     async function getUserPlaylist(){
+      if(checkForLogin()){
       var playlistParameters={
         method: 'GET',
         headers: {
@@ -131,6 +134,7 @@ export default function Create(){
       )
       // .then(//console.log(userPlaylists))
       // .catch(response => //console.log(response.json()))
+    }
     }
     // Add Tracks to Playlist
     async function addTrackToPlaylist(){
@@ -168,11 +172,17 @@ export default function Create(){
       //console.log("JSON Tracks = " + jsonTrackIDs)
       addTrackToPlaylist()
     }
-
+    function checkForLogin(){
+      if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
+          window.location.assign("https://www.tastemakers.pro")
+      }else{
+        return true
+      }
+    }
     //Search
     async function search() {
       //console.log("Search for " + searchInput);
-  
+      if(checkForLogin()){
       //Get Request for Artist Id
       var searchParameters = {
         method: 'GET',
@@ -203,7 +213,7 @@ export default function Create(){
         // .then(//console.log("Tracks for " + clickedAlbum + " Found"))
       }
         
-      
+    }
     }
   
     function onClickFunction(name){
@@ -260,11 +270,11 @@ export default function Create(){
         return ""
       }
     }
-    function checkForLogin(){
-      if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
-          window.location.assign("https://www.tastemakers.pro")
-      }
-    }
+    // function checkForLogin(){
+    //   if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
+    //       window.location.assign("https://www.tastemakers.pro")
+    //   }
+    // }
     function handleWindowSize(){
       if(windowSize.width < 765){
           return (
@@ -375,7 +385,7 @@ export default function Create(){
   }
     return (
       <div style={{backgroundColor:"#FFFCFC"}}className="App">
-        {checkForLogin()}
+        {/* {checkForLogin()} */}
         <Navigation/>
         <br/>
         <Container style={{marginTop:"6rem"}}>

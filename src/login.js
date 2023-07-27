@@ -175,6 +175,10 @@ export default function Login(){
       window.location.assign("https://forms.gle/9z9cmbSbvpmSCSwb8")
   };
 
+  const handleGuest = () => {
+    window.location.assign("https://www.tastemakers.pro/Home")
+};
+
   function checkForUser(){
     if(sessionStorage.getItem("userEmail") == null){
       window.location.assign("https://www.tastemakers.pro")
@@ -204,13 +208,16 @@ export default function Login(){
                       <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center", fontSize:"1.5rem"}}
                       onClick={handleLogin}
                       >
-                      <img style={{width:"1.5rem",height:"1.5rem", marginRight:"1rem"}}
+                      <img style={{width:"1rem",height:"1rem", marginRight:"1rem"}}
                        src={spotifyImg}
                        />
                       Login</Button>
                       <Button style={{backgroundColor:"black", marginTop:"1rem", width:"40vh", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleSignup}>
                     <img style={{width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
                     Sign Up for Beta</Button>
+                    <Button style={{backgroundColor:"black", marginTop:"1rem", width:"40vh", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleGuest}>
+                    {/* <img style={{width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}}/> */}
+                    View Site as Guest</Button>
                   </InputGroup>
               </Container>
               {/* </div> */}
@@ -243,6 +250,9 @@ export default function Login(){
                     <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
                     <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
                     Sign Up for Beta</Button>
+                    <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleGuest}>
+                    {/* <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/> */}
+                    View Site as Guest</Button>
                 </InputGroup>
             </Container>
             </div>

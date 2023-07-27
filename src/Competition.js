@@ -90,6 +90,7 @@ export default function UserProfile(){
 
     //Get Playlist
     async function getUserPlaylist(){
+      if(checkForLogin()){
         var playlistParameters={
           method: 'GET',
           headers: {
@@ -107,7 +108,7 @@ export default function UserProfile(){
         }
         )
         // .then(console.log(userPlaylists))
-        .catch(response => console.log(response.json()))
+        .catch(response => console.log(response.json()))}
       }
 
     //Get Comp Submitted Playlist
@@ -176,6 +177,7 @@ export default function UserProfile(){
       }
       //Like Comp Playlist
     const handleLike = async (userId,id) => {
+        if(checkForLogin()){
                 var arr = [];
                 
                 const checkIfLikedAlready = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/' + id)
@@ -225,7 +227,7 @@ export default function UserProfile(){
 
 
 
-        
+              }
     }
     function handleNull(data){
         if(data == undefined){
@@ -245,11 +247,13 @@ export default function UserProfile(){
         }
     }
     function handleCompDocPress(playlist){
+      if(checkForLogin()){
       console.log("MADE IT")
       console.log(playlist)
       sessionStorage.setItem('compDoc', playlist)
       handleShow_showCompPlayListModal()
       compPlaylist()
+      }
     }
     function handleCompDocPressMobile(playlist){
       console.log("MADE IT")
@@ -452,12 +456,14 @@ function handleGoogleAds(){
   function checkForLogin(){
     if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
         window.location.assign("https://www.tastemakers.pro")
+    }else{
+      return true
     }
   }
 
     return(
         <div style={{backgroundColor:"black"}}>
-          {checkForLogin()}
+          {/* {checkForLogin()} */}
             <Navigation/>
             <div style={{marginTop:"6rem", width:"100%"}}>
                     {handleBigText()}
