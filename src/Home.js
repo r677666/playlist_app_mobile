@@ -8,7 +8,7 @@ import Navigation from './Navigation';
 import TasteMaker3 from './Tastemaker SUBMIT FREE AD.png'
 import { renderMatches } from 'react-router-dom';
 import Footer from './Footer';
-import FOATad from './FOAT ad (3).png'
+import FOATad from './FOAT ad updated.png'
 import pollPicture from './Kendrick Poll Clear.png'
 import stockPhotoLogo from './Tastemakers Main Logo (1).png'
 import MobileAe2 from './Tastemaker Pro Ad .99 UPDATED - MOBILE.png'
