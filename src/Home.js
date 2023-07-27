@@ -97,11 +97,11 @@ export default function Home(){
         .then(alert("Friend Added"))
     }
 
-    function checkForLogin(){
-        if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
-            window.location.assign("https://www.tastemakers.pro")
-        }
-      }
+    // function checkForLogin(){
+    //     if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
+    //         window.location.assign("https://www.tastemakers.pro")
+    //     }
+    //   }
 
     function checkFollowButton(item1,item2){
         if(item1 != item2){
@@ -445,7 +445,7 @@ export default function Home(){
     }
     return(
         <div>
-            {checkForLogin()}
+            {/* {checkForLogin()} */}
             {handleMobileHomeScreen()}
             <BottomGoogleAd/>
         </div>
