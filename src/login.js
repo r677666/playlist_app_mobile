@@ -208,7 +208,7 @@ export default function Login(){
                       <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center", fontSize:"1.5rem"}}
                       onClick={handleLogin}
                       >
-                      <img style={{width:"1rem",height:"1rem", marginRight:"1rem"}}
+                      <img style={{width:"1.5rem",height:"1.5rem", marginRight:"1rem"}}
                        src={spotifyImg}
                        />
                       Login</Button>
