@@ -447,7 +447,7 @@ export default function Home(){
         <div>
             {/* {checkForLogin()} */}
             {handleMobileHomeScreen()}
-            <BottomGoogleAd/>
+            {/* <BottomGoogleAd/> */}
         </div>
         
     );

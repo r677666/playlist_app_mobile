@@ -596,7 +596,7 @@ export default function Create(){
                     </Modal.Footer>
                 </Modal>
         </Container>
-        <BottomGoogleAd/>
+        {/* <BottomGoogleAd/> */}
       </div>
     );
     
