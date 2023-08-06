@@ -249,7 +249,7 @@ export default function Upgrade(){
                 </Button>
                 </Modal.Footer>
             </Modal>
-            <BottomGoogleAd/>
+            {/* <BottomGoogleAd/> */}
         </div>
         
     )

@@ -611,7 +611,7 @@ function handleGoogleAds(){
                     
                 </div>
                 {/* {checkForSpotifyPlayer()} */}
-                <BottomGoogleAd/>
+                {/* <BottomGoogleAd/> */}
                 <Footer/>
         </div>
     )
