@@ -1,8 +1,8 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Form } from 'react-bootstrap';
 import React,{ useState, useEffect, Component } from 'react';
-import { click } from '@testing-library/user-event/dist/click';
+// import { click } from '@testing-library/user-event/dist/click';
 import App from './App';
 import TastemakerImg  from './Tastemakers Main Logo (1).png'
 import TastemakerLogo from './taste makers logo (1).png'
