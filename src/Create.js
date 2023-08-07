@@ -77,7 +77,7 @@ export default function Create(){
     const [windowSize, setWindowSize] = useState({
       width: undefined,
       height: undefined,
-    });
+    },[]);
   
     useEffect(() => {
       function handleResize() {

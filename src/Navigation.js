@@ -10,7 +10,7 @@ const CLIENT_ID = "46a1cee5d9084a10876b12abb9c51208";
 const CLIENT_SECRET = "af917974b69544beb3c66ec1045f1f73";
 
 function Navigation() {
-  const userAuthToken = sessionStorage.getItem("token")
+  // const userAuthToken = sessionStorage.getItem("token")
   const userId = sessionStorage.getItem("userId");
   const userImg = sessionStorage.getItem("imgURL");
   const [accessToken, setAccessToken] = useState("");
@@ -41,7 +41,7 @@ function Navigation() {
   }
 
   function handleProUser(){
-    if(userPro == true){
+    if(userPro === true){
       return(
         <>
         <img className="d-inline-block align-top" alt='' style={{width:'2.3rem',height:'2.3rem', marginRight:'.5rem', marginLeft:'20rem'}}src={crown}/>

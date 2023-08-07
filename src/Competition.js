@@ -7,7 +7,7 @@ import Navigation from './Navigation';
 import Footer from './Footer';
 import play from './play.png';
 import Adsense from 'react-adsense';
-import SpotifyPlayback from './SpotifyPlayback';
+// import SpotifyPlayback from './SpotifyPlayback';
 import officialSpotify from './Spotify_Icon_RGB_Black.png'
 import BottomGoogleAd from './BottomGoogleAd';
 //testing change
@@ -43,7 +43,7 @@ export default function UserProfile(){
     const [windowSize, setWindowSize] = useState({
       width: undefined,
       height: undefined,
-    });
+    },[]);
     var docTracks = [];
     useEffect(() => {
         const fetchUsers = async () => {
@@ -438,16 +438,16 @@ function handleGoogleAds(){
   }
 }
 
-  function checkForSpotifyPlayer(){
-    if(localStorage.getItem("showSpotifyPlayer")=="true"){
-      // handleOpen_showSpotifyPlayer();
-          return(
-            <div>
-              <SpotifyPlayback/>
-            </div>
-          )
-        }
-  }
+  // function checkForSpotifyPlayer(){
+  //   if(localStorage.getItem("showSpotifyPlayer")=="true"){
+  //     // handleOpen_showSpotifyPlayer();
+  //         return(
+  //           <div>
+  //             <SpotifyPlayback/>
+  //           </div>
+  //         )
+  //       }
+  // }
 
   function handleSpotifyPlayback(){
     // localStorage.setItem("showSpotifyPlayer","true")

@@ -1,14 +1,12 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Stack, Card, CardGroup, Navbar, Image, Modal, Col, Collapse, Accordion } from 'react-bootstrap';
+import { Container, Button, Stack, Card, Modal} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
 import Footer from './Footer';
 import crown from './crown.png';
 import goldOk from './gold_ok.png';
 import grayOk from './gray_ok.png'
-import { Link } from 'react-router-dom';
-import BottomGoogleAd from './BottomGoogleAd';
 // import Stripe from "stripe";
 
 export default function Upgrade(){
@@ -27,7 +25,7 @@ export default function Upgrade(){
     const [windowSize, setWindowSize] = useState({
         width: undefined,
         height: undefined,
-      });
+      },[]);
     
       useEffect(() => {
         function handleResize() {

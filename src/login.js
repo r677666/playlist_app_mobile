@@ -3,16 +3,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Form } from 'react-bootstrap';
 import React,{ useState, useEffect, Component } from 'react';
 // import { click } from '@testing-library/user-event/dist/click';
-import App from './App';
+// import App from './App';
 import TastemakerImg  from './Tastemakers Main Logo (1).png'
 import TastemakerLogo from './taste makers logo (1).png'
 import spotifyImg from './Spotify_Icon_RGB_White.png'
 import Footer from './Footer Desktop Login'
 import FooterMobile from './Footer Login'
-import GoogleAd from 'react-google-ad';
+// import GoogleAd from 'react-google-ad';
 
-import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
-import BottomGoogleAd from './BottomGoogleAd';
+// import { responsivePropType } from 'react-bootstrap/esm/createUtilityClasses';
+// import BottomGoogleAd from './BottomGoogleAd';
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
 const SPOTIFY_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -28,16 +28,17 @@ const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET
 
 export default function Login(){
     checkURL()
-    const [userId,setUserId] = useState("");
-    const [currentURL, setCurrentURL] = useState("");
+    // const [userId,setUserId] = useState("");
+    
+
     const [accessToken, setAccessToken] = useState("");
-    const [userAuthToken, setUserAuthToken] = useState("");
-    const [error, setError] = useState([]);
-    const [isActive, setIsActive] = useState(false);
+    // const [userAuthToken, setUserAuthToken] = useState("");
+    // const [error, setError] = useState([]);
+    // const [isActive, setIsActive] = useState(false);
     const [windowSize, setWindowSize] = useState({
       width: undefined,
       height: undefined,
-    });
+    },[]);
     //console.log("Image:"+ (sessionStorage.getItem("imgURL")))
     //console.log("User: "+ (sessionStorage.getItem("userId")))
     const SPACE_DELIMITER = "%20";

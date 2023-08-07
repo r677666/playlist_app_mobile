@@ -68,7 +68,7 @@ export default function UserProfile(){
         queryFriends()
         
         
-    });
+    },[]);
     //trying to stop constant run
     // const handleStopEffect = () => {
     //     setShouldRunEffect(false);

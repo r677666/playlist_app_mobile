@@ -1,8 +1,8 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal } from 'react-bootstrap';
+// import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import Navigation from './Navigation';
+// import Navigation from './Navigation';
 
 export default function Logout(){
     sessionStorage.setItem('token','')
