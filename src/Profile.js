@@ -1,13 +1,10 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal, Stack } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
-import FREE from './FREE 2.png';
-import PRO from './vibes.png';
 import Footer from './Footer';
 import crown from './crown.png';
-import BottomGoogleAd from './BottomGoogleAd';
 
 function handleUpgradeButton(){
     window.location.assign("https://www.tastemakers.pro/Upgrade")

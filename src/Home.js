@@ -1,33 +1,29 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Row, Card, CardGroup, Navbar, Image, Modal, ButtonGroup, Collapse} from 'react-bootstrap';
+import { Container, Button, Row, Card, } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
 // import TasteMaker3 from './Tastemaker Pro Ad .99 UPDATED.png'
 import TasteMaker3 from './Tastemaker SUBMIT FREE AD.png'
-import { renderMatches } from 'react-router-dom';
 import Footer from './Footer';
 import FOATad from './FOAT ad updated.png'
-import pollPicture from './Kendrick Poll Clear.png'
 import stockPhotoLogo from './Tastemakers Main Logo (1).png'
-import MobileAe2 from './Tastemaker Pro Ad .99 UPDATED - MOBILE.png'
-import SpotifyPlayback from './SpotifyPlayback';
-import BottomGoogleAd from './BottomGoogleAd';
+// import SpotifyPlayback from './SpotifyPlayback';
 
 
 export default function Home(){
-    const userAuthToken = sessionStorage.getItem("token")
-    const userImg = sessionStorage.getItem("imgURL");
+    // const userAuthToken = sessionStorage.getItem("token")
+    // const userImg = sessionStorage.getItem("imgURL");
     const [users,setUsers] = useState([])
-    const [isActive, setIsActive] = useState(false);
-    const [accessToken, setAccessToken] = useState("");
-    const [getUserImg, setGetUserImg] = useState([]);
+    // const [isActive, setIsActive] = useState(false);
+    // const [accessToken, setAccessToken] = useState("");
+    // const [getUserImg, setGetUserImg] = useState([]);
     const [windowSize, setWindowSize] = useState({
         width: undefined,
         height: undefined,
-      });
-    var test;
+      },[]);
+    // var test;
     useEffect(() => {
         const fetchUsers = async () => {
             const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/users')
@@ -49,17 +45,17 @@ export default function Home(){
           return () => window.removeEventListener("resize", handleResize);
     },[])
 
-    function onlyUnique(value, index, self) {
-        return self.indexOf(value) === index;
-      }
+    // function onlyUnique(value, index, self) {
+    //     return self.indexOf(value) === index;
+    //   }
 
-    function clickUser(name){
-        name = name.replaceAll("\"", "")
-        window.location.assign("https://www.tastemakers.pro/User/" + name)
-    }
+    // function clickUser(name){
+    //     name = name.replaceAll("\"", "")
+    //     window.location.assign("https://www.tastemakers.pro/User/" + name)
+    // }
 
     async function followUserButton(user,follower){
-        var alreadyFollowed = false;
+        // var alreadyFollowed = false;
         //console.log(user)
         //console.log(follower)
         var followThisPerson = '';
@@ -68,7 +64,7 @@ export default function Home(){
         
 
         for(var i = 0; i<users.length;i++){
-            if(users[i].userId == user){
+            if(users[i].userId === user){
                 followThisPerson = users[i]._id
                 //console.log(followThisPerson)
                 //console.log("FOLLOWER MATCH")
@@ -76,7 +72,7 @@ export default function Home(){
         }
 
         for(var i = 0; i<users.length;i++){
-            if(users[i].userId == follower){
+            if(users[i].userId === follower){
                 followerId = users[i]._id;
                 //console.log(followerId)
                 //console.log("USER MATCH")
@@ -134,18 +130,18 @@ export default function Home(){
     function competitionButton(){
         window.location.assign("https://www.tastemakers.pro/Competition/")
     }
-    function handleUserImgs(userId){
-        var userParameters = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + sessionStorage.getItem("token")
-            }
-        }
-        var userData = fetch('https://api.spotify.com/v1/users/' + userId.replaceAll("\"",""))
-        .then(response => response.json())
-        .then(data => setGetUserImg(data))
-    }
+    // function handleUserImgs(userId){
+    //     var userParameters = {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+    //         }
+    //     }
+    //     var userData = fetch('https://api.spotify.com/v1/users/' + userId.replaceAll("\"",""))
+    //     .then(response => response.json())
+    //     .then(data => setGetUserImg(data))
+    // }
     function handleUpgradeButton(){
         window.location.assign("https://www.tastemakers.pro/Upgrade")
     }
@@ -193,26 +189,26 @@ export default function Home(){
         }
     }
 
-    function checkForSpotifyPlayer(){
-        if(localStorage.getItem("showSpotifyPlayer")=="true"){
-          // handleOpen_showSpotifyPlayer();
-              return(
-                <div>
-                  <SpotifyPlayback/>
-                </div>
-              )
-            }else if(localStorage.getItem("showSpotifyPlayer")=="false"){
-              return(
-                <div></div>
-              )
-            }
-      }
+    // function checkForSpotifyPlayer(){
+    //     if(localStorage.getItem("showSpotifyPlayer")=="true"){
+    //       // handleOpen_showSpotifyPlayer();
+    //           return(
+    //             <div>
+    //               <SpotifyPlayback/>
+    //             </div>
+    //           )
+    //         }else if(localStorage.getItem("showSpotifyPlayer")=="false"){
+    //           return(
+    //             <div></div>
+    //           )
+    //         }
+    //   }
     
-      function handleSpotifyPlayback(){
-        localStorage.setItem("showSpotifyPlayer","true")
-        //console.log(localStorage.getItem("showSpotifyPlayer"))
-        checkForSpotifyPlayer()
-      }
+    //   function handleSpotifyPlayback(){
+    //     localStorage.setItem("showSpotifyPlayer","true")
+    //     //console.log(localStorage.getItem("showSpotifyPlayer"))
+    //     checkForSpotifyPlayer()
+    //   }
 
     function handleMobileHomeScreen(){
         if(windowSize.width < 765){
