@@ -9,7 +9,7 @@ import play from './play.png';
 import Adsense from 'react-adsense';
 // import SpotifyPlayback from './SpotifyPlayback';
 import officialSpotify from './Spotify_Icon_RGB_Black.png'
-import BottomGoogleAd from './BottomGoogleAd';
+// import BottomGoogleAd from './BottomGoogleAd';
 //testing change
 export default function UserProfile(){
 
