@@ -7,7 +7,6 @@ import Footer from './Footer';
 import crown from './crown.png';
 import goldOk from './gold_ok.png';
 import grayOk from './gray_ok.png'
-// import Stripe from "stripe";
 
 export default function Upgrade(){
     let [message, setMessage] = useState('');
@@ -18,9 +17,6 @@ export default function Upgrade(){
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    // const stripe = new Stripe("sk_test_51Mdh79DtWk2E47D2T8ZzQnNWdiE1mXZETGEtr5kmP0TXKE1D4E0IB2xD8OXd0LIMeVLxIwydqJhBRJpuhFwbKfLS00YhbtWKpA");
-    // const [customer, setCustomer] = useState(null);
 
     const [windowSize, setWindowSize] = useState({
         width: undefined,
@@ -57,18 +53,6 @@ export default function Upgrade(){
             "Order canceled -- continue to shop around and checkout when you're ready."
           );
         }
-
-        // useEffect(() => {
-        //   stripe.customers.list({ email })
-        //     .then((customers) => {
-        //       if (customers.data.length > 0) {
-        //         setCustomer(customers.data[0]);
-        //       }
-        //     })
-        //     .catch((error) => {
-        //       console.error(error);
-        //     });
-        // }, [email]);
 
         function updateUserProStatus(){
             // //console.log("TESTING SUCCESSFUL")
