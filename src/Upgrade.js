@@ -170,7 +170,7 @@ export default function Upgrade(){
                                 </Card.Text>
                                 <Card.Text>
                                     <img src={grayOk} alt='...'/>
-                                    Ability to View Other's created playlist
+                                    Submit to ONE Weekly Competition
                                 </Card.Text>
                                 <Card.Text>
                                     <img src={grayOk} alt='...'/>
@@ -192,7 +192,7 @@ export default function Upgrade(){
                      <hr style={{marginBottom: '0', marginTop:'1rem'}}/>
                      <Card.Body className='text-center' style={{backgroundColor:'white'}}>
                                 <Card.Text style={{marginTop:'1rem', fontSize:'2rem'}}>
-                                    $4.99 / month
+                                    $1.99 / month
                                 </Card.Text>
                                 <Card.Text>
                                     <img src={goldOk}/>
@@ -200,7 +200,7 @@ export default function Upgrade(){
                                 </Card.Text>
                                 <Card.Text>
                                     <img src={goldOk}/>
-                                    Submit to Weekly Competition
+                                    Submit to ALL Weekly Competition
                                 </Card.Text>
                                 <Card.Text>
                                     <img src={goldOk}/>
