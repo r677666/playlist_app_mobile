@@ -57,178 +57,206 @@ export default function UserProfile(){
 
     })
     useEffect(() => {
-              function handleResize() {
-          setWindowSize({
-            width: window.innerWidth,
-            height: window.innerHeight,
-          });
-        }
+      const handleResize = () => {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      };
     
-        window.addEventListener("resize", handleResize);
-        handleResize(); // Set initial size on mount
+      window.addEventListener("resize", handleResize);
+      handleResize(); // Set initial size on mount
     
-        return () => window.removeEventListener("resize", handleResize);
-    },[])
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    
 
     //Post Playlist to Competition
-    async function postCompDoc(){
-
-        var postPlaylistToComp = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/create', {
-            method: 'POST',
-            body: JSON.stringify({
-              "userId": userId,
-              "playlistName": sessionStorage.getItem("playlistName"),
-              "playlistsId": sessionStorage.getItem("playlistId"),
-              "likes": []
-            }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-        .then(result => console.log(result.json()))
+    async function postCompDoc() {
+      try {
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/api/competition/create', {
+          method: 'POST',
+          body: JSON.stringify({
+            userId: userId,
+            playlistName: sessionStorage.getItem("playlistName"),
+            playlistsId: sessionStorage.getItem("playlistId"),
+            likes: []
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+        } else {
+          console.error('Failed to post competition document:', response.status);
+        }
+      } catch (error) {
+        console.error('Error posting competition document:', error);
+      }
     }
+    
 
     //Get Playlist
-    async function getUserPlaylist(){
-      if(checkForLogin()){
-        var playlistParameters={
+    async function getUserPlaylist() {
+      if (checkForLogin()) {
+        const playlistParameters = {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + sessionStorage.getItem('token')
           }
+        };
+    
+        try {
+          const response = await fetch('https://api.spotify.com/v1/me/playlists?limit=50&mine=true', playlistParameters);
+          
+          if (response.ok) {
+            const data = await response.json();
+            const personalPlaylists = data.items.filter(playlist => playlist.owner.id === userId.replaceAll("\"", ""));
+            setUserPlaylists(personalPlaylists);
+          } else {
+            console.error('Failed to fetch user playlists:', response.status);
+          }
+        } catch (error) {
+          console.error('Error fetching user playlists:', error);
         }
-        var getUsersPlaylist = await fetch('https://api.spotify.com/v1/me/playlists?limit=50&mine=true' , playlistParameters)
-        .then(response => response.json())
-        .then(data => 
-          {
-          const personalPlaylists = data.items.filter(playlist => {
-            return playlist.owner.id === userId.replaceAll("\"","");
-        });setUserPlaylists(personalPlaylists);
-        }
-        )
-        // .then(console.log(userPlaylists))
-        .catch(response => console.log(response.json()))}
       }
+    }
+    
 
     //Get Comp Submitted Playlist
-    async function compPlaylist(){
-      setCompIsActive(true)
-      var playlistParameters={
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-        }
-      }
-      console.log(sessionStorage.getItem('token'))
-      var getUsersPlaylist = await fetch('https://api.spotify.com/v1/playlists/' + sessionStorage.getItem('compDoc'), playlistParameters)
-        .then(response => response.json())
-        .then(data => setCompDoc(data))
-        console.log(compDoc)
-        //   {
-        //   const personalPlaylists = data.items.filter(playlist => {
-        //     return playlist.owner.id === userId.replaceAll("\"","");
-        // });setUserPlaylists(personalPlaylists);
-        // }
-        // // .then(console.log(userPlaylists))
-        // .catch(response => console.log(response.json()))
-        console.log("PLAYLIST TRACKS FOUND")
-    }
-    function setClickedPlaylistButton(userId,playlistsName,playlistsId){
-        var executed = false;
-        var currentID = "";
-        return function(){
-          
-          if(!executed){
-            // if(id==currentID){
-            setChoosePlaylistActive(current => !current)
-            // }else{
-            //   currentID = id
-            // }
-            // console.log("User Name:"+userId)
-            // console.log("Playlists Name:"+playlistsName)
-            // console.log("Playlist ID = " + playlistsId)
-            alert("SELECTED")
-            sessionStorage.setItem("playlistId",playlistsId)
-            sessionStorage.setItem("playlistName",playlistsName)
-            console.log("TEST"+ sessionStorage.getItem("playlistName") + " " + sessionStorage.getItem("playlistId"))
-            
-            handleClose_showSetPlayListModal()
-            postCompDoc()
+    async function compPlaylist() {
+      try {
+        setCompIsActive(true);
+        const playlistParameters = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
           }
+        };
+    
+        console.log(sessionStorage.getItem('token'));
+        const response = await fetch('https://api.spotify.com/v1/playlists/' + sessionStorage.getItem('compDoc'), playlistParameters);
+    
+        if (response.ok) {
+          const data = await response.json();
+          setCompDoc(data);
+          console.log(compDoc);
+          console.log("PLAYLIST TRACKS FOUND");
+        } else {
+          console.error('Failed to fetch competition playlist:', response.status);
         }
+      } catch (error) {
+        console.error('Error fetching competition playlist:', error);
       }
-      function deleteButtonFunction(id){
-        console.log(id)
-        const getMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/' +id)
-        .then(result => console.log(result.json()))
-
-        const deleteMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/',{
-        method: 'DELETE',
-        body: JSON.stringify({
-            "id": id
-        }),
-        headers: {
-        'Content-Type': 'application/json'
-        }
-        }).then(response => console.log(response.json()))
-        
-      }
-      //Like Comp Playlist
-    const handleLike = async (userId,id) => {
-        if(checkForLogin()){
-                var arr = [];
-                
-                const checkIfLikedAlready = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/' + id)
-                .then(result => result.json())
-                .then(data => 
-                    {
-                    if(data.likes == null){
-                        console.log("TEST")
-                    }else{
-                        // console.log(data.likes.indexOf('testLike') )
-                        if(data.likes.indexOf(userId) !== -1){
-                            console.log("REMOVED LIKE")
-                                    const followMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/removeLike',{
-                                        method: 'PATCH',
-                                        body: JSON.stringify({
-                                            "userId": userId,
-                                            "playlistId": id
-                                        }),
-                                        headers: {
-                                        'Content-Type': 'application/json'
-                                        }
-                                    })
-                                    setIsActive(false)
-                            //     }
-                            // }catch(err){
-                            //     console.log(err)
-                            // }
-                        }else{
-                            console.log("ADDED LIKE")
-                            const followMethod = fetch(process.env.REACT_APP_BACKEND_URL+'/api/competition/addLike',{
-                                method: 'PATCH',
-                                body: JSON.stringify({
-                                    "userId": userId,
-                                    "playlistId": id
-                                }),
-                                headers: {
-                                'Content-Type': 'application/json'
-                                }
-                            }
-                            )
-                            setIsActive(true)
-                        }
-                    }
-                }
-                )
-                // .then(data => arr.push(data.likes))
-
-
-
-              }
     }
+    
+    function setClickedPlaylistButton(userId, playlistsName, playlistsId) {
+      let executed = false;
+    
+      return function () {
+        if (!executed) {
+          executed = true;
+    
+          setChoosePlaylistActive(current => !current);
+    
+          alert("SELECTED");
+    
+          sessionStorage.setItem("playlistId", playlistsId);
+          sessionStorage.setItem("playlistName", playlistsName);
+    
+          handleClose_showSetPlayListModal();
+          postCompDoc();
+        }
+      };
+    }
+    
+    async function deleteButtonFunction(id) {
+      try {
+        console.log(id);
+    
+        // Get competition data (optional)
+        const getResponse = await fetch(process.env.REACT_APP_BACKEND_URL + '/api/competition/' + id);
+        if (getResponse.ok) {
+          const getResult = await getResponse.json();
+          console.log(getResult);
+        } else {
+          console.error('Failed to get competition data:', getResponse.status);
+        }
+    
+        // Delete competition
+        const deleteResponse = await fetch(process.env.REACT_APP_BACKEND_URL + '/api/competition/', {
+          method: 'DELETE',
+          body: JSON.stringify({
+            id: id
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+    
+        if (deleteResponse.ok) {
+          const deleteResult = await deleteResponse.json();
+          console.log(deleteResult);
+        } else {
+          console.error('Failed to delete competition:', deleteResponse.status);
+        }
+      } catch (error) {
+        console.error('Error in deleteButtonFunction:', error);
+      }
+    }
+    
+      //Like Comp Playlist
+      const handleLike = async (userId, id) => {
+        if (!checkForLogin()) {
+          return;
+        }
+      
+        try {
+          const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/api/competition/' + id);
+          if (response.ok) {
+            const data = await response.json();
+            const likes = data.likes || [];
+      
+            if (likes.includes(userId)) {
+              console.log("REMOVED LIKE");
+              await fetch(process.env.REACT_APP_BACKEND_URL + '/api/competition/removeLike', {
+                method: 'PATCH',
+                body: JSON.stringify({
+                  userId: userId,
+                  playlistId: id
+                }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              });
+              setIsActive(false);
+            } else {
+              console.log("ADDED LIKE");
+              await fetch(process.env.REACT_APP_BACKEND_URL + '/api/competition/addLike', {
+                method: 'PATCH',
+                body: JSON.stringify({
+                  userId: userId,
+                  playlistId: id
+                }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              });
+              setIsActive(true);
+            }
+          } else {
+            console.error('Failed to fetch competition data:', response.status);
+          }
+        } catch (error) {
+          console.error('Error in handleLike:', error);
+        }
+      };
+      
     function handleNull(data){
         if(data == undefined){
             return "0"
