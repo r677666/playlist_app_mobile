@@ -17,24 +17,32 @@ function Navigation() {
   const [userPro, setUserPro] = useState(false);
 
   useEffect(() => {
-    // API Access Token
-    var authParameters = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
-    }
-    fetch('https://accounts.spotify.com/api/token', authParameters)
-      .then(result => result.json())
-      .then(data => setAccessToken(data.access_token))
-
-    const response = fetch(process.env.REACT_APP_BACKEND_URL+'/api/users/'+userId)
-      .then(result => result.json())
-      .then(data => setUserPro(data.paidMember))
-      // .then(//console.log(userPro))
-
-  }, [])
+    const fetchData = async () => {
+      try {
+        // Get Spotify access token
+        const authParameters = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`
+        };
+        const authResponse = await fetch('https://accounts.spotify.com/api/token', authParameters);
+        const authData = await authResponse.json();
+        setAccessToken(authData.access_token);
+  
+        // Get user data from your backend
+        const userResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`);
+        const userData = await userResponse.json();
+        setUserPro(userData.paidMember);
+      } catch (error) {
+        // Handle errors here
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData();
+  }, [userId]);  
 
   // function handleNavPic(){
   //   window.location.assign("https://www.tastemakers.pro/Account")

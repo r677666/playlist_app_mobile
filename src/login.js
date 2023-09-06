@@ -45,65 +45,73 @@ export default function Login(){
     const SCOPES = ["playlist-read-private","playlist-modify-private", "playlist-modify-public", "playlist-read-collaborative", "user-library-modify", "user-read-private", "user-read-email", "user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state"]
     const SCOPES_URI_PARAM = SCOPES.join(SPACE_DELIMITER)
     useEffect(() => {
-        // API Access Token
-        var authParameters = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
-        }
-
-        fetch('https://accounts.spotify.com/api/token', authParameters)
-          .then(result => result.json())
-          .then(data => setAccessToken(data.access_token))
-          .catch(result => console.log(result.json()))
-
-          function handleResize() {
-            setWindowSize({
-              width: window.innerWidth,
-              height: window.innerHeight,
-            });
-          }
-
-          document.body.style.overflowX = 'hidden';
-      
-          window.addEventListener("resize", handleResize);
-          handleResize(); // Set initial size on mount
-      
-          return () => window.removeEventListener("resize", handleResize);
-      }, [])
+      // API Access Token
+      const authParameters = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`
+      };
+    
+      fetch('https://accounts.spotify.com/api/token', authParameters)
+        .then(response => response.json())
+        .then(data => setAccessToken(data.access_token))
+        .catch(error => console.error('Error fetching access token:', error));
+    
+      const handleResize = () => {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight
+        });
+      };
+    
+      document.body.style.overflowX = 'hidden';
+    
+      window.addEventListener("resize", handleResize);
+      handleResize(); // Set initial size on mount
+    
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    
 
       //For Playlist App Server
-      async function fetchUsers(){
-            if(sessionStorage.getItem("userId") != null){
-                  const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/users/createUser',{
-                    method: 'POST',
-                    body: JSON.stringify({
-                      "userId": sessionStorage.getItem("userId"),
-                      "friends":[],
-                      "playlists":[],
-                      "spotifyToken": sessionStorage.getItem("spotifyToken"),
-                      "spotifyUserImgUrl": sessionStorage.getItem("spotifyUserImgUrl"),
-                      "paidMember":false,
-                      "email":sessionStorage.getItem("userEmail")
-                    }),
-                    headers: {
-                      'Content-Type': 'application/json'
-                    }
-                  })
-                  //console.log(response)
-                  const json = await response.json()
-                  //console.log(json)
-                  if(!response.ok){
-                    console.log("User Already Exists")
-                  }else{
-                    console.log("User Created")
-                  }
-          }else{
-            console.log("UserId Null")
+      async function fetchUsers() {
+        const userId = sessionStorage.getItem("userId");
+      
+        if (userId) {
+          try {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/api/users/createUser', {
+              method: 'POST',
+              body: JSON.stringify({
+                "userId": userId,
+                "friends": [],
+                "playlists": [],
+                "spotifyToken": sessionStorage.getItem("spotifyToken"),
+                "spotifyUserImgUrl": sessionStorage.getItem("spotifyUserImgUrl"),
+                "paidMember": false,
+                "email": sessionStorage.getItem("userEmail")
+              }),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+      
+            if (response.ok) {
+              console.log("User Created");
+            } else if (response.status === 409) {
+              console.log("User Already Exists");
+            } else {
+              console.error("Failed to create user:", response.status);
+            }
+          } catch (error) {
+            console.error("Error creating user:", error);
           }
+        } else {
+          console.log("UserId Null");
         }
+      }
+      
 
       function checkURL(){
       if(window.location.href.includes("access_token")){
@@ -127,43 +135,38 @@ export default function Login(){
         }
       }
 
-    function userInfo(){
-        var userParameters = {
+      async function userInfo() {
+        const userParameters = {
           method: 'GET',
           headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token")
           }
+        };
+      
+        try {
+          sessionStorage.setItem("params", JSON.stringify(userParameters));
+          const response = await fetch('https://api.spotify.com/v1/me', userParameters);
+      
+          if (response.status !== 200) {
+            alert("Login Failed - Sign Up for Beta / Clear Cache / or Contact Us");
+            window.location.assign('https://www.tastemakers.pro/Logout');
+            return;
+          }
+      
+          const data = await response.json();
+          sessionStorage.setItem("userId", JSON.stringify(data.id));
+          sessionStorage.setItem("imgURL", data.images[0].url);
+          sessionStorage.setItem("userEmail", data.email);
+          sessionStorage.setItem("spotifyToken", data.href);
+          sessionStorage.setItem("spotifyUserImgUrl", data.images[0].url);
+        } catch (error) {
+          console.error("Error fetching user info:", error);
+          sessionStorage.setItem("userId", null);
+          sessionStorage.setItem("token", null);
         }
-        try{
-        sessionStorage.setItem("params",JSON.stringify(userParameters))
-        //console.log(sessionStorage.getItem("params"))
-        var userData = fetch('https://api.spotify.com/v1/me',userParameters)
-        .then(response => 
-          {
-            if(response.status !== 200){
-              alert("Login Failed - Sign Up for Beta / Clear Cache / or Contact Us")
-              window.location.assign('https://www.tastemakers.pro/Logout')
-            return null
-          }
-          return response.json()
-          })
-        // .then(data => sessionStorage.setItem("error",JSON.stringify(data)))
-        .then(data => {
-          sessionStorage.setItem("userId", JSON.stringify(data.id))
-          sessionStorage.setItem("imgURL",data.images[0].url)
-          sessionStorage.setItem("userEmail",data.email)
-          sessionStorage.setItem("spotifyToken",data.href)
-          sessionStorage.setItem("spotifyUserImgUrl",data.images[0].url)
-        })
-        .catch(response => console.log("CATCH"+response.json()))
-      }catch{
-        sessionStorage.setItem("userId",null)
-        sessionStorage.setItem("token",null)
       }
-      // checkForUser()
-        //Just getting UserId for now but definitely can get additional info from this json
-      }
+      
 
     const handleLogin = () => {
         window.location.assign(SPOTIFY_ENDPOINT+'?response_type=token' + '&client_id=' + (CLIENT_ID)

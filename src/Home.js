@@ -26,24 +26,30 @@ export default function Home(){
     // var test;
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/users')
-            .then(result => result.json())
-            .then(data => setUsers(data))
-            // .then(//console.log("users from Playlist App Server have been found"))
-        }
-        fetchUsers()
-        function handleResize() {
-            setWindowSize({
-              width: window.innerWidth,
-              height: window.innerHeight,
-            });
+          try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users`);
+            const data = await response.json();
+            setUsers(data);
+            // console.log("Users from Playlist App Server have been found");
+          } catch (error) {
+            // Handle errors here
+            console.error('Error fetching users:', error);
           }
+        };
       
-          window.addEventListener("resize", handleResize);
-          handleResize(); // Set initial size on mount
+        const handleResize = () => {
+          setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+          });
+        };
       
-          return () => window.removeEventListener("resize", handleResize);
-    },[])
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Set initial size on mount
+      
+        return () => window.removeEventListener("resize", handleResize);
+      }, []);
+      
 
     // function onlyUnique(value, index, self) {
     //     return self.indexOf(value) === index;
@@ -54,44 +60,40 @@ export default function Home(){
     //     window.location.assign("https://www.tastemakers.pro/User/" + name)
     // }
 
-    async function followUserButton(user,follower){
-        // var alreadyFollowed = false;
-        //console.log(user)
-        //console.log(follower)
-        var followThisPerson = '';
-        var followerId = '';
-
-        
-
-        for(var i = 0; i<users.length;i++){
-            if(users[i].userId === user){
-                followThisPerson = users[i]._id
-                //console.log(followThisPerson)
-                //console.log("FOLLOWER MATCH")
+    async function followUserButton(user, follower) {
+        try {
+          const followThisPerson = users.find((u) => u.userId === user)?._id;
+          const followerId = users.find((u) => u.userId === follower)?._id;
+      
+          if (!followThisPerson || !followerId) {
+            console.log("User or follower not found.");
+            return;
+          }
+      
+          const response = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/api/users/friends/addFriend`,
+            {
+              method: "PATCH",
+              body: JSON.stringify({
+                userId: followerId,
+                friendId: followThisPerson,
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
             }
+          );
+      
+          if (response.ok) {
+            alert("Friend Added");
+          } else {
+            console.error("Error adding friend:", response.status);
+          }
+        } catch (error) {
+          console.error("Error following user:", error);
         }
-
-        for(var i = 0; i<users.length;i++){
-            if(users[i].userId === follower){
-                followerId = users[i]._id;
-                //console.log(followerId)
-                //console.log("USER MATCH")
-            }
-        }
-
-        const followMethod = await fetch(process.env.REACT_APP_BACKEND_URL+'/api/users/friends/addFriend',{
-            method: 'PATCH',
-            body: JSON.stringify({
-              "userId": followerId,
-              "friendId": followThisPerson
-            }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-        // .then(response => //console.log(response.json()))
-        .then(alert("Friend Added"))
-    }
+      }
+      
 
     // function checkForLogin(){
     //     if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
@@ -99,33 +101,38 @@ export default function Home(){
     //     }
     //   }
 
-    function checkFollowButton(item1,item2){
-        if(item1 != item2){
-            return(
+    // function checkFollowButton(item1,item2){
+    //     if(item1 != item2){
+    //         return(
 
-                <Button 
-                style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA", paddingLeft:"1rem", paddingRight:"1rem", marginLeft:".5rem"}}
-                onClick={() => {followUserButton(item2,item1)}}>Follow</Button>
-            )
+    //             <Button 
+    //             style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA", paddingLeft:"1rem", paddingRight:"1rem", marginLeft:".5rem"}}
+    //             onClick={() => {followUserButton(item2,item1)}}>Follow</Button>
+    //         )
+    //     }
+    // }
+    function handleGoProButton() {
+        if (windowSize.width < 765) {
+          return null; // Return null if window width is less than 765
         }
-    }
-    function handleGoProButton(){
-        if(windowSize.width < 765){
-            return(
-                <div></div>
-            )
-        }else{
-           return(
-              <Button 
-                    onClick={() => handleUpgradeButton()}
-                    style={{marginBottom:"1rem", color:"white",backgroundColor:"black", borderColor:"#ff914d", paddingLeft:"2rem",paddingRight:"2rem"}}
-                    >
-                        Go Pro
-                    </Button>  
-            )
-        }
-        
-    }
+      
+        return (
+          <Button
+            onClick={() => handleUpgradeButton()}
+            style={{
+              marginBottom: "1rem",
+              color: "white",
+              backgroundColor: "black",
+              borderColor: "#ff914d",
+              paddingLeft: "2rem",
+              paddingRight: "2rem",
+            }}
+          >
+            Go Pro
+          </Button>
+        );
+      }
+      
 
     function competitionButton(){
         window.location.assign("https://www.tastemakers.pro/Competition/")
@@ -145,49 +152,57 @@ export default function Home(){
     function handleUpgradeButton(){
         window.location.assign("https://www.tastemakers.pro/Upgrade")
     }
-    function handleTextMobile(){
-        if(windowSize.width < 765){
-            return(
-                <div>
-                    
-                </div>
-            )
-        }else{
-            return(
-                <div style={{maxWidth:"45rem"}}>
-                    <h5 style={{textAlign:"center", paddingTop:"1.5rem"}}>Ever sit around and wonder, "What would be their best album?". Three songs from this</h5>
-            <h5 style={{textAlign:"center"}}>album, five from that, two from another? Man, that's a good dang album right?...</h5>
-            <h5 style={{textAlign:"center"}}>Shouldn't you get a paid for making THAT good of an album. Well, Tastemakers is the place for you.</h5>
-            <h5 style={{textAlign:"center"}}> We're here for the music heads, the casuals, the TASTEMAKERS. Sure AI can generate some random playlists of something you MIGHT like.</h5>
-            <h5 style={{textAlign:"center"}}> But we all know the truth.</h5>
-                </div>
-            )
+    function handleTextMobile() {
+        if (windowSize.width < 765) {
+          return null; // Return null if window width is less than 765
         }
-    }
-    function handleCardTextMobile(){
-        if(windowSize.width < 765){
-            return (
-                <div>
-                </div>
-            )
-        }else{
-            return(
-                <h3 style={{color:"black", marginTop:"20rem",textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF'}}>F.O.A.T.</h3>
-            )
+      
+        return (
+          <div style={{ maxWidth: "45rem" }}>
+            <h5 style={{ textAlign: "center", paddingTop: "1.5rem" }}>
+              Ever sit around and wonder, "What would be their best album?". Three songs
+              from this
+            </h5>
+            <h5 style={{ textAlign: "center" }}>
+              album, five from that, two from another? Man, that's a good dang album right?...
+            </h5>
+            <h5 style={{ textAlign: "center" }}>
+              Shouldn't you get a paid for making THAT good of an album. Well, Tastemakers is
+              the place for you.
+            </h5>
+            <h5 style={{ textAlign: "center" }}>
+              We're here for the music heads, the casuals, the TASTEMAKERS. Sure AI can
+              generate some random playlists of something you MIGHT like.
+            </h5>
+            <h5 style={{ textAlign: "center" }}>But we all know the truth.</h5>
+          </div>
+        );
+      }
+      
+      function handleCardTextMobile() {
+        if (windowSize.width < 765) {
+          return null; // Return null if window width is less than 765
         }
-    }
-    function handleCard2TextMobile(){
-        if(windowSize.width < 765){
-            return (
-                <div>
-                </div>
-            )
-        }else{
-            return(
-                <h3 style={{color:"black", textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF'}}>To Pimp a Butterfly or Good Kid m.A.A.d City</h3>
-            )
-        }
-    }
+      
+        return (
+          <h3 style={{ color: "black", marginTop: "20rem", textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF' }}>
+            F.O.A.T.
+          </h3>
+        );
+      }
+      
+    //   function handleCard2TextMobile() {
+    //     if (windowSize.width < 765) {
+    //       return null; // Return null if window width is less than 765
+    //     }
+      
+    //     return (
+    //       <h3 style={{ color: "black", textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF' }}>
+    //         To Pimp a Butterfly or Good Kid m.A.A.d City
+    //       </h3>
+    //     );
+    //   }
+      
 
     // function checkForSpotifyPlayer(){
     //     if(localStorage.getItem("showSpotifyPlayer")=="true"){
