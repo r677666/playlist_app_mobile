@@ -128,7 +128,7 @@ export default function Upgrade(){
                       value={sessionId}
                     /> */}
                   <Button
-                  onClick={event => handleManageButton()}
+                  onClick={() => handleManageButton()}
                   id="create-customer-portal-session" type="submit" 
                   style={{marginBottom:".25rem", color:"#ff914d",backgroundColor:"black", borderColor:"black", paddingLeft:"2rem",paddingRight:"2rem",marginTop:'.75rem'}}
                   >

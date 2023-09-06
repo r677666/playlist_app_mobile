@@ -105,7 +105,7 @@ export default function Home(){
 
                 <Button 
                 style={{backgroundColor: "#ff914d", color: "black", border:"#5AEDEA", paddingLeft:"1rem", paddingRight:"1rem", marginLeft:".5rem"}}
-                onClick={event => {followUserButton(item2,item1)}}>Follow</Button>
+                onClick={() => {followUserButton(item2,item1)}}>Follow</Button>
             )
         }
     }
@@ -117,7 +117,7 @@ export default function Home(){
         }else{
            return(
               <Button 
-                    onClick={event => handleUpgradeButton()}
+                    onClick={() => handleUpgradeButton()}
                     style={{marginBottom:"1rem", color:"white",backgroundColor:"black", borderColor:"#ff914d", paddingLeft:"2rem",paddingRight:"2rem"}}
                     >
                         Go Pro
@@ -229,7 +229,7 @@ export default function Home(){
                 <Carousel.Caption>
                 {handleCardTextMobile()}
                 {/* <p style={{color:"white", textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Submit playlist for this week's competition</p> */}
-                {/* <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button> */}
+                {/* <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={() => competitionButton()} >Submit playlist</Button> */}
                 </Carousel.Caption>
                 
             </Carousel.Item>
@@ -301,7 +301,7 @@ export default function Home(){
                     {users && users.map((user,i) => (
                         <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
                             <Container 
-                            // onClick={event => clickUser(users[i].userId)}
+                            // onClick={() => clickUser(users[i].userId)}
                             >
                                 {/* {console.log(users[i])} */}
                                     
@@ -342,7 +342,7 @@ export default function Home(){
                 <Carousel.Caption>
                 {/* {handleCardTextMobile()} */}
                 <p style={{color:"white", textShadow: "0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 55px #000, 0 0 75px #000"}}>Submit playlist for this week's competition</p>
-                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={event => competitionButton()} >Submit playlist</Button>
+                <Button style={{backgroundColor: "#ff914d", color: "black", border:"#000000", marginBottom:".5rem", paddingTop:".5rem", paddingBottom:".5rem"}} onClick={() => competitionButton()} >Submit playlist</Button>
                 </Carousel.Caption>
                 
             </Carousel.Item>
@@ -413,7 +413,7 @@ export default function Home(){
                     {users && users.map((user,i) => (
                         <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
                             <Container 
-                            // onClick={event => clickUser(users[i].userId)}
+                            // onClick={() => clickUser(users[i].userId)}
                             >
                                 {/* {//console.log(users[i])} */}
                                     

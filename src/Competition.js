@@ -239,7 +239,7 @@ export default function UserProfile(){
     function deleteButton(user,userX){
         if(user == currentUserForDelete){
             return(
-            <Button style={{color:"orange",backgroundColor:"black",borderColor:"black"}}onClick={event => deleteButtonFunction(userX)}>
+            <Button style={{color:"orange",backgroundColor:"black",borderColor:"black"}}onClick={() => deleteButtonFunction(userX)}>
                 Delete
             </Button>
             )
@@ -330,12 +330,12 @@ function handleGoogleAds(){
                   <Container style={{width:"100%"}}> 
                       <h4 style={{justifySelf:"left", marginTop:"1rem"}}>{compSubmissions[i].playlistName}</h4>
                       <Button 
-                      onClick={event => handleCompDocPressMobile(compSubmissions[i].playlistsId)} 
+                      onClick={() => handleCompDocPressMobile(compSubmissions[i].playlistsId)} 
                       style={{marginLeft:"1rem",color:"black", backgroundColor:"white", borderColor:"orange"}}>view</Button>
                       <ButtonGroup style={{float:"right"}}>
                           <Button
                           key={compSubmissions._id} 
-                          onClick={event => handleLike(userId,compSubmissions[i]._id)}
+                          onClick={() => handleLike(userId,compSubmissions[i]._id)}
                           style={{width:"5rem",
                           backgroundColor: "white", 
                           color:"black",
@@ -392,12 +392,12 @@ function handleGoogleAds(){
                           <Container> 
                               <h4 style={{justifySelf:"left"}}>{compSubmissions[i].playlistName}</h4>
                               <Button 
-                              onClick={event => handleCompDocPress(compSubmissions[i].playlistsId)} 
+                              onClick={() => handleCompDocPress(compSubmissions[i].playlistsId)} 
                               style={{marginLeft:"1rem",color:"black", backgroundColor:"white", borderColor:"orange"}}>view</Button>
                               <ButtonGroup style={{float:"right"}}>
                                   <Button
                                   key={compSubmissions._id} 
-                                  onClick={event => handleLike(userId,compSubmissions[i]._id)}
+                                  onClick={() => handleLike(userId,compSubmissions[i]._id)}
                                   style={{width:"5rem",
                                   backgroundColor: "white", 
                                   color:"black",
@@ -527,7 +527,7 @@ function handleGoogleAds(){
                 {/* Show submitted playlist tracks */}
                    <Modal show={showCompPlayListModal} onHide={handleClose_showCompPlayListModal} style={{padding:"5rem",zIndex:"1050"}}>
                     <Modal.Header closeButton>
-                    <Modal.Title>{compDoc.name}<Button style={{marginLeft:"6rem", backgroundColor:"white", color:"black", borderColor:"black", fontSize:"1.25rem"}} onClick={event => handleSpotifyPlayback()}>
+                    <Modal.Title>{compDoc.name}<Button style={{marginLeft:"6rem", backgroundColor:"white", color:"black", borderColor:"black", fontSize:"1.25rem"}} onClick={() => handleSpotifyPlayback()}>
                       Play
                       <Image
                         style={{marginLeft:'.5rem', width:"2rem", height:"2rem"}}
