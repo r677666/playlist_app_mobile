@@ -36,9 +36,9 @@ function Navigation() {
 
   }, [])
 
-  function handleNavPic(){
-    window.location.assign("https://www.tastemakers.pro/Account")
-  }
+  // function handleNavPic(){
+  //   window.location.assign("https://www.tastemakers.pro/Account")
+  // }
 
   function handleProUser(){
     if(userPro === true){
@@ -68,7 +68,7 @@ function Navigation() {
             <Navbar.Toggle/>
             <Navbar.Collapse id='basic-navbar-nav'>
               <Nav className="me-auto">
-                <Nav.Link href="/">Home</Nav.Link>
+                {/* <Nav.Link href="/">Home</Nav.Link> */}
                 {/* <Nav.Link href="/Create">Create</Nav.Link> */}
                 <Nav.Link href="/Competition">Competition</Nav.Link>
                 <Nav.Link href="/Account">Account</Nav.Link>
