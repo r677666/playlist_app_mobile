@@ -45,7 +45,7 @@ function Navigation() {
       return(
         <>
         <img className="d-inline-block align-top" alt='' style={{width:'2.3rem',height:'2.3rem', marginRight:'.5rem', marginLeft:'20rem'}}src={crown}/>
-        <img onClick={event => handleNavPic()} src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem"}}/>
+        <img onClick={() => handleNavPic()} src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem"}}/>
         </>
       )
     }else{
