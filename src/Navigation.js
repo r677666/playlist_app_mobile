@@ -44,9 +44,9 @@ function Navigation() {
     fetchData();
   }, [userId]);  
 
-  // function handleNavPic(){
-  //   window.location.assign("https://www.tastemakers.pro/Account")
-  // }
+  function handleNavPic(){
+    window.location.assign("https://www.tastemakers.pro/Account")
+  }
 
   function handleProUser(){
     if(userPro === true){
@@ -76,8 +76,8 @@ function Navigation() {
             <Navbar.Toggle/>
             <Navbar.Collapse id='basic-navbar-nav'>
               <Nav className="me-auto">
-                {/* <Nav.Link href="/">Home</Nav.Link> */}
-                {/* <Nav.Link href="/Create">Create</Nav.Link> */}
+                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/Create">Create</Nav.Link>
                 <Nav.Link href="/Competition">Competition</Nav.Link>
                 <Nav.Link href="/Account">Account</Nav.Link>
                 <Nav.Link href="/Logout">Logout</Nav.Link>
@@ -88,8 +88,8 @@ function Navigation() {
             </Navbar.Collapse>
             <NavbarCollapse>
             {handleProUser()}
-            {/* <img className="d-inline-block align-top" style={{width:'2.3rem',height:'2.3rem', marginRight:'.5rem'}}src={crown}/> */}
-            {/* <img src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem"}}/> */}
+            <img className="d-inline-block align-top" style={{width:'2.3rem',height:'2.3rem', marginRight:'.5rem'}}src={crown}/>
+            <img src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem"}}/>
             
             </NavbarCollapse>
           </Container>
