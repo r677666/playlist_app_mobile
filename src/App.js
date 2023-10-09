@@ -5,14 +5,14 @@ import { useState, useEffect } from 'react';
 import { click } from '@testing-library/user-event/dist/click';
 import { Route, Routes, BrowserRouter, Switch, useParams} from "react-router-dom";
 import Login from './login';
-// import Create from './Create';
+import Create from './Create';
 import Profile from './Profile';
 import Home from './Home';
 import Logout from './Logout';
 import User from './userProfile';
 import Competition from './Competition';
 import Upgrade from './Upgrade';
-import Payment from './stripePayment'
+// import Payment from './stripePayment'
 import Ads from './Ads'
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
           <Route path={'/User/:id'} element={<User/>}/>
           <Route path={'/Upgrade'} element={<Upgrade/>}/>
           <Route path='/Logout' element={<Logout/>}/>
-          <Route path='/payment' element={<Payment/>}/>
+          {/* <Route path='/payment' element={<Payment/>}/> */}
           {/* <Route path='/ads.txt' element={<Ads/>}/> */}
       </Routes>
     </BrowserRouter>
