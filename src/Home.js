@@ -423,28 +423,29 @@ export default function Home(){
         <div>
             <h1 style={{textAlign:"center"}}>Current Users</h1>
             <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"4rem", textAlign:'center'}}/>
-            <Container style={{alignItems:"normal"}}>
+            <h1 style={{textAlign:"center"}}>{users.length}</h1>
+            {/* <Container style={{alignItems:"normal"}}>
                 <Row className="flex-nowrap overflow-auto">
                     {users && users.map((user,i) => (
                         <Card style={{width:'25rem',height:'26rem', paddingTop:'1rem', marginLeft:"1.5rem" }} key={users._id} >
-                            <Container 
-                            // onClick={() => clickUser(users[i].userId)}
-                            >
+                            <Container  */}
+                             {/* onClick={() => clickUser(users[i].userId)} */}
+                             {/* > */}
                                 {/* {//console.log(users[i])} */}
                                     
-                                    <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
+                                    {/* <Card.Img src={users[i].spotifyUserImgUrl} alt="..."/>
                                         <Container style={{paddingTop:'.25rem'}}> 
-                                            {users[i].userId.replaceAll("\"","")}
+                                            {users[i].userId.replaceAll("\"","")} */}
                                             {/* Add Follower Button with userProfile is finished */}
                                             {/* {checkFollowButton(sessionStorage.getItem("userId"),users[i].userId)} */}
-                                        </Container>
+                                        {/* </Container>
                                         
                             </Container>
                             
                         </Card>
                     ))}
                 </Row>
-            </Container>
+            </Container> */}
         </div>
         <br/>
         {/* {checkForSpotifyPlayer()} */}
