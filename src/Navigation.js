@@ -56,9 +56,27 @@ function Navigation() {
         <img onClick={() => handleNavPic()} src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem"}}/>
         </>
       )
-    }else{
+    }else if(userPro === false && userId != null){
       return(
         <img src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem", marginLeft:'22.75rem'}}/>
+      )
+    }else{
+      return(
+        <></>
+      )
+    }
+  }
+
+  function LogoutLogic(){
+    if(userId != null){
+      return(
+        <>
+        <Nav.Link href="/Account">Account</Nav.Link>
+        <Nav.Link href="/Logout">Logout</Nav.Link>
+        <Nav.Link href="/Upgrade" style={{
+                  color:"#FFD700",
+                  textShadow: "0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700, 0 0 55px #FFD700, 0 0 75px #FFD700"}}>PRO</Nav.Link>
+        </>
       )
     }
   }
@@ -79,17 +97,13 @@ function Navigation() {
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/Create">Create</Nav.Link>
                 <Nav.Link href="/Competition">Competition</Nav.Link>
-                <Nav.Link href="/Account">Account</Nav.Link>
-                <Nav.Link href="/Logout">Logout</Nav.Link>
-                <Nav.Link href="/Upgrade" style={{
-                  color:"#FFD700",
-                  textShadow: "0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700, 0 0 55px #FFD700, 0 0 75px #FFD700"}}>PRO</Nav.Link>
-              </Nav>
+                {LogoutLogic()}
+                </Nav>
             </Navbar.Collapse>
             <NavbarCollapse>
             {handleProUser()}
-            <img className="d-inline-block align-top" style={{width:'2.3rem',height:'2.3rem', marginRight:'.5rem'}}src={crown}/>
-            <img src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem"}}/>
+            {/* <img className="d-inline-block align-top" style={{width:'2.3rem',height:'2.3rem', marginRight:'.5rem'}}src={crown}/> */}
+            {/* <img src={userImg} className="d-inline-block align-top" alt='...' style={{width:'5rem',height:'5rem',borderRadius: "8rem"}}/> */}
             
             </NavbarCollapse>
           </Container>
