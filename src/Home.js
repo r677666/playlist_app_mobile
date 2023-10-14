@@ -29,6 +29,7 @@ export default function Home(){
           try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users`);
             const data = await response.json();
+            console.log(data)
             setUsers(data);
             console.log(users)
             // console.log("Users from Playlist App Server have been found");
