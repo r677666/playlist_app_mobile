@@ -171,7 +171,7 @@ export default function Login(){
     const handleLogin = () => {
         window.location.assign(SPOTIFY_ENDPOINT+'?response_type=token' + '&client_id=' + (CLIENT_ID)
         + '&scope=' + (SCOPES_URI_PARAM) + '&redirect_uri=' + (REDIRECT_URI) + '&state=' + (state))
-        const getURL = window.location.href
+        const getURL = window.location.href;
         getURL.substring(getURL.indexOf("access_token="),"&token_type")
     };
 
