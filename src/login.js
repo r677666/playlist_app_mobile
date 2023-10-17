@@ -169,14 +169,10 @@ export default function Login(){
       
 
     const handleLogin = () => {
-      const spotifyAuthUrl = SPOTIFY_ENDPOINT + '?response_type=token' +
-      '&client_id=' + CLIENT_ID +
-      '&scope=' + SCOPES_URI_PARAM +
-      '&redirect_uri=' + REDIRECT_URI +
-      '&state=' + state;
-    
-    // Redirect to the Spotify authorization URL
-    window.location.assign(spotifyAuthUrl);
+        window.location.assign(SPOTIFY_ENDPOINT + '?response_type=token' + '&client_id=' + CLIENT_ID
+          + '&scope=' + SCOPES_URI_PARAM + '&redirect_uri=' + REDIRECT_URI + '&state=' + state);
+        const getURL = window.location.href;
+        return getURL.substring(getURL.indexOf("access_token="), "&token_type");
     };
 
     const handleSignup = () => {
@@ -204,10 +200,6 @@ export default function Login(){
       if(windowSize.width < 765){
         return (
           <div style={{height: "100vh", width: "100%", backgroundColor:"black", textAlign:"center", alignContent:"center", alignItems:"center",color:"black", justifyContent:"center", justifyItems:"center", display:"center"}}>
-          {/* <div style={{display: "left", height: "100vh", width: "50vh",textAlign:"center", justifyContent:"left",backgroundColor:"black"}}> */}
-            {/* <div style={{textAlign:"center", justifyContent:"center", backgroundColor:"black"}}> */}
-              {/* <h1>TasteMakers</h1> */}
-              {/* <div style={{justifyContent:"left", marginRight:"20rem", display:"center"}}> */}
                 <img src={TastemakerImg} style={{height:"25rem",width:"23rem", marginTop:".5rem"}}/>
                 
                 <Container style={{marginTop:".1rem",marginBottom:"12rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
@@ -228,10 +220,6 @@ export default function Login(){
                     View Site as Guest</Button>
                   </InputGroup>
               </Container>
-              {/* </div> */}
-              
-            {/* </div>   */}
-          {/* </div> */}
           <br/>
         <FooterMobile/>
         </div>
@@ -241,25 +229,21 @@ export default function Login(){
             <div style={{height: "100vh", width: "100%", backgroundColor:"black"}}>
         <div style={{display: "flex", height: "100vh", width: "100%",textAlign:"center", justifyContent:"center",backgroundColor:"black"}}>
           <div style={{textAlign:"center", justifyContent:"center"}}>
-            {/* <h1>TasteMakers</h1> */}
             <div style={{justifyContent:"left", marginRight:"20rem", display:"flex"}}>
               <img src={TastemakerImg} style={{height:"40rem",widht:"40rem", marginLeft:"10rem", marginTop:".5rem"}}/>
               
               <Container style={{marginTop:"20rem", marginLeft:"5rem"}}>
                 <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
                 <InputGroup>
-                {/* <div style={{display:"flex"}}> */}
                     <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem", fontSize:"1.5rem"}}
                     onClick={handleLogin}
                     >
                     <img style={{width:"2rem",height:"2rem", marginRight:".5rem"}} src={spotifyImg}/>
                     Login</Button>
-                {/* </div> */}
                     <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
                     <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
                     Sign Up for Beta</Button>
                     <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleGuest}>
-                    {/* <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/> */}
                     View Site as Guest</Button>
                 </InputGroup>
             </Container>
@@ -268,14 +252,6 @@ export default function Login(){
           </div>  
         </div>
         <br/>
-        {/* <div style={containerStyle}>
-        <GoogleAd
-          adClient="ca-pub-7787464840070054"
-          adSlot="4414116362"
-          format="auto"
-        />
-        </div> */}
-        {/* <BottomGoogleAd/> */}
         <Footer/>
       </div>
            )
@@ -285,7 +261,6 @@ export default function Login(){
     return(
       <div>
       {handleSmallerScreen()}
-      {/* <BottomGoogleAd/> */}
         </div>
     )
 }
