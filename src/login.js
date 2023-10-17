@@ -177,7 +177,7 @@ export default function Login(){
     
     // Redirect to the Spotify authorization URL
     window.location.assign(spotifyAuthUrl);
-    console.log(userId)
+    console.log(sessionStorage.getItem("userId"))
     };
 
     const handleSignup = () => {
