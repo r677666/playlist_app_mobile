@@ -209,7 +209,7 @@ export default function Login(){
                 <Container style={{marginTop:".1rem",marginBottom:"12rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
                   <h5 style={{color:"#ff514d",fontSize:"1.5rem"}}>Join Now</h5>
                   <InputGroup style={{display:"center", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
-                      <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center", fontSize:"1.5rem"}}
+                      <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem", fontSize:"1.5rem"}}
                       onClick={handleLogin}
                       >
                       <img style={{width:"1.5rem",height:"1.5rem", marginRight:"1rem"}}
