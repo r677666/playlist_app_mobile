@@ -162,8 +162,8 @@ export default function Login(){
           sessionStorage.setItem("spotifyUserImgUrl", data.images[0].url);
         } catch (error) {
           console.error("Error fetching user info:", error);
-          sessionStorage.setItem("userId", null);
-          sessionStorage.setItem("token", null);
+          // sessionStorage.setItem("userId", null);
+          // sessionStorage.setItem("token", null);
         }
       }
       
