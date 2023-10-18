@@ -71,13 +71,15 @@ function Navigation() {
     if(userId != null){
       return(
         <>
-        <Nav.Link href="/Create">Create</Nav.Link>
+        {/* <Nav.Link href="/Create">Create</Nav.Link> */}
         <Nav.Link href="/Account">Account</Nav.Link>
         <Nav.Link href="/Logout">Logout</Nav.Link>
         <Nav.Link href="/Upgrade" style={{
                   color:"#FFD700",
                   textShadow: "0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700, 0 0 55px #FFD700, 0 0 75px #FFD700"}}>PRO</Nav.Link>
+                  
         </>
+        
       )
     }else if(userId == null){
       return(
