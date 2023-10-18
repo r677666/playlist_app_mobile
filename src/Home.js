@@ -192,17 +192,9 @@ export default function Home(){
         );
       }
       
-    //   function handleCard2TextMobile() {
-    //     if (windowSize.width < 765) {
-    //       return null; // Return null if window width is less than 765
-    //     }
-      
-    //     return (
-    //       <h3 style={{ color: "black", textShadow: '0 0 5px #ffffff, 0 0 10px #FFFFFF, 0 0 15px #FFFFFF' }}>
-    //         To Pimp a Butterfly or Good Kid m.A.A.d City
-    //       </h3>
-    //     );
-    //   }
+      function handleJoinButton() {
+        window.location.assign("https://www.tastemakers.pro/Login")
+      }
       
 
     // function checkForSpotifyPlayer(){
@@ -300,19 +292,23 @@ export default function Home(){
                 <h5 style={{textAlign:"center", paddingTop:"1rem", paddingRight:"3rem"}}>Makers have TASTE. </h5>
                 <h5 style={{textAlign:"center", paddingTop:"1.5rem", paddingRight:"3rem"}}> Welcome to the movement.</h5>
                 <h5 style={{textAlign:"center", paddingTop:"1.5rem", fontSize:"1.75rem", paddingRight:"3rem"}}> Welcome to 
-                <span style={{color:"red", marginLeft:".25rem"
+                <span style={{color:"red",marginLeft:".25rem"
                 // textShadow: "0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px red, 0 0 2px red, 0 0 2px red, 0 0 10px red, 0 0 0px red"
-                }}>TASTEMAKERS</span>.</h5>
+                }}>TASTEMAKERS</span>.
+                <br/>
+                <Button style={{textAlign:"center",backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleJoinButton}>
+                    Join Now</Button>
+                </h5>
                 </div>
                 
             </div>
-            <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"3rem"}}/>
+            {/* <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"3rem"}}/> */}
             
         </div>
-        <div>
+        {/* <div>
             <h1 style={{textAlign:"center"}}>Current Users</h1>
             <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"4rem", textAlign:'center'}}/>
-            <h1 style={{textAlign:"center"}}>{users.length}</h1>
+            <h1 style={{textAlign:"center"}}>{users.length}</h1> */}
             {/* <Container style={{alignItems:"normal"}}> */}
                 {/* <Row className="flex-nowrap overflow-auto">
                     {users && users.map((user,i) => (
@@ -335,8 +331,8 @@ export default function Home(){
                     ))}
                 </Row> */}
             {/* </Container> */}
-        </div>
-        <br/>
+        {/* </div> */}
+        {/* <br/> */}
         <Footer/>
         </div>
                 </div>
@@ -406,7 +402,7 @@ export default function Home(){
                 
             
             <hr style={{borderColor:"red", height:".2rem"}}/>
-            <div style={{width:"100%", display:"inline-flex", justifyContent:"center"}}>
+            <div style={{width:"100%", display:"center", justifyContent:"center"}}>
                 <div style={{maxWidth:"45rem", marginLeft:"4rem"}}>
                     {handleTextMobile()}
                 
@@ -415,17 +411,22 @@ export default function Home(){
                 <h5 style={{textAlign:"center", paddingTop:"1.5rem", fontSize:"1.75rem"}}> Welcome to 
                 <span style={{color:"red", marginLeft:".25rem"
                 // textShadow: "0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px red, 0 0 2px red, 0 0 2px red, 0 0 10px red, 0 0 0px red"
-                }}>TASTEMAKERS</span>.</h5>
+                }}>TASTEMAKERS</span>.
+                <br/>
+                <Button style={{textAlign:"center",backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem"}} onClick={handleJoinButton}>
+                    Join Now</Button>
+                </h5>
+                
                 </div>
                 <img style={{width:"28rem", height:"25rem", marginLeft:"8rem", marginTop:"2rem"}}src={stockPhotoLogo}/>
             </div>
-            <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"4rem"}}/>
+            {/* <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"4rem"}}/> */}
             
         </div>
-        <div>
+        {/* <div>
             <h1 style={{textAlign:"center"}}>Current Users</h1>
             <hr style={{borderColor:"red", height:".2rem",marginBottom:"3rem", marginTop:"4rem", textAlign:'center'}}/>
-            <h1 style={{textAlign:"center"}}>{users.length}</h1>
+            <h1 style={{textAlign:"center"}}>{users.length}</h1> */}
             {/* <Container style={{alignItems:"normal"}}>
                 <Row className="flex-nowrap overflow-auto">
                     {users && users.map((user,i) => (
@@ -448,8 +449,8 @@ export default function Home(){
                     ))}
                 </Row>
             </Container> */}
-        </div>
-        <br/>
+        {/* </div> */}
+        {/* <br/> */}
         {/* {checkForSpotifyPlayer()} */}
         <Footer/>
         </div>

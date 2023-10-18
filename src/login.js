@@ -199,7 +199,7 @@ export default function Login(){
           <div style={{height: "100vh", width: "100%", backgroundColor:"black", textAlign:"center", alignContent:"center", alignItems:"center",color:"black", justifyContent:"center", justifyItems:"center", display:"center"}}>
                 <img src={TastemakerImg} style={{height:"25rem",width:"23rem", marginTop:".5rem"}}/>
                 
-                <Container style={{marginTop:".1rem",marginBottom:"12rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
+                <Container style={{marginTop:".1rem",marginBottom:"2rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
                   <h5 style={{color:"#ff514d",fontSize:"1.5rem"}}>Join Now</h5>
                   <InputGroup style={{display:"center", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
                       <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center", fontSize:"1.5rem"}}
@@ -224,23 +224,23 @@ export default function Login(){
       }else{
           return(
             <div style={{height: "100vh", width: "100%", backgroundColor:"black"}}>
-        <div style={{display: "flex", height: "100vh", width: "100%",textAlign:"center", justifyContent:"center",backgroundColor:"black"}}>
-          <div style={{textAlign:"center", justifyContent:"center"}}>
-            <div style={{justifyContent:"left", marginRight:"20rem", display:"flex"}}>
-              <img src={TastemakerImg} style={{height:"40rem",widht:"40rem", marginLeft:"10rem", marginTop:".5rem"}}/>
+        <div style={{height: "100vh", width: "100%",backgroundColor:"black"}}>
+          <div style={{textAlign:"center"}}>
+            <div style={{marginRight:"20rem", display:"flex"}}>
+              <img src={TastemakerImg} style={{height:"40rem",widht:"40rem", marginLeft:"10rem", marginTop:".5rem"}} alt='...'/>
               
-              <Container style={{marginTop:"20rem", marginLeft:"5rem"}}>
-                <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
-                <InputGroup>
-                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem", fontSize:"1.5rem"}}
+              <Container style={{marginTop:"20rem", marginLeft:"15rem"}}>
+                <h5 style={{color:"#ff514d",fontSize:"2rem", marginRight:"8rem"}}>Join Now</h5>
+                <InputGroup style={{}}>
+                    <Button style={{backgroundColor:"green", height:"3rem",width:"15rem", marginBottom:"1rem",color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem", fontSize:"1.5rem"}}
                     onClick={handleLogin}
                     >
-                    <img style={{width:"2rem",height:"2rem", marginRight:".5rem"}} src={spotifyImg}/>
+                    <img style={{width:"2rem",height:"2rem", marginRight:".5rem"}} src={spotifyImg} alt='...'/>
                     Login</Button>
-                    <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
-                    <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
+                    <Button style={{height:"3rem", marginBottom:"1rem",backgroundColor:"black",width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
+                    <img style={{height:"2rem",width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
                     Sign Up for Beta</Button>
-                    <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleGuest}>
+                    <Button style={{backgroundColor:"black", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleGuest}>
                     View Site as Guest</Button>
                 </InputGroup>
             </Container>
