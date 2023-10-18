@@ -232,7 +232,7 @@ export default function Login(){
               <Container style={{marginTop:"20rem", marginLeft:"15rem"}}>
                 <h5 style={{color:"#ff514d",fontSize:"2rem", marginRight:"8rem"}}>Join Now</h5>
                 <InputGroup style={{}}>
-                    <Button style={{backgroundColor:"green", height:"3rem",width:"15rem", marginBottom:"1rem",color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem", fontSize:"1.5rem"}}
+                    <Button style={{backgroundColor:"green", height:"3.5rem",width:"15rem", marginBottom:"1rem",color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem", fontSize:"1.5rem"}}
                     onClick={handleLogin}
                     >
                     <img style={{width:"2rem",height:"2rem", marginRight:".5rem"}} src={spotifyImg} alt='...'/>
