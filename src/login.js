@@ -188,13 +188,13 @@ export default function Login(){
     window.location.assign("https://www.tastemakers.pro/")
 };
 
-  function checkForUser(){
-    if(sessionStorage.getItem("userEmail") == null){
-      window.location.assign("https://www.tastemakers.pro")
-      sessionStorage.setItem("userId", null)
-      alert("Login Failed - Sign Up / Clear Cache / or Contact Us")
-    }
-  }
+  // function checkForUser(){
+  //   if(sessionStorage.getItem("userEmail") == null){
+  //     window.location.assign("https://www.tastemakers.pro")
+  //     sessionStorage.setItem("userId", null)
+  //     alert("Login Failed - Sign Up / Clear Cache / or Contact Us")
+  //   }
+  // }
 
   const containerStyle = {
     height:"5rem",backgroundSize: "0", backgroundColor: "black", bottom:"0",
@@ -202,7 +202,7 @@ export default function Login(){
   };
     
     function handleSmallerScreen(){
-      if(windowSize.width < 765){
+      // if(windowSize.width < 765){
         return (
           <div style={{height: "100vh", width: "100%", backgroundColor:"black", textAlign:"center", alignContent:"center", alignItems:"center",color:"black", justifyContent:"center", justifyItems:"center", display:"center"}}>
                 <img src={TastemakerImg} style={{height:"25rem",width:"23rem", marginTop:".5rem"}}/>
@@ -229,46 +229,46 @@ export default function Login(){
         <FooterMobile/>
         </div>
         )
-      }else{
-          return(
-            <div style={{height: "100vh", width: "100%", backgroundColor:"black"}}>
-        <div style={{display: "flex", height: "100vh", width: "100%",textAlign:"center", justifyContent:"center",backgroundColor:"black"}}>
-          <div style={{textAlign:"center", justifyContent:"center"}}>
-            <div style={{justifyContent:"left", marginRight:"20rem", display:"flex"}}>
-              <img src={TastemakerImg} style={{height:"40rem",widht:"40rem", marginLeft:"10rem", marginTop:".5rem"}}/>
+      // }else{
+      //     return(
+      //       <div style={{height: "100vh", width: "100%", backgroundColor:"black"}}>
+      //   <div style={{display: "flex", height: "100vh", width: "100%",textAlign:"center", justifyContent:"center",backgroundColor:"black"}}>
+      //     <div style={{textAlign:"center", justifyContent:"center"}}>
+      //       <div style={{justifyContent:"left", marginRight:"20rem", display:"flex"}}>
+      //         <img src={TastemakerImg} style={{height:"40rem",widht:"40rem", marginLeft:"10rem", marginTop:".5rem"}}/>
               
-              <Container style={{marginTop:"20rem", marginLeft:"5rem"}}>
-                <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
-                <InputGroup>
-                    <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem", fontSize:"1.5rem"}}
-                    onClick={handleLogin}
-                    >
-                    <img style={{width:"2rem",height:"2rem", marginRight:".5rem"}} src={spotifyImg}/>
-                    Login</Button>
-                    <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
-                    <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
-                    Sign Up for Beta</Button>
-                    <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleGuest}>
-                    View Site as Guest</Button>
-                </InputGroup>
-            </Container>
-            </div>
+      //         <Container style={{marginTop:"20rem", marginLeft:"5rem"}}>
+      //           <h5 style={{color:"#ff514d",fontSize:"2rem"}}>Join Now</h5>
+      //           <InputGroup>
+      //               <Button style={{backgroundColor:"green", width:"15rem", color:"white", borderColor:"black", borderRadius:"2rem", marginLeft:"1.5rem", fontSize:"1.5rem"}}
+      //               onClick={handleLogin}
+      //               >
+      //               <img style={{width:"2rem",height:"2rem", marginRight:".5rem"}} src={spotifyImg}/>
+      //               Login</Button>
+      //               <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleSignup}>
+      //               <img style={{width:"2.5rem",height:"2.5rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
+      //               Sign Up for Beta</Button>
+      //               <Button style={{backgroundColor:"black", marginTop:"1rem", width:"15rem", color:"orange", borderColor:"orange", borderRadius:"2rem", marginLeft:"1.5rem"}}onClick={handleGuest}>
+      //               View Site as Guest</Button>
+      //           </InputGroup>
+      //       </Container>
+      //       </div>
             
-          </div>  
-        </div>
-        <br/>
-        {/* <div style={containerStyle}>
-        <GoogleAd
-          adClient="ca-pub-7787464840070054"
-          adSlot="4414116362"
-          format="auto"
-        />
-        </div> */}
-        {/* <BottomGoogleAd/> */}
-        <Footer/>
-      </div>
-           )
-      }
+      //     </div>  
+      //   </div>
+      //   <br/>
+      //   {/* <div style={containerStyle}>
+      //   <GoogleAd
+      //     adClient="ca-pub-7787464840070054"
+      //     adSlot="4414116362"
+      //     format="auto"
+      //   />
+      //   </div> */}
+      //   {/* <BottomGoogleAd/> */}
+      //   <Footer/>
+      // </div>
+      //      )
+      // }
     }
 
     return(
