@@ -402,7 +402,7 @@ export default function Home(){
                 
             
             <hr style={{borderColor:"red", height:".2rem"}}/>
-            <div style={{width:"100%", display:"center", justifyContent:"center"}}>
+            <div style={{width:"100%", display:"inline-flex", justifyContent:"center"}}>
                 <div style={{maxWidth:"45rem", marginLeft:"4rem"}}>
                     {handleTextMobile()}
                 
