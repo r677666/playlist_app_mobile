@@ -155,7 +155,7 @@ export default function Login(){
           }
       
           const data = await response.json();
-          sessionStorage.setItem("userId", JSON.stringify(data.id));
+          sessionStorage.setItem("userId", data.id);
           sessionStorage.setItem("imgURL", data.images[0].url);
           sessionStorage.setItem("userEmail", data.email);
           sessionStorage.setItem("spotifyToken", data.href);
@@ -188,48 +188,40 @@ export default function Login(){
     window.location.assign("https://www.tastemakers.pro/")
 };
 
-  // function checkForUser(){
-  //   if(sessionStorage.getItem("userEmail") == null){
-  //     window.location.assign("https://www.tastemakers.pro")
-  //     sessionStorage.setItem("userId", null)
-  //     alert("Login Failed - Sign Up / Clear Cache / or Contact Us")
-  //   }
-  // }
-
   const containerStyle = {
     height:"5rem",backgroundSize: "0", backgroundColor: "black", bottom:"0",
             position:"fixed",zIndex:"1060", width:"100%", color:"white", display:"flex"
   };
     
     function handleSmallerScreen(){
-      // if(windowSize.width < 765){
-      //   return (
-      //     <div style={{height: "100vh", width: "100%", backgroundColor:"black", textAlign:"center", alignContent:"center", alignItems:"center",color:"black", justifyContent:"center", justifyItems:"center", display:"center"}}>
-      //           <img src={TastemakerImg} style={{height:"25rem",width:"23rem", marginTop:".5rem"}}/>
+      if(windowSize.width < 765){
+        return (
+          <div style={{height: "100vh", width: "100%", backgroundColor:"black", textAlign:"center", alignContent:"center", alignItems:"center",color:"black", justifyContent:"center", justifyItems:"center", display:"center"}}>
+                <img src={TastemakerImg} style={{height:"25rem",width:"23rem", marginTop:".5rem"}}/>
                 
-      //           <Container style={{marginTop:".1rem",marginBottom:"12rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
-      //             <h5 style={{color:"#ff514d",fontSize:"1.5rem"}}>Join Now</h5>
-      //             <InputGroup style={{display:"center", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
-      //                 <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center", fontSize:"1.5rem"}}
-      //                 onClick={handleLogin}
-      //                 >
-      //                 <img style={{width:"1.5rem",height:"1.5rem", marginRight:"1rem"}}
-      //                  src={spotifyImg}
-      //                  />
-      //                 Login</Button>
-      //                 <Button style={{backgroundColor:"black", marginTop:"1rem", width:"40vh", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleSignup}>
-      //               <img style={{width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
-      //               Sign Up for Beta</Button>
-      //               <Button style={{backgroundColor:"black", marginTop:"1rem", width:"40vh", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleGuest}>
-      //               {/* <img style={{width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}}/> */}
-      //               View Site as Guest</Button>
-      //             </InputGroup>
-      //         </Container>
-      //     <br/>
-      //   <FooterMobile/>
-      //   </div>
-      //   )
-      // }else{
+                <Container style={{marginTop:".1rem",marginBottom:"12rem",backgroundColor:"black", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center", textAlign:"center", display:"center"}}>
+                  <h5 style={{color:"#ff514d",fontSize:"1.5rem"}}>Join Now</h5>
+                  <InputGroup style={{display:"center", alignContent:"center", alignItems:"center", justifyContent:"center", justifyItems:"center"}}>
+                      <Button style={{backgroundColor:"green", width:"40vh", color:"white", borderColor:"black", borderRadius:"2rem", alignContent:"center", fontSize:"1.5rem"}}
+                      onClick={handleLogin}
+                      >
+                      <img style={{width:"1.5rem",height:"1.5rem", marginRight:"1rem"}}
+                       src={spotifyImg}
+                       />
+                      Login</Button>
+                      <Button style={{backgroundColor:"black", marginTop:"1rem", width:"40vh", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleSignup}>
+                    <img style={{width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}} src={TastemakerLogo}/>
+                    Sign Up for Beta</Button>
+                    <Button style={{backgroundColor:"black", marginTop:"1rem", width:"40vh", color:"orange", borderColor:"orange", borderRadius:"2rem"}}onClick={handleGuest}>
+                    {/* <img style={{width:"2rem",height:"2rem", borderRadius:"5rem", marginRight:"1rem"}}/> */}
+                    View Site as Guest</Button>
+                  </InputGroup>
+              </Container>
+          <br/>
+        <FooterMobile/>
+        </div>
+        )
+      }else{
           return(
             <div style={{height: "100vh", width: "100%", backgroundColor:"black"}}>
         <div style={{display: "flex", height: "100vh", width: "100%",textAlign:"center", justifyContent:"center",backgroundColor:"black"}}>
@@ -257,24 +249,15 @@ export default function Login(){
           </div>  
         </div>
         <br/>
-        {/* <div style={containerStyle}>
-        <GoogleAd
-          adClient="ca-pub-7787464840070054"
-          adSlot="4414116362"
-          format="auto"
-        />
-        </div> */}
-        {/* <BottomGoogleAd/> */}
         <Footer/>
       </div>
            )
-      // }
+      }
     }
 
     return(
       <div>
       {handleSmallerScreen()}
-      {/* <BottomGoogleAd/> */}
         </div>
     )
 }
