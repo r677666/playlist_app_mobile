@@ -27,17 +27,16 @@ export default function Home(){
     useEffect(() => {
         const fetchUsers = async () => {
           try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/`);
             const data = await response.json();
-            console.log(data)
-            setUsers(data);
-            console.log(users)
+            setUsers(data); 
             // console.log("Users from Playlist App Server have been found");
           } catch (error) {
             // Handle errors here
             console.error('Error fetching users:', error);
           }
         };
+        fetchUsers();
       
         const handleResize = () => {
           setWindowSize({
