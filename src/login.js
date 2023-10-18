@@ -155,7 +155,7 @@ export default function Login(){
           }
       
           const data = await response.json();
-          sessionStorage.setItem("userId", data.id);
+          sessionStorage.setItem("userId", JSON.stringify(data.id));
           sessionStorage.setItem("imgURL", data.images[0].url);
           sessionStorage.setItem("userEmail", data.email);
           sessionStorage.setItem("spotifyToken", data.href);
