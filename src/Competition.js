@@ -15,7 +15,7 @@ export default function UserProfile(){
 
     const [compSubmissions,setCompSubmissions] = useState([''])
     const [userPlaylists,setUserPlaylists] = useState([]);
-    const userId = sessionStorage.getItem("userId");
+    var userId = sessionStorage.getItem("userId");
     const [showSetPlayListModal, set_SetPlayList_ShowModal] = useState(false);
     const handleClose_showSetPlayListModal = () => set_SetPlayList_ShowModal(false);
     const handleShow_showSetPlayListModal = () => set_SetPlayList_ShowModal(true);
@@ -98,6 +98,12 @@ export default function UserProfile(){
       }
     }
     
+    function checkForLogin(){
+      if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token").length < 1){
+          window.location.assign("https://www.tastemakers.pro/Login")
+      }
+      // userId = userId.replaceAll("\"","")
+    }
 
     //Get Playlist
     async function getUserPlaylist() {
@@ -493,7 +499,7 @@ function handleGoogleAds(){
 
     return(
         <div style={{backgroundColor:"black"}}>
-          {/* {checkForLogin()} */}
+          {checkForLogin()}
             <Navigation/>
             <div style={{marginTop:"6rem", width:"100%"}}>
                     {handleBigText()}
