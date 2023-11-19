@@ -45,10 +45,9 @@ const App = () => {
         source={{ uri: 'https://tastemakers.pro' }}
         onNavigationStateChange={handleNavigationStateChange}
       />
-      {canGoBack && currentUrl.includes('spotify.com') && (
+      {canGoBack && (currentUrl.includes('spotify.com') || currentUrl.includes('google.com')) && (
           <Button title="Go Back" onPress={handleGoBack} />
         )}
-      {/* <Button title='Back' onPress={handleGoBack}></Button> */}
     </SafeAreaView>
   );
 }
